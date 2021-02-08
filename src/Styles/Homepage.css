@@ -1,0 +1,22 @@
+button {
+  height: 56px;
+  width: 186px;
+  font-size: 18px;
+}
+
+img {
+  margin-bottom: 40px;
+}
+
+.login {
+  background-color: #ffc65a;
+  border: 2px #ffa801 solid;
+  color: #34495e;
+  margin-bottom: 20px;
+}
+
+.signup {
+  background-color: white;
+  border: 2px #227093 solid;
+  color: #227093;
+}
