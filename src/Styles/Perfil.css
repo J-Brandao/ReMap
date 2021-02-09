@@ -11,7 +11,7 @@
   margin-bottom: 25px;
 }
 
-#biografiaTitulo {
+#seccaoTitulo {
   font-size: 17px;
   font-weight: 900;
   color: #34495e;
@@ -20,4 +20,9 @@
 #biografiaTexto {
   font-size: 14px;
   color: #010101;
+}
+
+.nomeTrofeu {
+  font-size: 12px;
+  font-weight: 500;
 }
