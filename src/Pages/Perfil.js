@@ -5,6 +5,7 @@ import Back from '../Images/BackArrow.png';
 import IconeAmigo from '../Images/IconeAmigo.png';
 import PerfilImg from '../Images/Perfil.jpg';
 import Trofeus from '../Components/Perfil/Trofeus';
+import Interacoes from '../Components/Perfil/Interacoes';
 
 const Div = styled.div`
     margin: 40px 30px 40px 30px;
@@ -44,10 +45,7 @@ function Perfil() {
 
            <Trofeus/>
 
-           <section className="row col-12 m-0 p-0">
-                <h5 id="seccaoTitulo">As minhas interações</h5>
-                <p id="biografiaTexto">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-           </section>
+           <Interacoes/>
         </Div>
     )
 }
