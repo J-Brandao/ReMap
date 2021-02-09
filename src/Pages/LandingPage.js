@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Styles/Homepage.css'
+import '../Styles/LandingPage.css'
 import styled from 'styled-components';
 import Logo from '../Images/Logo.png';
 import Background from '../Images/Background.png'
@@ -16,7 +16,7 @@ const Home = styled.div`
     height: 100vh;
 `;
 
-function Homepage() {
+function LandingPage() {
     return(
         <Home>
             <img src={Logo}/>
@@ -27,4 +27,4 @@ function Homepage() {
     )
 }
 
-export default Homepage;
+export default LandingPage;
