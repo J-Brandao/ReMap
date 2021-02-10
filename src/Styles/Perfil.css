@@ -31,3 +31,15 @@
   height: 175px;
   width: 100%;
 }
+
+.textoComments {
+  font-size: 12px;
+  margin-top: 0;
+}
+
+.NomeComments {
+  color: #34495e;
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 0;
+}

@@ -21,8 +21,8 @@ function DetalhesSeccao (props) {
       background-position: center;
       background-size: cover;
       border-radius: 50%;
-      min-height: 50px;
-      width: 50px;
+      min-height: 70px;
+      width: 70px;
     `;  
 
     return(
@@ -47,11 +47,12 @@ function DetalhesSeccao (props) {
             :
             props.tipo === 'Sugestões' ?
             <>
-                <span className="col-2 p-0">
+                <span className="col-3 p-0">
                     <CommentPicture/>
                 </span>
-                <span className="col-10">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                <span className="col-9 pr-0">
+                    <p className="NomeComments">Pedro Alves</p>
+                    <p className="textoComments">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                 </span>
             </>
             :
@@ -74,11 +75,12 @@ function DetalhesSeccao (props) {
             </Carousel>
             :
             <>
-                <span className="col-2 p-0">
+                <span className="col-3 p-0">
                     <CommentPicture/>
                 </span>
-                <span className="col-10">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                <span className="col-9 pr-0">
+                    <p className="NomeComments">Pedro Alves</p>
+                    <p className="textoComments">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                 </span>
             </>
             }
