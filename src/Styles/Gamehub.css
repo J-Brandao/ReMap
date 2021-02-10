@@ -1,0 +1,64 @@
+.spanNivel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.nomeUtilizador {
+  font-size: 18px;
+  font-weight: 500;
+  color: #34495e;
+}
+
+.nomeNivel {
+  font-size: 11px;
+  color: #898989;
+  margin-top: -5px;
+}
+
+.experienciaNivel {
+  font-size: 11px;
+  color: #898989;
+  margin-top: 5px;
+}
+
+.nivel {
+  font-size: 30px;
+  font-weight: 500;
+  color: #34495e;
+}
+
+.progress {
+  background-color: #000000;
+  height: 7px;
+}
+
+.bg-custom {
+  background-color: #ffa801;
+  color: white;
+}
+
+.bgSeccao {
+  background: rgba(196, 196, 196, 0.22);
+  padding: 20px 30px 20px 30px;
+  width: 100vw;
+}
+
+.subtituloGH {
+  margin-left: 30px;
+}
+
+.textoEstatisticas {
+  font-size: 13px;
+  color: #34495e;
+}
+
+.nomeCracha {
+  font-size: 11px;
+  color: #34495e;
+}
+
+.imgCracha {
+  height: 50px;
+  width: auto;
+}

@@ -1,3 +1,15 @@
 * {
   font-family: "Roboto", sans-serif;
 }
+
+.tituloPagina {
+  font-size: 24px;
+  color: #34495e;
+  top: -7px;
+}
+
+#seccaoTitulo {
+  font-size: 17px;
+  font-weight: 900;
+  color: #34495e;
+}
