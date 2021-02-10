@@ -12,6 +12,7 @@ const Div = styled.div`
 `;
 
 const ProfilePicture = styled.div`
+    margin: 0 auto;
     background-image: url(${PerfilImg});
     background-repeat: no-repeat;
     background-position: center;
@@ -34,7 +35,7 @@ function Perfil() {
                     <h5 id="NomeUser">Pedro Alves</h5>  
                     <p id="DataUser">Membro desde 2021</p>
                 </div>
-                <span className="col-2 m-0 p-0">
+                <span className="col-2 text-right m-0 p-0">
                     <img src={IconeAmigo}/>
                 </span>
            </section>
