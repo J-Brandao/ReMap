@@ -41,3 +41,13 @@
   font-weight: 500;
   margin-bottom: 0;
 }
+
+.botaoFotografia {
+  border: 0;
+  width: 100px;
+  height: 25px;
+  background-color: #34495e;
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+}

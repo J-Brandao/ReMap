@@ -81,6 +81,9 @@ function PaginaEdificio () {
                 <section className="row col-12 m-0 p-0">
                         <h5 id="seccaoTitulo">Galeria de Imagens</h5>
                         <Galeria/>
+                        <span className="col-12 mx-0 px-0 text-right mt-2">
+                            <button className="botaoFotografia">Nova Fotografia</button>
+                        </span>
                 </section>
 
                 <Classificacao/>
