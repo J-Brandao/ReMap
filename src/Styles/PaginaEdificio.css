@@ -1,0 +1,43 @@
+.nomeUser {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+.extraInfoUser {
+  font-size: 11px;
+  color: #898989;
+  margin-top: -3px;
+  margin-bottom: 0;
+}
+
+.inicio {
+  top: -15px;
+}
+
+.nomeEdificio {
+  font-size: 24px;
+  color: #34495e;
+  text-align: center;
+}
+
+#descricaoEdificio {
+  font-size: 14px;
+}
+
+.tipoClass {
+  font-size: 12px;
+  margin-bottom: 0;
+  color: #34495e;
+}
+
+.textoComments {
+  font-size: 12px;
+  margin-top: 0;
+}
+
+.NomeComments {
+  color: #34495e;
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 0;
+}

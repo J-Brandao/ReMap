@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import '../Styles/Perfil.css'
-import Back from '../Images/BackArrow.png';
-import IconeAmigo from '../Images/IconeAmigo.png';
+import Back from '../Images/BackArrow.svg';
+import IconeAmigo from '../Images/IconeAmigo.svg';
 import PerfilImg from '../Images/Perfil.jpg';
 import Trofeus from '../Components/Perfil/Trofeus';
 import Interacoes from '../Components/Perfil/Interacoes';

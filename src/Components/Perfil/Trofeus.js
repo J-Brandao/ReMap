@@ -1,8 +1,8 @@
 import React from 'react';
 import '../../Styles/Perfil.css';
-import Camera from '../../Images/Camera.png';
-import Bandeira from '../../Images/Bandeira.png';
-import Trofeu from '../../Images/Trofeu.png';
+import Camera from '../../Images/Camera.svg';
+import Bandeira from '../../Images/Bandeira.svg';
+import Trofeu from '../../Images/Trofeu.svg';
 
 function trofeus () {
     return(

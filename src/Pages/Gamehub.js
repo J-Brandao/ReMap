@@ -1,24 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
-import Back from '../Images/BackArrow.png';
+import Back from '../Images/BackArrow.svg';
 import Perfil from '../Images/Perfil.jpg';
 import '../Styles/Gamehub.css';
 import {ProgressBar} from 'react-bootstrap';
 import Trofeus from '../Components/Perfil/Trofeus';
-import IdeiaGH from '../Images/IdeiaGH.png';
-import BrokenHouseGH from '../Images/BrokenHouseGH.png';
-import IdeiaCracha from '../Images/IdeiaCracha.png';
-import BrokenHouseCracha from '../Images/BrokenHouseCracha.png';
-import CameraGH from '../Images/CameraStats.png';
-import FootstepsGH from '../Images/FootstepsGH.png';
-import CommentsGH from '../Images/CommentsGH.png';
-import Camera from '../Images/Camera.png';
-import Bandeira from '../Images/Bandeira.png';
-import Alert from '../Images/Alert.png';
-import ArrowMap from '../Images/ArrowMap.png';
-import Book from '../Images/Book.png';
-import CheckMark from '../Images/CheckMark.png';
-import Spray from '../Images/Spray.png';
+import Ideia from '../Images/Ideia.svg';
+import BrokenHouseGH from '../Images/BrokenHouse.svg';
+import CameraGH from '../Images/CameraStats.svg';
+import FootstepsGH from '../Images/FootstepsGH.svg';
+import CommentsGH from '../Images/Comments.svg';
+import Camera from '../Images/Camera.svg';
+import Bandeira from '../Images/Bandeira.svg';
+import Alert from '../Images/Alert.svg';
+import ArrowMap from '../Images/ArrowMap.svg';
+import Book from '../Images/Book.svg';
+import CheckMark from '../Images/CheckMark.svg';
+import Spray from '../Images/Spray.svg';
 
 const Div = styled.div`
     margin: 40px 30px 0 30px;
@@ -76,35 +74,35 @@ function Gamehub () {
                 <div className="bgSeccao">
                     <span className="row col-12 m-0 px-0 py-2 justify-content-center">
                         <span className="col-2 m-0 p-0 my-auto">
-                            <img className="m-0" src={FootstepsGH}/>
+                            <img className="m-0 imgStats" src={FootstepsGH}/>
                         </span>
                         <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Área de Influência</p>
                         <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">2</p>
                     </span>
                     <span className="row col-12 m-0 px-0 py-2 justify-content-center">
                         <span className="col-2 m-0 p-0 my-auto">
-                            <img className="m-0" src={BrokenHouseGH}/>
+                            <img className="m-0 imgStats" src={BrokenHouseGH}/>
                         </span>
                         <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Edifícios Adicionados</p>
                         <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">2</p>
                     </span>
                     <span className="row col-12 m-0 px-0 py-2 justify-content-center">
                         <span className="col-2 m-0 p-0 my-auto">
-                            <img className="m-0" src={IdeiaGH}/>
+                            <img className="m-0 imgStats" src={Ideia}/>
                         </span>
                         <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Sugestões dadas</p>
                         <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">2</p>
                     </span>
                     <span className="row col-12 m-0 px-0 py-2 justify-content-center">
                         <span className="col-2 m-0 p-0 my-auto">
-                            <img className="m-0" src={CameraGH}/>
+                            <img className="m-0 imgStats" src={CameraGH}/>
                         </span>
                         <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Fotografias Publicadas</p>
                         <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">2</p>
                     </span>
                     <span className="row col-12 m-0 px-0 py-2 justify-content-center">
                         <span className="col-2 m-0 p-0 my-auto">
-                            <img className="m-0" src={CommentsGH}/>
+                            <img className="m-0 imgStats" src={CommentsGH}/>
                         </span>
                         <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Comentários Publicados</p>
                         <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">2</p>
@@ -139,7 +137,7 @@ function Gamehub () {
                             <p className="m-0 p-0 nomeCracha">Edifícios Raros</p>
                         </span>
                         <span className="col-4 m-0 text-center">
-                            <img className="m-0 imgCracha" src={IdeiaCracha}/>
+                            <img className="m-0 imgCracha" src={Ideia}/>
                             <ProgressBar now={60} className="my-2" variant="custom"/>
                             <p className="m-0 p-0 nomeCracha">Sugestões</p>
                         </span>
@@ -161,13 +159,28 @@ function Gamehub () {
                             <p className="m-0 p-0 nomeCracha">Vandalizado</p>
                         </span>
                         <span className="col-4 m-0 text-center">
-                            <img className="m-0 imgCracha" src={BrokenHouseCracha}/>
+                            <img className="m-0 imgCracha" src={BrokenHouseGH}/>
                             <ProgressBar now={60} className="my-2" variant="custom"/>
                             <p className="m-0 p-0 nomeCracha">Mapeador</p>
                         </span>
                     </span>
                 </div>
            </section>
+
+
+        <style>
+            {`
+            .progress {
+                background-color: #000000;
+                height: 7px;
+              }
+              
+              .bg-custom {
+                background-color: #ffa801;
+                color: white;
+              }
+            `}
+        </style>
 
         </div>
     )

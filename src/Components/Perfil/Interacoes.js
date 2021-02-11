@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import '../../Styles/Perfil.css';
 import DetalhesSeccao from './DetalhesSeccao';
-import Comentarios from '../../Images/Comentarios.png';
-import ComentariosSelected from '../../Images/ComentariosSelected.png';
-import Edificios from '../../Images/Edificios.png';
-import EdificiosSelected from '../../Images/EdificiosSelected.png';
-import Fotografias from '../../Images/Fotografias.png';
-import FotografiasSelected from '../../Images/FotografiasSelected.png';
-import Ideias from '../../Images/Ideias.png';
-import IdeiasSelected from '../../Images/IdeiasSelected.png';
+import Comentarios from '../../Images/Comentarios.svg';
+import ComentariosSelected from '../../Images/ComentariosSelected.svg';
+import Edificios from '../../Images/Edificios.svg';
+import EdificiosSelected from '../../Images/EdificiosSelected.svg';
+import Fotografias from '../../Images/Fotografias.svg';
+import FotografiasSelected from '../../Images/FotografiasSelected.svg';
+import Ideias from '../../Images/Ideias.svg';
+import IdeiasSelected from '../../Images/IdeiasSelected.svg';
 
 function Interacoes () {
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../Styles/LandingPage.css'
 import styled from 'styled-components';
-import Logo from '../Images/Logo.png';
+import Logo from '../Images/Logo.svg';
 import Background from '../Images/Background.png'
 
 const Home = styled.div`

@@ -28,14 +28,9 @@
   color: #34495e;
 }
 
-.progress {
-  background-color: #000000;
-  height: 7px;
-}
-
-.bg-custom {
-  background-color: #ffa801;
-  color: white;
+.imgStats {
+  height: 35px;
+  width: 35px;
 }
 
 .bgSeccao {
