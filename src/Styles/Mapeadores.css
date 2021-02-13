@@ -1,0 +1,21 @@
+.nomeUtilizador {
+  font-size: 18px;
+  color: #34495e;
+}
+
+.nivelUtilizador {
+  font-size: 12px;
+  color: #34495e;
+  text-align: center;
+}
+
+.divUtilizador {
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+
+.pesquisa {
+  border: solid 2px #34495e;
+  border-radius: 0;
+}
