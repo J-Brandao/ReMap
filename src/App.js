@@ -4,6 +4,7 @@ import LandingPage from './Pages/LandingPage';
 import Perfil from './Pages/Perfil';
 import Gamehub from './Pages/Gamehub';
 import PaginaEdificio from './Pages/PaginaEdificio';
+import Mapeadores from './Pages/Mapeadores';
 import './Styles/Geral.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/perfil" component={Perfil}/>
         <Route exact path="/gamehub" component={Gamehub}/>
         <Route exact path="/edificio" component={PaginaEdificio}/>
+        <Route exact path="/mapeadores" component={Mapeadores}/>
       </Switch>
     </Router>
   );
