@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../Styles/LandingPage.css'
 import styled from 'styled-components';
 import Logo from '../Images/Logo.svg';
 import Background from '../Images/Background.png'
+import {useAuth0} from "@auth0/auth0-react"
 
 const Home = styled.div`
     flex-grow: 1;
@@ -17,6 +18,14 @@ const Home = styled.div`
 `;
 
 function LandingPage() {
+    const { loginWithRedirect, isAuthenticated } = useAuth0();
+
+    useEffect(() => {
+        if (!isAuthenticated) {
+            loginWithRedirect();
+        }
+    }, [isAuthenticated])
+
     return(
         <Home>
             <img src={Logo}/>
