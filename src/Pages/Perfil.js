@@ -6,6 +6,7 @@ import IconeAmigo from '../Images/IconeAmigo.svg';
 import PerfilImg from '../Images/Perfil.jpg';
 import Trofeus from '../Components/Perfil/Trofeus';
 import Interacoes from '../Components/Perfil/Interacoes';
+import BackArrow from '../Components/Geral/BackArrow'
 
 const Div = styled.div`
     margin: 40px 30px 40px 30px;
@@ -27,9 +28,7 @@ function Perfil() {
     return(
         <Div>
            <section className="row col-12 m-0 p-0">
-                <span className="col-2 m-0 p-0">
-                    <img src={Back}/>
-                </span>
+                <BackArrow />
                 <div className="col-8 text-center m-0 p-0">
                     <ProfilePicture/>
                     <h5 id="NomeUser">Pedro Alves</h5>  

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Back from '../Images/BackArrow.svg';
 import '../Styles/AdicionarEdificio.css';
 import AdicionarImagem from '../Images/GaleriaImagens.svg'
+import BackArrow from '../Components/Geral/BackArrow'
 
 const Div = styled.div`
     margin: 40px 30px 40px 30px;
@@ -12,9 +13,7 @@ function AdicionarEdificio () {
     return(
         <Div>
             <section className="row col-12 m-0 p-0">
-                <span className="col-2 m-0 p-0">
-                    <img src={Back}/>
-                </span>
+                <BackArrow />
                 <span className="col-9 tituloPagina offset-2 text-center m-0 p-0">
                     Adicionar novo edifício
                 </span>

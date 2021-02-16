@@ -4,6 +4,7 @@ import Back from '../Images/BackArrow.svg';
 import '../Styles/Mapeadores.css';
 import ListaUtilizadores from '../Components/Mapeadores/ListaUtilizadores';
 import Pesquisa from '../Components/Mapeadores/Pesquisa';
+import BackArrow from '../Components/Geral/BackArrow';
 
 const Div = styled.div`
     margin: 40px 30px 0 30px;
@@ -43,9 +44,7 @@ function Mapeadores() {
         <div className="m-0 p-0">
             <Div>
                 <section className="row col-12 p-0 m-0">
-                    <span className="col-2 m-0 p-0">
-                        <img src={Back}/>
-                    </span>
+                    <BackArrow />
                     <span className="col-8 tituloPagina offset-2 text-center m-0 p-0">
                         Mapeadores
                     </span>

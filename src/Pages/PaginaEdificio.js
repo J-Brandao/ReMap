@@ -10,6 +10,7 @@ import ArrowMap from '../Images/ArrowMap.svg';
 import Book from '../Images/Book.svg';
 import Camera from '../Images/Camera.svg';
 import UltimaSeccao from '../Components/PaginaEdificio/UltimaSeccao';
+import BackArrow from '../Components/Geral/BackArrow';
 
 const Div = styled.div`
     margin: 40px 30px 0 30px;
@@ -45,7 +46,7 @@ const ButtonS = styled.button`
 `;
 
 function PaginaEdificio () {
-
+    
     const [seccao, setSeccao] = useState('Sugestões');
 
     const MudaSeccao = id => {        
@@ -56,9 +57,7 @@ function PaginaEdificio () {
         <div className="m-0 p-0">
             <Div>
                 <section className="row col-12 m-0 p-0">
-                    <span className="col-2 m-0 p-0">
-                        <img src={Back}/>
-                    </span>
+                    <BackArrow />
                     <span className="col-8 inicio row justify-content-center m-0 p-0">
                         <span className="col-4 p-0">
                             <ProfilePicture/>

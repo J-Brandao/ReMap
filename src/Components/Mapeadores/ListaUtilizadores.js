@@ -16,10 +16,14 @@ const ProfilePicture = styled.div`
     width: 70px;
 `;
 
+const UserCard = styled.div`
+margin: 20px 0 0 0;
+`
+
 
 function ListaUtilizadores (props) {
     return(
-        <div className="m-0 p-0">
+        <UserCard className="p-0">
             {
                 props.tipo === 'Amigos' ?
                 <span className="row col-12 m-0 mt-3 p-0 divUtilizador">
@@ -64,7 +68,7 @@ function ListaUtilizadores (props) {
                 </span>
 
             }
-        </div>
+        </UserCard>
     )
 }
 
