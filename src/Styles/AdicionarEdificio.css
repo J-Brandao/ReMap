@@ -1,0 +1,19 @@
+.forms {
+  border: solid 2px #898989;
+  border-radius: 0;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.formsImagem {
+  background-color: #344953;
+  border-radius: 6px;
+  height: 140px;
+  width: 100%;
+  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

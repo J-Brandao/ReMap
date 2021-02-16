@@ -1,0 +1,20 @@
+.leaflet-container {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  z-index: 100;
+}
+
+.menu {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 500;
+}
+
+.fotografia {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 500;
+}
