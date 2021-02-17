@@ -7,9 +7,42 @@
 
 .menu {
   position: fixed;
-  bottom: 0;
   right: 0;
   z-index: 500;
+  height: 227px;
+  width: 87px;
+  background-color: rgba(255, 168, 1, 0.9);
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.imagemMenu {
+  margin-bottom: 0;
+  padding: 7px 0;
+}
+
+.Aberto {
+  bottom: 0;
+}
+
+.Fechado {
+  bottom: -190px;
+}
+
+.setaMenu {
+  padding-top: 13px;
+  height: 35px;
+  margin-bottom: 10px;
+}
+
+.setaMenu2 {
+  padding-bottom: 13px;
+  transform: rotate(180deg);
+  height: 35px;
+  margin-bottom: 10px;
 }
 
 .fotografia {
@@ -17,4 +50,42 @@
   bottom: 0;
   left: 0;
   z-index: 500;
+}
+
+.filtros {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 500;
+  text-align: end;
+}
+
+.filtrosImagem {
+  margin: 13px 7px 0 0;
+}
+
+.filtrosAberto {
+  background-color: rgba(255, 168, 1, 0.9);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin-right: 0;
+  margin-top: 10px;
+  padding: 5px 0;
+  width: 160px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.linhaFiltro {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #34495e;
+}
+
+.inputFiltro {
+  border: 1px solid #34495e;
+  height: 28px;
+  width: 28px;
+  margin: 0 10px 5px 10px;
 }
