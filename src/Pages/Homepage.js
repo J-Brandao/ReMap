@@ -1,14 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import styled from 'styled-components';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 import '../Styles/Homepage.css';
 import Perfil from '../Images/Perfil.jpg';
-import Filtros from '../Images/BotaoFiltros.svg';
-import FiltrosAtivo from '../Images/BotaoFiltrosAtivo.svg';
 import ArrowMenu from '../Images/ArrowMenu.svg';
 import MenuComunidade from '../Images/MenuComunidade.svg';
 import MenuEdificio from '../Images/MenuEdificio.svg';
 import MenuGamehub from '../Images/MenuGamehub.svg';
+import Filtros from '../Components/Homepage/Filtros';
 
 const ProfilePicture = styled.div`
     margin: 0 0 15px 15px;
@@ -22,50 +21,36 @@ const ProfilePicture = styled.div`
     width: 80px;
 `;  
 
+function GetLocation ({latitude, longitude}) {
+    const map = useMap();
+    map.setView([latitude, longitude], 15);
+    /*map.locate({
+        setView: true,
+        enableHighAccuracy: true
+    });*/
+    return null
+}
+
 function Homepage () {
 
     const [menu, setMenu] = useState('Fechado');
-    const [filtros, setFiltros] = useState('Fechado');
+    const [coordenadas, setCoordenadas] = useState({lat: '0', long: '0'});
 
     const abreMenu = id => {        
         setMenu(id);
     }
 
-    const abreFiltros = id => {        
-        setFiltros(id);
-    }
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            setCoordenadas({lat: position.coords.latitude, long: position.coords.longitude});
+        })
+    }, [setCoordenadas])
 
     return(
         <div className="m-0 p-0">
+            {console.log(coordenadas)}
             <div className="m-0 p-0 filtros">
-                {
-                    filtros === 'Fechado' ?
-                        <img className="filtrosImagem" src={Filtros} onClick={() => abreFiltros('Aberto')}/>
-                        :
-                        <span>
-                            <img className="filtrosImagem" src={FiltrosAtivo} onClick={() => abreFiltros('Fechado')}/>
-                            <div className="filtrosAberto">
-                                <p className="mb-0">Menu Filtrar</p>
-                                <span className="linhaFiltro">
-                                    <input type="checkbox" className="inputFiltro"/>
-                                    <p className="mb-0">Favoritos</p>
-                                </span>
-                                <span className="linhaFiltro">
-                                    <input type="checkbox" className="inputFiltro"/>
-                                    <p className="mb-0">Próximidade</p>
-                                </span>
-                                <span className="linhaFiltro">
-                                    <input type="checkbox" className="inputFiltro"/>
-                                    <p className="mb-0">Perigoso</p>
-                                </span>
-                                <span className="linhaFiltro">
-                                    <input type="checkbox" className="inputFiltro"/>
-                                    <p className="mb-0">Fotogénico</p>
-                                </span>
-                            </div>
-                        </span>
-                }
-
+                <Filtros/>
             </div>
             <div className={`menu ${menu === "Aberto" ? "Aberto" : "Fechado"}`} onClick={menu === "Aberto" ? () => abreMenu('Fechado') : () => abreMenu('Aberto') }>
                 {
@@ -79,7 +64,8 @@ function Homepage () {
                 <img src={MenuGamehub} className="imagemMenu"/>
             </div>
             <ProfilePicture className="fotografia"/>
-            <MapContainer center={[41.032670, -8.551000]} zoom={13}>
+            <MapContainer center={[coordenadas.lat, coordenadas.long]} zoom={20}>
+                <GetLocation latitude={coordenadas.lat} longitude={coordenadas.long}/>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
