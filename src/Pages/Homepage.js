@@ -50,7 +50,6 @@ function Homepage () {
 
     return(
         <div className="m-0 p-0">
-            {console.log(coordenadas)}
             <div className="m-0 p-0 filtros">
                 <Filtros/>
             </div>
@@ -64,14 +63,22 @@ function Homepage () {
                 <Link to="/mapeadores">
                     <img src={MenuComunidade} className="imagemMenu"/>
                 </Link>
-                <Link to="/novo">
+                <Link
+                    to={{
+                        pathname:'/novo',
+                        state: {
+                            localizacao: [coordenadas.lat, coordenadas.long]
+                        }
+                    }}>
                     <img src={MenuEdificio} className="imagemMenu"/>
                 </Link>
                 <Link to="/gamehub">
                     <img src={MenuGamehub} className="imagemMenu"/>
                 </Link>
             </div>
-            <ProfilePicture className="fotografia"/>
+            <Link className="m-0 p-0" to="/perfil">
+                <ProfilePicture className="fotografia"/>
+            </Link>
             <MapContainer center={[coordenadas.lat, coordenadas.long]} zoom={20}>
                 <GetLocation latitude={coordenadas.lat} longitude={coordenadas.long}/>
                 <TileLayer

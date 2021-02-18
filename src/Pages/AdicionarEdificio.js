@@ -2,32 +2,37 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import Back from '../Images/BackArrow.svg';
 import '../Styles/AdicionarEdificio.css';
+import { useDispatch } from 'react-redux';
 import AdicionarImagem from '../Images/GaleriaImagens.svg'
 import BackArrow from '../Components/Geral/BackArrow';
-import { set } from 'lodash';
+import { createNovoEdificio } from '../Store/Edificios/Actions';
 
 
 const Div = styled.div`
     margin: 40px 30px 40px 30px;
 `;
 
-function AdicionarEdificio () {
+function AdicionarEdificio (props) {
 
+    const dispatch = useDispatch();
     const [valores, setValores] = useState({
         nomeEdificio: '',
         descricao: '',
         fotos: '',
-        localizacao: [],
+        localizacao: props.location.state.localizacao,
         degradacao: '5',
         acesso: '5',
         seguranca: '5',
         vandalismo: '5'
-    })
+    });
 
     const handleChange = tipo => conteudo => {
         valores[tipo] = conteudo.target.value;
         setValores({...valores});
-    }
+    };
+
+    const onCreateFavEdificio = (nomeEdificio, descricao, localizacao, degradacao, acesso, seguranca, vandalismo) => 
+        dispatch(createNovoEdificio(nomeEdificio, descricao, localizacao, degradacao, acesso, seguranca, vandalismo))
 
     return(
         <Div>
@@ -37,7 +42,6 @@ function AdicionarEdificio () {
                     Adicionar novo edifício
                 </span>
             </section>
-            {console.log(valores)}
             <section className="row col-12 m-0 p-0">
                 <form className="col-12 w-0 p-0">
                     <span className="col-12 m-0 p-0">
@@ -85,6 +89,7 @@ function AdicionarEdificio () {
                         </div>
                     </span>
                 </form>
+                <button onClick={() => onCreateFavEdificio(valores.nomeEdificio, valores.descricao, valores.localizacao, valores.degradacao, valores.acesso, valores.seguranca, valores.vandalismo)}>Adicionar</button>
             </section>
         </Div>
     )
