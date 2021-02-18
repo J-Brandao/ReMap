@@ -41,6 +41,7 @@ function Homepage () {
     }
 
     useEffect(() => {
+        //podemos usar o watchPosition para receber de X em X tempo
         navigator.geolocation.getCurrentPosition((position) => {
             setCoordenadas({lat: position.coords.latitude, long: position.coords.longitude});
         })
