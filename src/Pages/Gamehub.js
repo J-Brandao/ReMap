@@ -17,6 +17,7 @@ import ArrowMap from '../Images/ArrowMap.svg';
 import Book from '../Images/Book.svg';
 import CheckMark from '../Images/CheckMark.svg';
 import Spray from '../Images/Spray.svg';
+import BackArrow from '../Components/Geral/BackArrow'
 
 const Div = styled.div`
     margin: 40px 30px 0 30px;
@@ -40,7 +41,7 @@ function Gamehub () {
             <Div>
                 <section className="row col-12 m-0 p-0">
                     <span className="col-2 m-0 p-0">
-                        <img src={Back}/>
+                        <BackArrow/>
                     </span>
                     <span className="col-8 tituloPagina offset-2 text-center m-0 p-0">
                         Gamehub

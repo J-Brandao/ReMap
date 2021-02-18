@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
+import { Link } from 'react-router-dom';
 import '../Styles/Homepage.css';
 import Perfil from '../Images/Perfil.jpg';
 import ArrowMenu from '../Images/ArrowMenu.svg';
@@ -23,7 +24,7 @@ const ProfilePicture = styled.div`
 
 function GetLocation ({latitude, longitude}) {
     const map = useMap();
-    map.setView([latitude, longitude], 15);
+    map.setView([latitude, longitude], 17);
     /*map.locate({
         setView: true,
         enableHighAccuracy: true
@@ -60,9 +61,15 @@ function Homepage () {
                         :
                         <img src={ArrowMenu} className="setaMenu2"/>
                 }
-                <img src={MenuComunidade} className="imagemMenu"/>
-                <img src={MenuEdificio} className="imagemMenu"/>
-                <img src={MenuGamehub} className="imagemMenu"/>
+                <Link to="/mapeadores">
+                    <img src={MenuComunidade} className="imagemMenu"/>
+                </Link>
+                <Link to="/novo">
+                    <img src={MenuEdificio} className="imagemMenu"/>
+                </Link>
+                <Link to="/gamehub">
+                    <img src={MenuGamehub} className="imagemMenu"/>
+                </Link>
             </div>
             <ProfilePicture className="fotografia"/>
             <MapContainer center={[coordenadas.lat, coordenadas.long]} zoom={20}>
@@ -70,6 +77,11 @@ function Homepage () {
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+                <Marker position={[coordenadas.lat, coordenadas.long]}>
+                    <Popup position={[coordenadas.lat, coordenadas.long]}>
+                        Hey badalhoca, cheiras a cu de cavalo.
+                    </Popup>
+                </Marker>
             </MapContainer>
         </div>
     )
