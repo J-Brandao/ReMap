@@ -11,6 +11,7 @@ import Book from '../Images/Book.svg';
 import Camera from '../Images/Camera.svg';
 import UltimaSeccao from '../Components/PaginaEdificio/UltimaSeccao';
 import BackArrow from '../Components/Geral/BackArrow';
+import {useAuth0} from "@auth0/auth0-react"
 
 const Div = styled.div`
     margin: 40px 30px 0 30px;
@@ -45,7 +46,8 @@ const ButtonS = styled.button`
     color: #34495e;
 `;
 
-function PaginaEdificio () {
+function PaginaEdificio() {
+    const {logout} = useAuth0()
     
     const [seccao, setSeccao] = useState('Sugestões');
 
@@ -81,7 +83,7 @@ function PaginaEdificio () {
                         <h5 id="seccaoTitulo">Galeria de Imagens</h5>
                         <Galeria/>
                         <span className="col-12 mx-0 px-0 text-right mt-2">
-                            <button className="botaoFotografia">Nova Fotografia</button>
+                            <button onClick={()=>logout()} className="botaoFotografia">Nova Fotografia</button>
                         </span>
                 </section>
 

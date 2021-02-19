@@ -15,7 +15,7 @@ function App() {
     <Auth0Provider
       domain="dev-x782vrhf.eu.auth0.com"
       clientId="nDVdfkS2EEi46sFaDQ6mBIbrFHhmsl7X"
-      redirectUri={"http://localhost:3000/perfil"} //A ALTERAR
+      redirectUri={"http://localhost:3000/homepage"}//A ALTERAR
     >
       <Router>
       <Switch>
