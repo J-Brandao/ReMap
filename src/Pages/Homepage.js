@@ -48,12 +48,11 @@ function Homepage () {
 
     useEffect(() => {
         dispatch(getEdificioList())
-
         //podemos usar o watchPosition para receber de X em X tempo
         navigator.geolocation.getCurrentPosition((position) => {
             setCoordenadas({lat: position.coords.latitude, long: position.coords.longitude});
         })
-    }, [setCoordenadas])
+    }, [])
 
     if(isLoadingEdificio) {
         return (
@@ -65,6 +64,7 @@ function Homepage () {
 
     return(
         <div className="m-0 p-0">
+            {console.log(EdificioList)}
             <div className="m-0 p-0 filtros">
                 <Filtros/>
             </div>
@@ -100,8 +100,8 @@ function Homepage () {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
 
-                {EdificioList.map(edificio => (
-                    <Marker position={[edificio.localizacao[0], edificio.localizacao[1]]}>
+                {EdificioList.map((edificio, key) => (
+                    <Marker key={key} position={[edificio.localizacao[0], edificio.localizacao[1]]}>
                         <Popup position={[edificio.localizacao[0], edificio.localizacao[1]]}>
                             ola?
                         </Popup>
