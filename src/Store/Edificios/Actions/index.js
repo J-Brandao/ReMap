@@ -15,21 +15,21 @@ import {
     EDIFICIO_DELETE_SUCCESS,
     EDIFICIO_DELETE_ERROR,
   } from './Constants';
-  import { /*fetchFavPokemonList, fetchFavPokemon,*/ createEdificio/*, deleteFavPokemon*/ } from "../../../Firebase/Pedidos"
+  import { fetchEdificioList, /*fetchFavPokemon,*/ createEdificio/*, deleteFavPokemon*/ } from "../../../Firebase/Pedidos"
   
-  /*export const getFavList = () => {
+  export const getEdificioList = () => {
     return (dispatch) => {
-      dispatch({ type: FAVLIST_GET_START });
+      dispatch({ type: EDIFICIOS_GET_START });
   
-      fetchFavPokemonList()
-        .then(FavPokemon => {
-          dispatch({ type: FAVLIST_GET_SUCCESS, payload: FavPokemon })
+      fetchEdificioList()
+        .then(Edificio => {
+          dispatch({ type: EDIFICIOS_GET_SUCCESS, payload: Edificio })
         })
-        .catch(() => dispatch({ type: FAVLIST_GET_ERROR }))
+        .catch(() => dispatch({ type: EDIFICIOS_GET_ERROR }))
     }
   }
 
-  export const getFavPokemon = (namePokemon = '', email = '') => {
+  /*export const getFavPokemon = (namePokemon = '', email = '') => {
     return (dispatch) => {
       dispatch({ type: FAVPOKE_GET_START });
   

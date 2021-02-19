@@ -23,3 +23,22 @@ input[type="file"] {
   font-weight: 700;
   color: #34495e;
 }
+
+.botaoSubmeter {
+  width: 146px;
+  height: 37px;
+  background-color: rgba(255, 168, 1, 0.75);
+  border: solid 2px #ffa801;
+  color: #34495e;
+  font-size: 18px;
+  border-radius: 0;
+}
+.botaoSubmeterDisabled {
+  width: 146px;
+  height: 37px;
+  background-color: rgba(196, 196, 196, 0.75);
+  border: solid 2px #c4c4c4;
+  color: #34495e;
+  font-size: 18px;
+  border-radius: 0;
+}

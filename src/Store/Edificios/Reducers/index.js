@@ -16,10 +16,10 @@ import {
     let data;
     
     switch(type) {
-      //case FAVLIST_GET_START:
-        //return { ...state, isLoading: true };
-      //case FAVLIST_GET_SUCCESS:
-        //return { ...state, data: payload, isLoading: false };
+      case EDIFICIOS_GET_START:
+        return { ...state, isLoading: true };
+      case EDIFICIOS_GET_SUCCESS:
+        return { ...state, data: payload, isLoading: false };
       //case FAVPOKE_GET_START:
         //return { ...state, isLoading: true };
       //case FAVPOKE_GET_SUCCESS:
