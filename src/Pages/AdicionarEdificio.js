@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
-import Back from '../Images/BackArrow.svg';
 import '../Styles/AdicionarEdificio.css';
 import { useDispatch } from 'react-redux';
 import AdicionarImagem from '../Images/GaleriaImagens.svg'
@@ -89,7 +88,19 @@ function AdicionarEdificio (props) {
                         </div>
                     </span>
                 </form>
-                <button onClick={() => onCreateFavEdificio(valores.nomeEdificio, valores.descricao, valores.localizacao, valores.degradacao, valores.acesso, valores.seguranca, valores.vandalismo)}>Adicionar</button>
+                <span className="col-12 text-right m-0 p-0">
+                    {valores.nomeEdificio !== '' && valores.descricao !== '' && valores.localizacao !== '' ?
+                        <button 
+                            className="botaoSubmeter mt-4" 
+                            onClick={() => onCreateFavEdificio(valores.nomeEdificio, valores.descricao, valores.localizacao, valores.degradacao, valores.acesso, valores.seguranca, valores.vandalismo)}
+                            >Submeter</button>
+                        :
+                        <button 
+                            className="botaoSubmeterDisabled mt-4" 
+                            disabled
+                            >Submeter</button>
+                    }
+                </span>
             </section>
         </Div>
     )

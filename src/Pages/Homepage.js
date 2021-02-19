@@ -9,6 +9,8 @@ import MenuComunidade from '../Images/MenuComunidade.svg';
 import MenuEdificio from '../Images/MenuEdificio.svg';
 import MenuGamehub from '../Images/MenuGamehub.svg';
 import Filtros from '../Components/Homepage/Filtros';
+import { useSelector, useDispatch } from 'react-redux';
+import { getEdificioList } from '../Store/Edificios/Actions';
 
 const ProfilePicture = styled.div`
     margin: 0 0 15px 15px;
@@ -36,17 +38,30 @@ function Homepage () {
 
     const [menu, setMenu] = useState('Fechado');
     const [coordenadas, setCoordenadas] = useState({lat: '0', long: '0'});
+    const EdificioList = useSelector(({Edificios}) => Edificios.data);
+    const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading)
+    const dispatch = useDispatch();
 
     const abreMenu = id => {        
         setMenu(id);
     }
 
     useEffect(() => {
+        dispatch(getEdificioList())
+
         //podemos usar o watchPosition para receber de X em X tempo
         navigator.geolocation.getCurrentPosition((position) => {
             setCoordenadas({lat: position.coords.latitude, long: position.coords.longitude});
         })
     }, [setCoordenadas])
+
+    if(isLoadingEdificio) {
+        return (
+            <div className="row col-12 justify-content-center bgWhite">
+                <div>Loading</div>
+            </div>
+        )
+    }
 
     return(
         <div className="m-0 p-0">
@@ -84,11 +99,14 @@ function Homepage () {
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Marker position={[coordenadas.lat, coordenadas.long]}>
-                    <Popup position={[coordenadas.lat, coordenadas.long]}>
-                        Hey badalhoca, cheiras a cu de cavalo.
-                    </Popup>
-                </Marker>
+
+                {EdificioList.map(edificio => (
+                    <Marker position={[edificio.localizacao[0], edificio.localizacao[1]]}>
+                        <Popup position={[edificio.localizacao[0], edificio.localizacao[1]]}>
+                            ola?
+                        </Popup>
+                    </Marker>
+                ))}
             </MapContainer>
         </div>
     )

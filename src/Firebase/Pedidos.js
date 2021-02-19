@@ -1,8 +1,8 @@
-/*export const fetchFavPokemonList = () =>
-  fetch(`http://localhost:3001/favoritos`)
+export const fetchEdificioList = () =>
+  fetch(`http://localhost:3001/edificios`)
     .then(response => response.json())
 
-export const fetchFavPokemon = ( namePokemon, email ) =>
+/*export const fetchFavPokemon = ( namePokemon, email ) =>
   fetch(`http://localhost:3001/favoritos/${namePokemon}/${email}`)
     .then(response => response.json())
 */

@@ -1,17 +1,17 @@
 const express = require("express");
-const { create } = require("../Models/Edificios");
+const { create, getAll } = require("../Models/Edificios");
 //const checkJwt = require("../Utils/checkJwt");
 
 const router = express.Router();
 
 router.route("/")
-    /*.get(async (req, res) => {
-    const pokemon = await getAll();
+    .get(async (req, res) => {
+    const edificios = await getAll();
 
     res.status(200);
-    res.json(pokemon);
+    res.json(edificios);
     res.end();
-    })*/
+    })
     .post(/*checkJwt,*/ async (req, res) => {
 
     const edificio = await create(req.body);
