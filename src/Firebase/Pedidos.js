@@ -1,3 +1,4 @@
+//EDIFICIOS
 export const fetchEdificioList = () =>
   fetch(`http://localhost:3001/edificios`)
     .then(response => response.json())
@@ -24,3 +25,15 @@ export const createEdificio = (token, nomeEdificio, descricao, localizacao, degr
       Authorization: `Bearer ${token}`
     }
   });*/
+
+
+//UTILIZADORES
+export const createUtilizador = (token, nomeEdificio, descricao, localizacao, degradacao, acesso, seguranca, vandalismo) =>
+fetch(`http://localhost:3001/utilizadores`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`
+  },
+  body: JSON.stringify({ nomeEdificio, descricao, localizacao, degradacao, acesso, seguranca, vandalismo })
+}).then(response => console.log(response.json()));

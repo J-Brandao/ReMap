@@ -25,8 +25,8 @@ input[type="file"] {
 }
 
 .botaoSubmeter {
-  width: 146px;
-  height: 37px;
+  width: 186px;
+  height: 58px;
   background-color: rgba(255, 168, 1, 0.75);
   border: solid 2px #ffa801;
   color: #34495e;

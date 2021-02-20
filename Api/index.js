@@ -10,5 +10,8 @@ app.use(bodyParser.json());
 app.use("/edificios",
   require("./Controllers/Edificio")
 );
+app.use("/utilizadores",
+  require("./Controllers/Utilizador")
+);
 
 app.listen(3001, () => console.log("Servidor a funcionar!"));

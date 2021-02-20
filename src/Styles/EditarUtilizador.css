@@ -1,0 +1,19 @@
+.forms {
+  border: solid 2px #898989;
+  border-radius: 0;
+}
+
+.nomeForm {
+  font-size: 18px;
+  color: #898989;
+}
+
+.botaoSubmeter {
+  width: 186px;
+  height: 58px;
+  background-color: rgba(255, 168, 1, 0.75);
+  border: solid 2px #ffa801;
+  color: #34495e;
+  font-size: 18px;
+  border-radius: 0;
+}

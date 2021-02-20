@@ -1,11 +1,13 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import EdificiosReducer from './Edificios/Reducers';
-//import tokenReducer from './Token/Reducers';
+import UtilizadoresReducer from './Utilizadores/Reducers';
+import tokenReducer from './Token/Reducers';
 import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({
     Edificios: EdificiosReducer,
-    //token: tokenReducer
+    Utilizadores: UtilizadoresReducer,
+    token: tokenReducer
 });
 
 const composeEnhancers =

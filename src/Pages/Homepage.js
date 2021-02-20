@@ -26,7 +26,7 @@ const ProfilePicture = styled.div`
 
 function GetLocation ({latitude, longitude}) {
     const map = useMap();
-    map.setView([latitude, longitude], 17);
+    map.setView([latitude, longitude], 16);
     /*map.locate({
         setView: true,
         enableHighAccuracy: true
@@ -99,11 +99,10 @@ function Homepage () {
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-
                 {EdificioList.map((edificio, key) => (
                     <Marker key={key} position={[edificio.localizacao[0], edificio.localizacao[1]]}>
                         <Popup position={[edificio.localizacao[0], edificio.localizacao[1]]}>
-                            ola?
+                            <Link to="/edificio"><h3>{edificio.nomeEdificio}</h3></Link>
                         </Popup>
                     </Marker>
                 ))}
