@@ -3,12 +3,16 @@ import '../../Styles/Homepage.css';
 import FiltrosFechado from '../../Images/BotaoFiltros.svg';
 import FiltrosAtivo from '../../Images/BotaoFiltrosAtivo.svg';
 
-function Filtros () {
+function Filtros ({filtro}) {
 
     const [filtros, setFiltros] = useState('Fechado');
 
     const abreFiltros = id => {        
         setFiltros(id);
+    }
+
+    const atualiza = (tipo) => {
+        filtro(tipo);
     }
 
     return(
@@ -26,7 +30,7 @@ function Filtros () {
                             <p className="mb-0">Favoritos</p>
                         </span>
                         <span className="linhaFiltro">
-                            <input type="checkbox" className="inputFiltro"/>
+                            <input type="checkbox" className="inputFiltro" onClick={() => atualiza('proximidade')}/>
                             <p className="mb-0">Próximidade</p>
                         </span>
                         <span className="linhaFiltro">
