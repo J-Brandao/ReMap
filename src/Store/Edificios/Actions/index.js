@@ -41,11 +41,11 @@ import {
     }
   }*/
   
-  export const createNovoEdificio = (nomeEdificio = '', descricao = '', localizacao = '', degradacao = '', acesso = '', seguranca = '', vandalismo = '') => {
+  export const createNovoEdificio = (nomeEdificio = '', descricao = '', fotos = '', localizacao = '', degradacao = '', acesso = '', seguranca = '', vandalismo = '') => {
     return (dispatch, getState) => {
       dispatch({ type: EDIFICIO_CREATE_START });
 
-      createEdificio(getState().token, nomeEdificio, descricao, localizacao, degradacao, acesso, seguranca, vandalismo)
+      createEdificio(getState().token, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo)
         .then(Edificio => {
           dispatch({ type: EDIFICIO_CREATE_SUCCESS, payload: Edificio })
         })

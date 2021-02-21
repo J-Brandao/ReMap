@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import AdicionarImagem from '../Images/GaleriaImagens.svg'
 import BackArrow from '../Components/Geral/BackArrow';
 import { createNovoEdificio } from '../Store/Edificios/Actions';
+import { storage } from '../Firebase/FbConfig';
 
 
 const Div = styled.div`
@@ -17,7 +18,7 @@ function AdicionarEdificio (props) {
     const [valores, setValores] = useState({
         nomeEdificio: '',
         descricao: '',
-        fotos: '',
+        fotos: null,
         localizacao: props.location.state.localizacao,
         degradacao: '5',
         acesso: '5',
@@ -26,15 +27,42 @@ function AdicionarEdificio (props) {
     });
 
     const handleChange = tipo => conteudo => {
-        valores[tipo] = conteudo.target.value;
+        if (tipo !== 'fotos') {
+            valores[tipo] = conteudo.target.value;
+        } else {
+            valores[tipo] = conteudo.target.files[0]
+        }
         setValores({...valores});
     };
 
-    const onCreateFavEdificio = (nomeEdificio, descricao, localizacao, degradacao, acesso, seguranca, vandalismo) => 
-        dispatch(createNovoEdificio(nomeEdificio, descricao, localizacao, degradacao, acesso, seguranca, vandalismo))
+    const onCreateFavEdificio = (nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo) => {
+        //Envia Informação para a firebase
+        dispatch(createNovoEdificio(nomeEdificio, descricao, fotos.name, localizacao, degradacao, acesso, seguranca, vandalismo));
+        
+        //Guarda a imagem na storage
+        const uploadTask = storage.ref(`images/${fotos.name}`).put(fotos);
+        uploadTask.on(
+        "state_changed",
+        snapshot => {
+        },
+        error => {
+            console.log(error);
+        },
+        () => {
+            storage
+            .ref("images")
+            .child(fotos.name)
+            .getDownloadURL()
+            .then(url => {
+                console.log(url)
+            })
+        });
+
+    }
 
     return(
         <Div>
+            {console.log(valores)}
             <section className="row col-12 m-0 p-0">
                 <BackArrow />
                 <span className="col-9 tituloPagina offset-2 text-center m-0 p-0">
@@ -62,7 +90,7 @@ function AdicionarEdificio (props) {
                     <span className="col-12 m-0 p-0">
                         <span className="seccaoTitulo">Galeria de fotos</span>
                         <label for="galeriaImgs" className="seccaoTitulo formsImagem mb-3"><img src={AdicionarImagem} className="mb-0"/></label>
-                        <input className="form-control" id="galeriaImgs" type="file" aria-label="Search"/>
+                        <input className="form-control" id="galeriaImgs" type="file" aria-label="Search" onChange={handleChange('fotos')}/>
                     </span>
                     <span className="col-12 m-0 p-0">
                         <span className="seccaoTitulo">Localização do edifício</span>
@@ -92,7 +120,7 @@ function AdicionarEdificio (props) {
                     {valores.nomeEdificio !== '' && valores.descricao !== '' && valores.localizacao !== '' ?
                         <button 
                             className="botaoSubmeter mt-4" 
-                            onClick={() => onCreateFavEdificio(valores.nomeEdificio, valores.descricao, valores.localizacao, valores.degradacao, valores.acesso, valores.seguranca, valores.vandalismo)}
+                            onClick={() => onCreateFavEdificio(valores.nomeEdificio, valores.descricao, valores.fotos, valores.localizacao, valores.degradacao, valores.acesso, valores.seguranca, valores.vandalismo)}
                             >Submeter</button>
                         :
                         <button 

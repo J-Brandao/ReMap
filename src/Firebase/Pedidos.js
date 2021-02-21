@@ -8,14 +8,14 @@ export const fetchEdificioList = () =>
     .then(response => response.json())
 */
 
-export const createEdificio = (token, nomeEdificio, descricao, localizacao, degradacao, acesso, seguranca, vandalismo) =>
+export const createEdificio = (token, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo) =>
   fetch(`http://localhost:3001/edificios`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     },
-    body: JSON.stringify({ nomeEdificio, descricao, localizacao, degradacao, acesso, seguranca, vandalismo })
+    body: JSON.stringify({ nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo })
   }).then(response => console.log(response.json()));
 
 /*export const deleteFavPokemon = (token, id) =>
