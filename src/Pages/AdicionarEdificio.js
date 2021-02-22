@@ -36,11 +36,17 @@ function AdicionarEdificio (props) {
     };
 
     const onCreateFavEdificio = (nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo) => {
+
+        //Cria nome único para a imagem
+        let date = new Date();
+        let timestamp = date.getTime();
+        let newName = fotos.name + "_imagem_" + timestamp; 
+
         //Envia Informação para a firebase
-        dispatch(createNovoEdificio(nomeEdificio, descricao, fotos.name, localizacao, degradacao, acesso, seguranca, vandalismo));
+        dispatch(createNovoEdificio(nomeEdificio, descricao, newName, localizacao, degradacao, acesso, seguranca, vandalismo));
         
         //Guarda a imagem na storage
-        const uploadTask = storage.ref(`imagensEdificios/${fotos.name}`).put(fotos);
+        const uploadTask = storage.ref(`imagensEdificios/${newName}`).put(fotos);
         uploadTask.on(
         "state_changed",
         snapshot => {
@@ -51,7 +57,7 @@ function AdicionarEdificio (props) {
         () => {
             storage
             .ref("imagensEdificios")
-            .child(fotos.name)
+            .child(newName)
             .getDownloadURL()
             .then(url => {
                 console.log(url)

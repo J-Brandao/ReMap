@@ -34,7 +34,7 @@ const ProfilePicture = styled.div`
 
 function EditarUtilizador (props) {
 
-    const { user, isLoading } = useAuth0();
+    const { user, isLoading, isAuthenticated } = useAuth0();
     const dispatch = useDispatch();
     const [valores, setValores] = useState({
         imagemUser: '',
@@ -62,9 +62,14 @@ function EditarUtilizador (props) {
     };
 
     const onCreateNovoUtilizador = (imagemUser, nomeUtilizador, biografia, pais, cidade) => {
-        dispatch(createNovoUtilizador(imagemUser.name, nomeUtilizador, biografia, pais, cidade));
 
-        const uploadTask = storage.ref(`imagensUtilizadores/${imagemUser.name}`).put(imagemUser);
+        let date = new Date();
+        let timestamp = date.getTime();
+        let newName = imagemUser.name + "_imagem_" + timestamp;
+
+        dispatch(createNovoUtilizador(newName, nomeUtilizador, biografia, pais, cidade));
+
+        const uploadTask = storage.ref(`imagensUtilizadores/${newName}`).put(imagemUser);
         uploadTask.on(
         "state_changed",
         snapshot => {
@@ -75,7 +80,7 @@ function EditarUtilizador (props) {
         () => {
             storage
             .ref("imagensUtilizadores")
-            .child(imagemUser.name)
+            .child(newName)
             .getDownloadURL()
             .then(url => {
                 console.log(url)
@@ -87,6 +92,8 @@ function EditarUtilizador (props) {
         <Fundo>
             <Div>
                 {console.log(valores)}
+                {console.log(user)}
+                {console.log(isAuthenticated)}
                 <section className="m-0 p-0 w-100">
                     <label for="imgPerfil" className="imagemPerfil mb-0"><ProfilePicture/></label>
                     <input className="form-control" id="imgPerfil" type="file" aria-label="Search" onChange={handleChange('imagemUser')}/>

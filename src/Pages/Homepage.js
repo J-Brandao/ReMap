@@ -11,6 +11,7 @@ import MenuGamehub from '../Images/MenuGamehub.svg';
 import Filtros from '../Components/Homepage/Filtros';
 import { useSelector, useDispatch } from 'react-redux';
 import { getEdificioList } from '../Store/Edificios/Actions';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const ProfilePicture = styled.div`
     margin: 0 0 15px 15px;
@@ -35,6 +36,8 @@ function GetLocation ({latitude, longitude}) {
 }
 
 function Homepage () {
+
+    const { user, isLoading, isAuthenticated } = useAuth0();
 
     const [menu, setMenu] = useState('Fechado');
     const [coordenadas, setCoordenadas] = useState({lat: '0', long: '0'});
@@ -74,6 +77,7 @@ function Homepage () {
         <div className="m-0 p-0">
             {console.log(EdificioList)}
             {console.log(filtros)}
+            {console.log(isAuthenticated, user)}
             <div className="m-0 p-0 filtros">
                 <Filtros filtro={atualiza}/>
             </div>
