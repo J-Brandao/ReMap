@@ -40,7 +40,7 @@ function AdicionarEdificio (props) {
         dispatch(createNovoEdificio(nomeEdificio, descricao, fotos.name, localizacao, degradacao, acesso, seguranca, vandalismo));
         
         //Guarda a imagem na storage
-        const uploadTask = storage.ref(`images/${fotos.name}`).put(fotos);
+        const uploadTask = storage.ref(`imagensEdificios/${fotos.name}`).put(fotos);
         uploadTask.on(
         "state_changed",
         snapshot => {
@@ -50,7 +50,7 @@ function AdicionarEdificio (props) {
         },
         () => {
             storage
-            .ref("images")
+            .ref("imagensEdificios")
             .child(fotos.name)
             .getDownloadURL()
             .then(url => {

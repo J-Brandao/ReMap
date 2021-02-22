@@ -28,12 +28,12 @@ export const createEdificio = (token, nomeEdificio, descricao, fotos, localizaca
 
 
 //UTILIZADORES
-export const createUtilizador = (token, nomeEdificio, descricao, localizacao, degradacao, acesso, seguranca, vandalismo) =>
+export const createUtilizador = (token, imagemUser, nomeUtilizador, biografia, pais, cidade) =>
 fetch(`http://localhost:3001/utilizadores`, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${token}`
   },
-  body: JSON.stringify({ nomeEdificio, descricao, localizacao, degradacao, acesso, seguranca, vandalismo })
+  body: JSON.stringify({ imagemUser, nomeUtilizador, biografia, pais, cidade })
 }).then(response => console.log(response.json()));

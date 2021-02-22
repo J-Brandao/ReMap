@@ -6,6 +6,7 @@ import Background from '../Images/Background2.svg';
 import imgPerfil from '../Images/Perfil.jpg';
 import '../Styles/EditarUtilizador.css';
 import { createNovoUtilizador } from '../Store/Utilizadores/Actions';
+import { storage } from '../Firebase/FbConfig';
 
 const Fundo = styled.div`
     background-image: url(${Background});
@@ -52,19 +53,43 @@ function EditarUtilizador (props) {
     }
 
     const handleChange = tipo => conteudo => {
-        valores[tipo] = conteudo.target.value;
+        if (tipo !== 'imagemUser') {
+            valores[tipo] = conteudo.target.value;
+        } else {
+            valores[tipo] = conteudo.target.files[0];
+        }
         setValores({...valores});
     };
 
-    const onCreateNovoUtilizador = (nomeUtilizador, biografia, pais, cidade) => 
-        dispatch(createNovoUtilizador(nomeUtilizador, biografia, pais, cidade))
+    const onCreateNovoUtilizador = (imagemUser, nomeUtilizador, biografia, pais, cidade) => {
+        dispatch(createNovoUtilizador(imagemUser.name, nomeUtilizador, biografia, pais, cidade));
+
+        const uploadTask = storage.ref(`imagensUtilizadores/${imagemUser.name}`).put(imagemUser);
+        uploadTask.on(
+        "state_changed",
+        snapshot => {
+        },
+        error => {
+            console.log(error);
+        },
+        () => {
+            storage
+            .ref("imagensUtilizadores")
+            .child(imagemUser.name)
+            .getDownloadURL()
+            .then(url => {
+                console.log(url)
+            })
+        });
+    }
 
     return(
         <Fundo>
             <Div>
                 {console.log(valores)}
                 <section className="m-0 p-0 w-100">
-                    <ProfilePicture/>
+                    <label for="imgPerfil" className="imagemPerfil mb-0"><ProfilePicture/></label>
+                    <input className="form-control" id="imgPerfil" type="file" aria-label="Search" onChange={handleChange('imagemUser')}/>
                 </section>
                 <section className="row col-12 m-0 p-0 w-100">
                     <span className="col-12 m-0 mb-2 p-0">
@@ -102,7 +127,7 @@ function EditarUtilizador (props) {
                     <span className="col-12 text-center mb-2 m-0 p-0">
                         <button 
                             className="botaoSubmeter mt-4"
-                            onClick={() => onCreateNovoUtilizador(valores.nomeUtilizador, valores.biografia, valores.pais, valores.cidade)} 
+                            onClick={() => onCreateNovoUtilizador(valores.imagemUser, valores.nomeUtilizador, valores.biografia, valores.pais, valores.cidade)} 
                             >Confirmar</button>
                     </span>
                 </section>

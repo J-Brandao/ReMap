@@ -17,3 +17,15 @@
   font-size: 18px;
   border-radius: 0;
 }
+
+input[type="file"] {
+  display: none;
+}
+
+.imagemPerfil {
+  width: 100%;
+  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
