@@ -11,20 +11,20 @@ import {
     UTILIZADOR_CREATE_SUCCESS,
     UTILIZADOR_CREATE_ERROR,
   } from './Constants';
-  import { /*fetchEdificioList, fetchFavPokemon,*/ createUtilizador/*, deleteFavPokemon*/ } from "../../../Firebase/Pedidos"
+  import { fetchUtilizadoresList, /*fetchFavPokemon,*/ createUtilizador/*, deleteFavPokemon*/ } from "../../../Firebase/Pedidos"
   
-  /*export const getEdificioList = () => {
+  export const getUtilizadoresList = () => {
     return (dispatch) => {
-      dispatch({ type: EDIFICIOS_GET_START });
+      dispatch({ type: UTILIZADORES_GET_START });
   
-      fetchEdificioList()
-        .then(Edificio => {
-          dispatch({ type: EDIFICIOS_GET_SUCCESS, payload: Edificio })
+      fetchUtilizadoresList()
+        .then(Utilizadores => {
+          dispatch({ type: UTILIZADORES_GET_SUCCESS, payload: Utilizadores })
         })
-        .catch(() => dispatch({ type: EDIFICIOS_GET_ERROR }))
+        .catch(() => dispatch({ type: UTILIZADORES_GET_ERROR }))
     }
   }
-
+  /*
   export const getFavPokemon = (namePokemon = '', email = '') => {
     return (dispatch) => {
       dispatch({ type: FAVPOKE_GET_START });

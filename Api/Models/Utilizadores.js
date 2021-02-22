@@ -16,17 +16,17 @@ module.exports = {
     }
     
     return {id: doc.docs[0].id};
-  },
+  },*/
   getAll: async () => {
     const db = getFirestore();
-    const pokeCollectionRef = db.collection("Edifícios");
-    const result = await pokeCollectionRef.get();
-    const edificios = result.docs.map(doc => ({
+    const utilizadorCollectionRef = db.collection("Utilizadores");
+    const result = await utilizadorCollectionRef.get();
+    const utilizadores = result.docs.map(doc => ({
         ...doc.data(),
         id: doc.id
     }));
-    return edificios;
-  },*/
+    return utilizadores;
+  },
   create: async (body) => {
     const db = getFirestore();
     const edificioCollectionRef = db.collection("Utilizadores");

@@ -5,6 +5,8 @@ import '../Styles/Mapeadores.css';
 import ListaUtilizadores from '../Components/Mapeadores/ListaUtilizadores';
 import Pesquisa from '../Components/Mapeadores/Pesquisa';
 import BackArrow from '../Components/Geral/BackArrow';
+import { getUtilizadoresList } from '../Store/Utilizadores/Actions';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Div = styled.div`
     margin: 40px 30px 0 30px;
@@ -36,13 +38,30 @@ function Mapeadores() {
 
     const [seccao, setSeccao] = useState('Amigos');
 
+    const UtilizadoresList = useSelector(({Utilizadores}) => Utilizadores.data);
+    const isLoadingUtilizadores = useSelector(({ Utilizadores }) => Utilizadores.isLoading)
+    const dispatch = useDispatch();
+
     const MudaSeccao = id => {        
         setSeccao(id);
+    }
+
+    useEffect(() => {
+        dispatch(getUtilizadoresList())
+    }, [])
+
+    if(isLoadingUtilizadores) {
+        return (
+            <div className="row col-12 justify-content-center bgWhite">
+                <div>Loading</div>
+            </div>
+        )
     }
 
     return(
         <div className="m-0 p-0">
             <Div>
+            {console.log(UtilizadoresList)}
                 <section className="row col-12 p-0 m-0">
                     <BackArrow />
                     <span className="col-8 tituloPagina offset-2 text-center m-0 p-0">

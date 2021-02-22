@@ -28,6 +28,11 @@ export const createEdificio = (token, nomeEdificio, descricao, fotos, localizaca
 
 
 //UTILIZADORES
+
+export const fetchUtilizadoresList = () =>
+  fetch(`http://localhost:3001/utilizadores`)
+    .then(response => response.json())
+
 export const createUtilizador = (token, imagemUser, nomeUtilizador, biografia, pais, cidade) =>
 fetch(`http://localhost:3001/utilizadores`, {
   method: 'POST',
