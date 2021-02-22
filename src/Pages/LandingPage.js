@@ -3,7 +3,8 @@ import '../Styles/LandingPage.css'
 import styled from 'styled-components';
 import Logo from '../Images/Logo.svg';
 import Background from '../Images/Background.png'
-import {useAuth0} from "@auth0/auth0-react"
+import { useAuth0 } from "@auth0/auth0-react"
+import {useHistory} from "react-router-dom"
 
 const Home = styled.div`
     flex-grow: 1;
@@ -18,20 +19,15 @@ const Home = styled.div`
 `;
 
 function LandingPage() {
-    const { loginWithRedirect, isAuthenticated } = useAuth0();
 
-    useEffect(() => {
-        if (!isAuthenticated) {
-            loginWithRedirect();
-        }
-    }, [isAuthenticated])
+    const history = useHistory()
+    const { loginWithRedirect, isAuthenticated } = useAuth0();
 
     return(
         <Home>
-            <img src={Logo}/>
+            <img alt="Logo Remap" src={Logo}/>
             <h2>Bem-vindo ao Remap</h2>
-            <button className="btn login">Log In</button>
-            <button className="btn signup">Sign Up</button>
+            <button onClick={isAuthenticated ? ()=> history.push("homepage") : ()=>loginWithRedirect()} className="btn login">Entrar</button>
         </Home>
     )
 }
