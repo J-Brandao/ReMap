@@ -4,12 +4,14 @@ import {
     UTILIZADOR_GET_START,
     UTILIZADOR_GET_SUCCESS,
     UTILIZADOR_CREATE_SUCCESS,
-    UTILIZADOR_DELETE_SUCCESS
+    UTILIZADOR_DELETE_SUCCESS,
+    UTILIZADOR_CREATE_START
   } from '../Actions/Constants'
   
   const initialState = {
     isLoading: true,
-    data: []
+    data: [],
+    user: {}
   };
   
   export default (state = initialState, { type, payload }) => {
@@ -20,6 +22,10 @@ import {
         return { ...state, isLoading: true };
       case UTILIZADORES_GET_SUCCESS:
         return { ...state, data: payload, isLoading: false };
+      case UTILIZADOR_GET_START:
+        return { ...state, isLoading: true };
+      case UTILIZADOR_GET_SUCCESS:
+        return { ...state, isLoading: false, user: payload };
       //case FAVPOKE_GET_START:
         //return { ...state, isLoading: true };
       //case FAVPOKE_GET_SUCCESS:

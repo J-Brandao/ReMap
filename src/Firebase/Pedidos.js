@@ -36,9 +36,7 @@ export const fetchUtilizadoresList = () =>
 export const fetchUtilizadorById = (userId) =>
   fetch(`http://localhost:3001/utilizador/${userId}`)
     .then(response => response.json())
-    .catch((e) => {
-      console.log(e)
-    }) 
+    
   
 export const createUtilizador = (token, userID, imagemUser, nomeUtilizador, biografia, pais, cidade) =>
 fetch(`http://localhost:3001/utilizadores`, {
