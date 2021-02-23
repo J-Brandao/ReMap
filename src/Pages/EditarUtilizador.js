@@ -8,6 +8,11 @@ import '../Styles/EditarUtilizador.css';
 import { createNovoUtilizador } from '../Store/Utilizadores/Actions';
 import { storage } from '../Firebase/FbConfig';
 
+const TiposAceites = 'image/x-png, image/png, image/jpg, image/jpeg';
+const arrayTiposAceites = TiposAceites.split(",").map((item) => {
+    return item.trim()
+});
+
 const Fundo = styled.div`
     background-image: url(${Background});
     background-repeat: no-repeat;
@@ -22,7 +27,6 @@ const Div = styled.div`
 
 const ProfilePicture = styled.div`
     margin: 0 auto 50px auto;
-    background-image: url(${imgPerfil});
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -32,9 +36,9 @@ const ProfilePicture = styled.div`
     border: solid 3px #227093;
 `;
 
-function EditarUtilizador (props) {
+function EditarUtilizador () {
 
-    const { user, isLoading, isAuthenticated } = useAuth0();
+    const { user, isLoading } = useAuth0();
     const dispatch = useDispatch();
     const [valores, setValores] = useState({
         imagemUser: '',
@@ -43,6 +47,52 @@ function EditarUtilizador (props) {
         pais: 'Portugal',
         cidade: 'Porto',
     });
+    const [imagem, setImagem] = useState(null)
+
+    const verificarFicheiro = (file) => {
+        if (!arrayTiposAceites.includes(file.type)) {
+            alert("Este ficheiro não é permitido. Por favor seleciona uma imagem.");
+            return false
+        } else {
+            return true
+        }
+    };
+
+    const handleChange = tipo => conteudo => {
+        if (tipo !== 'imagemUser') {
+            valores[tipo] = conteudo.target.value;
+            setValores({...valores});
+        } else {
+            const verificar = verificarFicheiro(conteudo.target.files[0]);
+            if (verificar){
+                const reader = new FileReader();
+                reader.addEventListener("load", () => {
+                    setImagem(reader.result);
+                }, false);
+                reader.readAsDataURL(conteudo.target.files[0]);
+                valores[tipo] = conteudo.target.files[0];
+                setValores({...valores});
+            }
+        }
+    };
+
+    const onCreateNovoUtilizador = (userID, imagemUser, nomeUtilizador, biografia, pais, cidade) => {
+
+        let date = new Date();
+        let timestamp = date.getTime();
+        let newName = imagemUser.name + "_imagem_" + timestamp;
+
+        dispatch(createNovoUtilizador(userID, newName, nomeUtilizador, biografia, pais, cidade));
+
+        const uploadTask = storage.ref(`imagensUtilizadores/${newName}`).put(imagemUser);
+        uploadTask.on(
+        "state_changed",
+        snapshot => {
+        },
+        error => {
+            console.log(error);
+        });
+    }
 
     if(isLoading) {
         return (
@@ -52,55 +102,16 @@ function EditarUtilizador (props) {
         )
     }
 
-    const handleChange = tipo => conteudo => {
-        if (tipo !== 'imagemUser') {
-            valores[tipo] = conteudo.target.value;
-        } else {
-            valores[tipo] = conteudo.target.files[0];
-        }
-        setValores({...valores});
-    };
-
-    const onCreateNovoUtilizador = (imagemUser, nomeUtilizador, biografia, pais, cidade) => {
-
-        let date = new Date();
-        let timestamp = date.getTime();
-        let newName = imagemUser.name + "_imagem_" + timestamp;
-
-        dispatch(createNovoUtilizador(newName, nomeUtilizador, biografia, pais, cidade));
-
-        const uploadTask = storage.ref(`imagensUtilizadores/${newName}`).put(imagemUser);
-        uploadTask.on(
-        "state_changed",
-        snapshot => {
-        },
-        error => {
-            console.log(error);
-        },
-        () => {
-            storage
-            .ref("imagensUtilizadores")
-            .child(newName)
-            .getDownloadURL()
-            .then(url => {
-                console.log(url)
-            })
-        });
-    }
-
     return(
         <Fundo>
             <Div>
-                {console.log(valores)}
-                {console.log(user)}
-                {console.log(isAuthenticated)}
                 <section className="m-0 p-0 w-100">
-                    <label for="imgPerfil" className="imagemPerfil mb-0"><ProfilePicture/></label>
+                    <label for="imgPerfil" className="imagemPerfil mb-0"><ProfilePicture style={{backgroundImage: `url(${imagem ? imagem : imgPerfil})`}}/></label>
                     <input className="form-control" id="imgPerfil" type="file" aria-label="Search" onChange={handleChange('imagemUser')}/>
                 </section>
                 <section className="row col-12 m-0 p-0 w-100">
                     <span className="col-12 m-0 mb-2 p-0">
-                        <span className="nomeForm">Nome</span>
+                        <span className="nomeForm">Nome<span className="obrigatorio">*</span></span>
                         <input 
                             className="form-control forms mb-3" 
                             type="text" aria-label="name" 
@@ -114,7 +125,7 @@ function EditarUtilizador (props) {
                             onChange={handleChange('biografia')}/>
                     </span>
                     <span className="col-12 mb-2 m-0 p-0">
-                        <span className="nomeForm">Pais</span>
+                        <span className="nomeForm">Pais<span className="obrigatorio">*</span></span>
                         <select 
                             className="form-control forms mb-3" 
                             type="text" aria-label="pais"
@@ -123,7 +134,7 @@ function EditarUtilizador (props) {
                         </select>
                     </span>
                     <span className="col-12 mb-2 m-0 p-0">
-                        <span className="nomeForm">Cidade</span>
+                        <span className="nomeForm">Cidade<span className="obrigatorio">*</span></span>
                         <select 
                             className="form-control forms mb-3" 
                             type="text" aria-label="cidade"
@@ -132,10 +143,18 @@ function EditarUtilizador (props) {
                         </select>
                     </span>
                     <span className="col-12 text-center mb-2 m-0 p-0">
-                        <button 
+                        {
+                            valores.nomeUtilizador !== '' && valores.cidade !== '' && valores.pais !== '' ?
+                            <button 
                             className="botaoSubmeter mt-4"
-                            onClick={() => onCreateNovoUtilizador(valores.imagemUser, valores.nomeUtilizador, valores.biografia, valores.pais, valores.cidade)} 
+                            onClick={() => onCreateNovoUtilizador(user.sub, valores.imagemUser, valores.nomeUtilizador, valores.biografia, valores.pais, valores.cidade)} 
                             >Confirmar</button>
+                            :
+                            <button 
+                            className="botaoSubmeterDisabled mt-4"
+                            disabled>Confirmar</button>
+
+                        }     
                     </span>
                 </section>
             </Div>

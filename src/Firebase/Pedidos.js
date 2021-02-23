@@ -33,12 +33,12 @@ export const fetchUtilizadoresList = () =>
   fetch(`http://localhost:3001/utilizadores`)
     .then(response => response.json())
 
-export const createUtilizador = (token, imagemUser, nomeUtilizador, biografia, pais, cidade) =>
+export const createUtilizador = (token, userID, imagemUser, nomeUtilizador, biografia, pais, cidade) =>
 fetch(`http://localhost:3001/utilizadores`, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${token}`
   },
-  body: JSON.stringify({ imagemUser, nomeUtilizador, biografia, pais, cidade })
+  body: JSON.stringify({ userID, imagemUser, nomeUtilizador, biografia, pais, cidade })
 }).then(response => console.log(response.json()));
