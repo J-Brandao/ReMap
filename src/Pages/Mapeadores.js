@@ -7,6 +7,7 @@ import Pesquisa from '../Components/Mapeadores/Pesquisa';
 import BackArrow from '../Components/Geral/BackArrow';
 import { getUtilizadoresList } from '../Store/Utilizadores/Actions';
 import { useSelector, useDispatch } from 'react-redux';
+import {useAuth0} from '@auth0/auth0-react'
 
 const Div = styled.div`
     margin: 40px 30px 0 30px;
@@ -37,7 +38,7 @@ const ButtonS = styled.button`
 function Mapeadores() {
 
     const [seccao, setSeccao] = useState('Amigos');
-
+    const {isLoading, user} = useAuth0()
     const UtilizadoresList = useSelector(({Utilizadores}) => Utilizadores.data);
     const isLoadingUtilizadores = useSelector(({ Utilizadores }) => Utilizadores.isLoading)
     const dispatch = useDispatch();
@@ -50,7 +51,7 @@ function Mapeadores() {
         dispatch(getUtilizadoresList())
     }, [])
 
-    if(isLoadingUtilizadores) {
+    if(isLoadingUtilizadores || isLoading) {
         return (
             <div className="row col-12 justify-content-center bgWhite">
                 <div>Loading</div>
@@ -61,7 +62,7 @@ function Mapeadores() {
     return(
         <div className="m-0 p-0">
             <Div>
-            {console.log(UtilizadoresList)}
+            {console.log(UtilizadoresList, user)}
                 <section className="row col-12 p-0 m-0">
                     <BackArrow />
                     <span className="col-8 tituloPagina offset-2 text-center m-0 p-0">
@@ -86,7 +87,15 @@ function Mapeadores() {
                 <div className="m-0 p-0">
                     <Pesquisa/>
                 </div>
-                <ListaUtilizadores tipo={seccao}/>
+                {UtilizadoresList.map((userInfo, index) => {
+                    if (user.email === userInfo.userId)
+                       return <ListaUtilizadores user={userInfo} tipo={"own"}/>
+                })}
+                {UtilizadoresList.map((userInfo, index) => {
+                    if(user.email === userInfo.userId) return null
+                    return <ListaUtilizadores tipo={seccao} user={userInfo} />
+                })}
+                
             </SectionB>
 
             <style>

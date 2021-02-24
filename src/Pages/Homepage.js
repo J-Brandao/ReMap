@@ -64,7 +64,7 @@ function Homepage () {
         })
     }, [])
     useEffect(() => {
-        if (user && !isLoading) {
+        if (user && !isLoading && isAuthenticated) {
             dispatch(getUtilizadorById(user.email))
         }
         
