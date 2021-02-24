@@ -86,18 +86,16 @@ function ListaUtilizadores(props) {
             </div>
             <div className="col-9 pr-0">
                 <span>
-                    <p className="nomeUtilizador mb-0 pb-0">{props.user.nomeUtilizador}</p>
+                    <p className="nomeUtilizador mb-0 pb-0">{props.user.nomeUtilizador} <Self>Eu!</Self></p>
                 </span>
                 <span className="col-12 row m-0 p-0 divUtilizador">
-                    <span className="col-7 m-0 pr-1 pl-0">
+                    <span className="col-9 m-0 pr-1 pl-0">
                         <ProgressBar now={60} variant="custom"/>
                     </span>
                     <span className="col-3 m-0 p-0">
                         <p className="nivelUtilizador mb-0 pb-0">niv. 14</p>
                     </span>
-                    <Self className="col-2 m-0 p-0 text-center">
-                        Este sou eu!
-                    </Self>
+                    
                 </span>
             </div>
         </span>

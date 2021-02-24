@@ -37,13 +37,19 @@ const ButtonS = styled.button`
 
 function Mapeadores() {
 
+    const [value, setValue] = useState("");
     const [seccao, setSeccao] = useState('Amigos');
     const {isLoading, user} = useAuth0()
     const UtilizadoresList = useSelector(({Utilizadores}) => Utilizadores.data);
     const isLoadingUtilizadores = useSelector(({ Utilizadores }) => Utilizadores.isLoading)
     const dispatch = useDispatch();
 
-    const MudaSeccao = id => {        
+    const onChange = (e) => {
+        setValue(e.currentTarget.value);
+
+    }
+
+    const MudaSeccao = id => { 
         setSeccao(id);
     }
 
@@ -85,14 +91,15 @@ function Mapeadores() {
 
             <SectionB>
                 <div className="m-0 p-0">
-                    <Pesquisa/>
+                    <Pesquisa onChange={onChange} value={value}/>
                 </div>
                 {UtilizadoresList.map((userInfo, index) => {
                     if (user.email === userInfo.userId)
                        return <ListaUtilizadores user={userInfo} tipo={"own"}/>
                 })}
                 {UtilizadoresList.map((userInfo, index) => {
-                    if(user.email === userInfo.userId) return null
+                    if (user.email === userInfo.userId) return null
+                    if (userInfo.nomeUtilizador.includes(value))
                     return <ListaUtilizadores tipo={seccao} user={userInfo} />
                 })}
                 
