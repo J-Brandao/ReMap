@@ -64,34 +64,36 @@ function Homepage () {
         })
     }, [])
     useEffect(() => {
-        if (user)
-        dispatch(getUtilizadorById(user.email))
+        if (user && !isLoading) {
+            dispatch(getUtilizadorById(user.email))
+        }
+        
     },[user])
 
-    if ( ownUser === {}) {
-        console.log("bateu")
-        history.push("/editar")
-    }
+   
+    
     const atualiza = tipo => {
         filtros[tipo] = !filtros[tipo];
         setFiltros({...filtros})
     }
 
-    if(isLoading || isLoadingEdificio) {
+    if (isLoading || isLoadingEdificio || isLoadingUser) {
         return (
             <div className="row col-12 justify-content-center bgWhite">
                 <div>Loading</div>
             </div>
         )
     }
+    const hasUser = () => {
+        if (!ownUser || ownUser === {})
+            return true
+        return false
+    }
 
     return(
         <div className="m-0 p-0">
-            {console.log(EdificioList)}
-            {console.log(filtros)}
-            {console.log(isAuthenticated, user)}
-            {!ownUser &&
-                history.push("/editar")}
+            {hasUser() &&
+            history.push("/editar")}
             <div className="m-0 p-0 filtros">
                 <Filtros filtro={atualiza}/>
             </div>

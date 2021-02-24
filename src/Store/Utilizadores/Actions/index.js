@@ -25,11 +25,11 @@ import {
     }
 }
   
-export const getUtilizadorById = () => {
+export const getUtilizadorById = (userId) => {
   return (dispatch) => {
     dispatch({ type: UTILIZADOR_GET_START });
 
-    fetchUtilizadorById()
+    fetchUtilizadorById(userId)
       .then(Utilizador => {
       dispatch({type: UTILIZADOR_GET_SUCCESS, payload: Utilizador})
       })
