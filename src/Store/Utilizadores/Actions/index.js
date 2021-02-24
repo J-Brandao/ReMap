@@ -51,7 +51,7 @@ export const getUtilizadorById = () => {
         })
         .catch(() => dispatch({ type: UTILIZADOR_GET_ERROR }))
     }
-  }
+  }*/
   
   export const createNovoUtilizador = (userID = '', imagemUser = '', nomeUtilizador = '', biografia = '', pais = '', cidade = '') => {
     return (dispatch, getState) => {

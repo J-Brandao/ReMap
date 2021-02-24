@@ -10,7 +10,7 @@ module.exports = {
     }
 
     const coll = getCollection("Utilizadores");
-    const doc = await coll.where("userId", "==", userId).get();
+    const doc = await coll.where("userID", "==", userId).get();
 
     if (doc.empty) {
       return false;

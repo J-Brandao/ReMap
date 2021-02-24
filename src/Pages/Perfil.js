@@ -7,8 +7,9 @@ import Trofeus from '../Components/Perfil/Trofeus';
 import Interacoes from '../Components/Perfil/Interacoes';
 import BackArrow from '../Components/Geral/BackArrow';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUtilizador } from '../Store/Utilizadores/Actions';
+import { getUtilizadorById } from '../Store/Utilizadores/Actions';
 import { useAuth0 } from '@auth0/auth0-react';
+import Loading from '../Components/Geral/Loading';
 
 const Div = styled.div`
     margin: 40px 30px 40px 30px;
@@ -35,14 +36,13 @@ function Perfil(props) {
 
     useEffect(() => {
         //verificar se isto funciona com props
-        let batata = dispatch(getUtilizador(props.location.state.id))
-    }, [])
+        if(user)
+        dispatch(getUtilizadorById(props.location.state.id))
+    }, [user])
     
-    if(isLoading || isLoadingUtilizador) {
+    if(isLoading) {
         return (
-            <div className="row col-12 justify-content-center bgWhite">
-                <div>Loading</div>
-            </div>
+            <Loading/>
         )
     }
 
