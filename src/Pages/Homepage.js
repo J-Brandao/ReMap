@@ -13,6 +13,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getEdificioList } from '../Store/Edificios/Actions';
 import { getUtilizadorById } from '../Store/Utilizadores/Actions'
 import { useAuth0 } from '@auth0/auth0-react';
+import Loading from '../Components/Geral/Loading'
+
 
 const ProfilePicture = styled.div`
     margin: 0 0 15px 15px;
@@ -79,9 +81,7 @@ function Homepage () {
 
     if (isLoading || isLoadingEdificio || isLoadingUser) {
         return (
-            <div className="row col-12 justify-content-center bgWhite">
-                <div>Loading</div>
-            </div>
+            <Loading />
         )
     }
     const hasUser = () => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Logo from '../../Images/Logo.svg';
+import Background from '../../Images/Background.png'
 
 const Div = styled.div`
     flex-grow: 1;
@@ -9,6 +10,9 @@ const Div = styled.div`
     justify-content: center;
     flex-direction: column;
     height: 100vh;
+    background-image: url(${Background});
+    background-repeat: no-repeat;
+    background-size: 100% auto;
 `;
 
 function Loading() {

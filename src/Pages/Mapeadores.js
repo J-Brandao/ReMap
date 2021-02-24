@@ -7,7 +7,8 @@ import Pesquisa from '../Components/Mapeadores/Pesquisa';
 import BackArrow from '../Components/Geral/BackArrow';
 import { getUtilizadoresList } from '../Store/Utilizadores/Actions';
 import { useSelector, useDispatch } from 'react-redux';
-import {useAuth0} from '@auth0/auth0-react'
+import { useAuth0 } from '@auth0/auth0-react'
+import Loading from '../Components/Geral/Loading'
 
 const Div = styled.div`
     margin: 40px 30px 0 30px;
@@ -59,9 +60,7 @@ function Mapeadores() {
 
     if(isLoadingUtilizadores || isLoading) {
         return (
-            <div className="row col-12 justify-content-center bgWhite">
-                <div>Loading</div>
-            </div>
+            <Loading/>
         )
     }
 
