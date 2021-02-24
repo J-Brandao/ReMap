@@ -20,10 +20,11 @@ import {
         return { ...state, isLoading: true };
       case UTILIZADORES_GET_SUCCESS:
         return { ...state, data: payload, isLoading: false };
-      //case FAVPOKE_GET_START:
-        //return { ...state, isLoading: true };
-      //case FAVPOKE_GET_SUCCESS:
-        //return { ...state, data: [payload], isLoading: false };
+      case UTILIZADOR_GET_START:
+        return { ...state, isLoading: true };
+      case UTILIZADOR_GET_SUCCESS:
+        console.log({...state, data:[payload]})
+        return { ...state, data: [payload], isLoading: false };
       case UTILIZADOR_CREATE_SUCCESS:
         return { ...state, data: [payload] };
       //case FAVLIST_DELETE_SUCCESS:

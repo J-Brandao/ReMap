@@ -1,22 +1,22 @@
 const getFirestore = require("../Utils/getFirestore");
 
 module.exports = {
-  /*get: async (id, email) =>  {
-    if (!id && !email) {
+  get: async (id) =>  {
+    if (!id) {
         throw new Error("Oops! An error occured!");
     }
 
     const db = getFirestore();
-    const pokeCollectionRef = db.collection("Favoritos");
+    const utilizadorCollectionRef = db.collection("Utilizadores");
 
-    const doc = await pokeCollectionRef.where("namePokemon", "==", id).where("email", "==", email).get();
+    const doc = await utilizadorCollectionRef.where("userID", "==", id).get();
 
     if(doc.empty){
       return false;
     }
     
-    return {id: doc.docs[0].id};
-  },*/
+    return {id: doc.docs[0].id, ...doc.docs[0].data()};
+  },
   getAll: async () => {
     const db = getFirestore();
     const utilizadorCollectionRef = db.collection("Utilizadores");

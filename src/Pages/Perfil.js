@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import '../Styles/Perfil.css'
-import Back from '../Images/BackArrow.svg';
 import IconeAmigo from '../Images/IconeAmigo.svg';
 import PerfilImg from '../Images/Perfil.jpg';
 import Trofeus from '../Components/Perfil/Trofeus';
 import Interacoes from '../Components/Perfil/Interacoes';
-import BackArrow from '../Components/Geral/BackArrow'
+import BackArrow from '../Components/Geral/BackArrow';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUtilizador } from '../Store/Utilizadores/Actions';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Div = styled.div`
     margin: 40px 30px 40px 30px;
@@ -24,9 +26,28 @@ const ProfilePicture = styled.div`
     border: solid 3px #ffa801;
 `;
 
-function Perfil() {
+function Perfil(props) {
+
+    const { user, isLoading } = useAuth0();
+    //const Utilizador = useSelector(({ Utilizador }) => Utilizador.data[0]);
+    //const isLoadingUtilizador = useSelector(({ Utilizador }) => Utilizador.isLoading)
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        //verificar se isto funciona com props
+        let batata = dispatch(getUtilizador(props.location.state.id))
+    }, [])
+    
+    if(isLoading || isLoadingUtilizador) {
+        return (
+            <div className="row col-12 justify-content-center bgWhite">
+                <div>Loading</div>
+            </div>
+        )
+    }
+
     return(
-        <Div>
+        <Div>    
            <section className="row col-12 m-0 p-0">
                 <BackArrow />
                 <div className="col-8 text-center m-0 p-0">

@@ -65,7 +65,7 @@ function Homepage () {
         setFiltros({...filtros})
     }
 
-    if(isLoadingEdificio) {
+    if(isLoading || isLoadingEdificio) {
         return (
             <div className="row col-12 justify-content-center bgWhite">
                 <div>Loading</div>
@@ -104,7 +104,13 @@ function Homepage () {
                     <img src={MenuGamehub} className="imagemMenu"/>
                 </Link>
             </div>
-            <Link className="m-0 p-0" to="/perfil">
+            <Link className="m-0 p-0" 
+                to={{
+                    pathname: "/perfil",
+                    state: {
+                        id: user.sub
+                    }
+                }}>
                 <ProfilePicture className="fotografia"/>
             </Link>
             <MapContainer center={[coordenadas.lat, coordenadas.long]} zoom={20}>

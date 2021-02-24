@@ -1,26 +1,18 @@
 const express = require("express");
-const { get } = require("../Models/Utilizadores");
+const { create, getAll } = require("../Models/Utilizadores");
 //const checkJwt = require("../Utils/checkJwt");
 
 const router = express.Router();
 
-router.route("/:id")
+router.route("/")
     .get(async (req, res) => {
-    const utilizador = await get(req.params.id);
-    
-    if (!utilizador) {
-      res.status(404);
-      res.json(false);
-      res.end();
-  
-      return;
-    }
-  
+    const utilizadores = await getAll();
+
     res.status(200);
-    res.json(utilizador);
+    res.json(utilizadores);
     res.end();
     })
-    /* delete ---> .post(checkJwt, async (req, res) => {
+    .post(/*checkJwt,*/ async (req, res) => {
 
     const edificio = await create(req.body);
     
@@ -28,6 +20,6 @@ router.route("/:id")
     res.status(201);
     res.end();
 
-    })*/;
+    });
 
 module.exports = router;

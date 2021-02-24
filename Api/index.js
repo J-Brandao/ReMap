@@ -11,6 +11,7 @@ app.use("/edificios",
   require("./Controllers/Edificio")
 );
 app.use("/utilizadores",
+  require("./Controllers/Utilizadores"),
   require("./Controllers/Utilizador")
 );
 
