@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import '../Styles/Homepage.css';
 import Perfil from '../Images/Perfil.jpg';
 import ArrowMenu from '../Images/ArrowMenu.svg';
@@ -11,6 +11,7 @@ import MenuGamehub from '../Images/MenuGamehub.svg';
 import Filtros from '../Components/Homepage/Filtros';
 import { useSelector, useDispatch } from 'react-redux';
 import { getEdificioList } from '../Store/Edificios/Actions';
+import { getUtilizadorById } from '../Store/Utilizadores/Actions'
 import { useAuth0 } from '@auth0/auth0-react';
 
 const ProfilePicture = styled.div`
@@ -38,14 +39,16 @@ function GetLocation ({latitude, longitude}) {
 function Homepage () {
 
     const { user, isLoading, isAuthenticated } = useAuth0();
-
+    const history = useHistory()
     const [menu, setMenu] = useState('Fechado');
     const [coordenadas, setCoordenadas] = useState({lat: '0', long: '0'});
     const [filtros, setFiltros] = useState({
         proximidade: false
     })
-    const EdificioList = useSelector(({Edificios}) => Edificios.data);
+    const EdificioList = useSelector(({ Edificios }) => Edificios.data);
+    const ownUser = useSelector(({Utilizadores})=> Utilizadores.user)
     const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading)
+    const isLoadingUser = useSelector(({Utilizadores}) => Utilizadores.isLoading)
     const dispatch = useDispatch();
 
     const abreMenu = id => {        
@@ -54,12 +57,21 @@ function Homepage () {
 
     useEffect(() => {
         dispatch(getEdificioList())
+        
         //podemos usar o watchPosition para receber de X em X tempo
         navigator.geolocation.getCurrentPosition((position) => {
             setCoordenadas({lat: position.coords.latitude, long: position.coords.longitude});
         })
     }, [])
+    useEffect(() => {
+        if (user)
+        dispatch(getUtilizadorById(user.email))
+    },[user])
 
+    if ( ownUser === {}) {
+        console.log("bateu")
+        history.push("/editar")
+    }
     const atualiza = tipo => {
         filtros[tipo] = !filtros[tipo];
         setFiltros({...filtros})
@@ -78,6 +90,8 @@ function Homepage () {
             {console.log(EdificioList)}
             {console.log(filtros)}
             {console.log(isAuthenticated, user)}
+            {!ownUser &&
+                history.push("/editar")}
             <div className="m-0 p-0 filtros">
                 <Filtros filtro={atualiza}/>
             </div>

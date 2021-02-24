@@ -11,7 +11,7 @@ import {
     UTILIZADOR_CREATE_SUCCESS,
     UTILIZADOR_CREATE_ERROR,
   } from './Constants';
-  import { fetchUtilizadoresList, fetchUtilizador, createUtilizador/*, deleteFavPokemon*/ } from "../../../Firebase/Pedidos"
+  import { fetchUtilizadoresList, fetchUtilizadorById, createUtilizador/*, deleteFavPokemon*/ } from "../../../Firebase/Pedidos"
   
   export const getUtilizadoresList = () => {
     return (dispatch) => {
@@ -23,7 +23,24 @@ import {
         })
         .catch(() => dispatch({ type: UTILIZADORES_GET_ERROR }))
     }
+}
+  
+export const getUtilizadorById = () => {
+  return (dispatch) => {
+    dispatch({ type: UTILIZADOR_GET_START });
+
+    fetchUtilizadorById()
+      .then(Utilizador => {
+      dispatch({type: UTILIZADOR_GET_SUCCESS, payload: Utilizador})
+      })
+    .catch(()=> dispatch({ type: UTILIZADOR_GET_ERROR}))
+
   }
+}
+  /*
+  export const getFavPokemon = (namePokemon = '', email = '') => {
+    return (dispatch) => {
+      dispatch({ type: FAVPOKE_GET_START });
   
   export const getUtilizador = (userID) => {
     return (dispatch) => {

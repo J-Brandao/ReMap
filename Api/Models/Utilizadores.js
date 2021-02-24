@@ -1,25 +1,26 @@
-const getFirestore = require("../Utils/getFirestore");
+const getCollection = require("../utils/getCollection")
+const getDocumentFromCollection = require("../utils/getDocFromCol")
 
 module.exports = {
-  get: async (id) =>  {
-    if (!id) {
-        throw new Error("Oops! An error occured!");
+
+  get: async (userId) => {
+    if (!userId) {
+      console.warn("ups")
+      throw new Error("É necessário um id de utilizador")
     }
 
-    const db = getFirestore();
-    const utilizadorCollectionRef = db.collection("Utilizadores");
+    const coll = getCollection("Utilizadores");
+    const doc = await coll.where("userId", "==", userId).get();
 
-    const doc = await utilizadorCollectionRef.where("userID", "==", id).get();
-
-    if(doc.empty){
+    if (doc.empty) {
       return false;
     }
+
     
-    return {id: doc.docs[0].id, ...doc.docs[0].data()};
+    return {id:doc.docs[0].id, ...doc.docs[0].data()}
   },
   getAll: async () => {
-    const db = getFirestore();
-    const utilizadorCollectionRef = db.collection("Utilizadores");
+    const utilizadorCollectionRef = getCollection("Utilizadores")
     const result = await utilizadorCollectionRef.get();
     const utilizadores = result.docs.map(doc => ({
         ...doc.data(),
@@ -28,13 +29,10 @@ module.exports = {
     return utilizadores;
   },
   create: async (body) => {
-    const db = getFirestore();
-    const edificioCollectionRef = db.collection("Utilizadores");
+    const edificioCollectionRef = getCollection("Utilizadores")
 
     if(!body){
-        response.status(400);
-        response.end();
-        return;
+        throw new Error("É necessário um body")
     }
 
     const edificioRef = await edificioCollectionRef.add(body);

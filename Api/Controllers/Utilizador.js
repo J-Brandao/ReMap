@@ -4,30 +4,19 @@ const { get } = require("../Models/Utilizadores");
 
 const router = express.Router();
 
-router.route("/:id")
-    .get(async (req, res) => {
-    const utilizador = await get(req.params.id);
+router.route("/:userId?")
+.get(async (req, res) => {
     
-    if (!utilizador) {
-      res.status(404);
-      res.json(false);
-      res.end();
-  
-      return;
-    }
-  
-    res.status(200);
-    res.json(utilizador);
+  const user = await get(req.params.userId);
+  if (!user) {
+    res.status(404);
+    res.json(false);
     res.end();
-    })
-    /* delete ---> .post(checkJwt, async (req, res) => {
-
-    const edificio = await create(req.body);
-    
-    res.json(edificio);
-    res.status(201);
-    res.end();
-
-    })*/;
+    return
+  }
+  res.status(200);
+  res.json(user);
+  res.end();
+})
 
 module.exports = router;
