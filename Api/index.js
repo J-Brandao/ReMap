@@ -16,5 +16,11 @@ app.use("/utilizadores",
 app.use("/utilizador",
   require("./Controllers/Utilizador")
 );
+app.use("/friend",
+  require("./Controllers/Friend")
+);
+app.use("/friends",
+  require("./Controllers/Friends")
+)
 
 app.listen(3001, () => console.log("Servidor a funcionar!"));
