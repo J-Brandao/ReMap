@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import styled from 'styled-components';
 import Background from '../Images/Background2.svg';
-import imgPlaceholder from '../Images/Placeholder.jpg';
+import imgPerfil from '../Images/Perfil.jpg';
 import '../Styles/EditarUtilizador.css';
 import { createNovoUtilizador } from '../Store/Utilizadores/Actions';
 import { storage } from '../Firebase/FbConfig';
@@ -36,8 +36,11 @@ const ProfilePicture = styled.div`
     border-radius: 50%;
     border: solid 3px #227093;
 `;
+const Title = styled.h3`
+color:#34495e;
+`
 
-function EditarUtilizador () {
+function FinalizarUtilizador () {
 
     const { user, isLoading } = useAuth0();
     const dispatch = useDispatch();
@@ -51,7 +54,7 @@ function EditarUtilizador () {
     const [imagem, setImagem] = useState(null)
 
     const verificarFicheiro = (file) => {
-        if (file.type && !arrayTiposAceites.includes(file.type)) {
+        if (!arrayTiposAceites.includes(file.type)) {
             alert("Este ficheiro não é permitido. Por favor seleciona uma imagem.");
             return false
         } else {
@@ -95,8 +98,6 @@ function EditarUtilizador () {
         });
     }
 
-    useAuthentication()
-
     if(isLoading) {
         return (
             <Loading />
@@ -107,8 +108,11 @@ function EditarUtilizador () {
         <Fundo>
             <Div>
                 <section className="m-0 p-0 w-100">
-                    <label for="imgPerfil" className="imagemPerfil mb-0"><ProfilePicture style={{backgroundImage: `url(${imagem ? imagem : imgPlaceholder})`}}/></label>
+                    <label for="imgPerfil" className="imagemPerfil mb-0"><ProfilePicture style={{backgroundImage: `url(${imagem ? imagem : imgPerfil})`}}/></label>
                     <input className="form-control" id="imgPerfil" type="file" aria-label="Search" onChange={handleChange('imagemUser')}/>
+                </section>
+                <section className="text-center my-3">
+                    <Title>Finalize o seu registo</Title>
                 </section>
                 <section className="row col-12 m-0 p-0 w-100">
                     <span className="col-12 m-0 mb-2 p-0">
@@ -434,7 +438,7 @@ function EditarUtilizador () {
                             valores.nomeUtilizador !== '' && valores.cidade !== '' && valores.pais !== '' ?
                             <button 
                             className="botaoSubmeter mt-4"
-                            onClick={() => onCreateNovoUtilizador(user.sub, valores.imagemUser, valores.nomeUtilizador, valores.biografia, valores.pais, valores.cidade)} 
+                            onClick={() => onCreateNovoUtilizador(user.email, valores.imagemUser, valores.nomeUtilizador, valores.biografia, valores.pais, valores.cidade)} 
                             >Confirmar</button>
                             :
                             <button 
@@ -449,4 +453,4 @@ function EditarUtilizador () {
     )
 }
 
-export default EditarUtilizador;
+export default FinalizarUtilizador;
