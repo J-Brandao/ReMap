@@ -3,10 +3,12 @@ import { useDispatch } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import styled from 'styled-components';
 import Background from '../Images/Background2.svg';
-import imgPerfil from '../Images/Perfil.jpg';
+import imgPlaceholder from '../Images/Placeholder.jpg';
 import '../Styles/EditarUtilizador.css';
 import { createNovoUtilizador } from '../Store/Utilizadores/Actions';
 import { storage } from '../Firebase/FbConfig';
+import Loading from '../Components/Geral/Loading';
+import useAuthentication from '../Firebase/useAuthentication';
 
 const TiposAceites = 'image/x-png, image/png, image/jpg, image/jpeg';
 const arrayTiposAceites = TiposAceites.split(",").map((item) => {
@@ -50,7 +52,7 @@ function EditarUtilizador () {
     const [imagem, setImagem] = useState(null)
 
     const verificarFicheiro = (file) => {
-        if (!arrayTiposAceites.includes(file.type)) {
+        if (file.type && !arrayTiposAceites.includes(file.type)) {
             alert("Este ficheiro não é permitido. Por favor seleciona uma imagem.");
             return false
         } else {
@@ -94,11 +96,11 @@ function EditarUtilizador () {
         });
     }
 
+    useAuthentication()
+
     if(isLoading) {
         return (
-            <div className="row col-12 justify-content-center bgWhite">
-                <h1>loading</h1>
-            </div>
+            <Loading/>
         )
     }
 
@@ -106,7 +108,7 @@ function EditarUtilizador () {
         <Fundo>
             <Div>
                 <section className="m-0 p-0 w-100">
-                    <label for="imgPerfil" className="imagemPerfil mb-0"><ProfilePicture style={{backgroundImage: `url(${imagem ? imagem : imgPerfil})`}}/></label>
+                    <label for="imgPerfil" className="imagemPerfil mb-0"><ProfilePicture style={{backgroundImage: `url(${imagem ? imagem : imgPlaceholder})`}}/></label>
                     <input className="form-control" id="imgPerfil" type="file" aria-label="Search" onChange={handleChange('imagemUser')}/>
                 </section>
                 <section className="row col-12 m-0 p-0 w-100">

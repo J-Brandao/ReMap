@@ -124,7 +124,7 @@ function Homepage () {
                 to={{
                     pathname: "/perfil",
                     state: {
-                        id: user.sub
+                        user: ownUser
                     }
                 }}>
                 <ProfilePicture className="fotografia"/>
