@@ -13,12 +13,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getEdificioList } from '../Store/Edificios/Actions';
 import { getUtilizadorById } from '../Store/Utilizadores/Actions'
 import { useAuth0 } from '@auth0/auth0-react';
-import Loading from '../Components/Geral/Loading'
+import Loading from '../Components/Geral/Loading';
+import { storage } from '../Firebase/FbConfig';
 
 
 const ProfilePicture = styled.div`
     margin: 0 0 15px 15px;
-    background-image: url(${Perfil});
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -44,6 +44,7 @@ function Homepage () {
     const history = useHistory()
     const [menu, setMenu] = useState('Fechado');
     const [coordenadas, setCoordenadas] = useState({lat: '0', long: '0'});
+    const [imagem, setImagem] = useState(null)
     const [filtros, setFiltros] = useState({
         proximidade: false
     })
@@ -71,6 +72,14 @@ function Homepage () {
         }
         
     },[user])
+    useEffect(() => {
+        if (ownUser && !isLoading && isAuthenticated) {
+            storage.ref('imagensUtilizadores').child(`${ownUser.imagemUser}`).getDownloadURL().then((url) => {
+                setImagem(url)
+            })
+        }
+        
+    },[ownUser])
 
    
     
@@ -121,7 +130,7 @@ function Homepage () {
                 </Link>
             </div>
             <Link className="m-0 p-0" to={`/perfil/${ownUser.id}`}>
-                <ProfilePicture className="fotografia"/>
+                <ProfilePicture className="fotografia" style={{backgroundImage: `url(${imagem})`}}/>
             </Link>
             <MapContainer center={[coordenadas.lat, coordenadas.long]} zoom={20}>
                 <GetLocation latitude={coordenadas.lat} longitude={coordenadas.long}/>

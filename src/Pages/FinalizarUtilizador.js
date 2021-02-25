@@ -45,7 +45,7 @@ function FinalizarUtilizador () {
     const { user, isLoading } = useAuth0();
     const dispatch = useDispatch();
     const [valores, setValores] = useState({
-        imagemUser: '',
+        imagemUser: 'Placeholder.jpg',
         nomeUtilizador: '',
         biografia: '',
         pais: 'Portugal',
