@@ -36,8 +36,11 @@ const ProfilePicture = styled.div`
     border-radius: 50%;
     border: solid 3px #227093;
 `;
+const Title = styled.h3`
+color:#34495e;
+`
 
-function EditarUtilizador () {
+function FinalizarUtilizador () {
 
     const { user, isLoading } = useAuth0();
     const dispatch = useDispatch();
@@ -107,6 +110,9 @@ function EditarUtilizador () {
                 <section className="m-0 p-0 w-100">
                     <label for="imgPerfil" className="imagemPerfil mb-0"><ProfilePicture style={{backgroundImage: `url(${imagem ? imagem : imgPerfil})`}}/></label>
                     <input className="form-control" id="imgPerfil" type="file" aria-label="Search" onChange={handleChange('imagemUser')}/>
+                </section>
+                <section className="text-center my-3">
+                    <Title>Finalize o seu registo</Title>
                 </section>
                 <section className="row col-12 m-0 p-0 w-100">
                     <span className="col-12 m-0 mb-2 p-0">
@@ -432,7 +438,7 @@ function EditarUtilizador () {
                             valores.nomeUtilizador !== '' && valores.cidade !== '' && valores.pais !== '' ?
                             <button 
                             className="botaoSubmeter mt-4"
-                            onClick={() => onCreateNovoUtilizador(user.sub, valores.imagemUser, valores.nomeUtilizador, valores.biografia, valores.pais, valores.cidade)} 
+                            onClick={() => onCreateNovoUtilizador(user.email, valores.imagemUser, valores.nomeUtilizador, valores.biografia, valores.pais, valores.cidade)} 
                             >Confirmar</button>
                             :
                             <button 
@@ -447,4 +453,4 @@ function EditarUtilizador () {
     )
 }
 
-export default EditarUtilizador;
+export default FinalizarUtilizador;

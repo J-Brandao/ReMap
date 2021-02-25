@@ -8,6 +8,7 @@ import Mapeadores from './Pages/Mapeadores';
 import AdicionarEdificio from './Pages/AdicionarEdificio';
 import Homepage from './Pages/Homepage';
 import EditarUtilizador from './Pages/EditarUtilizador';
+import FinalizarUtilizador from './Pages/FinalizarUtilizador'
 import './Styles/Geral.css';
 import { Auth0Provider } from "@auth0/auth0-react";
 
@@ -27,7 +28,8 @@ function App() {
         <Route exact path="/mapeadores" component={Mapeadores}/>
         <Route exact path="/novo" component={AdicionarEdificio}/>
         <Route exact path="/homepage" component={Homepage}/>
-        <Route exact path="/editar" component={EditarUtilizador}/>
+          <Route exact path="/editar" component={EditarUtilizador} />
+          <Route exact path="/finalizar" component={FinalizarUtilizador} />
       </Switch>
     </Router>
     </Auth0Provider>

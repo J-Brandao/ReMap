@@ -93,7 +93,7 @@ function Homepage () {
     return(
         <div className="m-0 p-0">
             {hasUser() &&
-            history.push("/editar")}
+            history.push("/finalizar")}
             <div className="m-0 p-0 filtros">
                 <Filtros filtro={atualiza}/>
             </div>
