@@ -1,8 +1,9 @@
 const express = require("express");
 const { create, getAll } = require("../Models/Utilizadores");
-//const checkJwt = require("../Utils/checkJwt");
+const checkJwt = require("../Utils/checkJwt");
 
 const router = express.Router();
+console.log(checkJwt);
 
 router.route("/")
     .get(async (req, res) => {
@@ -12,8 +13,7 @@ router.route("/")
     res.json(utilizadores);
     res.end();
     })
-    .post(/*checkJwt,*/ async (req, res) => {
-
+    .post(checkJwt, async (req, res) => {
     const edificio = await create(req.body);
     
     res.json(edificio);

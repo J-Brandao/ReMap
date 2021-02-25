@@ -18,11 +18,12 @@ function App() {
       domain="dev-x782vrhf.eu.auth0.com"
       clientId="nDVdfkS2EEi46sFaDQ6mBIbrFHhmsl7X"
       redirectUri={"http://localhost:3000/homepage"}//A ALTERAR
+      audience='https://dev-x782vrhf.eu.auth0.com/api/v2/'
     >
       <Router>
       <Switch>
         <Route exact path="/" component={LandingPage}/>
-        <Route exact path="/perfil" component={Perfil}/>
+        <Route exact path="/perfil/:id" component={Perfil}/>
         <Route exact path="/gamehub" component={Gamehub}/>
         <Route exact path="/edificio" component={PaginaEdificio}/>
         <Route exact path="/mapeadores" component={Mapeadores}/>

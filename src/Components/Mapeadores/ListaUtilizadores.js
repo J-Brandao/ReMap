@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import '../../Styles/Mapeadores.css';
-import Perfil from '../../Images/Perfil.jpg';
+import Placeholder from '../../Images/Placeholder.jpg';
 import AdicionarAmigo from '../../Images/AdicionarAmigo.svg';
 import {ProgressBar} from 'react-bootstrap';
+import {storage} from '../../Firebase/FbConfig';
 
 const ProfilePicture = styled.div`
     margin: 0 auto;
-    background-image: url(${Perfil});
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -28,11 +28,23 @@ color: #555`
 
 function ListaUtilizadores(props) {
 
+    const [imagem, setImagem] = useState(null);
+
+    useEffect(() => {
+        if(props.user.imagemUser){
+            storage.ref('imagensUtilizadores').child(`${props.user.imagemUser}`).getDownloadURL().then((url) => {
+                if (imagem === null) {
+                    setImagem(url)
+                }
+            })
+        }
+    }, [])
+
     const FriendCard=()=> {
         return (
             <span className="row col-12 m-0 mt-3 p-0 divUtilizador">
             <div className="col-3 p-0">
-                <ProfilePicture/>
+                <ProfilePicture style={{backgroundImage: `url(${imagem !== null ? imagem : Placeholder})`}}/>
             </div>
             <div className="col-9 pr-0">
                 <span>
@@ -56,7 +68,7 @@ function ListaUtilizadores(props) {
         return (
             <span className="row col-12 m-0 mt-3 p-0 divUtilizador">
             <div className="col-3 p-0">
-                <ProfilePicture/>
+                <ProfilePicture style={{backgroundImage: `url(${imagem !== null ? imagem : Placeholder})`}}/>
             </div>
             <div className="col-9 pr-0">
                 <span>
@@ -82,7 +94,7 @@ function ListaUtilizadores(props) {
         return (
             <span className="row col-12 m-0 mt-3 p-0 divUtilizador">
             <div className="col-3 p-0">
-                <ProfilePicture/>
+                <ProfilePicture style={{backgroundImage: `url(${imagem !== null ? imagem : Placeholder})`}}/>
             </div>
             <div className="col-9 pr-0">
                 <span>

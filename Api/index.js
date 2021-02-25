@@ -8,7 +8,7 @@ const app = express();
 app.use(cors({ origin: 'http://localhost:3000', optionsSuccessStatus: 200 }));
 app.use(bodyParser.json());
 app.use("/edificios",
-  require("./Controllers/Edificio")
+  require("./Controllers/Edificios")
 );
 app.use("/utilizadores",
   require("./Controllers/Utilizadores")
@@ -22,5 +22,8 @@ app.use("/friend",
 app.use("/friends",
   require("./Controllers/Friends")
 )
+app.use("/utilizadorPerfil",
+  require("./Controllers/UtilizadorPerfil")
+);
 
 app.listen(3001, () => console.log("Servidor a funcionar!"));

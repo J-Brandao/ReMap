@@ -19,6 +19,22 @@ module.exports = {
     
     return {id:doc.docs[0].id, ...doc.docs[0].data()}
   },
+  getPerfil: async (userId) => {
+    if (!userId) {
+      console.warn("ups")
+      throw new Error("É necessário um id de utilizador")
+    }
+
+    const coll = getCollection("Utilizadores");
+    const doc = await coll.doc(`${userId}`).get();
+    
+    if (doc.empty) {
+      return false;
+    }
+
+    
+    return {id:doc.id, ...doc.data()}
+  },
   getAll: async () => {
     const utilizadorCollectionRef = getCollection("Utilizadores")
     const result = await utilizadorCollectionRef.get();

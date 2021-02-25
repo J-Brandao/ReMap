@@ -1,6 +1,6 @@
 const express = require("express");
 const { getAll, create } = require("../models/Friends");
-//const checkJwt = require("../utils/checkJwt");
+const checkJwt = require("../utils/checkJwt");
 
 const router = express.Router();
 
@@ -17,7 +17,7 @@ router.route("/:userId?")
     res.json(friends);
     res.end();
   })
-  .post(async (req, res) => {
+  .post(checkJwt, async (req, res) => {
     const friend = await create(req.body);
     if (!req.body) {
       res.status(400);

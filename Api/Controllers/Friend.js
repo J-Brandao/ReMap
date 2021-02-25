@@ -1,7 +1,6 @@
 const express = require("express");
 const { get, remove } = require("../models/Friends");
-//const checkJwt = require("../utils/checkJwt");
-
+const checkJwt = require("../Utils/checkJwt");
 
 const router = express.Router();
 
@@ -18,7 +17,7 @@ router.route("/:userId?/:friendId?")
     res.json(friend);
     res.end();
   })
-  .delete(async (req, res) => {
+  .delete(checkJwt, async (req, res) => {
     if (!req.params.userId) {
       res.status(400);
       res.json(false);
