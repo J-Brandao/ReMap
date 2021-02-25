@@ -3,7 +3,6 @@ const { create, getAll } = require("../Models/Utilizadores");
 const checkJwt = require("../Utils/checkJwt");
 
 const router = express.Router();
-console.log(checkJwt);
 
 router.route("/")
     .get(async (req, res) => {

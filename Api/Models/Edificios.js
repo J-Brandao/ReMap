@@ -36,7 +36,7 @@ module.exports = {
         response.end();
         return;
     }
-    console.log(body);
+    
     const edificioRef = await edificioCollectionRef.add(body);
     return {id: edificioRef.id, ...body}
   }/*,
