@@ -23,7 +23,7 @@ function App() {
       <Router>
       <Switch>
         <Route exact path="/" component={LandingPage}/>
-        <Route exact path="/perfil" component={Perfil}/>
+        <Route exact path="/perfil/:id" component={Perfil}/>
         <Route exact path="/gamehub" component={Gamehub}/>
         <Route exact path="/edificio" component={PaginaEdificio}/>
         <Route exact path="/mapeadores" component={Mapeadores}/>

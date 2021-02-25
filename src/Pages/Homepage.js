@@ -120,13 +120,7 @@ function Homepage () {
                     <img src={MenuGamehub} className="imagemMenu"/>
                 </Link>
             </div>
-            <Link className="m-0 p-0" 
-                to={{
-                    pathname: "/perfil",
-                    state: {
-                        user: ownUser
-                    }
-                }}>
+            <Link className="m-0 p-0" to={`/perfil/${ownUser.id}`}>
                 <ProfilePicture className="fotografia"/>
             </Link>
             <MapContainer center={[coordenadas.lat, coordenadas.long]} zoom={20}>

@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import '../Styles/Perfil.css'
 import IconeAmigo from '../Images/IconeAmigo.svg';
-import PerfilImg from '../Images/Perfil.jpg';
+import Placeholder from '../Images/Placeholder.jpg';
+import More from '../Images/More.svg';
 import Trofeus from '../Components/Perfil/Trofeus';
 import Interacoes from '../Components/Perfil/Interacoes';
 import BackArrow from '../Components/Geral/BackArrow';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUtilizadorById } from '../Store/Utilizadores/Actions';
+import { getUtilizadorForPerfil } from '../Store/Utilizadores/Actions';
 import { useAuth0 } from '@auth0/auth0-react';
 import Loading from '../Components/Geral/Loading';
 import { storage } from '../Firebase/FbConfig';
@@ -29,17 +30,23 @@ const ProfilePicture = styled.div`
 
 function Perfil(props) {
 
-    const { user, isLoading } = useAuth0();
-    const [imagem, setImagem] = useState(null);
-    const utilizador = props.location.state.user;
+    const { user, isLoading, isAuthenticated } = useAuth0();
+    const [imagem, setImagem] = useState(null)
+    const utilizador = useSelector(({Utilizadores})=> Utilizadores.user)
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        storage.ref('imagensUtilizadores').child(`${utilizador.imagemUser}`).getDownloadURL().then((url) => {
-            if (imagem === null) {
-                setImagem(url)
-            }
-        })
+        setImagem(null)
+        dispatch(getUtilizadorForPerfil(props.match.params.id))    
     }, [])
+    useEffect(() => {
+        if (utilizador && !isLoading && isAuthenticated) {
+            storage.ref('imagensUtilizadores').child(`${utilizador.imagemUser}`).getDownloadURL().then((url) => {
+                setImagem(url)
+            })
+        }
+        
+    },[utilizador])
     
     if(isLoading) {
         return (
@@ -48,16 +55,16 @@ function Perfil(props) {
     }
 
     return(
-        <Div>    
+        <Div>{console.log(utilizador)}
            <section className="row col-12 m-0 p-0">
                 <BackArrow />
                 <div className="col-8 text-center m-0 p-0">
-                    <ProfilePicture style={{backgroundImage:`url(${imagem})`}}/>
+                    <ProfilePicture style={{backgroundImage:`url(${imagem !== null ? imagem : Placeholder})`}}/>
                     <h5 id="NomeUser">{utilizador.nomeUtilizador}</h5>  
                     <p id="DataUser">Membro desde 2021</p>
                 </div>
                 <span className="col-2 text-right m-0 p-0">
-                    <img src={IconeAmigo}/>
+                    <img src={user.email === utilizador.userId ? More : IconeAmigo}/>
                 </span>
            </section>
            <section className="row col-12 m-0 p-0">

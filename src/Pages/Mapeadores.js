@@ -7,7 +7,8 @@ import Pesquisa from '../Components/Mapeadores/Pesquisa';
 import BackArrow from '../Components/Geral/BackArrow';
 import { getUtilizadoresList } from '../Store/Utilizadores/Actions';
 import { useSelector, useDispatch } from 'react-redux';
-import { useAuth0 } from '@auth0/auth0-react'
+import { useAuth0 } from '@auth0/auth0-react';
+import { Link } from 'react-router-dom';
 import Loading from '../Components/Geral/Loading'
 
 const Div = styled.div`
@@ -67,7 +68,6 @@ function Mapeadores() {
     return(
         <div className="m-0 p-0">
             <Div>
-            {console.log(UtilizadoresList, user)}
                 <section className="row col-12 p-0 m-0">
                     <BackArrow />
                     <span className="col-8 tituloPagina offset-2 text-center m-0 p-0">
@@ -75,7 +75,7 @@ function Mapeadores() {
                     </span>
                 </section>
             </Div>
-
+            
             {seccao === 'Amigos' ?
             <div className="row col-12 m-0 p-0">
                 <ButtonS className="btn col-6 m-0 p-0">Amigos</ButtonS>
@@ -94,12 +94,20 @@ function Mapeadores() {
                 </div>
                 {UtilizadoresList.map((userInfo, index) => {
                     if (user.email === userInfo.userId)
-                       return <ListaUtilizadores user={userInfo} tipo={"own"}/>
+                       return(
+                        <Link className="m-0 p-0" to={`/perfil/${userInfo.id}`}>
+                            <ListaUtilizadores user={userInfo} tipo={"own"}/>
+                        </Link>
+                       )
                 })}
                 {UtilizadoresList.map((userInfo, index) => {
                     if (user.email === userInfo.userId) return null
                     if (userInfo.nomeUtilizador.includes(value))
-                    return <ListaUtilizadores tipo={seccao} user={userInfo} />
+                    return (
+                        <Link className="m-0 p-0" to={`/perfil/${userInfo.id}`}>
+                            <ListaUtilizadores tipo={seccao} user={userInfo} />
+                        </Link>
+                    )
                 })}
                 
             </SectionB>

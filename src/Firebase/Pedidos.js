@@ -2,11 +2,11 @@
 export const fetchEdificioList = () =>
   fetch(`http://localhost:3001/edificios`)
     .then(response => response.json())
-/*
-export const fetchUtilizador = ( userID ) =>
-  fetch(`http://localhost:3001/favoritos/${namePokemon}/${email}`)
+
+export const fetchEdificio = ( coordenadas ) =>
+  fetch(`http://localhost:3001/edificio/${coordenadas}`)
     .then(response => response.json())
-*/
+
 
 export const createEdificio = (token, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo) =>
   fetch(`http://localhost:3001/edificios`, {
@@ -35,6 +35,10 @@ export const fetchUtilizadoresList = () =>
 
 export const fetchUtilizadorById = (userId) =>
   fetch(`http://localhost:3001/utilizador/${userId}`)
+    .then(response => response.json())
+
+export const fetchUtilizadorForPerfil = (userId) =>
+  fetch(`http://localhost:3001/utilizadorPerfil/${userId}`)
     .then(response => response.json())
     
   
