@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import '../Styles/AdicionarEdificio.css';
 import { useDispatch } from 'react-redux';
@@ -6,6 +6,10 @@ import AdicionarImagem from '../Images/GaleriaImagens.svg'
 import BackArrow from '../Components/Geral/BackArrow';
 import { createNovoEdificio } from '../Store/Edificios/Actions';
 import { storage } from '../Firebase/FbConfig';
+import { useHistory } from 'react-router-dom';
+import Loading from '../Components/Geral/Loading';
+import { useAuth0 } from '@auth0/auth0-react';
+import useAuthentication from '../Firebase/useAuthentication';
 
 
 const Div = styled.div`
@@ -14,17 +18,28 @@ const Div = styled.div`
 
 function AdicionarEdificio (props) {
 
+    const { user, isLoading } = useAuth0();
     const dispatch = useDispatch();
+    const history = useHistory();
     const [valores, setValores] = useState({
         nomeEdificio: '',
         descricao: '',
         fotos: null,
-        localizacao: props.location.state.localizacao,
+        localizacao: '',
         degradacao: '5',
         acesso: '5',
         seguranca: '5',
         vandalismo: '5'
     });
+
+    useEffect(() => {
+        if(!props.location.state){
+            history.push('/homepage')
+        } else {
+            valores.localizacao = props.location.state.localizacao;
+            setValores({...valores})
+        }
+    }, [])
 
     const handleChange = tipo => conteudo => {
         if (tipo !== 'fotos') {
@@ -35,7 +50,7 @@ function AdicionarEdificio (props) {
         setValores({...valores});
     };
 
-    const onCreateFavEdificio = (nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo) => {
+    const onCreateFavEdificio = (userId, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo) => {
 
         //Cria nome único para a imagem
         let date = new Date();
@@ -43,7 +58,7 @@ function AdicionarEdificio (props) {
         let newName = fotos.name + "_imagem_" + timestamp; 
 
         //Envia Informação para a firebase
-        dispatch(createNovoEdificio(nomeEdificio, descricao, newName, localizacao, degradacao, acesso, seguranca, vandalismo));
+        dispatch(createNovoEdificio(userId, nomeEdificio, descricao, newName, localizacao, degradacao, acesso, seguranca, vandalismo));
         
         //Guarda a imagem na storage
         const uploadTask = storage.ref(`imagensEdificios/${newName}`).put(fotos);
@@ -53,25 +68,23 @@ function AdicionarEdificio (props) {
         },
         error => {
             console.log(error);
-        },
-        () => {
-            storage
-            .ref("imagensEdificios")
-            .child(newName)
-            .getDownloadURL()
-            .then(url => {
-                console.log(url)
-            })
         });
 
     }
 
+    useAuthentication();
+
+    if(isLoading) {
+        return(
+            <Loading/>
+        )
+    }
+
     return(
         <Div>
-            {console.log(valores)}
             <section className="row col-12 m-0 p-0">
                 <BackArrow />
-                <span className="col-9 tituloPagina offset-2 text-center m-0 p-0">
+                <span className="col-10 tituloPagina offset-2 text-center m-0 p-0">
                     Adicionar novo edifício
                 </span>
             </section>
@@ -126,7 +139,7 @@ function AdicionarEdificio (props) {
                     {valores.nomeEdificio !== '' && valores.descricao !== '' && valores.localizacao !== '' ?
                         <button 
                             className="botaoSubmeter mt-4" 
-                            onClick={() => onCreateFavEdificio(valores.nomeEdificio, valores.descricao, valores.fotos, valores.localizacao, valores.degradacao, valores.acesso, valores.seguranca, valores.vandalismo)}
+                            onClick={() => onCreateFavEdificio(user.email, valores.nomeEdificio, valores.descricao, valores.fotos, valores.localizacao, valores.degradacao, valores.acesso, valores.seguranca, valores.vandalismo)}
                             >Submeter</button>
                         :
                         <button 
