@@ -51,3 +51,34 @@ fetch(`http://localhost:3001/utilizadores`, {
   },
   body: JSON.stringify({ userID, imagemUser, nomeUtilizador, biografia, pais, cidade })
 }).then(response => console.log(response.json()));
+
+
+export const fetchAllFriends = (userId) => {
+  return fetch(`http://localhost:3001/friends/${userId}`)
+    .then(response => response.json())
+}
+
+export const fetchFriends = (userId, friendId) => {
+  return fetch(`http://localhost:3001/friend/${userId}/${friendId}`)
+    .then(response => response.json())
+}
+
+export const createFriends = (token, friendName, userId, friendId, imageFriend) => {
+  return fetch(`http://localhost:3001/friends`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ friendName, userId, friendId, imageFriend })
+  }).then(response => response.json());
+}
+
+export const deleteFriends = (token, id) => {
+  return fetch(`http://localhost:3001/friend/${id}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+}
