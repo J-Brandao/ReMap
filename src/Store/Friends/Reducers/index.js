@@ -5,6 +5,7 @@ import {
 
   FRIEND_GET_START,
   FRIEND_GET_SUCCESS,
+  FRIEND_GET_ERROR,
 
   FRIEND_CREATE_START,
   FRIEND_CREATE_SUCCESS,
@@ -32,6 +33,8 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, isLoading: true }
     case FRIEND_GET_SUCCESS:
       return { ...state, isLoading: false, data: payload }
+    case FRIEND_GET_ERROR:
+      return {...state, isLoading: false, data:payload}
     case FRIEND_CREATE_START:
       return { ...state, isLoading: true }
     case FRIEND_CREATE_SUCCESS:

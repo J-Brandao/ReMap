@@ -77,7 +77,7 @@ function Mapeadores() {
 
     useEffect(() => {
         if (!isLoadingSelf) {
-            console.log(ownUser)
+            
         dispatch(getAllFriends(ownUser.id))
        }
     }, [isLoadingSelf])
@@ -124,7 +124,7 @@ function Mapeadores() {
                 
                 {seccao === "Amigos" ?
                     <>
-                        {console.log(FriendsList)}
+                       
                         {FriendsList.map((userSingle, index) => {
                             
                             if (ownUser.id === userSingle.id) return null
@@ -143,9 +143,9 @@ function Mapeadores() {
                     if (ownUser.id === userSingle.id) return null
                     if (userSingle.nomeUtilizador.includes(value))
                     return (
-                        <Link className="m-0 p-0" to={`/perfil/${userSingle.id}`}>
+                        <div className="m-0 p-0">
                             <ListaUtilizadores ownUser={ownUser} tipo={seccao} user={userSingle} />
-                        </Link>
+                        </div>
                     )
                         })}
                     </>

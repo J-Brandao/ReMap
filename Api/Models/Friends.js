@@ -5,6 +5,7 @@ const COLLECTION_NAME = "Relacao_User_User"
 
 module.exports = {
   get: async (userId, friendId) => {
+    
     if (!userId) {
       throw new Error("É necessário enviar um Id para o utilizador")
     }
@@ -32,6 +33,7 @@ module.exports = {
     return friends;
   },
   create: async (body) => {
+    
     const coll = getCollection(COLLECTION_NAME);
     const docRef = await coll.add(body);
     return { id: docRef.id, ...body };

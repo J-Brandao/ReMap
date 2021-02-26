@@ -5,6 +5,12 @@ import Placeholder from '../../Images/Placeholder.jpg';
 import AdicionarAmigo from '../../Images/AdicionarAmigo.svg';
 import {ProgressBar} from 'react-bootstrap';
 import { storage } from '../../Firebase/FbConfig';
+import { useSelector, useDispatch } from 'react-redux'
+import FriendButton from '../Geral/FriendButton';
+import { Link } from 'react-router-dom';
+import useAuthentication from '../../Firebase/useAuthentication';
+
+
 
 const ProfilePicture = styled.div`
     margin: 0 auto;
@@ -28,7 +34,10 @@ color: #555`
 
 function ListaUtilizadores(props) {
 
+   
     const [imagem, setImagem] = useState(null);
+
+   
 
     useEffect(() => {
         if(props.user.imagemUser){
@@ -39,6 +48,8 @@ function ListaUtilizadores(props) {
             })
         }
     }, [])
+    useAuthentication()
+    
 
     const FriendCard=()=> {
         return (
@@ -64,29 +75,37 @@ function ListaUtilizadores(props) {
     }
     
     const AllCard = () => {
-        console.log(props.user)
+        
         return (
-            <span className="row col-12 m-0 mt-3 p-0 divUtilizador">
+         
+                <span className="row col-12 m-0 mt-3 p-0 divUtilizador">
             <div className="col-3 p-0">
                 <ProfilePicture style={{backgroundImage: `url(${imagem !== null ? imagem : Placeholder})`}}/>
             </div>
             <div className="col-9 pr-0">
-                <span>
+                <Link  to={`/perfil/${props.user.id}`}>
                     <p className="nomeUtilizador mb-0 pb-0">{props.user.nomeUtilizador}</p>
-                </span>
+                </Link>
                 <span className="col-12 row m-0 p-0 divUtilizador">
                     <span className="col-7 m-0 pr-1 pl-0">
                         <ProgressBar now={60} variant="custom"/>
                     </span>
                     <span className="col-3 m-0 p-0">
                         <p className="nivelUtilizador mb-0 pb-0">niv. 14</p>
+                        </span>
+                        
+                            <span className="col-2 m-0 p-0 text-center">
+                            <FriendButton friendId={props.user.id} userId={props.ownUser.id} friendName={props.user.nomeUtilizador} imageFriend={props.user.imagemUser} />
+                                   
+                                
                     </span>
-                    <span className="col-2 m-0 p-0 text-center">
-                        <img src={AdicionarAmigo} className="m-0"/>
-                    </span>
+                    
+                    
                 </span>
             </div>
         </span>
+           
+            
         )
     }
     
@@ -127,6 +146,7 @@ function ListaUtilizadores(props) {
 
     return(
         <UserCard className="p-0 mb-5">
+            
             {getCard()}
         </UserCard>
     )
