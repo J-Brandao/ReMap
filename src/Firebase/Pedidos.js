@@ -63,14 +63,14 @@ export const fetchFriends = (userId, friendId) => {
     .then(response => response.json())
 }
 
-export const createFriends = (token, friendName, userId, friendId, imageFriend) => {
+export const createFriends = (token, nomeFriend, userId, friendId, imagemUser) => {
   return fetch(`http://localhost:3001/friends`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     },
-    body: JSON.stringify({ friendName, userId, friendId, imageFriend })
+    body: JSON.stringify({ nomeFriend, userId, friendId, imagemUser })
   }).then(response => response.json());
 }
 

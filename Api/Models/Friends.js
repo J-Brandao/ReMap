@@ -3,7 +3,7 @@ const getDocumentFromCollection = require("../Utils/getDocFromCol")
 
 const COLLECTION_NAME = "Relacao_User_User"
 
-module.export = {
+module.exports = {
   get: async (userId, friendId) => {
     if (!userId) {
       throw new Error("É necessário enviar um Id para o utilizador")
@@ -21,11 +21,13 @@ module.export = {
     return {id: doc.docs[0].id}
   },
   getAll: async (userId) => {
-    const coll = getCollection(COLLECTION_NAME);
-    const result = await coll.where("userId","==",userId).get();
+    const friendCollectionRef = getCollection(COLLECTION_NAME)
+    
+    const result = await friendCollectionRef.where("userId","==",userId).get();
+   
     const friends = result.docs.map(doc => ({
-      ...doc.data(),
-      id: doc.id
+        ...doc.data(),
+        id: doc.id
     }));
     return friends;
   },

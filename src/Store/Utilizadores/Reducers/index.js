@@ -3,6 +3,8 @@ import {
     UTILIZADORES_GET_SUCCESS,
     UTILIZADOR_GET_START,
     UTILIZADOR_GET_SUCCESS,
+    UTILIZADOR_OWN_GET_START,
+    UTILIZADOR_OWN_GET_SUCCESS,
     UTILIZADOR_CREATE_SUCCESS,
     UTILIZADOR_DELETE_SUCCESS,
     UTILIZADOR_CREATE_START
@@ -10,8 +12,10 @@ import {
   
   const initialState = {
     isLoading: true,
+    isLoadingSelf: true,
     data: [],
-    user: {}
+    user: {},
+    ownUser: {},
   };
   
   export default (state = initialState, { type, payload }) => {
@@ -26,6 +30,10 @@ import {
         return { ...state, isLoading: true };
       case UTILIZADOR_GET_SUCCESS:
         return { ...state, isLoading: false, user: payload };
+      case UTILIZADOR_OWN_GET_START:
+        return { ...state, isLoadingSelf: true };
+      case UTILIZADOR_OWN_GET_SUCCESS:
+        return { ...state, isLoadingSelf: false, ownUser: payload };
       //case FAVPOKE_GET_START:
         //return { ...state, isLoading: true };
       //case FAVPOKE_GET_SUCCESS:

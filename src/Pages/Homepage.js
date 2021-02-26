@@ -44,7 +44,7 @@ function Homepage () {
         proximidade: false
     })
     const EdificioList = useSelector(({ Edificios }) => Edificios.data);
-    const ownUser = useSelector(({Utilizadores})=> Utilizadores.user)
+    const ownUser = useSelector(({Utilizadores})=> Utilizadores.ownUser)
     const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading)
     const isLoadingUser = useSelector(({Utilizadores}) => Utilizadores.isLoading)
     const dispatch = useDispatch();
@@ -59,7 +59,10 @@ function Homepage () {
     }, [])
     useEffect(() => {
         if (user && !isLoading && isAuthenticated) {
-            dispatch(getUtilizadorById(user.email))
+            
+                 dispatch(getUtilizadorById(user.email))
+            
+           
         }
         
     },[user])

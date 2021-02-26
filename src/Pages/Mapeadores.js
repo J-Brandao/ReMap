@@ -5,11 +5,13 @@ import '../Styles/Mapeadores.css';
 import ListaUtilizadores from '../Components/Mapeadores/ListaUtilizadores';
 import Pesquisa from '../Components/Mapeadores/Pesquisa';
 import BackArrow from '../Components/Geral/BackArrow';
-import { getUtilizadoresList } from '../Store/Utilizadores/Actions';
+import { getUtilizadorById, getUtilizadoresList } from '../Store/Utilizadores/Actions';
+import {getAllFriends} from '../Store/Friends/Actions'
 import { useSelector, useDispatch } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
 import Loading from '../Components/Geral/Loading'
+import {useOwnUser} from '../Hooks/ownUser'
 
 const Div = styled.div`
     margin: 40px 30px 0 30px;
@@ -38,28 +40,51 @@ const ButtonS = styled.button`
 
 
 function Mapeadores() {
+    const { userInfo } = useOwnUser();
 
     const [value, setValue] = useState("");
     const [seccao, setSeccao] = useState('Amigos');
     const {isLoading, user} = useAuth0()
     const UtilizadoresList = useSelector(({Utilizadores}) => Utilizadores.data);
     const isLoadingUtilizadores = useSelector(({ Utilizadores }) => Utilizadores.isLoading)
+    const isLoadingSelf = useSelector(({ Utilizadores }) => Utilizadores.isLoadingSelf)
+    const ownUser = useSelector(({Utilizadores})=> Utilizadores.ownUser)
+    const FriendsList = useSelector(({ Friends }) => Friends.dataArray)
+    const isLoadingFriends = useSelector(({Friends})=>Friends.isLoading)
     const dispatch = useDispatch();
 
     const onChange = (e) => {
         setValue(e.currentTarget.value);
 
     }
+    
 
     const MudaSeccao = id => { 
         setSeccao(id);
     }
 
     useEffect(() => {
+        
         dispatch(getUtilizadoresList())
-    }, [])
 
-    if(isLoadingUtilizadores || isLoading) {
+        if (Object.keys(ownUser).length === 0) {
+            if (!isLoading && user) {
+                dispatch(getUtilizadorById(user.email))
+            }
+        } 
+            
+    }, [isLoading])
+
+    useEffect(() => {
+        if (!isLoadingSelf) {
+            console.log(ownUser)
+        dispatch(getAllFriends(ownUser.id))
+       }
+    }, [isLoadingSelf])
+
+    
+
+    if(isLoadingUtilizadores || isLoading || isLoadingSelf || isLoadingFriends) {
         return (
             <Loading/>
         )
@@ -92,23 +117,41 @@ function Mapeadores() {
                 <div className="m-0 p-0">
                     <Pesquisa onChange={onChange} value={value}/>
                 </div>
-                {UtilizadoresList.map((userInfo, index) => {
-                    if (user.email === userInfo.userId)
-                       return(
-                        <Link className="m-0 p-0" to={`/perfil/${userInfo.id}`}>
-                            <ListaUtilizadores user={userInfo} tipo={"own"}/>
-                        </Link>
-                       )
-                })}
-                {UtilizadoresList.map((userInfo, index) => {
-                    if (user.email === userInfo.userId) return null
-                    if (userInfo.nomeUtilizador.includes(value))
+                
+                        <Link className="m-0 p-0" to={`/perfil/${ownUser.id}`}>
+                            <ListaUtilizadores user={ownUser} tipo={"own"}/>
+                </Link>
+                
+                {seccao === "Amigos" ?
+                    <>
+                        {console.log(FriendsList)}
+                        {FriendsList.map((userSingle, index) => {
+                            
+                            if (ownUser.id === userSingle.id) return null
+                            if (userSingle.nomeFriend.includes(value))
+                                return (
+                                    <Link className="m-0 p-0" to={`/perfil/${userSingle.id}`}>
+                                        <ListaUtilizadores tipo={seccao} user={userSingle} />
+                                    </Link>
+                                )
+                        })}
+                            
+                    </>
+                    :
+                    <>
+                        {UtilizadoresList.map((userSingle, index) => {
+                    if (ownUser.id === userSingle.id) return null
+                    if (userSingle.nomeUtilizador.includes(value))
                     return (
-                        <Link className="m-0 p-0" to={`/perfil/${userInfo.id}`}>
-                            <ListaUtilizadores tipo={seccao} user={userInfo} />
+                        <Link className="m-0 p-0" to={`/perfil/${userSingle.id}`}>
+                            <ListaUtilizadores ownUser={ownUser} tipo={seccao} user={userSingle} />
                         </Link>
                     )
-                })}
+                        })}
+                    </>
+            }
+                    
+               
                 
             </SectionB>
 

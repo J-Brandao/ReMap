@@ -1,5 +1,5 @@
 const express = require("express");
-const { get, remove } = require("../models/Friends");
+const { get, remove } = require("../Models/Friends");
 const checkJwt = require("../Utils/checkJwt");
 
 const router = express.Router();

@@ -6,6 +6,10 @@ import {
     UTILIZADOR_GET_START,
     UTILIZADOR_GET_SUCCESS,
     UTILIZADOR_GET_ERROR,
+
+    UTILIZADOR_OWN_GET_START,
+    UTILIZADOR_OWN_GET_SUCCESS,
+    UTILIZADOR_OWN_GET_ERROR,
   
     UTILIZADOR_CREATE_START,
     UTILIZADOR_CREATE_SUCCESS,
@@ -27,13 +31,13 @@ import {
   
   export const getUtilizadorById = (userId) => {
     return (dispatch) => {
-      dispatch({ type: UTILIZADOR_GET_START });
+      dispatch({ type: UTILIZADOR_OWN_GET_START });
 
       fetchUtilizadorById(userId)
         .then(Utilizador => {
-        dispatch({type: UTILIZADOR_GET_SUCCESS, payload: Utilizador})
+        dispatch({type: UTILIZADOR_OWN_GET_SUCCESS, payload: Utilizador})
         })
-      .catch(()=> dispatch({ type: UTILIZADOR_GET_ERROR}))
+      .catch(()=> dispatch({ type: UTILIZADOR_OWN_GET_ERROR}))
 
     }
   }

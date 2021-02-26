@@ -4,7 +4,7 @@ import '../../Styles/Mapeadores.css';
 import Placeholder from '../../Images/Placeholder.jpg';
 import AdicionarAmigo from '../../Images/AdicionarAmigo.svg';
 import {ProgressBar} from 'react-bootstrap';
-import {storage} from '../../Firebase/FbConfig';
+import { storage } from '../../Firebase/FbConfig';
 
 const ProfilePicture = styled.div`
     margin: 0 auto;
@@ -48,7 +48,7 @@ function ListaUtilizadores(props) {
             </div>
             <div className="col-9 pr-0">
                 <span>
-                        <p className="nomeUtilizador mb-0 pb-0">{props.user.nomeUtilizador}</p>
+                        <p className="nomeUtilizador mb-0 pb-0">{props.user.nomeFriend}</p>
                 </span>
                 <span className="col-12 row m-0 p-0 divUtilizador">
                     <span className="col-9 m-0 pr-1 pl-0">
