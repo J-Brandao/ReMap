@@ -8,13 +8,12 @@ import { ReactComponent as AddFriend} from "../../Images/AdicionarAmigo.svg"
 function FriendButton({friendId, userId, friendName, imageFriend}) {
 const dispatch = useDispatch()
   const isFriend = useSelector(({ Friends }) => Friends.data)
-  const isLoadingFriendship = useSelector(({ Friends }) => Friends.isLoading)
+  const isLoadingFriendship = useSelector(({ Friends }) => Friends.isLoadingFriendship)
   
   
   useEffect(() => {
-    if (isLoadingFriendship) {
-    dispatch(getFriends(userId, friendId)) }
-  }, [isLoadingFriendship])
+    dispatch(getFriends(userId, friendId)) 
+  }, [dispatch, userId, friendId])
 
   const onCreateFriend = (friendName, userId, friendId, imageFriend) => {
     dispatch(createFriend(friendName, userId, friendId, imageFriend))
@@ -25,19 +24,17 @@ const dispatch = useDispatch()
   }
 
   if (isLoadingFriendship) {
-    return (
-      <button disabled={true} >
-        Loading...
-      </button>
-    )
+    return null
   }
+  console.log(isFriend)
   
   return (
     <>
+      {}
       {isFriend ?
-            <Friend onClick={()=>onDeleteFriend(isFriend.id)}><CheckMark  width="30px" /></Friend>
+        <Friend onClick={() => onDeleteFriend(isFriend.id)}><CheckMark width="30px" /></Friend>
         :
-        <Friend onClick={()=>onCreateFriend(friendName, userId, friendId, imageFriend)}><AddFriend  width="30px" /></Friend>
+        <Friend onClick={() => onCreateFriend(friendName, userId, friendId, imageFriend)}><AddFriend width="30px" /></Friend>
 
     }
     </>
