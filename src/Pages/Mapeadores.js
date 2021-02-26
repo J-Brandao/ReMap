@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
 import Loading from '../Components/Geral/Loading'
-import {useOwnUser} from '../Hooks/ownUser'
+
 
 const Div = styled.div`
     margin: 40px 30px 0 30px;
@@ -40,7 +40,7 @@ const ButtonS = styled.button`
 
 
 function Mapeadores() {
-    const { userInfo } = useOwnUser();
+    
 
     const [value, setValue] = useState("");
     const [seccao, setSeccao] = useState('Amigos');
