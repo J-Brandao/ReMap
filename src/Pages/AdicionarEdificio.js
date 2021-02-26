@@ -10,10 +10,24 @@ import { useHistory } from 'react-router-dom';
 import Loading from '../Components/Geral/Loading';
 import { useAuth0 } from '@auth0/auth0-react';
 import useAuthentication from '../Firebase/useAuthentication';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 
+const TiposAceites = 'image/x-png, image/png, image/jpg, image/jpeg';
+const arrayTiposAceites = TiposAceites.split(",").map((item) => {
+    return item.trim()
+});
 
 const Div = styled.div`
     margin: 40px 30px 40px 30px;
+`;
+
+const Imagem = styled.div`
+    height: 175px;
+    width: 100%;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 `;
 
 function AdicionarEdificio (props) {
@@ -21,10 +35,11 @@ function AdicionarEdificio (props) {
     const { user, isLoading } = useAuth0();
     const dispatch = useDispatch();
     const history = useHistory();
+    const [imagem, setImagem] = useState([]);
     const [valores, setValores] = useState({
         nomeEdificio: '',
         descricao: '',
-        fotos: null,
+        fotos: [],
         localizacao: '',
         degradacao: '5',
         acesso: '5',
@@ -41,35 +56,56 @@ function AdicionarEdificio (props) {
         }
     }, [])
 
+    const verificarFicheiro = (file) => {
+        if (file.type && !arrayTiposAceites.includes(file.type)) {
+            alert("Este ficheiro não é permitido. Por favor seleciona uma imagem.");
+            return false
+        } else {
+            return true
+        }
+    };
+
     const handleChange = tipo => conteudo => {
         if (tipo !== 'fotos') {
             valores[tipo] = conteudo.target.value;
+            setValores({...valores});
         } else {
-            valores[tipo] = conteudo.target.files[0]
+            const verificar = verificarFicheiro(conteudo.target.files[0]);
+            if (verificar){
+                const reader = new FileReader();
+                reader.addEventListener("load", () => {
+                    setImagem([...imagem, reader.result]);
+                }, false);
+                reader.readAsDataURL(conteudo.target.files[0]);
+                valores[tipo] = [...valores[tipo], conteudo.target.files[0]]
+                setValores({...valores});
+            }
         }
-        setValores({...valores});
     };
 
     const onCreateFavEdificio = (userId, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo) => {
 
+        let arrayNomes = [];
         //Cria nome único para a imagem
-        let date = new Date();
-        let timestamp = date.getTime();
-        let newName = fotos.name + "_imagem_" + timestamp; 
+        fotos.map(imagem => {
+            let date = new Date();
+            let timestamp = date.getTime();
+            let newName = imagem.name + "_imagem_" + timestamp;
+            arrayNomes.push(newName);
+            
+            //Guarda a imagem na storage
+            const uploadTask = storage.ref(`imagensEdificios/${newName}`).put(fotos);
+            uploadTask.on(
+            "state_changed",
+            snapshot => {
+            },
+            error => {
+                console.log(error);
+            });
+        }) 
 
         //Envia Informação para a firebase
-        dispatch(createNovoEdificio(userId, nomeEdificio, descricao, newName, localizacao, degradacao, acesso, seguranca, vandalismo));
-        
-        //Guarda a imagem na storage
-        const uploadTask = storage.ref(`imagensEdificios/${newName}`).put(fotos);
-        uploadTask.on(
-        "state_changed",
-        snapshot => {
-        },
-        error => {
-            console.log(error);
-        });
-
+        dispatch(createNovoEdificio(userId, nomeEdificio, descricao, arrayNomes, localizacao, degradacao, acesso, seguranca, vandalismo));
     }
 
     useAuthentication();
@@ -106,15 +142,33 @@ function AdicionarEdificio (props) {
                             aria-label="Search" 
                             onChange={handleChange('descricao')}/>
                     </span>
-                    <span className="col-12 m-0 p-0">
-                        <span className="seccaoTitulo">Galeria de fotos</span>
-                        <label for="galeriaImgs" className="seccaoTitulo formsImagem mb-3"><img src={AdicionarImagem} className="mb-0"/></label>
-                        <input className="form-control" id="galeriaImgs" type="file" aria-label="Search" onChange={handleChange('fotos')}/>
-                    </span>
-                    <span className="col-12 m-0 p-0">
+                    {valores.fotos !== '' ?
+                        <span className="col-12 m-0 p-0">
+                            <span className="seccaoTitulo">Galeria de fotos</span>
+                            {imagem.map(item => {
+                                return(
+                                    <Imagem className="m-0 mb-3 mt-1 p-0" style={{backgroundImage: `url(${item})`}}/>
+                                )
+                            })}
+                            <label for="galeriaImgs" className="seccaoTitulo formsImagem"><img src={AdicionarImagem} className="mb-0"/></label>
+                            <input className="form-control" id="galeriaImgs" type="file" aria-label="Search" onChange={handleChange('fotos')}/>
+                        </span>
+                            :
+                        <span className="col-12 m-0 p-0">
+                            <span className="seccaoTitulo">Galeria de fotos</span>                        
+                            <label for="galeriaImgs" className="seccaoTitulo formsImagem mb-3"><img src={AdicionarImagem} className="mb-0"/></label>
+                            <input className="form-control" id="galeriaImgs" type="file" aria-label="Search" onChange={handleChange('fotos')}/>
+                        </span>
+                    }
+                    <div className="col-12 m-0 mb-5 p-0" style={{width: '100%', height: '175px'}}>
                         <span className="seccaoTitulo">Localização do edifício</span>
-                        <input className="form-control forms mb-3" type="text" aria-label="Search"/>
-                    </span>
+                        <MapContainer center={valores.localizacao !=='' ? [valores.localizacao[0], valores.localizacao[1]] : [0, 0]} zoom={15}>
+                            <TileLayer
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            />
+                            <Marker position={[valores.localizacao[0], valores.localizacao[1]]}></Marker>
+                        </MapContainer>
+                    </div>
                     <span className="col-12 m-0 p-0">
                         <span className="seccaoTitulo">Estado do edifício</span>
                         <div className="m-0 p-0">
@@ -149,6 +203,15 @@ function AdicionarEdificio (props) {
                     }
                 </span>
             </section>
+            <style>
+                {`
+                .leaflet-container {
+                    height: 175px;
+                    width: 100%;
+                    display: block;
+                  }
+                `}
+            </style>
         </Div>
     )
 }
