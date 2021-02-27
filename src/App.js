@@ -28,7 +28,7 @@ function App() {
         <Route exact path="/" component={LandingPage}/>
         <Route exact path="/perfil" component={Perfil}/>
         <Route exact path="/gamehub" component={Gamehub}/>
-        <Route exact path="/edificio" component={PaginaEdificio}/>
+        <Route exact path="/edificio/:id" component={PaginaEdificio}/>
           <Route exact path="/mapeadores" component={Mapeadores} />
           <Route exact path="/mapeadores/amigos" component={MapeadoresFriends} />
           <Route exact path="/mapeadores/comunidade" component={MapeadoresCom} />

@@ -51,7 +51,6 @@ function Homepage () {
 
     useEffect(() => {
         dispatch(getEdificioList())
-        
         //podemos usar o watchPosition para receber de X em X tempo
         navigator.geolocation.getCurrentPosition((position) => {
             setCoordenadas({lat: position.coords.latitude, long: position.coords.longitude});
@@ -59,20 +58,15 @@ function Homepage () {
     }, [])
     useEffect(() => {
         if (user && !isLoading && isAuthenticated) {
-            
-                 dispatch(getUtilizadorById(user.email))
-            
-           
+            dispatch(getUtilizadorById(user.email))
         }
-        
     },[user])
     useEffect(() => {
         if (ownUser && !isLoading && isAuthenticated) {
             storage.ref('imagensUtilizadores').child(`${ownUser.imagemUser}`).getDownloadURL().then((url) => {
                 setImagem(url)
             })
-        }
-        
+        } 
     },[ownUser])
 
    
@@ -117,7 +111,7 @@ function Homepage () {
                             {edificio.localizacao[0] <= coordenadas.lat + 0.01 && edificio.localizacao[0] >= coordenadas.lat - 0.01 && edificio.localizacao[1] <= coordenadas.long + 0.01 && edificio.localizacao[1] >= coordenadas.long - 0.01 ?
                                 <Marker key={key} position={[edificio.localizacao[0], edificio.localizacao[1]]}>
                                     <Popup position={[edificio.localizacao[0], edificio.localizacao[1]]}>
-                                        <Link to="/edificio"><h3>{edificio.nomeEdificio}</h3></Link>
+                                        <Link to={`/edificio/${edificio.id}`}><h3>{edificio.nomeEdificio}</h3></Link>
                                     </Popup>
                                 </Marker>
                                 :
@@ -132,7 +126,7 @@ function Homepage () {
                     {EdificioList.map((edificio, key) => (
                         <Marker key={key} position={[edificio.localizacao[0], edificio.localizacao[1]]}>
                             <Popup position={[edificio.localizacao[0], edificio.localizacao[1]]}>
-                                <Link to="/edificio"><h3>{edificio.nomeEdificio}</h3></Link>
+                                <Link to={`/edificio/${edificio.id}`}><h3>{edificio.nomeEdificio}</h3></Link>
                             </Popup>
                         </Marker>
                     ))}
