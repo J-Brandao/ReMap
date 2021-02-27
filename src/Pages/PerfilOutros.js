@@ -8,7 +8,7 @@ import Trofeus from '../Components/Perfil/Trofeus';
 import Interacoes from '../Components/Perfil/Interacoes';
 import BackArrow from '../Components/Geral/BackArrow';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUtilizadorById } from '../Store/Utilizadores/Actions';
+import { getUtilizadorForPerfil } from '../Store/Utilizadores/Actions';
 import { useAuth0 } from '@auth0/auth0-react';
 import Loading from '../Components/Geral/Loading';
 import { storage } from '../Firebase/FbConfig';
@@ -28,28 +28,27 @@ const ProfilePicture = styled.div`
     border: solid 3px #ffa801;
 `;
 
-function Perfil() {
+function PerfilOutros(props) {
 
     const { user, isLoading, isAuthenticated } = useAuth0();
     const [imagem, setImagem] = useState(null)
-    const utilizador = useSelector(({Utilizadores})=> Utilizadores.ownUser)
-    const isLoadingUtilizador = useSelector(({Utilizadores})=> Utilizadores.isLoadingSelf)
+    const utilizador = useSelector(({Utilizadores})=> Utilizadores.user)
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (user && !isLoading && isAuthenticated) {
-            dispatch(getUtilizadorById(user.email))
-        } 
-    },[user])
+        setImagem(null)
+        dispatch(getUtilizadorForPerfil(props.match.params.id))    
+    }, [])
     useEffect(() => {
         if (utilizador && !isLoading && isAuthenticated) {
             storage.ref('imagensUtilizadores').child(`${utilizador.imagemUser}`).getDownloadURL().then((url) => {
                 setImagem(url)
             })
-        }  
+        }
+        
     },[utilizador])
     
-    if(isLoading || isLoadingUtilizador) {
+    if(isLoading) {
         return (
             <Loading/>
         )
@@ -65,7 +64,7 @@ function Perfil() {
                     <p id="DataUser">Membro desde 2021</p>
                 </div>
                 <span className="col-2 text-right m-0 p-0">
-                    <img src={More}/>
+                    <img src={user.email === utilizador.userId ? More : IconeAmigo}/>
                 </span>
            </section>
            <section className="row col-12 m-0 p-0">
@@ -80,4 +79,4 @@ function Perfil() {
     )
 }
 
-export default Perfil;
+export default PerfilOutros;

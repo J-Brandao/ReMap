@@ -118,7 +118,7 @@ function Mapeadores() {
                     <Pesquisa onChange={onChange} value={value}/>
                 </div>
                 
-                        <Link className="m-0 p-0" to={`/perfil/${ownUser.id}`}>
+                        <Link className="m-0 p-0" to={`/perfil`}>
                             <ListaUtilizadores user={ownUser} tipo={"own"}/>
                 </Link>
                 
@@ -130,7 +130,7 @@ function Mapeadores() {
                             if (ownUser.id === userSingle.id) return null
                             if (userSingle.nomeFriend.includes(value))
                                 return (
-                                    <Link className="m-0 p-0" to={`/perfil/${userSingle.id}`}>
+                                    <Link className="m-0 p-0" to={`/mapeador/${userSingle.id}`}>
                                         <ListaUtilizadores tipo={seccao} user={userSingle} />
                                     </Link>
                                 )
