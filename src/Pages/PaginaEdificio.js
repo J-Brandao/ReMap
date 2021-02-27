@@ -11,7 +11,10 @@ import Book from '../Images/Book.svg';
 import Camera from '../Images/Camera.svg';
 import UltimaSeccao from '../Components/PaginaEdificio/UltimaSeccao';
 import BackArrow from '../Components/Geral/BackArrow';
-import {useAuth0} from "@auth0/auth0-react"
+import {useAuth0} from "@auth0/auth0-react";
+import { getEdificio } from '../Store/Edificios/Actions';
+import { useSelector, useDispatch } from 'react-redux';
+import Loading from '../Components/Geral/Loading';
 
 const Div = styled.div`
     margin: 40px 30px 0 30px;
@@ -46,17 +49,32 @@ const ButtonS = styled.button`
     color: #34495e;
 `;
 
-function PaginaEdificio() {
+function PaginaEdificio(props) {
+    const dispatch = useDispatch();
     const {logout} = useAuth0()
     
     const [seccao, setSeccao] = useState('Sugestões');
+    const edificio = useSelector(({ Edificios }) => Edificios.data );
+    const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading)
+    
+
+    useEffect(() => {
+        dispatch(getEdificio(props.match.params.id));
+    }, [])
 
     const MudaSeccao = id => {        
         setSeccao(id);
     }
 
+    if (isLoadingEdificio) {
+        return (
+            <Loading />
+        )
+    }
+
     return(
         <div className="m-0 p-0">
+            
             <Div>
                 <section className="row col-12 m-0 p-0">
                     <BackArrow />

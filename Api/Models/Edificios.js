@@ -1,22 +1,22 @@
 const getFirestore = require("../Utils/getFirestore");
 
 module.exports = {
-  /*get: async (id, email) =>  {
-    if (!id && !email) {
+  get: async (id) =>  {
+    if (!id) {
         throw new Error("Oops! An error occured!");
     }
 
     const db = getFirestore();
-    const pokeCollectionRef = db.collection("Favoritos");
+    const edificioCollectionRef = db.collection("Edifícios");
 
-    const doc = await pokeCollectionRef.where("namePokemon", "==", id).where("email", "==", email).get();
+    const doc = await edificioCollectionRef.doc(`${id}`).get();
 
     if(doc.empty){
       return false;
     }
     
-    return {id: doc.docs[0].id};
-  },*/
+    return {id: doc.id, ...doc.data()};
+  },
   getAll: async () => {
     const db = getFirestore();
     const pokeCollectionRef = db.collection("Edifícios");
