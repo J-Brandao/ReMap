@@ -435,7 +435,7 @@ function EditarUtilizador () {
                             valores.nomeUtilizador !== '' && valores.cidade !== '' && valores.pais !== '' ?
                             <button 
                             className="botaoSubmeter mt-4"
-                            onClick={() => onCreateNovoUtilizador(user.sub, valores.imagemUser, valores.nomeUtilizador, valores.biografia, valores.pais, valores.cidade)} 
+                            onClick={() => onCreateNovoUtilizador(user.email, valores.imagemUser, valores.nomeUtilizador, valores.biografia, valores.pais, valores.cidade)} 
                             >Confirmar</button>
                             :
                             <button 
