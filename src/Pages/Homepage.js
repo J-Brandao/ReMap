@@ -46,7 +46,7 @@ function Homepage () {
     const EdificioList = useSelector(({ Edificios }) => Edificios.data);
     const ownUser = useSelector(({Utilizadores})=> Utilizadores.ownUser)
     const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading)
-    const isLoadingUser = useSelector(({Utilizadores}) => Utilizadores.isLoading)
+    const isLoadingUser = useSelector(({Utilizadores}) => Utilizadores.isLoadingSelf)
     const dispatch = useDispatch();
 
     useEffect(() => {
