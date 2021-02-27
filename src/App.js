@@ -5,6 +5,8 @@ import Perfil from './Pages/Perfil';
 import Gamehub from './Pages/Gamehub';
 import PaginaEdificio from './Pages/PaginaEdificio';
 import Mapeadores from './Pages/Mapeadores';
+import MapeadoresCom from './Pages/MapeadoresCom';
+import MapeadoresFriends from './Pages/MapeadoresFriends';
 import AdicionarEdificio from './Pages/AdicionarEdificio';
 import Homepage from './Pages/Homepage';
 import EditarUtilizador from './Pages/EditarUtilizador';
@@ -27,7 +29,9 @@ function App() {
         <Route exact path="/perfil" component={Perfil}/>
         <Route exact path="/gamehub" component={Gamehub}/>
         <Route exact path="/edificio" component={PaginaEdificio}/>
-        <Route exact path="/mapeadores" component={Mapeadores}/>
+          <Route exact path="/mapeadores" component={Mapeadores} />
+          <Route exact path="/mapeadores/amigos" component={MapeadoresFriends} />
+          <Route exact path="/mapeadores/comunidade" component={MapeadoresCom} />
         <Route exact path="/novo" component={AdicionarEdificio}/>
         <Route exact path="/homepage" component={Homepage}/>
         <Route exact path="/editar" component={EditarUtilizador} />
