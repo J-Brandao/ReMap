@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import '../Styles/AdicionarEdificio.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AdicionarImagem from '../Images/GaleriaImagens.svg'
 import BackArrow from '../Components/Geral/BackArrow';
-import { createNovoEdificio } from '../Store/Edificios/Actions';
+import { createNovoEdificio, getEdificioList } from '../Store/Edificios/Actions';
 import { storage } from '../Firebase/FbConfig';
 import { useHistory } from 'react-router-dom';
 import Loading from '../Components/Geral/Loading';
@@ -34,7 +34,9 @@ function AdicionarEdificio (props) {
 
     const { user, isLoading } = useAuth0();
     const dispatch = useDispatch();
-    const history = useHistory();
+    const history = useHistory();   
+    const EdificioList = useSelector(({ Edificios }) => Edificios.data);
+    const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading);
     const [imagem, setImagem] = useState([]);
     const [valores, setValores] = useState({
         nomeEdificio: '',
@@ -49,12 +51,22 @@ function AdicionarEdificio (props) {
 
     useEffect(() => {
         if(!props.location.state){
-            history.push('/homepage')
+            history.push('/homepage');
         } else {
+            dispatch(getEdificioList())
             valores.localizacao = props.location.state.localizacao;
             setValores({...valores})
         }
     }, [])
+    useEffect(() => {
+        if(EdificioList) {
+            EdificioList.map(edificio => {
+                if(edificio.localizacao[0] === valores.localizacao[0] && edificio.localizacao[1] === valores.localizacao[1]){
+                    history.push('/homepage');
+                }
+            })
+        }
+    }, [EdificioList])
 
     const verificarFicheiro = (file) => {
         if (file.type && !arrayTiposAceites.includes(file.type)) {
@@ -110,7 +122,7 @@ function AdicionarEdificio (props) {
 
     useAuthentication();
 
-    if(isLoading) {
+    if(isLoading || isLoadingEdificio) {
         return(
             <Loading/>
         )
