@@ -12,6 +12,7 @@ import Camera from '../Images/Camera.svg';
 import BackArrow from '../Components/Geral/BackArrow';
 import {useAuth0} from "@auth0/auth0-react";
 import { getEdificio } from '../Store/Edificios/Actions';
+import { getUtilizadorById } from '../Store/Utilizadores/Actions'
 import { useSelector, useDispatch } from 'react-redux';
 import Loading from '../Components/Geral/Loading';
 import Comentarios from '../Components/PaginaEdificio/Comentarios';
@@ -52,9 +53,11 @@ const ButtonS = styled.button`
 
 function PaginaEdificio(props) {
     const dispatch = useDispatch();
-    const {logout} = useAuth0()
+    const {user, isLoading, isAuthenticated, logout} = useAuth0()
     
     const [seccao, setSeccao] = useState('Sugestões');
+    const ownUser = useSelector(({Utilizadores})=> Utilizadores.ownUser);
+    const isLoadingUser = useSelector(({Utilizadores}) => Utilizadores.isLoadingSelf);
     const edificio = useSelector(({ Edificios }) => Edificios.data );
     const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading)
     
@@ -62,12 +65,17 @@ function PaginaEdificio(props) {
     useEffect(() => {
         dispatch(getEdificio(props.match.params.id));
     }, [])
+    useEffect(() => {
+        if (user && !isLoading && isAuthenticated) {
+            dispatch(getUtilizadorById(user.email))
+        }
+    }, [user])
 
     const MudaSeccao = id => {        
         setSeccao(id);
     }
 
-    if (isLoadingEdificio) {
+    if (isLoading || isLoadingEdificio || isLoadingUser) {
         return (
             <Loading />
         )
@@ -75,7 +83,6 @@ function PaginaEdificio(props) {
 
     return(
         <div className="m-0 p-0">
-            
             <Div>
                 <section className="row col-12 m-0 p-0">
                     <BackArrow />
@@ -138,9 +145,9 @@ function PaginaEdificio(props) {
             </div>
             }
             {seccao === 'Sugestões' ?
-            <Sugestoes/>
+            <Sugestoes utilizador={ownUser.id} edificio={edificio[0].id}/>
             :
-            <Comentarios/>
+            <Comentarios utilizador={ownUser.id} edificio={edificio[0].id}/>
             }
         </div>
     )

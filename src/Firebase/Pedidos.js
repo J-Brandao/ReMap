@@ -52,6 +52,7 @@ fetch(`http://localhost:3001/utilizadores`, {
   body: JSON.stringify({ userID, imagemUser, nomeUtilizador, biografia, pais, cidade })
 }).then(response => console.log(response.json()));
 
+//AMIGOS
 
 export const fetchAllFriends = (userId) => {
   return fetch(`http://localhost:3001/friends/${userId}`)
@@ -82,3 +83,35 @@ export const deleteFriends = (token, id) => {
     }
   })
 }
+
+//COMENTÁRIOS
+
+export const fetchComentariosList = () =>
+  fetch(`http://localhost:3001/comentarios`)
+    .then(response => response.json())
+    
+export const createComentario = (token, userId, valor, edificioId) =>
+fetch(`http://localhost:3001/comentarios`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`
+  },
+  body: JSON.stringify({ userId, valor, edificioId })
+}).then(response => console.log(response.json()));
+
+//SUGESTÕES
+
+export const fetchSugestoesList = () =>
+  fetch(`http://localhost:3001/sugestoes`)
+    .then(response => response.json())
+    
+export const createSugestao = (token, userId, valor, edificioId) =>
+fetch(`http://localhost:3001/sugestoes`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`
+  },
+  body: JSON.stringify({ userId, valor, edificioId })
+}).then(response => console.log(response.json()));
