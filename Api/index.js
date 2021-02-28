@@ -28,5 +28,11 @@ app.use("/friends",
 app.use("/utilizadorPerfil",
   require("./Controllers/UtilizadorPerfil")
 );
+app.use("/comentarios",
+  require("./Controllers/Comentarios")
+);
+app.use("/sugestoes",
+  require("./Controllers/Sugestoes")
+);
 
 app.listen(3001, () => console.log("Servidor a funcionar!"));
