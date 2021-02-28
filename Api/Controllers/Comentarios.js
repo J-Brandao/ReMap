@@ -1,17 +1,11 @@
 const express = require("express");
-const { create, getAll } = require("../Models/Comentarios");
+const { create, getAllByUser, getAllByBuilding } = require("../Models/Comentarios");
 const checkJwt = require("../Utils/checkJwt");
 
 const router = express.Router();
 
 router.route("/")
-    .get(async (req, res) => {
-    const comentarios = await getAll();
-
-    res.status(200);
-    res.json(comentarios);
-    res.end();
-    })
+    
     .post(checkJwt, async (req, res) => {
 
     const comentario = await create(req.body);
@@ -21,5 +15,39 @@ router.route("/")
     res.end();
 
     });
+
+router.route("/building/:buildingId?")
+    .get(async (req, res) => {
+    
+        if (!req.params.buildingId) {
+            res.status(400)
+            res.json(false)
+            res.end();
+            return;
+        }    
+        
+
+    const comentarios = await getAllByBuilding(req.params.buildingId);
+        
+    res.status(200);
+    res.json(comentarios);
+    res.end();
+    })
+    router.route("/user/:userId?")
+    .get(async (req, res) => {
+    
+        if (!req.params.userId) {
+            res.status(400)
+            res.json(false)
+            res.end();
+            return;
+    }    
+
+    const comentarios = await getAllByUser(req.params.userId);
+
+    res.status(200);
+    res.json(comentarios);
+    res.end();
+    })
 
 module.exports = router;

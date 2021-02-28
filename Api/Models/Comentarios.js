@@ -1,10 +1,22 @@
 const getFirestore = require("../Utils/getFirestore");
 
 module.exports = {
-  getAll: async () => {
+  getAllByBuilding: async (buildingId) => {
     const db = getFirestore();
     const comentarioCollectionRef = db.collection("Comentarios");
-    const result = await comentarioCollectionRef.get();
+    const result = await comentarioCollectionRef.where("edificioId", "==", buildingId).get();
+    console.log(result)
+    const comentarios = result.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id
+    }));
+    
+    return comentarios;
+  },
+  getAllByUser: async (userId) => {
+    const db = getFirestore();
+    const comentarioCollectionRef = db.collection("Comentarios");
+    const result = await comentarioCollectionRef.where("userId","==", userId ).get();
     const comentarios = result.docs.map(doc => ({
         ...doc.data(),
         id: doc.id
