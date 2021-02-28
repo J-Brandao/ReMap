@@ -2,21 +2,25 @@ import React from 'react';
 import '../../Styles/PaginaEdificio.css';
 import {ProgressBar} from 'react-bootstrap';
 
-function Classificacao() {
+function Classificacao({vandalismo, acesso, seguranca, degradacao}) {
     return(
         <section className="row col-12 m-0 mt-3 p-0">
             <h5 id="seccaoTitulo">Classificação do edifício</h5>
             <span className="m-0 p-0 w-100">
                 <p className="tipoClass">Acesso</p>
-                <ProgressBar now={60} variant="custom"/>
+                <ProgressBar now={acesso*20} variant="custom"/>
             </span>
             <span className="m-0 mt-1 p-0 w-100">
                 <p className="tipoClass">Segurança</p>
-                <ProgressBar now={60} variant="custom"/>
+                <ProgressBar now={seguranca*20} variant="custom"/>
             </span>
             <span className="m-0 mt-1 p-0 w-100">
                 <p className="tipoClass">Vandalismo</p>
-                <ProgressBar now={60} variant="custom"/>
+                <ProgressBar now={vandalismo*20} variant="custom"/>
+            </span>
+            <span className="m-0 mt-1 p-0 w-100">
+                <p className="tipoClass">Degradação</p>
+                <ProgressBar now={degradacao*20} variant="custom"/>
             </span>
 
             <style>

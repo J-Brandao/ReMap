@@ -16,6 +16,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Loading from '../Components/Geral/Loading';
 import Comentarios from '../Components/PaginaEdificio/Comentarios';
 import Sugestoes from '../Components/PaginaEdificio/Sugestoes';
+import { storage } from '../Firebase/FbConfig';
 
 const Div = styled.div`
     margin: 40px 30px 0 30px;
@@ -57,21 +58,41 @@ function PaginaEdificio(props) {
     const [seccao, setSeccao] = useState('Sugestões');
     const edificio = useSelector(({ Edificios }) => Edificios.data );
     const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading)
+    const [imagens, setImagens] = useState([]);
+    const [isLoadingImages, setIsLoadingImages] = useState(true);
     
 
     useEffect(() => {
         dispatch(getEdificio(props.match.params.id));
     }, [])
 
+    useEffect(() => {
+        if (edificio && !isLoadingEdificio && edificio[0].fotos) {
+            
+            edificio[0].fotos.map((item, index) => {
+
+                storage.ref('imagensEdificios').child(item).getDownloadURL().then((url) => {
+                    const newArray = imagens
+                    newArray.push(item)
+                    setImagens(newArray)
+                });
+                if (index === edificio[0].fotos.length - 1)
+                    setTimeout(()=>setIsLoadingImages(false),300);
+            })
+        }
+    }, [edificio])
+
     const MudaSeccao = id => {        
         setSeccao(id);
     }
 
-    if (isLoadingEdificio) {
+    if (isLoadingEdificio || isLoadingImages) {
         return (
             <Loading />
         )
     }
+    
+
 
     return(
         <div className="m-0 p-0">
@@ -93,20 +114,22 @@ function PaginaEdificio(props) {
                         <img src={More}/>
                     </span>
                 </section>
-                <h2 className="nomeEdificio p-0 pb-2">Antiga Câmara Municipal</h2>
-                <section className="row col-12 m-0 p-0">
+                <h2 className="nomeEdificio p-0 pb-2">{edificio[0].nomeEdificio}</h2>
+                <section className="col-12 m-0 p-0">
                         <h5 id="seccaoTitulo">Informações do Edifiício</h5>
-                        <p id="descricaoEdificio">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        <p id="descricaoEdificio">{edificio[0].descricao}</p>
                 </section>
                 <section className="row col-12 m-0 p-0">
                         <h5 id="seccaoTitulo">Galeria de Imagens</h5>
-                        <Galeria/>
+                    
+                        <Galeria fotos={imagens} />
+                    
                         <span className="col-12 mx-0 px-0 text-right mt-2">
                             <button onClick={()=>logout()} className="botaoFotografia">Nova Fotografia</button>
                         </span>
                 </section>
 
-                <Classificacao/>
+                <Classificacao vandalismo={edificio[0].vandalismo} degradacao={edificio[0].degradacao} seguranca={edificio[0].seguranca} acesso={edificio[0].acesso}/>
 
                 <section className="row col-12 m-0 p-0 mt-3">
                         <h5 id="seccaoTitulo">Crachás</h5>

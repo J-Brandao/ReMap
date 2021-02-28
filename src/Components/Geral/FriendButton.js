@@ -26,11 +26,11 @@ const dispatch = useDispatch()
   if (isLoadingFriendship) {
     return null
   }
-  console.log(isFriend)
+  
   
   return (
     <>
-      {}
+      
       {isFriend ?
         <Friend onClick={() => onDeleteFriend(isFriend.id)}><CheckMark width="30px" /></Friend>
         :
