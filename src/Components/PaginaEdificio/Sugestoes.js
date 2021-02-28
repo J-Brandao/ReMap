@@ -23,10 +23,11 @@ function Sugestoes (props) {
     return(
         <Div className="row col-12 m-0">
             <span className="col-12 p-0">
-                <input className="form-control forms mb-3" 
+                <input className="form-control forms mb-2" 
                        type="text" aria-label="name"
                        placeholder="Escreve uma sugestão..." 
                         />
+                <button className="btnPublicar mb-3">Publicar</button>
             </span>
             <span className="col-3 p-0">
                 <CommentPicture/>
