@@ -83,7 +83,7 @@ function ListaUtilizadores(props) {
                 <ProfilePicture style={{backgroundImage: `url(${imagem !== null ? imagem : Placeholder})`}}/>
             </div>
             <div className="col-9 pr-0">
-                <Link  to={`/perfil/${props.user.id}`}>
+                <Link  to={`/mapeador/${props.user.id}`}>
                     <p className="nomeUtilizador mb-0 pb-0">{props.user.nomeUtilizador}</p>
                 </Link>
                 <span className="col-12 row m-0 p-0 divUtilizador">

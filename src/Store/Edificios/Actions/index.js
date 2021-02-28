@@ -15,7 +15,7 @@ import {
     EDIFICIO_DELETE_SUCCESS,
     EDIFICIO_DELETE_ERROR,
   } from './Constants';
-  import { fetchEdificioList, /*fetchFavPokemon,*/ createEdificio/*, deleteFavPokemon*/ } from "../../../Firebase/Pedidos"
+  import { fetchEdificioList, fetchEdificio, createEdificio/*, deleteFavPokemon*/ } from "../../../Firebase/Pedidos"
   
   export const getEdificioList = () => {
     return (dispatch) => {
@@ -29,17 +29,16 @@ import {
     }
   }
 
-  /*export const getFavPokemon = (namePokemon = '', email = '') => {
+  export const getEdificio = (id = '') => {
     return (dispatch) => {
-      dispatch({ type: FAVPOKE_GET_START });
-  
-      fetchFavPokemon(namePokemon, email)
-        .then(FavPokemon => {
-          dispatch({ type: FAVPOKE_GET_SUCCESS, payload: FavPokemon })
+      dispatch({ type: EDIFICIO_GET_START });
+      fetchEdificio(id)
+        .then(Edificio => {
+          dispatch({ type: EDIFICIO_GET_SUCCESS, payload: Edificio })
         })
-        .catch(() => dispatch({ type: FAVPOKE_GET_ERROR }))
+        .catch(() => dispatch({ type: EDIFICIO_GET_ERROR }))
     }
-  }*/
+  }
   
   export const createNovoEdificio = (userId = '', nomeEdificio = '', descricao = '', fotos = '', localizacao = '', degradacao = '', acesso = '', seguranca = '', vandalismo = '') => {
     return (dispatch, getState) => {

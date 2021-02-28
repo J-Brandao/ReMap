@@ -20,10 +20,10 @@ import {
         return { ...state, isLoading: true };
       case EDIFICIOS_GET_SUCCESS:
         return { ...state, data: payload, isLoading: false };
-      //case FAVPOKE_GET_START:
-        //return { ...state, isLoading: true };
-      //case FAVPOKE_GET_SUCCESS:
-        //return { ...state, data: [payload], isLoading: false };
+      case EDIFICIO_GET_START:
+        return { ...state, isLoading: true };
+      case EDIFICIO_GET_SUCCESS:
+        return { ...state, data: [payload], isLoading: false };
       case EDIFICIO_CREATE_SUCCESS:
         return { ...state, data: [payload] };
       //case FAVLIST_DELETE_SUCCESS:

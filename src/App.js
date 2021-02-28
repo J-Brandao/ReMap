@@ -9,7 +9,8 @@ import MapeadoresFriends from './Pages/MapeadoresFriends';
 import AdicionarEdificio from './Pages/AdicionarEdificio';
 import Homepage from './Pages/Homepage';
 import EditarUtilizador from './Pages/EditarUtilizador';
-import FinalizarUtilizador from './Pages/FinalizarUtilizador'
+import FinalizarUtilizador from './Pages/FinalizarUtilizador';
+import PerfilOutros from './Pages/PerfilOutros';
 import './Styles/Geral.css';
 import { Auth0Provider } from "@auth0/auth0-react";
 
@@ -24,16 +25,17 @@ function App() {
       <Router>
       <Switch>
         <Route exact path="/" component={LandingPage}/>
-        <Route exact path="/perfil/:id" component={Perfil}/>
+        <Route exact path="/perfil" component={Perfil}/>
         <Route exact path="/gamehub" component={Gamehub}/>
-          <Route exact path="/edificio" component={PaginaEdificio} />
+        <Route exact path="/edificio/:id" component={PaginaEdificio}/>
           <Route exact path="/mapeadores" component={MapeadoresFriends} />
           <Route exact path="/mapeadores/amigos" component={MapeadoresFriends} />
           <Route exact path="/mapeadores/comunidade" component={MapeadoresCom} />
         <Route exact path="/novo" component={AdicionarEdificio}/>
         <Route exact path="/homepage" component={Homepage}/>
-          <Route exact path="/editar" component={EditarUtilizador} />
-          <Route exact path="/finalizar" component={FinalizarUtilizador} />
+        <Route exact path="/editar" component={EditarUtilizador} />
+        <Route exact path="/finalizar" component={FinalizarUtilizador} />
+        <Route exact path="/mapeador/:id" component={PerfilOutros}/>
       </Switch>
     </Router>
     </Auth0Provider>

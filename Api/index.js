@@ -10,6 +10,9 @@ app.use(bodyParser.json());
 app.use("/edificios",
   require("./Controllers/Edificios")
 );
+app.use("/edificio",
+  require("./Controllers/Edificio")
+);
 app.use("/utilizadores",
   require("./Controllers/Utilizadores")
 );

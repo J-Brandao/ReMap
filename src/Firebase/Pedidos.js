@@ -3,8 +3,8 @@ export const fetchEdificioList = () =>
   fetch(`http://localhost:3001/edificios`)
     .then(response => response.json())
 
-export const fetchEdificio = ( coordenadas ) =>
-  fetch(`http://localhost:3001/edificio/${coordenadas}`)
+export const fetchEdificio = ( id ) =>
+  fetch(`http://localhost:3001/edificio/${id}`)
     .then(response => response.json())
 
 
