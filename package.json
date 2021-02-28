@@ -18,6 +18,7 @@
     "lodash": "^4.17.20",
     "nodemon": "^2.0.7",
     "react": "^17.0.1",
+    "react-bones": "^1.0.3",
     "react-bootstrap": "^1.4.3",
     "react-dom": "^17.0.1",
     "react-leaflet": "^3.1.0",
