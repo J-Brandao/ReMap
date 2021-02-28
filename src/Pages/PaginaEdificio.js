@@ -9,12 +9,13 @@ import Classificacao from '../Components/PaginaEdificio/Classificacao';
 import ArrowMap from '../Images/ArrowMap.svg';
 import Book from '../Images/Book.svg';
 import Camera from '../Images/Camera.svg';
-import UltimaSeccao from '../Components/PaginaEdificio/UltimaSeccao';
 import BackArrow from '../Components/Geral/BackArrow';
 import {useAuth0} from "@auth0/auth0-react";
 import { getEdificio } from '../Store/Edificios/Actions';
 import { useSelector, useDispatch } from 'react-redux';
 import Loading from '../Components/Geral/Loading';
+import Comentarios from '../Components/PaginaEdificio/Comentarios';
+import Sugestoes from '../Components/PaginaEdificio/Sugestoes';
 
 const Div = styled.div`
     margin: 40px 30px 0 30px;
@@ -136,7 +137,11 @@ function PaginaEdificio(props) {
                 <ButtonS className="btn col-6 m-0 p-0">Comentários</ButtonS>
             </div>
             }
-            <UltimaSeccao tipo={seccao}/>
+            {seccao === 'Sugestões' ?
+            <Sugestoes/>
+            :
+            <Comentarios/>
+            }
         </div>
     )
 }
