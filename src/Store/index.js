@@ -3,12 +3,14 @@ import EdificiosReducer from './Edificios/Reducers';
 import UtilizadoresReducer from './Utilizadores/Reducers';
 import FriendsReducer from './Friends/Reducers';
 import tokenReducer from './Token/Reducers';
+import SugestoesReducer from './Sugestoes/Reducers';
 import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({
     Edificios: EdificiosReducer,
     Utilizadores: UtilizadoresReducer,
     Friends: FriendsReducer,
+    Sugestoes: SugestoesReducer,
     token: tokenReducer
 });
 
