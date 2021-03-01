@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import styled from 'styled-components';
-import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer, useMap, Circle } from 'react-leaflet';
 import { Link, useHistory } from 'react-router-dom';
 import '../Styles/Homepage.css';
 import Filtros from '../Components/Homepage/Filtros';
@@ -10,7 +10,9 @@ import { getUtilizadorById } from '../Store/Utilizadores/Actions'
 import { useAuth0 } from '@auth0/auth0-react';
 import Loading from '../Components/Geral/Loading';
 import { storage } from '../Firebase/FbConfig';
-import Menu from '../Components/Homepage/Menu'
+import Menu from '../Components/Homepage/Menu';
+import UserLocation from '../Images/UserLocation.svg';
+import L from 'leaflet';
 
 
 const ProfilePicture = styled.div`
@@ -47,6 +49,7 @@ function Homepage () {
     const ownUser = useSelector(({Utilizadores})=> Utilizadores.ownUser)
     const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading)
     const isLoadingUser = useSelector(({Utilizadores}) => Utilizadores.isLoadingSelf)
+    const userCircle = { fillColor: 'blue' }
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -87,6 +90,13 @@ function Homepage () {
         return false
     }
 
+    const getIcon = (_iconSize) => {
+        return L.icon({
+            iconUrl: UserLocation,
+            iconSize: _iconSize,
+        })
+    }
+
     return(
         <div className="m-0 p-0">
             {hasUser() &&
@@ -103,6 +113,7 @@ function Homepage () {
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+                <Marker position={[coordenadas.lat, coordenadas.long]} icon={getIcon(40)}/>
                 {
                     filtros.proximidade === true ?
                     <>
