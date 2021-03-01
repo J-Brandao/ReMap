@@ -86,8 +86,12 @@ export const deleteFriends = (token, id) => {
 
 //COMENTÁRIOS
 
-export const fetchComentariosList = () =>
-  fetch(`http://localhost:3001/comentarios`)
+export const fetchComentariosListByBuilding = (buildingId) =>
+  fetch(`http://localhost:3001/comentarios/building/${buildingId}`)
+    .then(response => response.json())
+
+    export const fetchComentariosListByUser = (userId) =>
+  fetch(`http://localhost:3001/comentarios/user/${userId}`)
     .then(response => response.json())
     
 export const createComentario = (token, userId, valor, edificioId) =>
