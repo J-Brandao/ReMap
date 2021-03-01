@@ -10,12 +10,16 @@ import {
     UTILIZADOR_OWN_GET_START,
     UTILIZADOR_OWN_GET_SUCCESS,
     UTILIZADOR_OWN_GET_ERROR,
-  
+
+    UTILIZADOR_UPDATE_START,
+    UTILIZADOR_UPDATE_SUCCESS,
+    UTILIZADOR_UPDATE_ERROR,
+
     UTILIZADOR_CREATE_START,
     UTILIZADOR_CREATE_SUCCESS,
     UTILIZADOR_CREATE_ERROR,
   } from './Constants';
-  import { fetchUtilizadoresList, fetchUtilizadorById, fetchUtilizadorForPerfil, createUtilizador/*, deleteFavPokemon*/ } from "../../../Firebase/Pedidos"
+  import { fetchUtilizadoresList, fetchUtilizadorById, fetchUtilizadorForPerfil, createUtilizador, updateUtilizador } from "../../../Firebase/Pedidos"
   
   export const getUtilizadoresList = () => {
     return (dispatch) => {
@@ -55,21 +59,17 @@ import {
     }
   }
 
-  /*
-  export const getFavPokemon = (namePokemon = '', email = '') => {
-    return (dispatch) => {
-      dispatch({ type: FAVPOKE_GET_START });
-  
-  export const getUtilizador = (userID) => {
-    return (dispatch) => {
-      dispatch({ type: UTILIZADOR_GET_START });
-      fetchUtilizador(userID)
-        .then(Id => {
-          dispatch({ type: UTILIZADOR_GET_SUCCESS, payload: Id })
+  export const atualizaUtilizador = (docID = '', userID = '', imagemUser = '', nomeUtilizador = '', biografia = '', pais = '', cidade = '') => {
+    return (dispatch, getState) => {
+      dispatch({ type: UTILIZADOR_UPDATE_START });
+
+      updateUtilizador(getState().token, docID, userID, imagemUser, nomeUtilizador, biografia, pais, cidade)
+        .then(Info => {
+          dispatch({ type: UTILIZADOR_UPDATE_SUCCESS, payload: Info })
         })
-        .catch(() => dispatch({ type: UTILIZADOR_GET_ERROR }))
+        .catch(() => dispatch({ type: UTILIZADOR_UPDATE_ERROR }))
     }
-  }*/
+  }
   
   export const createNovoUtilizador = (userID = '', imagemUser = '', nomeUtilizador = '', biografia = '', pais = '', cidade = '') => {
     return (dispatch, getState) => {

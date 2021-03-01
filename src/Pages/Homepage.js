@@ -49,7 +49,6 @@ function Homepage () {
     const ownUser = useSelector(({Utilizadores})=> Utilizadores.ownUser)
     const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading)
     const isLoadingUser = useSelector(({Utilizadores}) => Utilizadores.isLoadingSelf)
-    const userCircle = { fillColor: 'blue' }
     const dispatch = useDispatch();
 
     useEffect(() => {

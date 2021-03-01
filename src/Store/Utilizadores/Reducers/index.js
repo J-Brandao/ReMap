@@ -7,7 +7,7 @@ import {
     UTILIZADOR_OWN_GET_SUCCESS,
     UTILIZADOR_CREATE_SUCCESS,
     UTILIZADOR_DELETE_SUCCESS,
-    UTILIZADOR_CREATE_START
+    UTILIZADOR_UPDATE_SUCCESS
   } from '../Actions/Constants'
   
   const initialState = {
@@ -34,10 +34,16 @@ import {
         return { ...state, isLoadingSelf: true };
       case UTILIZADOR_OWN_GET_SUCCESS:
         return { ...state, isLoadingSelf: false, ownUser: payload };
-      //case FAVPOKE_GET_START:
-        //return { ...state, isLoading: true };
-      //case FAVPOKE_GET_SUCCESS:
-        //return { ...state, data: [payload], isLoading: false };
+      case UTILIZADOR_UPDATE_SUCCESS:
+      data = state.data.map(utilizador => {
+        if (utilizador.id !== payload.id) {
+          return utilizador;
+        }
+
+        return payload;
+      });
+
+      return { ...state, data };
       case UTILIZADOR_CREATE_SUCCESS:
         return { ...state, data: [payload] };
       //case FAVLIST_DELETE_SUCCESS:

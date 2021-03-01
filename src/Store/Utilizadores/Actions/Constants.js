@@ -10,6 +10,10 @@ export const UTILIZADOR_GET_START = 'utilizador/get:start';
 export const UTILIZADOR_GET_SUCCESS = 'utilizador/get:success';
 export const UTILIZADOR_GET_ERROR = 'utilizador/get:error';
 
+export const UTILIZADOR_UPDATE_START = 'utilizador/update:start';
+export const UTILIZADOR_UPDATE_SUCCESS = 'utilizador/update:success';
+export const UTILIZADOR_UPDATE_ERROR = 'utilizador/update:error';
+
 export const UTILIZADOR_CREATE_START = 'utilizador/create:start';
 export const UTILIZADOR_CREATE_SUCCESS = 'utilizador/create:success';
 export const UTILIZADOR_CREATE_ERROR = 'utilizador/create:error';
