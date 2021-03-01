@@ -106,10 +106,14 @@ fetch(`http://localhost:3001/comentarios`, {
 
 //SUGESTÕES
 
-export const fetchSugestoesList = () =>
-  fetch(`http://localhost:3001/sugestoes`)
+export const fetchSugestoesListByBuilding = (buildingId) =>
+  fetch(`http://localhost:3001/sugestoes/building/${buildingId}`)
     .then(response => response.json())
-    
+
+    export const fetchSugestoesListByUser = (userId) =>
+  fetch(`http://localhost:3001/sugestoes/user/${userId}`)
+    .then(response => response.json())
+
 export const createSugestao = (token, userId, valor, edificioId) =>
 fetch(`http://localhost:3001/sugestoes`, {
   method: 'POST',

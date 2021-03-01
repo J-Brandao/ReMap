@@ -7,19 +7,31 @@ import {
     SUGESTAO_CREATE_SUCCESS,
     SUGESTAO_CREATE_ERROR,
   } from './Constants';
-  import { fetchSugestoesList, createSugestao } from "../../../Firebase/Pedidos"
+  import { fetchSugestoesListByBuilding, fetchSugestoesListByUser, createSugestao } from "../../../Firebase/Pedidos"
   
-  export const getSugestoesList = () => {
+  export const getSugestoesListByBuilding = (buildingId) => {
+   
     return (dispatch) => {
       dispatch({ type: SUGESTOES_GET_START });
   
-      fetchSugestoesList()
+      fetchSugestoesListByBuilding(buildingId)
         .then(Sugestoes => {
           dispatch({ type: SUGESTOES_GET_SUCCESS, payload: Sugestoes })
         })
         .catch(() => dispatch({ type: SUGESTOES_GET_ERROR }))
     }
+}
+export const getSugestoesListByUser = (userId) => {
+  return (dispatch) => {
+    dispatch({ type: SUGESTOES_GET_START });
+
+    fetchSugestoesListByUser(userId)
+      .then(Sugestoes => {
+        dispatch({ type: SUGESTOES_GET_SUCCESS, payload: Sugestoes })
+      })
+      .catch(() => dispatch({ type: SUGESTOES_GET_ERROR }))
   }
+}
   
   export const createNovaSugestao = (userId = '', valor = '', edificioId = '') => {
     return (dispatch, getState) => {

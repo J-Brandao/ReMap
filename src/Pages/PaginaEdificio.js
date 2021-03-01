@@ -19,6 +19,7 @@ import Comentarios from '../Components/PaginaEdificio/Comentarios';
 import Sugestoes from '../Components/PaginaEdificio/Sugestoes';
 import { storage } from '../Firebase/FbConfig';
 import { getComentariosListByBuilding } from '../Store/Comentarios/Actions';
+import { getSugestoesListByBuilding } from '../Store/Sugestoes/Actions';
 
 
 const Div = styled.div`
@@ -62,7 +63,10 @@ function PaginaEdificio(props) {
     const ownUser = useSelector(({Utilizadores})=> Utilizadores.ownUser);
     const isLoadingUser = useSelector(({Utilizadores}) => Utilizadores.isLoadingSelf);
     const edificio = useSelector(({ Edificios }) => Edificios.data );
-    const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading)
+    const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading);
+    const sugestoes = useSelector(({ Sugestoes }) => Sugestoes.data);
+    const isLoadingSugestoes = useSelector(({Sugestoes})=> Sugestoes.isLoading)
+
     const [imagens, setImagens] = useState([]);
     const [isLoadingImages, setIsLoadingImages] = useState(true);
 
@@ -73,6 +77,7 @@ function PaginaEdificio(props) {
     useEffect(() => {
         dispatch(getEdificio(props.match.params.id));
         dispatch(getComentariosListByBuilding(props.match.params.id));
+        dispatch(getSugestoesListByBuilding(props.match.params.id))
     }, [])
     useEffect(() => {
         if (user && !isLoading && isAuthenticated) {
@@ -181,7 +186,7 @@ function PaginaEdificio(props) {
             }
            
             {seccao === 'Sugestões' ?
-            <Sugestoes utilizador={ownUser.id} edificio={edificio[0].id}/>
+                <Sugestoes utilizador={ownUser.id} edificio={edificio[0].id} isLoading={isLoadingSugestoes} sugestoes={sugestoes}/>
                 :
             <Comentarios utilizador={ownUser.id} edificio={edificio[0].id} isLoading={isLoadingComment} comments={commentData}/>
            

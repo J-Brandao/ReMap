@@ -33,7 +33,7 @@ router.route("/building/:buildingId?")
     res.json(comentarios);
     res.end();
     })
-    router.route("/user/:userId?")
+router.route("/user/:userId?")
     .get(async (req, res) => {
     
         if (!req.params.userId) {
