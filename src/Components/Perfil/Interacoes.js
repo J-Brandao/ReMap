@@ -9,13 +9,32 @@ import Fotografias from '../../Images/Fotografias.svg';
 import FotografiasSelected from '../../Images/FotografiasSelected.svg';
 import Ideias from '../../Images/Ideias.svg';
 import IdeiasSelected from '../../Images/IdeiasSelected.svg';
+import { useDispatch, useSelector } from "react-redux"
+import { getSugestoesListByUser } from "../../Store/Sugestoes/Actions"
+import { getComentariosListByUser } from "../../Store/Comentarios/Actions"
 
-function Interacoes () {
+
+
+function Interacoes ({userId}) {
 
     const [seccao, setSeccao] = useState('Edifícios Adicionados');
+    const dispatch = useDispatch()
+    const isLoadingComment = useSelector(({ Comentarios }) => Comentarios.isLoading)
+    const commentData = useSelector(({ Comentarios }) => Comentarios.data)
+    const sugestoes = useSelector(({ Sugestoes }) => Sugestoes.data);
+    const isLoadingSugestoes = useSelector(({Sugestoes})=> Sugestoes.isLoading)
+    
+    useEffect(() => {
+        dispatch(getComentariosListByUser(userId));
+        dispatch(getSugestoesListByUser(userId))
+    }, [])
 
     const MudaSeccao = id => {
         setSeccao(id);
+    }
+
+    if (isLoadingSugestoes || isLoadingComment) {
+        return null;
     }
 
     return(
@@ -53,7 +72,7 @@ function Interacoes () {
         </section>
         <section className="row col-12 m-0 p-0">
             <h5 className="col-12 p-0 mb-3 mt-3" id="seccaoTitulo">{seccao}</h5>
-            <DetalhesSeccao tipo={seccao}/>
+                <DetalhesSeccao tipo={seccao} sugestoes={sugestoes} comentarios={commentData}/>
         </section>
         </>
     )

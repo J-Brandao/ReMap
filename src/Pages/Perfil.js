@@ -75,7 +75,7 @@ function Perfil() {
 
            <Trofeus/>
 
-           <Interacoes/>
+            <Interacoes userId={utilizador.id}/>
         </Div>
     )
 }

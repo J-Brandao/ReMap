@@ -13,6 +13,7 @@ const SugestaoPicture = styled.div`
       background-position: center;
       background-size: cover;
       border-radius: 50%;
+      border: 2px solid #ffa801;
       min-height: 70px;
       width: 70px;
     `; 

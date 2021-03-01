@@ -5,6 +5,8 @@ import {Carousel} from 'react-bootstrap';
 import imgCarousel1 from '../../Images/ImgCarousel1.jpg';
 import imgCarousel2 from '../../Images/ImgCarousel2.jpg';
 import Perfil from '../../Images/Perfil.jpg';
+import SingleSugestao from '../PaginaEdificio/SingleSugestao'
+import SingleComentario from '../PaginaEdificio/SingleComentario'
 
 function DetalhesSeccao (props) {
 
@@ -45,15 +47,13 @@ function DetalhesSeccao (props) {
                 </Carousel.Item>
             </Carousel>
             :
-            props.tipo === 'Sugestões' ?
+                props.tipo === 'Sugestões' ?
             <>
-                <span className="col-3 p-0">
-                    <CommentPicture/>
-                </span>
-                <span className="col-9 pr-0">
-                    <p className="NomeComments">Pedro Alves</p>
-                    <p className="textoComments">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                </span>
+                        {props.sugestoes && props.sugestoes.length>0 &&
+                            props.sugestoes.map((sugestao, index) => {
+                        return <SingleSugestao sugestao={sugestao} />
+                    })
+                    }
             </>
             :
             props.tipo === 'Fotografias' ?
@@ -75,13 +75,11 @@ function DetalhesSeccao (props) {
             </Carousel>
             :
             <>
-                <span className="col-3 p-0">
-                    <CommentPicture/>
-                </span>
-                <span className="col-9 pr-0">
-                    <p className="NomeComments">Pedro Alves</p>
-                    <p className="textoComments">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                </span>
+                            {props.comentarios && props.comentarios.length>0 &&
+                                props.comentarios.map((comment, index) => {
+                           return <SingleComentario comment={comment} />
+                         })
+                    } 
             </>
             }
         </div> 
