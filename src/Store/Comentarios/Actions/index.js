@@ -7,20 +7,33 @@ import {
     COMENTARIO_CREATE_SUCCESS,
     COMENTARIO_CREATE_ERROR,
   } from './Constants';
-  import { fetchComentariosList, createComentario } from "../../../Firebase/Pedidos"
+  import { fetchComentariosListByBuilding, fetchComentariosListByUser, createComentario } from "../../../Firebase/Pedidos"
   
-  export const getComentariosList = () => {
+
+
+export const getComentariosListByBuilding = (buildingId) => {
+   
     return (dispatch) => {
       dispatch({ type: COMENTARIOS_GET_START });
   
-      fetchComentariosList()
+      fetchComentariosListByBuilding(buildingId)
         .then(Comentarios => {
           dispatch({ type: COMENTARIOS_GET_SUCCESS, payload: Comentarios })
         })
         .catch(() => dispatch({ type: COMENTARIOS_GET_ERROR }))
     }
+}
+export const getComentariosListByUser = (userId) => {
+  return (dispatch) => {
+    dispatch({ type: COMENTARIOS_GET_START });
+
+    fetchComentariosListByUser(userId)
+      .then(Comentarios => {
+        dispatch({ type: COMENTARIOS_GET_SUCCESS, payload: Comentarios })
+      })
+      .catch(() => dispatch({ type: COMENTARIOS_GET_ERROR }))
   }
-  
+}
   export const createNovoComentario = (userId = '', valor = '', edificioId = '') => {
     return (dispatch, getState) => {
       dispatch({ type: COMENTARIO_CREATE_START });

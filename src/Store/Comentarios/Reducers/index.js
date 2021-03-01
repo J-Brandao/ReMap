@@ -15,8 +15,8 @@ import {
     switch(type) {
       case COMENTARIOS_GET_START:
         return { ...state, isLoading: true };
-      case COMENTARIOS_GET_SUCCESS:
-        return { ...state, data: payload, isLoading: false };
+      case COMENTARIOS_GET_SUCCESS:{
+        return { ...state, data: payload, isLoading: false };}
       case COMENTARIO_CREATE_SUCCESS:
         return { ...state, data: [payload] };
       default:
