@@ -18,6 +18,8 @@ import Loading from '../Components/Geral/Loading';
 import Comentarios from '../Components/PaginaEdificio/Comentarios';
 import Sugestoes from '../Components/PaginaEdificio/Sugestoes';
 import { storage } from '../Firebase/FbConfig';
+import { getComentariosListByBuilding } from '../Store/Comentarios/Actions';
+
 
 const Div = styled.div`
     margin: 40px 30px 0 30px;
@@ -63,10 +65,14 @@ function PaginaEdificio(props) {
     const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading)
     const [imagens, setImagens] = useState([]);
     const [isLoadingImages, setIsLoadingImages] = useState(true);
+
+    const isLoadingComment = useSelector(({ Comentarios }) => Comentarios.isLoading)
+    const commentData = useSelector(({Comentarios}) => Comentarios.data)
     
 
     useEffect(() => {
         dispatch(getEdificio(props.match.params.id));
+        dispatch(getComentariosListByBuilding(props.match.params.id));
     }, [])
     useEffect(() => {
         if (user && !isLoading && isAuthenticated) {
@@ -75,15 +81,20 @@ function PaginaEdificio(props) {
     }, [user])
 
     useEffect(() => {
+        
         if (edificio && !isLoadingEdificio && edificio[0].fotos) {
             
             edificio[0].fotos.map((item, index) => {
-
+                if (imagens.length < edificio[0].fotos.length) {
                 storage.ref('imagensEdificios').child(item).getDownloadURL().then((url) => {
-                    const newArray = imagens
+                    
+                        const newArray = imagens
                     newArray.push(item)
                     setImagens(newArray)
+                    
+                    
                 });
+            }
                 if (index === edificio[0].fotos.length - 1)
                     setTimeout(()=>setIsLoadingImages(false),300);
             })
@@ -99,6 +110,7 @@ function PaginaEdificio(props) {
             <Loading />
         )
     }
+    
     
 
 
@@ -167,10 +179,16 @@ function PaginaEdificio(props) {
                 <ButtonS className="btn col-6 m-0 p-0">Comentários</ButtonS>
             </div>
             }
+           
             {seccao === 'Sugestões' ?
             <Sugestoes utilizador={ownUser.id} edificio={edificio[0].id}/>
-            :
-            <Comentarios utilizador={ownUser.id} edificio={edificio[0].id}/>
+                :
+            <Comentarios utilizador={ownUser.id} edificio={edificio[0].id} isLoading={isLoadingComment} comments={commentData}/>
+           
+                          
+             
+               
+
             }
         </div>
     )
