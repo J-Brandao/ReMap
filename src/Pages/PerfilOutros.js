@@ -74,7 +74,7 @@ function PerfilOutros(props) {
 
            <Trofeus/>
 
-           <Interacoes/>
+            <Interacoes userId={utilizador.id}/>
         </Div>
     )
 }

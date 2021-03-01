@@ -100,7 +100,7 @@ function Mapeadores() {
                     <Pesquisa onChange={onChange} value={value}/>
                 </div>
                 
-                        <Link className="m-0 p-0" to={`/perfil/${ownUser.id}`}>
+                        <Link className="m-0 p-0" to={`/perfil`}>
                             <ListaUtilizadores user={ownUser} tipo={"own"}/>
                 </Link>
                 
