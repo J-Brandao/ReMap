@@ -12,6 +12,7 @@ import { getUtilizadorById } from '../Store/Utilizadores/Actions';
 import { useAuth0 } from '@auth0/auth0-react';
 import Loading from '../Components/Geral/Loading';
 import { storage } from '../Firebase/FbConfig';
+import {useHistory} from "react-router-dom"
 
 const Div = styled.div`
     margin: 40px 30px 40px 30px;
@@ -28,13 +29,58 @@ const ProfilePicture = styled.div`
     border: solid 3px #ffa801;
 `;
 
+const Button = styled.button`
+background: none;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    width:100%;
+:focus{
+    outline:0;
+    boder:none
+}
+`
+const ButtonOptions = styled.button`
+background: none;
+	border: none;
+	padding:10px;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    width:130px;
+    text-align:left;
+   :focus{
+        background-color: ${props => props.eliminar ? "rgba(255,0,0, 0.3)" : "none"}
+        outline:0;
+   }
+`
+const DropDown = styled.div`
+border:2px solid #ffa801;
+text-align:left;
+padding:0;
+min-width:120px;
+position:absolute;
+background-color:white;
+right:0;
+z-index:5000;
+`
+const Line = styled.hr`
+color:#ffa801;
+margin:0;
+
+`
+
 function Perfil() {
 
-    const { user, isLoading, isAuthenticated } = useAuth0();
+    const { user, isLoading, isAuthenticated, logout } = useAuth0();
     const [imagem, setImagem] = useState(null)
+    const [showDropdown, setShowDropDown] = useState(false);
     const utilizador = useSelector(({Utilizadores})=> Utilizadores.ownUser)
     const isLoadingUtilizador = useSelector(({Utilizadores})=> Utilizadores.isLoadingSelf)
     const dispatch = useDispatch();
+    const history = useHistory()
 
     useEffect(() => {
         if (user && !isLoading && isAuthenticated) {
@@ -55,8 +101,43 @@ function Perfil() {
         )
     }
 
-    return(
+    const showMenu = () => {
+        setShowDropDown(!showDropdown);
+    }
+    const _logout = () => {
+        logout();
+        setShowDropDown(false);
+    }
+
+    const _editProfile = () => {
+        setShowDropDown(false);
+        history.push("/editar");
+
+    }
+    const _deleteProfile = () => {
+        console.log("eliminar")
+    }
+    
+    const renderOptions = () => {
+        if(showDropdown)
+        return (
+            <DropDown >
+                        
+                <ButtonOptions onClick={_editProfile}>Editar perfil</ButtonOptions>
+                <Line/>
+                <ButtonOptions onClick={_logout}>Logout</ButtonOptions>
+                <Line />
+                <ButtonOptions onClick={_deleteProfile} eliminar> Eliminar conta </ButtonOptions>
+                            
+        
+            </DropDown>
+        )
+    }
+
+    return (
+        
         <Div>
+            {console.log(showDropdown)}
            <section className="row col-12 m-0 p-0">
                 <BackArrow />
                 <div className="col-8 text-center m-0 p-0">
@@ -65,7 +146,13 @@ function Perfil() {
                     <p id="DataUser">Membro desde 2021</p>
                 </div>
                 <span className="col-2 text-right m-0 p-0">
-                    <img src={More}/>
+                    <Button onClick={showMenu}>
+                        <img className="m-0" src={More} alt="Mais opções" />
+                    </Button>
+                    {renderOptions()}
+                    
+                        
+                    
                 </span>
            </section>
            <section className="row col-12 m-0 p-0">
