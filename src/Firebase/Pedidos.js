@@ -7,6 +7,10 @@ export const fetchEdificio = ( id ) =>
   fetch(`http://localhost:3001/edificio/${id}`)
     .then(response => response.json())
 
+export const fetchEdificioForPerfil = ( userId ) =>
+  fetch(`http://localhost:3001/edificioPerfil/${userId}`)
+    .then(response => response.json())
+
 
 export const createEdificio = (token, userId, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo) =>
   fetch(`http://localhost:3001/edificios`, {

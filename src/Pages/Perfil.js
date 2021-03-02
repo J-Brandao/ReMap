@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import '../Styles/Perfil.css'
-import IconeAmigo from '../Images/IconeAmigo.svg';
 import Placeholder from '../Images/Placeholder.jpg';
 import More from '../Images/More.svg';
 import Trofeus from '../Components/Perfil/Trofeus';
@@ -31,7 +30,8 @@ const ProfilePicture = styled.div`
 function Perfil() {
 
     const { user, isLoading, isAuthenticated } = useAuth0();
-    const [imagem, setImagem] = useState(null)
+    const [imagem, setImagem] = useState(null);
+    const [menu, setMenu] = useState('Fechado');
     const utilizador = useSelector(({Utilizadores})=> Utilizadores.ownUser)
     const isLoadingUtilizador = useSelector(({Utilizadores})=> Utilizadores.isLoadingSelf)
     const dispatch = useDispatch();
@@ -48,6 +48,10 @@ function Perfil() {
             })
         }  
     },[utilizador])
+
+    const abreMenu = id => {        
+        setMenu(id);
+    }
     
     if(isLoading || isLoadingUtilizador) {
         return (
@@ -65,7 +69,17 @@ function Perfil() {
                     <p id="DataUser">Membro desde 2021</p>
                 </div>
                 <span className="col-2 text-right m-0 p-0">
-                    <img src={More}/>
+                    {menu === 'Fechado' ? 
+                        <img src={More} onClick={() => abreMenu('Aberto')}/>
+                    :
+                        <span>
+                            <img src={More} className="mb-2" onClick={() => abreMenu('Fechado')}/>
+                            <div className="menuUserAberto">
+                                <p className="mt-2 mb-2">Editar</p>
+                                <p className="mb-2">Log Out</p>
+                            </div>
+                        </span>
+                    }
                 </span>
            </section>
            <section className="row col-12 m-0 p-0">
@@ -75,7 +89,7 @@ function Perfil() {
 
            <Trofeus/>
 
-            <Interacoes userId={utilizador.id}/>
+           <Interacoes userId={utilizador.id}/>
         </Div>
     )
 }

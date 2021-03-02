@@ -106,7 +106,7 @@ function AdicionarEdificio (props) {
             arrayNomes.push(newName);
             
             //Guarda a imagem na storage
-            const uploadTask = storage.ref(`imagensEdificios/${newName}`).put(fotos);
+            const uploadTask = storage.ref(`imagensEdificios/${newName}`).put(imagem);
             uploadTask.on(
             "state_changed",
             snapshot => {
@@ -205,7 +205,7 @@ function AdicionarEdificio (props) {
                     {valores.nomeEdificio !== '' && valores.descricao !== '' && valores.localizacao !== '' ?
                         <button 
                             className="botaoSubmeter mt-4" 
-                            onClick={() => onCreateFavEdificio(user.email, valores.nomeEdificio, valores.descricao, valores.fotos, valores.localizacao, valores.degradacao, valores.acesso, valores.seguranca, valores.vandalismo)}
+                            onClick={() => onCreateFavEdificio(props.location.state.id, valores.nomeEdificio, valores.descricao, valores.fotos, valores.localizacao, valores.degradacao, valores.acesso, valores.seguranca, valores.vandalismo)}
                             >Submeter</button>
                         :
                         <button 
