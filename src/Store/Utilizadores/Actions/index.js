@@ -59,11 +59,11 @@ import {
     }
   }
 
-  export const atualizaUtilizador = (docID = '', userID = '', imagemUser = '', nomeUtilizador = '', biografia = '', pais = '', cidade = '') => {
+  export const atualizaUtilizador = (docID = '', userId = '', imagemUser = '', nomeUtilizador = '', biografia = '', pais = '', cidade = '') => {
     return (dispatch, getState) => {
       dispatch({ type: UTILIZADOR_UPDATE_START });
 
-      updateUtilizador(getState().token, docID, userID, imagemUser, nomeUtilizador, biografia, pais, cidade)
+      updateUtilizador(getState().token, docID, userId, imagemUser, nomeUtilizador, biografia, pais, cidade)
         .then(Info => {
           dispatch({ type: UTILIZADOR_UPDATE_SUCCESS, payload: Info })
         })

@@ -100,7 +100,7 @@ function EditarUtilizador () {
         }
     };
 
-    const onAtualizaUtilizador = (docId, userID, imagemUser, nomeUtilizador, biografia, pais, cidade) => {
+    const onAtualizaUtilizador = (docId, userId, imagemUser, nomeUtilizador, biografia, pais, cidade) => {
 
         if(imagemUser.name) {
             let date = new Date();
@@ -108,7 +108,7 @@ function EditarUtilizador () {
             let newName = imagemUser.name + "_imagem_" + timestamp;
             console.log(imagemUser, newName)
 
-            dispatch(atualizaUtilizador(docId, userID, newName, nomeUtilizador, biografia, pais, cidade));
+            dispatch(atualizaUtilizador(docId, userId, newName, nomeUtilizador, biografia, pais, cidade));
 
             const uploadTask = storage.ref(`imagensUtilizadores/${newName}`).put(imagemUser);
             uploadTask.on(
@@ -119,7 +119,7 @@ function EditarUtilizador () {
                 console.log(error);
             });
         } else {
-            dispatch(atualizaUtilizador(docId, userID, imagemUser, nomeUtilizador, biografia, pais, cidade));
+            dispatch(atualizaUtilizador(docId, userId, imagemUser, nomeUtilizador, biografia, pais, cidade));
         }
     }
 
@@ -134,8 +134,6 @@ function EditarUtilizador () {
 
     return(
         <Fundo>
-            {console.log(ownUser)}
-            {console.log(valores)}
             <Div>
                 <section className="m-0 p-0 w-100">
                     <label for="imgPerfil" className="imagemPerfil mb-0"><ProfilePicture style={{backgroundImage: `url(${imagem ? imagem : imgPlaceholder})`}}/></label>

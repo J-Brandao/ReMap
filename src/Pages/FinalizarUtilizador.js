@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import styled from 'styled-components';
 import Background from '../Images/Background2.svg';
-import imgPerfil from '../Images/Perfil.jpg';
+import Placeholder from '../Images/Placeholder.jpg';
 import '../Styles/EditarUtilizador.css';
 import { createNovoUtilizador } from '../Store/Utilizadores/Actions';
 import { storage } from '../Firebase/FbConfig';
