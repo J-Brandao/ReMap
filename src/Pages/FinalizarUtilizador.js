@@ -81,13 +81,13 @@ function FinalizarUtilizador () {
         }
     };
 
-    const onCreateNovoUtilizador = (userID, imagemUser, nomeUtilizador, biografia, pais, cidade) => {
+    const onCreateNovoUtilizador = (userId, imagemUser, nomeUtilizador, biografia, pais, cidade) => {
 
         let date = new Date();
         let timestamp = date.getTime();
         let newName = imagemUser.name + "_imagem_" + timestamp;
 
-        dispatch(createNovoUtilizador(userID, newName, nomeUtilizador, biografia, pais, cidade));
+        dispatch(createNovoUtilizador(userId, newName, nomeUtilizador, biografia, pais, cidade));
 
         const uploadTask = storage.ref(`imagensUtilizadores/${newName}`).put(imagemUser);
         uploadTask.on(

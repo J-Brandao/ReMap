@@ -41,24 +41,24 @@ export const fetchUtilizadorForPerfil = (userId) =>
   fetch(`http://localhost:3001/utilizadorPerfil/${userId}`)
     .then(response => response.json())
     
-export const updateUtilizador = (token, docID, userID, imagemUser, nomeUtilizador, biografia, pais, cidade) =>
+export const updateUtilizador = (token, docID, userId, imagemUser, nomeUtilizador, biografia, pais, cidade) =>
   fetch(`http://localhost:3001/utilizadorPerfil/${docID}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     },
-    body: JSON.stringify({ userID, imagemUser, nomeUtilizador, biografia, pais, cidade })
+    body: JSON.stringify({ userId, imagemUser, nomeUtilizador, biografia, pais, cidade })
   }).then(response => console.log(response.json()));
   
-export const createUtilizador = (token, userID, imagemUser, nomeUtilizador, biografia, pais, cidade) =>
+export const createUtilizador = (token, userId, imagemUser, nomeUtilizador, biografia, pais, cidade) =>
 fetch(`http://localhost:3001/utilizadores`, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${token}`
   },
-  body: JSON.stringify({ userID, imagemUser, nomeUtilizador, biografia, pais, cidade })
+  body: JSON.stringify({ userId, imagemUser, nomeUtilizador, biografia, pais, cidade })
 }).then(response => console.log(response.json()));
 
 //AMIGOS

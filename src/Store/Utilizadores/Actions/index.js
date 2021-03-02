@@ -71,11 +71,11 @@ import {
     }
   }
   
-  export const createNovoUtilizador = (userID = '', imagemUser = '', nomeUtilizador = '', biografia = '', pais = '', cidade = '') => {
+  export const createNovoUtilizador = (userId = '', imagemUser = '', nomeUtilizador = '', biografia = '', pais = '', cidade = '') => {
     return (dispatch, getState) => {
       dispatch({ type: UTILIZADOR_CREATE_START });
 
-      createUtilizador(getState().token, userID, imagemUser, nomeUtilizador, biografia, pais, cidade)
+      createUtilizador(getState().token, userId, imagemUser, nomeUtilizador, biografia, pais, cidade)
         .then(Info => {
           dispatch({ type: UTILIZADOR_CREATE_SUCCESS, payload: Info })
         })
