@@ -3,11 +3,12 @@ import { useDispatch } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import styled from 'styled-components';
 import Background from '../Images/Background2.svg';
-import imgPerfil from '../Images/Perfil.jpg';
+import Placeholder from '../Images/Placeholder.jpg';
 import '../Styles/EditarUtilizador.css';
 import { createNovoUtilizador } from '../Store/Utilizadores/Actions';
 import { storage } from '../Firebase/FbConfig';
-import Loading from '../Components/Geral/Loading'
+import Loading from '../Components/Geral/Loading';
+import useAuthentication from '../Firebase/useAuthentication';
 
 const TiposAceites = 'image/x-png, image/png, image/jpg, image/jpeg';
 const arrayTiposAceites = TiposAceites.split(",").map((item) => {
@@ -80,13 +81,13 @@ function FinalizarUtilizador () {
         }
     };
 
-    const onCreateNovoUtilizador = (userID, imagemUser, nomeUtilizador, biografia, pais, cidade) => {
+    const onCreateNovoUtilizador = (userId, imagemUser, nomeUtilizador, biografia, pais, cidade) => {
 
         let date = new Date();
         let timestamp = date.getTime();
         let newName = imagemUser.name + "_imagem_" + timestamp;
 
-        dispatch(createNovoUtilizador(userID, newName, nomeUtilizador, biografia, pais, cidade));
+        dispatch(createNovoUtilizador(userId, newName, nomeUtilizador, biografia, pais, cidade));
 
         const uploadTask = storage.ref(`imagensUtilizadores/${newName}`).put(imagemUser);
         uploadTask.on(
@@ -98,6 +99,8 @@ function FinalizarUtilizador () {
         });
     }
 
+    useAuthentication();
+
     if(isLoading) {
         return (
             <Loading />
@@ -108,7 +111,7 @@ function FinalizarUtilizador () {
         <Fundo>
             <Div>
                 <section className="m-0 p-0 w-100">
-                    <label for="imgPerfil" className="imagemPerfil mb-0"><ProfilePicture style={{backgroundImage: `url(${imagem ? imagem : imgPerfil})`}}/></label>
+                    <label for="imgPerfil" className="imagemPerfil mb-0"><ProfilePicture style={{backgroundImage: `url(${imagem ? imagem : Placeholder})`}}/></label>
                     <input className="form-control" id="imgPerfil" type="file" aria-label="Search" onChange={handleChange('imagemUser')}/>
                 </section>
                 <section className="text-center my-3">

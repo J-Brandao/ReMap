@@ -53,5 +53,20 @@ module.exports = {
 
     const edificioRef = await edificioCollectionRef.add(body);
     return {id: edificioRef.id, ...body}
-  }
+  },
+  update: async (id, body) => {
+    if (!id) {
+      throw new Error("An ID must be provided");
+    }
+
+    if (!body) {
+      throw new Error("A body must be provided");
+    }
+
+    const coll = getCollection("Utilizadores");
+    const doc = getDocumentFromCollection(coll, id);
+
+    await doc.update(body);
+    return true;
+  },
 }

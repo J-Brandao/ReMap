@@ -1,11 +1,11 @@
-import React, {useState}  from 'react';
-import { useDispatch } from 'react-redux';
+import React, {useState, useEffect}  from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import styled from 'styled-components';
 import Background from '../Images/Background2.svg';
 import imgPlaceholder from '../Images/Placeholder.jpg';
 import '../Styles/EditarUtilizador.css';
-import { createNovoUtilizador } from '../Store/Utilizadores/Actions';
+import { atualizaUtilizador, getUtilizadorById } from '../Store/Utilizadores/Actions';
 import { storage } from '../Firebase/FbConfig';
 import Loading from '../Components/Geral/Loading';
 import useAuthentication from '../Firebase/useAuthentication';
@@ -40,16 +40,38 @@ const ProfilePicture = styled.div`
 
 function EditarUtilizador () {
 
-    const { user, isLoading } = useAuth0();
+    const { user, isLoading, isAuthenticated } = useAuth0();
     const dispatch = useDispatch();
     const [valores, setValores] = useState({
         imagemUser: '',
         nomeUtilizador: '',
         biografia: '',
-        pais: 'Portugal',
-        cidade: 'Porto',
+        pais: '',
+        cidade: '',
     });
-    const [imagem, setImagem] = useState(null)
+    const [imagem, setImagem] = useState(null);
+    const ownUser = useSelector(({Utilizadores})=> Utilizadores.ownUser)
+    const isLoadingUser = useSelector(({Utilizadores}) => Utilizadores.isLoadingSelf)
+
+    useEffect(() => {
+        if (user && !isLoading && isAuthenticated) {
+            dispatch(getUtilizadorById(user.email))
+        }
+    },[user])
+    useEffect(() => {
+        if (!isLoadingUser) {
+            storage.ref('imagensUtilizadores').child(`${ownUser.imagemUser}`).getDownloadURL().then((url) => {
+                setValores({
+                    imagemUser: ownUser.imagemUser,
+                    nomeUtilizador: ownUser.nomeUtilizador,
+                    biografia: ownUser.biografia,
+                    pais: ownUser.pais,
+                    cidade: ownUser.cidade
+                })
+                setImagem(url)
+            })
+        }
+    },[isLoadingUser])
 
     const verificarFicheiro = (file) => {
         if (file.type && !arrayTiposAceites.includes(file.type)) {
@@ -78,27 +100,33 @@ function EditarUtilizador () {
         }
     };
 
-    const onCreateNovoUtilizador = (userID, imagemUser, nomeUtilizador, biografia, pais, cidade) => {
+    const onAtualizaUtilizador = (docId, userId, imagemUser, nomeUtilizador, biografia, pais, cidade) => {
 
-        let date = new Date();
-        let timestamp = date.getTime();
-        let newName = imagemUser.name + "_imagem_" + timestamp;
+        if(imagemUser.name) {
+            let date = new Date();
+            let timestamp = date.getTime();
+            let newName = imagemUser.name + "_imagem_" + timestamp;
+            console.log(imagemUser, newName)
 
-        dispatch(createNovoUtilizador(userID, newName, nomeUtilizador, biografia, pais, cidade));
+            dispatch(atualizaUtilizador(docId, userId, newName, nomeUtilizador, biografia, pais, cidade));
 
-        const uploadTask = storage.ref(`imagensUtilizadores/${newName}`).put(imagemUser);
-        uploadTask.on(
-        "state_changed",
-        snapshot => {
-        },
-        error => {
-            console.log(error);
-        });
+            const uploadTask = storage.ref(`imagensUtilizadores/${newName}`).put(imagemUser);
+            uploadTask.on(
+            "state_changed",
+            snapshot => {
+            },
+            error => {
+                console.log(error);
+            });
+        } else {
+            dispatch(atualizaUtilizador(docId, userId, imagemUser, nomeUtilizador, biografia, pais, cidade));
+        }
     }
 
     useAuthentication()
 
-    if(isLoading) {
+    console.log(isLoading, isLoadingUser)
+    if(isLoading || isLoadingUser) {
         return (
             <Loading />
         )
@@ -116,7 +144,8 @@ function EditarUtilizador () {
                         <span className="nomeForm">Nome<span className="obrigatorio">*</span></span>
                         <input 
                             className="form-control forms mb-3" 
-                            type="text" aria-label="name" 
+                            type="text" aria-label="name"
+                            defaultValue={valores.nomeUtilizador}
                             onChange={handleChange('nomeUtilizador')}/>
                     </span>
                     <span className="col-12 mb-2 m-0 p-0">
@@ -124,6 +153,7 @@ function EditarUtilizador () {
                         <textarea 
                             className="form-control forms mb-3" 
                             type="text" aria-label="biografia"
+                            defaultValue={valores.biografia}
                             onChange={handleChange('biografia')}/>
                     </span>
                     <span className="col-12 mb-2 m-0 p-0">
@@ -131,9 +161,10 @@ function EditarUtilizador () {
                         <select 
                             className="form-control forms mb-3" 
                             type="text" aria-label="pais"
+                            defaultValue={valores.pais}
                             onChange={handleChange('pais')}
                             placeholder="Selecione um país">
-                                <option value="" disabled selected>Selecione um país</option>
+                                <option value="" disabled>Selecione um país</option>
                                 <option value="Brasil">Brasil</option>
                                 <option value="Afeganistão">Afeganistão</option>
                                 <option value="África do Sul">África do Sul</option>
@@ -391,9 +422,10 @@ function EditarUtilizador () {
                         <select 
                             className="form-control forms mb-3" 
                             type="text" aria-label="cidade"
+                            defaultValue={valores.cidade}
                             onChange={handleChange('cidade')}
                             placeholder="Selecione um distrito">
-                                    <option value="" disabled selected>Selecione um Distrito</option>
+                                    <option value="" disabled>Selecione um Distrito</option>
                                     <option value="aveiro">Aveiro</option>
                                     <option value="beja">Beja</option>
                                     <option value="braga">Braga</option>
@@ -435,7 +467,7 @@ function EditarUtilizador () {
                             valores.nomeUtilizador !== '' && valores.cidade !== '' && valores.pais !== '' ?
                             <button 
                             className="botaoSubmeter mt-4"
-                            onClick={() => onCreateNovoUtilizador(user.email, valores.imagemUser, valores.nomeUtilizador, valores.biografia, valores.pais, valores.cidade)} 
+                            onClick={() => onAtualizaUtilizador(ownUser.id, user.email, valores.imagemUser, valores.nomeUtilizador, valores.biografia, valores.pais, valores.cidade)} 
                             >Confirmar</button>
                             :
                             <button 

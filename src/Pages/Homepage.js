@@ -49,7 +49,6 @@ function Homepage () {
     const ownUser = useSelector(({Utilizadores})=> Utilizadores.ownUser)
     const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading)
     const isLoadingUser = useSelector(({Utilizadores}) => Utilizadores.isLoadingSelf)
-    const userCircle = { fillColor: 'blue' }
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -104,7 +103,7 @@ function Homepage () {
             <div className="m-0 p-0 filtros">
                 <Filtros filtro={atualiza}/>
             </div>
-            <Menu coordenadas={coordenadas}/>
+            <Menu coordenadas={coordenadas} userId={ownUser.id}/>
             <Link className="m-0 p-0" to={`/perfil`}>
                 <ProfilePicture className="fotografia" style={{backgroundImage: `url(${imagem})`}}/>
             </Link>

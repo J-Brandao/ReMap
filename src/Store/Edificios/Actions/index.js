@@ -6,6 +6,10 @@ import {
     EDIFICIO_GET_START,
     EDIFICIO_GET_SUCCESS,
     EDIFICIO_GET_ERROR,
+
+    EDIFICIOS_PERFIL_GET_START,
+    EDIFICIOS_PERFIL_GET_SUCCESS,
+    EDIFICIOS_PERFIL_GET_ERROR,
   
     EDIFICIO_CREATE_START,
     EDIFICIO_CREATE_SUCCESS,
@@ -15,7 +19,7 @@ import {
     EDIFICIO_DELETE_SUCCESS,
     EDIFICIO_DELETE_ERROR,
   } from './Constants';
-  import { fetchEdificioList, fetchEdificio, createEdificio/*, deleteFavPokemon*/ } from "../../../Firebase/Pedidos"
+  import { fetchEdificioList, fetchEdificio, createEdificio, fetchEdificioForPerfil } from "../../../Firebase/Pedidos"
   
   export const getEdificioList = () => {
     return (dispatch) => {
@@ -35,6 +39,17 @@ import {
       fetchEdificio(id)
         .then(Edificio => {
           dispatch({ type: EDIFICIO_GET_SUCCESS, payload: Edificio })
+        })
+        .catch(() => dispatch({ type: EDIFICIO_GET_ERROR }))
+    }
+  }
+
+  export const getEdificioPerfil = (userId = '') => {
+    return (dispatch) => {
+      dispatch({ type: EDIFICIO_GET_START });
+      fetchEdificioForPerfil(userId)
+        .then(Edificios => {
+          dispatch({ type: EDIFICIO_GET_SUCCESS, payload: Edificios })
         })
         .catch(() => dispatch({ type: EDIFICIO_GET_ERROR }))
     }

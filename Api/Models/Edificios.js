@@ -17,6 +17,27 @@ module.exports = {
     
     return {id: doc.id, ...doc.data()};
   },
+  getForPerfil: async (id) =>  {
+    if (!id) {
+        throw new Error("Oops! An error occured!");
+    }
+
+    const db = getFirestore();
+    const edificioCollectionRef = db.collection("Edifícios");
+
+    const doc = await edificioCollectionRef.where('userId', '==', id).get();
+
+    if(doc.empty){
+      return false;
+    }
+
+    const edificios = doc.docs.map(doc => ({
+      ...doc.data(),
+      id: doc.id
+    }));
+    
+    return edificios;
+  },
   getAll: async () => {
     const db = getFirestore();
     const pokeCollectionRef = db.collection("Edifícios");

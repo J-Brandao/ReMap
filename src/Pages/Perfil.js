@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import '../Styles/Perfil.css'
-import IconeAmigo from '../Images/IconeAmigo.svg';
 import Placeholder from '../Images/Placeholder.jpg';
 import More from '../Images/More.svg';
 import Trofeus from '../Components/Perfil/Trofeus';
@@ -94,6 +93,10 @@ function Perfil() {
             })
         }  
     },[utilizador])
+
+    const abreMenu = id => {        
+        setMenu(id);
+    }
     
     if(isLoading || isLoadingUtilizador) {
         return (
@@ -162,7 +165,7 @@ function Perfil() {
 
            <Trofeus/>
 
-            <Interacoes userId={utilizador.id}/>
+           <Interacoes userId={utilizador.id}/>
         </Div>
     )
 }

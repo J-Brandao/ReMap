@@ -29,7 +29,8 @@ function Menu (props) {
                     to={{
                         pathname:'/novo',
                         state: {
-                            localizacao: [props.coordenadas.lat, props.coordenadas.long]
+                            localizacao: [props.coordenadas.lat, props.coordenadas.long],
+                            id: props.userId
                         }
                     }}>
                     <img src={MenuEdificio} className="imagemMenu"/>

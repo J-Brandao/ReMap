@@ -7,14 +7,25 @@ import imgCarousel2 from '../../Images/ImgCarousel2.jpg';
 import Perfil from '../../Images/Perfil.jpg';
 import SingleSugestao from '../PaginaEdificio/SingleSugestao'
 import SingleComentario from '../PaginaEdificio/SingleComentario'
+import { storage } from '../../Firebase/FbConfig';
 
 function DetalhesSeccao (props) {
 
     const [index, setIndex] = useState(0);
+    const [imagens, setImagens] = useState([]);
 
     const handleSelect = (selectedIndex, e) => {
         setIndex(selectedIndex);
       };
+    
+    useEffect(() => {
+        props.edificios.map(item => {
+            storage.ref('imagensEdificios').child(`${item[0].fotos[0]}`).getDownloadURL().then((url) => {
+                console.log(url)
+                setImagens([...imagens, url])
+            })
+        })
+    }, [])
 
     const CommentPicture = styled.div`
       margin: 0 auto;
@@ -31,20 +42,18 @@ function DetalhesSeccao (props) {
         <div className="row col-12 m-0 p-0">
             {props.tipo === 'Edifícios Adicionados' ?
             <Carousel className="imgCarousel mb-0" activeIndex={index} onSelect={handleSelect}>
-                <Carousel.Item>
-                    <img
-                        className="d-block imgCarousel"
-                        src={imgCarousel1}
-                        alt="First slide"
-                    />
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img
-                        className="d-block imgCarousel"
-                        src={imgCarousel2}
-                        alt="Second slide"
-                    />
-                </Carousel.Item>
+                {imagens.map(item => {
+                    console.log(item)
+                    return(
+                        <Carousel.Item>
+                            <img
+                                className="d-block imgCarousel"
+                                src={item}
+                                alt="First slide"
+                            />
+                        </Carousel.Item>
+                    )
+                })}
             </Carousel>
             :
                 props.tipo === 'Sugestões' ?

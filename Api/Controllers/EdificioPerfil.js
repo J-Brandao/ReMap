@@ -1,21 +1,23 @@
 const express = require("express");
-const { get, update } = require("../Models/Utilizadores");
-const checkJwt = require("../Utils/checkJwt");
+const { getForPerfil } = require("../Models/Edificios");
+//const checkJwt = require("../Utils/checkJwt");
 
 const router = express.Router();
 
 router.route("/:userId?")
 .get(async (req, res) => {
-    
-  const user = await get(req.params.userId);
-  if (!user) {
+
+  const edificio = await getForPerfil(req.params.userId);
+  
+  if (!edificio) {
     res.status(404);
     res.json(false);
     res.end();
     return
   }
+  
   res.status(200);
-  res.json(user);
+  res.json(edificio);
   res.end();
 })
 
