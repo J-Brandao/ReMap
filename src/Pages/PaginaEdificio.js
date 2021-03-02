@@ -87,10 +87,10 @@ function PaginaEdificio(props) {
 
     useEffect(() => {
         
-        if (edificio && !isLoadingEdificio && edificio[0].fotos) {
+        if (edificio && !isLoadingEdificio && edificio.fotos) {
             
-            edificio[0].fotos.map((item, index) => {
-                if (imagens.length < edificio[0].fotos.length) {
+            edificio.fotos.map((item, index) => {
+                if (imagens.length < edificio.fotos.length) {
                 storage.ref('imagensEdificios').child(item).getDownloadURL().then((url) => {
                     
                         const newArray = imagens
@@ -100,7 +100,7 @@ function PaginaEdificio(props) {
                     
                 });
             }
-                if (index === edificio[0].fotos.length - 1)
+                if (index === edificio.fotos.length - 1)
                     setTimeout(()=>setIsLoadingImages(false),300);
             })
         }
@@ -138,10 +138,10 @@ function PaginaEdificio(props) {
                         <img src={More}/>
                     </span>
                 </section>
-                <h2 className="nomeEdificio p-0 pb-2">{edificio[0].nomeEdificio}</h2>
+                <h2 className="nomeEdificio p-0 pb-2">{edificio.nomeEdificio}</h2>
                 <section className="col-12 m-0 p-0">
                         <h5 id="seccaoTitulo">Informações do Edifiício</h5>
-                        <p id="descricaoEdificio">{edificio[0].descricao}</p>
+                        <p id="descricaoEdificio">{edificio.descricao}</p>
                 </section>
                 <section className="row col-12 m-0 p-0">
                         <h5 id="seccaoTitulo">Galeria de Imagens</h5>
@@ -153,7 +153,7 @@ function PaginaEdificio(props) {
                         </span>
                 </section>
 
-                <Classificacao vandalismo={edificio[0].vandalismo} degradacao={edificio[0].degradacao} seguranca={edificio[0].seguranca} acesso={edificio[0].acesso}/>
+                <Classificacao vandalismo={edificio.vandalismo} degradacao={edificio.degradacao} seguranca={edificio.seguranca} acesso={edificio.acesso}/>
 
                 <section className="row col-12 m-0 p-0 mt-3">
                         <h5 id="seccaoTitulo">Crachás</h5>
@@ -186,9 +186,9 @@ function PaginaEdificio(props) {
             }
            
             {seccao === 'Sugestões' ?
-                <Sugestoes utilizador={ownUser.id} edificio={edificio[0].id} isLoading={isLoadingSugestoes} sugestoes={sugestoes}/>
+                <Sugestoes utilizador={ownUser.id} edificio={edificio.id} isLoading={isLoadingSugestoes} sugestoes={sugestoes}/>
                 :
-            <Comentarios utilizador={ownUser.id} edificio={edificio[0].id} isLoading={isLoadingComment} comments={commentData}/>
+            <Comentarios utilizador={ownUser.id} edificio={edificio.id} isLoading={isLoadingComment} comments={commentData}/>
            
                           
              
