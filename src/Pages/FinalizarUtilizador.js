@@ -111,7 +111,7 @@ function FinalizarUtilizador () {
         <Fundo>
             <Div>
                 <section className="m-0 p-0 w-100">
-                    <label for="imgPerfil" className="imagemPerfil mb-0"><ProfilePicture style={{backgroundImage: `url(${imagem ? imagem : imgPerfil})`}}/></label>
+                    <label for="imgPerfil" className="imagemPerfil mb-0"><ProfilePicture style={{backgroundImage: `url(${imagem ? imagem : Placeholder})`}}/></label>
                     <input className="form-control" id="imgPerfil" type="file" aria-label="Search" onChange={handleChange('imagemUser')}/>
                 </section>
                 <section className="text-center my-3">
