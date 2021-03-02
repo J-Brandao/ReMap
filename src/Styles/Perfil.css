@@ -21,8 +21,17 @@
 }
 
 .imgCarousel {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.divCarousel {
   height: 175px;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .textoComments {

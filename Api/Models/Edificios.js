@@ -27,10 +27,6 @@ module.exports = {
 
     const doc = await edificioCollectionRef.where('userId', '==', id).get();
 
-    if(doc.empty){
-      return false;
-    }
-
     const edificios = doc.docs.map(doc => ({
       ...doc.data(),
       id: doc.id

@@ -13,9 +13,6 @@ app.use("/edificios",
 app.use("/edificio",
   require("./Controllers/Edificio")
 );
-app.use("/edificioPerfil",
-  require("./Controllers/EdificioPerfil")
-);
 app.use("/utilizadores",
   require("./Controllers/Utilizadores")
 );
@@ -28,9 +25,6 @@ app.use("/friend",
 app.use("/friends",
   require("./Controllers/Friends")
 )
-app.use("/utilizadorPerfil",
-  require("./Controllers/UtilizadorPerfil")
-);
 app.use("/comentarios",
   require("./Controllers/Comentarios")
 );

@@ -4,11 +4,11 @@ export const fetchEdificioList = () =>
     .then(response => response.json())
 
 export const fetchEdificio = ( id ) =>
-  fetch(`http://localhost:3001/edificio/${id}`)
+  fetch(`http://localhost:3001/edificio/building/${id}`)
     .then(response => response.json())
 
 export const fetchEdificioForPerfil = ( userId ) =>
-  fetch(`http://localhost:3001/edificioPerfil/${userId}`)
+  fetch(`http://localhost:3001/edificio/perfil/${userId}`)
     .then(response => response.json())
 
 
@@ -38,15 +38,15 @@ export const fetchUtilizadoresList = () =>
     .then(response => response.json())
 
 export const fetchUtilizadorById = (userId) =>
-  fetch(`http://localhost:3001/utilizador/${userId}`)
+  fetch(`http://localhost:3001/utilizador/geral/${userId}`)
     .then(response => response.json())
 
 export const fetchUtilizadorForPerfil = (userId) =>
-  fetch(`http://localhost:3001/utilizadorPerfil/${userId}`)
+  fetch(`http://localhost:3001/utilizador/perfil/${userId}`)
     .then(response => response.json())
     
 export const updateUtilizador = (token, docID, userId, imagemUser, nomeUtilizador, biografia, pais, cidade, role) =>
-  fetch(`http://localhost:3001/utilizadorPerfil/${docID}`, {
+  fetch(`http://localhost:3001/utilizador/perfil/${docID}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
