@@ -7,7 +7,8 @@ import imgPerfil from '../Images/Perfil.jpg';
 import '../Styles/EditarUtilizador.css';
 import { createNovoUtilizador } from '../Store/Utilizadores/Actions';
 import { storage } from '../Firebase/FbConfig';
-import Loading from '../Components/Geral/Loading'
+import Loading from '../Components/Geral/Loading';
+import useAuthentication from '../Firebase/useAuthentication';
 
 const TiposAceites = 'image/x-png, image/png, image/jpg, image/jpeg';
 const arrayTiposAceites = TiposAceites.split(",").map((item) => {
@@ -97,6 +98,8 @@ function FinalizarUtilizador () {
             console.log(error);
         });
     }
+
+    useAuthentication();
 
     if(isLoading) {
         return (
