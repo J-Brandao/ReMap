@@ -19,12 +19,16 @@ function DetalhesSeccao (props) {
       };
     
     useEffect(() => {
-        props.edificios.map(item => {
-            storage.ref('imagensEdificios').child(`${item[0].fotos[0]}`).getDownloadURL().then((url) => {
+        if (props.edificios.length>0) {
+             props.edificios.map(item => {
+            
+            storage.ref('imagensEdificios').child(`${item.fotos[0]}`).getDownloadURL().then((url) => {
                 console.log(url)
                 setImagens([...imagens, url])
             })
         })
+        }
+       
     }, [])
 
     const CommentPicture = styled.div`

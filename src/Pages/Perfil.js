@@ -94,9 +94,7 @@ function Perfil() {
         }  
     },[utilizador])
 
-    const abreMenu = id => {        
-        setMenu(id);
-    }
+    
     
     if(isLoading || isLoadingUtilizador) {
         return (
