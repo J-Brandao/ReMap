@@ -44,7 +44,7 @@ function Interacoes ({userId}) {
     return(
         <>
         <section className="row col-12 m-0 p-0">
-            {console.log(EdificioList)}
+            {console.log(commentData, EdificioList, sugestoes)}
             <h5 className="col-12 p-0 mb-3" id="seccaoTitulo">As minhas interações</h5>
             <span onClick = {() => MudaSeccao('Edifícios Adicionados')} className="col-3 m-0 p-0 text-center">
                 {seccao === 'Edifícios Adicionados' ?

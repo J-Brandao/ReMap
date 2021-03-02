@@ -49,7 +49,7 @@ function DetalhesSeccao (props) {
                 {imagens.map(item => {
                     console.log(item)
                     return(
-                        <Carousel.Item>
+                        <Carousel.Item className="divCarousel">
                             <img
                                 className="d-block imgCarousel"
                                 src={item}
