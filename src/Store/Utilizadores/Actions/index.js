@@ -59,11 +59,12 @@ import {
     }
   }
 
-  export const atualizaUtilizador = (docID = '', userId = '', imagemUser = '', nomeUtilizador = '', biografia = '', pais = '', cidade = '', role='normal') => {
+export const atualizaUtilizador = (docID = '', userId = '', imagemUser = '', nomeUtilizador = '', biografia = '', pais = '', cidade = '', role = 'normal', active) => {
+    console.log(active)
     return (dispatch, getState) => {
       dispatch({ type: UTILIZADOR_UPDATE_START });
 
-      updateUtilizador(getState().token, docID, userId, imagemUser, nomeUtilizador, biografia, pais, cidade, role)
+      updateUtilizador(getState().token, docID, userId, imagemUser, nomeUtilizador, biografia, pais, cidade, role, active)
         .then(Info => {
           dispatch({ type: UTILIZADOR_UPDATE_SUCCESS, payload: Info })
         })
@@ -71,11 +72,11 @@ import {
     }
   }
   
-  export const createNovoUtilizador = (userId = '', imagemUser = '', nomeUtilizador = '', biografia = '', pais = '', cidade = '', role='normal') => {
+  export const createNovoUtilizador = (userId = '', imagemUser = '', nomeUtilizador = '', biografia = '', pais = '', cidade = '', role='normal', active=true) => {
     return (dispatch, getState) => {
       dispatch({ type: UTILIZADOR_CREATE_START });
 
-      createUtilizador(getState().token, userId, imagemUser, nomeUtilizador, biografia, pais, cidade, role)
+      createUtilizador(getState().token, userId, imagemUser, nomeUtilizador, biografia, pais, cidade, role, active)
         .then(Info => {
           dispatch({ type: UTILIZADOR_CREATE_SUCCESS, payload: Info })
         })

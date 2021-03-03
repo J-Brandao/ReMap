@@ -9,6 +9,7 @@ import { atualizaUtilizador, getUtilizadorById } from '../Store/Utilizadores/Act
 import { storage } from '../Firebase/FbConfig';
 import Loading from '../Components/Geral/Loading';
 import useAuthentication from '../Firebase/useAuthentication';
+import BackArrow from '../Components/Geral/BackArrow'
 
 const TiposAceites = 'image/x-png, image/png, image/jpg, image/jpeg';
 const arrayTiposAceites = TiposAceites.split(",").map((item) => {
@@ -136,6 +137,7 @@ function EditarUtilizador () {
         <Fundo>
             <Div>
                 <section className="m-0 p-0 w-100">
+                    <BackArrow isGoingBack={true} />
                     <label for="imgPerfil" className="imagemPerfil mb-0"><ProfilePicture style={{backgroundImage: `url(${imagem ? imagem : imgPlaceholder})`}}/></label>
                     <input className="form-control" id="imgPerfil" type="file" aria-label="Search" onChange={handleChange('imagemUser')}/>
                 </section>

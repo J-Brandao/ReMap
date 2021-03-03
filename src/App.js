@@ -14,7 +14,7 @@ import PerfilOutros from './Pages/PerfilOutros';
 import './Styles/Geral.css';
 import { Auth0Provider } from "@auth0/auth0-react";
 import Error404 from './Components/Geral/404';
-import Modal from './Components/Geral/ModalAdicaoEdificio';
+
 
 function App() {
   return (
