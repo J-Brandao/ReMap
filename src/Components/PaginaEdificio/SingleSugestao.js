@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import styled from "styled-components"
 import { fetchUtilizadorForPerfil } from '../../Firebase/Pedidos'
 import { storage } from '../../Firebase/FbConfig';
+import { Link } from 'react-router-dom';
 
 
 
@@ -18,7 +19,7 @@ const SugestaoPicture = styled.div`
       width: 70px;
     `; 
 
-function SingleSugestao({ sugestao }) {
+function SingleSugestao({ sugestao, tipo, utilizador }) {
   
   const [user, setUser] = useState({})
   const [imagem, setImagem] = useState({})
@@ -44,14 +45,40 @@ function SingleSugestao({ sugestao }) {
 
   return (
     <>
-            <span className="col-3 p-0">
-        <SugestaoPicture imagem={imagem}/>
-            </span>
-            <span className="col-9 pr-0">
-        <p className="NomeComments">{user.nomeUtilizador}</p>
-                <p className="textoComments">{sugestao.valor}</p>
-                    </span>
-                   </>
+    {tipo === 'perfil' ?
+      <>
+        <span className="col-3 p-0">
+          <SugestaoPicture imagem={imagem}/>
+        </span>
+        <span className="col-9 pr-0">
+          <p className="NomeComments">{user.nomeUtilizador}</p>
+          <p className="textoComments">{sugestao.valor}</p>
+        </span>
+      </>
+    :
+      <>
+        <span className="col-3 p-0">
+          <SugestaoPicture imagem={imagem}/>
+        </span>
+        <span className="col-9 pr-0">
+          {utilizador === user.userId ?
+            <Link className="m-0 p-0" to={{
+                pathname: `/perfil`,
+                state: {
+                  id: user.id
+                }}}>
+              <p className="NomeComments">{user.nomeUtilizador}</p>
+            </Link>
+            :
+            <Link className="m-0 p-0" to={`/mapeador/${user.id}`}>
+              <p className="NomeComments">{user.nomeUtilizador}</p>
+            </Link>
+          }
+          <p className="textoComments">{sugestao.valor}</p>
+        </span>
+      </>
+    }
+    </>
   )
 }
 

@@ -179,7 +179,7 @@ function Perfil(props) {
 
            <Trofeus/>
 
-           <Interacoes userId={utilizador.id} urlId={props.location.state.id}/>
+           <Interacoes userId={utilizador.id} urlId={props.location.state.id} utilizador={user.email}/>
             </Div>
             
             <ModalEliminarPerfil show={showModal} onHide={handleClose} onDelete={deleteProfile}/>

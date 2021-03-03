@@ -69,7 +69,7 @@ function DetalhesSeccao (props) {
             <>
                         {props.sugestoes && props.sugestoes.length>0 &&
                             props.sugestoes.map((sugestao, index) => {
-                        return <SingleSugestao sugestao={sugestao} />
+                        return <SingleSugestao sugestao={sugestao} tipo={'perfil'} utilizador={props.utilizador}/>
                     })
                     }
             </>
@@ -77,7 +77,7 @@ function DetalhesSeccao (props) {
             <>
                             {props.comentarios && props.comentarios.length>0 &&
                                 props.comentarios.map((comment, index) => {
-                           return <SingleComentario comment={comment} />
+                           return <SingleComentario comment={comment} tipo={'perfil'} utilizador={props.utilizador}/>
                          })
                     } 
             </>

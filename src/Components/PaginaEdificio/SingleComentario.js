@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import styled from "styled-components"
 import { fetchUtilizadorForPerfil } from '../../Firebase/Pedidos'
 import { storage } from '../../Firebase/FbConfig';
+import { Link } from 'react-router-dom';
 
 
 
@@ -18,7 +19,7 @@ const CommentPicture = styled.div`
       width: 70px;
     `; 
 
-function SingleComentario({ comment }) {
+function SingleComentario({ comment, tipo, utilizador }) {
   
   const [user, setUser] = useState({})
   const [imagem, setImagem] = useState({})
@@ -44,14 +45,40 @@ function SingleComentario({ comment }) {
 
   return (
     <>
-            <span className="col-3 p-0">
+    {tipo === 'perfil' ?
+    <>
+      <span className="col-3 p-0">
         <CommentPicture imagem={imagem}/>
-            </span>
-            <span className="col-9 pr-0">
+      </span>
+      <span className="col-9 pr-0">
         <p className="NomeComments">{user.nomeUtilizador}</p>
-                <p className="textoComments">{comment.valor}</p>
-                    </span>
-                   </>
+        <p className="textoComments">{comment.valor}</p>
+      </span>
+    </>
+    :
+    <>
+      <span className="col-3 p-0">
+        <CommentPicture imagem={imagem}/>
+      </span>
+      <span className="col-9 pr-0">
+        {utilizador === user.userId ?
+          <Link className="m-0 p-0" to={{
+              pathname: `/perfil`,
+              state: {
+                id: user.id
+              }}}>
+            <p className="NomeComments">{user.nomeUtilizador}</p>
+          </Link>
+          :
+          <Link className="m-0 p-0" to={`/mapeador/${user.id}`}>
+            <p className="NomeComments">{user.nomeUtilizador}</p>
+          </Link>
+        }
+        <p className="textoComments">{comment.valor}</p>
+      </span>
+    </>
+    }
+    </>
   )
 }
 

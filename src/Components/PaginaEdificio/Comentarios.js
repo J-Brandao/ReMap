@@ -59,7 +59,7 @@ function Comentarios (props) {
                 </span>
                     
                     { props.comments.map((comment, index)=>{
-                           return <SingleComentario comment={comment} />
+                           return <SingleComentario comment={comment} tipo={'edificio'} utilizador={props.userCheck} />
                          })
                     } 
                     </>)

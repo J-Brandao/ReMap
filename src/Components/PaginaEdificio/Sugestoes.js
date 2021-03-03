@@ -61,7 +61,7 @@ function Sugestoes (props) {
                     }
                 </span>
                     { props.sugestoes.map((sugestao, index) => {
-                        return <SingleSugestao sugestao={sugestao} />
+                        return <SingleSugestao sugestao={sugestao} tipo={'edificio'} utilizador={props.userCheck}/>
                     })
                     } </>)
             

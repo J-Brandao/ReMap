@@ -122,7 +122,7 @@ function PaginaEdificio(props) {
             <Div>
                 <section className="row col-12 m-0 p-0">
                     <BackArrow isGoingBack={true}/>
-                    <UserEdificio userId={edificio.userId} data={edificio.date}/>
+                    <UserEdificio userId={edificio.userId} data={edificio.date} userCheck={user.email}/>
                     <span className="col-2 text-right m-0 p-0">
                         <img src={More}/>
                     </span>
@@ -175,9 +175,9 @@ function PaginaEdificio(props) {
             }
            
             {seccao === 'Sugestões' ?
-                <Sugestoes utilizador={ownUser.id} edificio={edificio.id} isLoading={isLoadingSugestoes} sugestoes={sugestoes}/>
+                <Sugestoes utilizador={ownUser.id} edificio={edificio.id} isLoading={isLoadingSugestoes} sugestoes={sugestoes} userCheck={user.email}/>
                 :
-            <Comentarios utilizador={ownUser.id} edificio={edificio.id} isLoading={isLoadingComment} comments={commentData}/>
+            <Comentarios utilizador={ownUser.id} edificio={edificio.id} isLoading={isLoadingComment} comments={commentData} userCheck={user.email}/>
             }
         </div>
     )
