@@ -9,10 +9,10 @@ cursor:pointer;
 
 
 
-function BackArrow(){
+function BackArrow({isGoingBack}){
     const history = useHistory()
     return (
-    <Button className="col-2 m-0 p-0" onClick={()=>history.goBack()}>
+    <Button className="col-2 m-0 p-0" onClick={isGoingBack ? ()=>history.goBack() : ()=>history.push("/homepage")}>
         <img src={Back}/>
     </Button>
     )

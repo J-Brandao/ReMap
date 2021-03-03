@@ -11,7 +11,7 @@ function Header() {
   return (
             <Div>
                 <section className="row col-12 p-0 m-0">
-                    <BackArrow />
+              <BackArrow isGoingBack={false}/>
                     <span className="col-8 tituloPagina offset-2 text-center m-0 p-0">
                         Mapeadores
                     </span>

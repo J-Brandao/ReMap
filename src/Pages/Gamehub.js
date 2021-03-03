@@ -41,7 +41,7 @@ function Gamehub () {
             <Div>
                 <section className="row col-12 m-0 p-0">
                     <span className="col-2 m-0 p-0">
-                        <BackArrow/>
+                        <BackArrow isGoingBack={true}/>
                     </span>
                     <span className="col-8 tituloPagina offset-2 text-center m-0 p-0">
                         Gamehub

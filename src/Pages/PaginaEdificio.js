@@ -120,7 +120,7 @@ function PaginaEdificio(props) {
         <div className="m-0 p-0">
             <Div>
                 <section className="row col-12 m-0 p-0">
-                    <BackArrow />
+                    <BackArrow isGoingBack={true}/>
                     <span className="col-8 inicio row justify-content-center m-0 p-0">
                         <span className="col-4 p-0">
                             <ProfilePicture/>
