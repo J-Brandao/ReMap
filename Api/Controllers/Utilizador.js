@@ -1,5 +1,5 @@
 const express = require("express");
-const { get, update } = require("../Models/Utilizadores");
+const { get, update, getPerfil } = require("../Models/Utilizadores");
 const checkJwt = require("../Utils/checkJwt");
 
 const router = express.Router();

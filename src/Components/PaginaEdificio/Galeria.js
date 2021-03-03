@@ -10,24 +10,24 @@ function Galeria({fotos}) {
     const handleSelect = (selectedIndex, e) => {
         setIndex(selectedIndex);
     };
-    
-   
-
-
-
-
     return(
         <Carousel className="imgCarousel mb-0" activeIndex={index} onSelect={handleSelect}>
-            {fotos.map((item) => {
-                
+            {fotos.map((item, key) => {
                 return (
-                    <Carousel.Item>
-                <img
-                    className="d-block imgCarousel"
-                    src={imgCarousel1}
-                    alt="First slide"
-                />
-                </Carousel.Item>
+                    <>
+                    {index === key ?
+                    <Carousel.Item className="divCarousel">
+                        <img
+                            className="d-block imgCarousel"
+                            src={item}
+                            alt={`${key}`}
+                        />
+                    </Carousel.Item>
+                    :
+                    <></>
+                    }
+
+                    </>
                 )
             })}
         </Carousel>

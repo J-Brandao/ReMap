@@ -19,7 +19,7 @@ router.route("/building/:id?")
   res.json(edificio);
   res.end();
 })
-router.route("/perfil/:userId?")
+router.route("/profile/:userId?")
 .get(async (req, res) => {
 
   if (!req.params.userId) {
