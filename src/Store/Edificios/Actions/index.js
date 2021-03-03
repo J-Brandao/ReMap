@@ -46,12 +46,12 @@ import {
 
   export const getEdificioPerfil = (userId = '') => {
     return (dispatch) => {
-      dispatch({ type: EDIFICIO_GET_START });
+      dispatch({ type: EDIFICIOS_PERFIL_GET_START });
       fetchEdificioForPerfil(userId)
         .then(Edificios => {
-          dispatch({ type: EDIFICIO_GET_SUCCESS, payload: Edificios })
+          dispatch({ type: EDIFICIOS_PERFIL_GET_SUCCESS, payload: Edificios })
         })
-        .catch(() => dispatch({ type: EDIFICIO_GET_ERROR }))
+        .catch(() => dispatch({ type: EDIFICIOS_PERFIL_GET_ERROR }))
     }
   }
   

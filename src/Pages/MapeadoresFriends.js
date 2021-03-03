@@ -116,7 +116,7 @@ function Mapeadores() {
                             if (ownUser.id === userSingle.id) return null
                             if (userSingle.nomeFriend.includes(value))
                                 return (
-                                    <Link className="m-0 p-0" to={`/perfil/${userSingle.id}`}>
+                                    <Link className="m-0 p-0" to={`/mapeador/${userSingle.id}`}>
                                         <ListaUtilizadores tipo={"Amigos"} user={userSingle} />
                                     </Link>
                                 )
