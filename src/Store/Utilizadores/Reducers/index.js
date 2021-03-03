@@ -14,6 +14,7 @@ import {
   const initialState = {
     isLoading: true,
     isLoadingSelf: true,
+    isLoadingEdit: false,
     data: [],
     user: {},
     ownUser: {},
@@ -36,7 +37,7 @@ import {
       case UTILIZADOR_OWN_GET_SUCCESS:
         return { ...state, isLoadingSelf: false, ownUser: payload };
       case UTILIZADOR_UPDATE_START:
-        return {...state, isLoading:true}
+        return {...state, isLoadingEdit:true}
       case UTILIZADOR_UPDATE_SUCCESS:
       data = state.data.map((utilizador) => {
         if (utilizador.id !== payload.id) {
@@ -46,7 +47,7 @@ import {
         return payload;
       });
 
-      return { ...state, isLoading:false, data };
+      return { ...state, isLoadingEdit:false, data };
       case UTILIZADOR_CREATE_SUCCESS:
         return { ...state, data: [payload] };
       //case FAVLIST_DELETE_SUCCESS:

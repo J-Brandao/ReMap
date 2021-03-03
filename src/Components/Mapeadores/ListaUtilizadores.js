@@ -84,6 +84,8 @@ function ListaUtilizadores(props) {
     const dispatch = useDispatch()
     const [imagem, setImagem] = useState(null);
     const [showDropdown, setShowDropDown] = useState(false);
+    const isLoadingEdicao = useSelector(({Utilizadores})=>Utilizadores.isLoadingEdit) 
+
    
 
     useEffect(() => {
@@ -129,7 +131,7 @@ function ListaUtilizadores(props) {
         return (
          
             <span className="row col-12 m-0 mt-3 p-0 divUtilizador">
-                {console.log(showDropdown)}
+                {console.log(props.user.role)}
             <div className="col-3 p-0">
                 <ProfilePicture style={{backgroundImage: `url(${imagem !== null ? imagem : Placeholder})`}}/>
             </div>
@@ -149,7 +151,7 @@ function ListaUtilizadores(props) {
                             <span className="col-2 m-0 p-0 text-center">
                             <FriendButton friendId={props.user.id} userId={props.ownUser.id} friendName={props.user.nomeUtilizador} imageFriend={props.user.imagemUser} /></span>
                             <span className="col-2 m-0 p-0">
-                            {props.ownUser.role==="admin"&&
+                            {props.ownUser.role==="admin" &&
                                 <><Button onClick={showMenu}>
                                 <img className="m-0 w-100" src={More} alt="Mais opções" />
                                 </Button>

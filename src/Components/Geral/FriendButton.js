@@ -10,31 +10,31 @@ function FriendButton({ friendId, userId, friendName, imageFriend }) {
 
   const dispatch = useDispatch()
   const [isFriend, setIsFriend] = useState(false); 
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
+  const isLoadingCreation = useSelector(({Friends})=>Friends.isLoadingCreation)
   
   async function fetch(userId, friendId) {
+      setIsLoading(true);
       const response = await fetchFriends(userId, friendId);  
       setIsFriend(response)
       setIsLoading(false)
     }
 
   useEffect(() => { 
-    if (isLoading) {
+    
       fetch(userId, friendId)
-    }
-    if (!isLoading)
-      console.log(isFriend)
-  }, [friendId, userId, isLoading])
+    
+  }, [friendId, userId, isLoadingCreation])
+
 
   const onCreateFriend = (friendName, userId, friendId, imageFriend) => {
-     setIsLoading(true);
     dispatch(createFriend(friendName, userId, friendId, imageFriend))
    
     
   }
 
   const onDeleteFriend = (id) => {
-    setIsLoading(true);
+    
     dispatch(deleteFriend(id))
    
     
