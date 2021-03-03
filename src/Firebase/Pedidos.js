@@ -12,14 +12,14 @@ export const fetchEdificioForPerfil = ( userId ) =>
     .then(response => response.json())
 
 
-export const createEdificio = (token, userId, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo) =>
+export const createEdificio = (token, userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo) =>
   fetch(`http://localhost:3001/edificios`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     },
-    body: JSON.stringify({ userId, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo })
+    body: JSON.stringify({ userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo })
   }).then(response => console.log(response.json()));
 
 /*export const deleteFavPokemon = (token, id) =>

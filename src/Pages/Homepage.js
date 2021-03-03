@@ -43,7 +43,8 @@ function Homepage () {
     const [coordenadas, setCoordenadas] = useState({lat: '0', long: '0'});
     const [imagem, setImagem] = useState(null)
     const [filtros, setFiltros] = useState({
-        proximidade: false
+        proximidade: false,
+        valor: 0
     })
     const EdificioList = useSelector(({ Edificios }) => Edificios.data);
     const ownUser = useSelector(({Utilizadores})=> Utilizadores.ownUser)
@@ -73,8 +74,14 @@ function Homepage () {
 
    
     
-    const atualiza = tipo => {
-        filtros[tipo] = !filtros[tipo];
+    const atualiza = (tipo, value) => {
+        if(filtros.valor === 0) {
+            filtros.valor = value;
+            filtros[tipo] = !filtros[tipo];
+        } else {
+            filtros.valor = 0;
+            filtros[tipo] = !filtros[tipo];
+        }
         setFiltros({...filtros})
     }
 
@@ -101,7 +108,7 @@ function Homepage () {
             {hasUser() &&
             history.push("/finalizar")}
             <div className="m-0 p-0 filtros">
-                <Filtros filtro={atualiza}/>
+                <Filtros filtro={atualiza} valorFiltro={filtros.valor}/>
             </div>
             <Menu coordenadas={coordenadas} userId={ownUser.id}/>
             <Link className="m-0 p-0" to={{
@@ -123,7 +130,7 @@ function Homepage () {
                     <>
                         {EdificioList.map((edificio, key) => (
                             <>
-                            {edificio.localizacao[0] <= coordenadas.lat + 0.01 && edificio.localizacao[0] >= coordenadas.lat - 0.01 && edificio.localizacao[1] <= coordenadas.long + 0.01 && edificio.localizacao[1] >= coordenadas.long - 0.01 ?
+                            {edificio.localizacao[0] <= coordenadas.lat + filtros.valor && edificio.localizacao[0] >= coordenadas.lat - filtros.valor && edificio.localizacao[1] <= coordenadas.long + filtros.valor && edificio.localizacao[1] >= coordenadas.long - filtros.valor ?
                                 <Marker key={key} position={[edificio.localizacao[0], edificio.localizacao[1]]}>
                                     <Popup position={[edificio.localizacao[0], edificio.localizacao[1]]}>
                                         <Link to={`/edificio/${edificio.id}`}><h3>{edificio.nomeEdificio}</h3></Link>
