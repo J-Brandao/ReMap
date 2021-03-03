@@ -67,7 +67,7 @@ function PaginaEdificio(props) {
     const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoadingSingle);
     const sugestoes = useSelector(({ Sugestoes }) => Sugestoes.data);
     const isLoadingSugestoes = useSelector(({Sugestoes})=> Sugestoes.isLoading)
-
+    
     const [imagens, setImagens] = useState([]);
     const [isLoadingImages, setIsLoadingImages] = useState(true);
 
@@ -87,20 +87,20 @@ function PaginaEdificio(props) {
     }, [user])
 
     useEffect(() => {
-        
         if (edificio && !isLoadingEdificio && edificio.fotos) {
-            
-            edificio.fotos.map((item, index) => {
-                if (imagens.length < edificio.fotos.length) {
-                storage.ref('imagensEdificios').child(item).getDownloadURL().then((url) => {
-                    const newArray = imagens
-                    newArray.push(url)
-                    setImagens(newArray)
-                });
+            if(edificio.id === props.match.params.id){
+                edificio.fotos.map((item, index) => {
+                    if (imagens.length < edificio.fotos.length) {
+                    storage.ref('imagensEdificios').child(item).getDownloadURL().then((url) => {
+                        const newArray = imagens
+                        newArray.push(url)
+                        setImagens(newArray)
+                    });
+                }
+                    if (index === edificio.fotos.length - 1)
+                        setTimeout(()=>setIsLoadingImages(false),300);
+                })
             }
-                if (index === edificio.fotos.length - 1)
-                    setTimeout(()=>setIsLoadingImages(false),300);
-            })
         }
     }, [edificio])
 
