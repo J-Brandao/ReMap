@@ -117,7 +117,7 @@ function Homepage () {
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Marker position={[coordenadas.lat, coordenadas.long]} icon={getIcon(40)}/>
+                
                 {
                     filtros.proximidade === true ?
                     <>
@@ -147,7 +147,10 @@ function Homepage () {
                     ))}
                     </>
                 }
+                <Marker position={[coordenadas.lat, coordenadas.long]} icon={getIcon(40)}/>
+                
             </MapContainer>
+
         </div>
     )
 }
