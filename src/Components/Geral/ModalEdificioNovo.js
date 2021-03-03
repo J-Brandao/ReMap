@@ -20,15 +20,14 @@ function ModalEliminarPerfil (props) {
     >
       <Modal.Header>
         <Modal.Title id="contained-modal">
-        Perfil criado!
+        Edifício adicionado!
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <h4></h4>
         <p>
-          Agora faz parte da comunidade ReMap! Explore todas as funcionalidades da aplicação e participe na nossa comunidade!
+          Obrigado por ter adicionado mais um edifício ao ReMap!
         </p>
-        
 <button style={{
 position: 'absolute',
 bottom:10,

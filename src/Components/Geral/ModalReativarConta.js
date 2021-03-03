@@ -20,23 +20,30 @@ function ModalEliminarPerfil (props) {
     >
       <Modal.Header>
         <Modal.Title id="contained-modal">
-        Perfil criado!
+        Deseja reativar a sua conta?
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <h4></h4>
-        <p>
-          Agora faz parte da comunidade ReMap! Explore todas as funcionalidades da aplicação e participe na nossa comunidade!
+        <p
+        style={{
+display: 'flex',
+alignItems: 'center',
+justifyContent: 'center',
+}} >
+        <Button variant="warning" onClick={props.onHide}>Sim</Button>
         </p>
-        
-<button style={{
-position: 'absolute',
-bottom:10,
-left:284,
-}}class="botaoFotografia" onClick={props.onHide}>Confirmar</button>
-      </Modal.Body>
-      
-      
+        <p
+        style={{
+display: 'flex',
+alignItems: 'center',
+justifyContent: 'center',
+color: '#cc0000',
+}} >
+        <Button style={{
+borderColor:'#34495e',
+}}variant="outline-danger" onClick={props.onHide}>Não</Button></p>
+          </Modal.Body>
       
     </Modal>
   
