@@ -37,7 +37,8 @@ function MapeadoresCom() {
   const [value, setValue] = useState("");
   const {isLoading, user} = useAuth0()
   const UtilizadoresList = useSelector(({Utilizadores}) => Utilizadores.data);
-  const isLoadingUtilizadores = useSelector(({ Utilizadores }) => Utilizadores.isLoading)
+    const isLoadingUtilizadores = useSelector(({ Utilizadores }) => Utilizadores.isLoading)
+const isLoadingEdicao = useSelector(({Utilizadores})=>Utilizadores.isLoadingEdit) 
   const isLoadingSelf = useSelector(({ Utilizadores }) => Utilizadores.isLoadingSelf)
   const ownUser = useSelector(({Utilizadores})=> Utilizadores.ownUser)
   const dispatch = useDispatch();
@@ -61,9 +62,12 @@ const changeSection = () => {
         }
     } 
         
-}, [isLoading])
+  }, [isLoading, isLoadingEdicao])
+    //add atualizar dados
 
-if(isLoading || isLoadingSelf || isLoadingUtilizadores) {
+    
+
+if(isLoading || isLoadingSelf || isLoadingUtilizadores || isLoadingEdicao) {
   return (
       <Loading/>
   )
@@ -96,7 +100,7 @@ if(isLoading || isLoadingSelf || isLoadingUtilizadores) {
                 if (userSingle.nomeUtilizador.includes(value))
                 return (
                     <div className="m-0 p-0">
-                        <ListaUtilizadores ownUser={ownUser} tipo={"Comunidade"} user={userSingle} />
+                        <ListaUtilizadores  ownUser={ownUser} tipo={"Comunidade"} user={userSingle} />
                     </div>
                 )
                     })}
