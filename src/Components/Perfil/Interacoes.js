@@ -42,7 +42,7 @@ function Interacoes ({userId, urlId}) {
     const MudaSeccao = id => {
         setSeccao(id);
     }
-    
+
     if (isLoadingSugestoes || isLoadingComment || isLoadingEdificio) {
         return null;
     }
