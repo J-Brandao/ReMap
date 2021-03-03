@@ -2,7 +2,7 @@ import React from "react"
 import styled from 'styled-components'
 import Broken from '../../Images/BrokenHouse.svg';
 import Background from '../../Images/Background2.svg';
-import Logo from '../../Images/check.png';
+//import Logo from '../../Images/check.svg'
 import {Modal,Button} from "react-bootstrap"
 
 
@@ -39,7 +39,7 @@ function ModalEliminarPerfil (props) {
     alignItems: 'center',
     justifyContent: 'center',
 }} >
-            <Button variant="danger" onClick={props.onHide}>Sim</Button></p>
+            <Button variant="danger" onClick={props.onDelete}>Sim</Button></p>
               </Modal.Body>
           
         </Modal>

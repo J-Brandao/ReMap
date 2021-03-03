@@ -98,9 +98,19 @@ function AdicionarEdificio (props) {
     const onCreateFavEdificio = (userId, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo) => {
 
         let arrayNomes = [];
+
+        //Cria data
+        let date = new Date();
+        let newDate = new Date(date.toDateString());
+        let dia  = newDate.getDate().toString();
+        let diaF = (dia.length == 1) ? '0'+dia : dia;
+        let mes  = (newDate.getMonth()+1).toString();
+        let mesF = (mes.length == 1) ? '0'+mes : mes;
+        let anoF = newDate.getFullYear();
+        let dataFinal = `${diaF}/${mesF}/${anoF}`;
+        
         //Cria nome único para a imagem
         fotos.map(imagem => {
-            let date = new Date();
             let timestamp = date.getTime();
             let newName = imagem.name + "_imagem_" + timestamp;
             arrayNomes.push(newName);
@@ -117,7 +127,7 @@ function AdicionarEdificio (props) {
         }) 
 
         //Envia Informação para a firebase
-        dispatch(createNovoEdificio(userId, nomeEdificio, descricao, arrayNomes, localizacao, degradacao, acesso, seguranca, vandalismo));
+        dispatch(createNovoEdificio(userId, dataFinal, nomeEdificio, descricao, arrayNomes, localizacao, degradacao, acesso, seguranca, vandalismo));
     }
 
     useAuthentication();
@@ -202,7 +212,7 @@ function AdicionarEdificio (props) {
                     </span>
                 </form>
                 <span className="col-12 text-right m-0 p-0">
-                    {valores.nomeEdificio !== '' && valores.descricao !== '' && valores.localizacao !== '' ?
+                    {valores.nomeEdificio !== '' && valores.descricao !== '' && valores.localizacao !== '' && valores.fotos.length > 0 ?
                         <button 
                             className="botaoSubmeter mt-4" 
                             onClick={() => onCreateFavEdificio(props.location.state.id, valores.nomeEdificio, valores.descricao, valores.fotos, valores.localizacao, valores.degradacao, valores.acesso, valores.seguranca, valores.vandalismo)}

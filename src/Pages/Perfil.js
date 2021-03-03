@@ -7,11 +7,13 @@ import Trofeus from '../Components/Perfil/Trofeus';
 import Interacoes from '../Components/Perfil/Interacoes';
 import BackArrow from '../Components/Geral/BackArrow';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUtilizadorById } from '../Store/Utilizadores/Actions';
+import { getUtilizadorById, atualizaUtilizador } from '../Store/Utilizadores/Actions';
 import { useAuth0 } from '@auth0/auth0-react';
 import Loading from '../Components/Geral/Loading';
 import { storage } from '../Firebase/FbConfig';
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom"
+import ModalEliminarPerfil from "../Components/Modal/ModalEliminarPerfil"
+import useAuthentication from "../Firebase/useAuthentication"
 
 const Div = styled.div`
     margin: 40px 30px 40px 30px;
@@ -73,6 +75,8 @@ margin:0;
 
 function Perfil(props) {
 
+
+    const [showModal, setShowModal] = useState(false);
     const { user, isLoading, isAuthenticated, logout } = useAuth0();
     const [imagem, setImagem] = useState(null)
     const [showDropdown, setShowDropDown] = useState(false);
@@ -93,7 +97,7 @@ function Perfil(props) {
             })
         }  
     },[utilizador])
-
+    useAuthentication();
     
     
     if(isLoading || isLoadingUtilizador) {
@@ -115,8 +119,21 @@ function Perfil(props) {
         history.push("/editar");
 
     }
-    const _deleteProfile = () => {
-        console.log("eliminar")
+    const handleShow = () => {
+        setShowModal(true);
+        setShowDropDown(false);
+    }
+
+    const handleClose = () => {
+        console.log("fechar")
+        setShowModal(false);
+
+    }
+
+    const deleteProfile = () => {
+        setShowModal(false);
+        dispatch(atualizaUtilizador(utilizador.id, utilizador.userId, utilizador.imagemUser, utilizador.nomeUtilizador, utilizador.biografia, utilizador.pais, utilizador.cidade, utilizador.role, false))
+        logout();
     }
     
     const renderOptions = () => {
@@ -128,7 +145,7 @@ function Perfil(props) {
                 <Line/>
                 <ButtonOptions onClick={_logout}>Logout</ButtonOptions>
                 <Line />
-                <ButtonOptions onClick={_deleteProfile} eliminar> Eliminar conta </ButtonOptions>
+                <ButtonOptions onClick={handleShow} eliminar> Eliminar conta </ButtonOptions>
                             
         
             </DropDown>
@@ -136,7 +153,7 @@ function Perfil(props) {
     }
 
     return (
-        
+        <>
         <Div>
            <section className="row col-12 m-0 p-0">
                 <BackArrow isGoingBack={true}/>
@@ -163,7 +180,10 @@ function Perfil(props) {
            <Trofeus/>
 
            <Interacoes userId={utilizador.id} urlId={props.location.state.id}/>
-        </Div>
+            </Div>
+            
+            <ModalEliminarPerfil show={showModal} onHide={handleClose} onDelete={deleteProfile}/>
+        </>
     )
 }
 

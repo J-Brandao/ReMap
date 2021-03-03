@@ -12,14 +12,14 @@ export const fetchEdificioForPerfil = ( userId ) =>
     .then(response => response.json())
 
 
-export const createEdificio = (token, userId, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo) =>
+export const createEdificio = (token, userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo) =>
   fetch(`http://localhost:3001/edificios`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     },
-    body: JSON.stringify({ userId, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo })
+    body: JSON.stringify({ userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo })
   }).then(response => console.log(response.json()));
 
 /*export const deleteFavPokemon = (token, id) =>
@@ -45,24 +45,24 @@ export const fetchUtilizadorForPerfil = (userId) =>
   fetch(`http://localhost:3001/utilizador/perfil/${userId}`)
     .then(response => response.json())
     
-export const updateUtilizador = (token, docID, userId, imagemUser, nomeUtilizador, biografia, pais, cidade, role) =>
+export const updateUtilizador = (token, docID, userId, imagemUser, nomeUtilizador, biografia, pais, cidade, role, active) =>
   fetch(`http://localhost:3001/utilizador/perfil/${docID}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     },
-    body: JSON.stringify({ userId, imagemUser, nomeUtilizador, biografia, pais, cidade, role })
+    body: JSON.stringify({ userId, imagemUser, nomeUtilizador, biografia, pais, cidade, role, active })
   }).then(response => response.json());
   
-export const createUtilizador = (token, userId, imagemUser, nomeUtilizador, biografia, pais, cidade, role) =>
+export const createUtilizador = (token, userId, imagemUser, nomeUtilizador, biografia, pais, cidade, role, active) =>
 fetch(`http://localhost:3001/utilizadores`, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${token}`
   },
-  body: JSON.stringify({ userId, imagemUser, nomeUtilizador, biografia, pais, cidade, role })
+  body: JSON.stringify({ userId, imagemUser, nomeUtilizador, biografia, pais, cidade, role, active })
 }).then(response => response.json());
 
 //AMIGOS
