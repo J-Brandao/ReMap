@@ -108,7 +108,6 @@ function Homepage () {
             {hasUser() &&
             history.push("/finalizar")}
             <div className="m-0 p-0 filtros">
-                {console.log(filtros)}
                 <Filtros filtro={atualiza} valorFiltro={filtros.valor}/>
             </div>
             <Menu coordenadas={coordenadas} userId={ownUser.id}/>

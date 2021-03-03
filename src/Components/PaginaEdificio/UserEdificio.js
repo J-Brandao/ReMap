@@ -16,7 +16,7 @@ const ProfilePicture = styled.div`
     width: 60px;
 `;
 
-function UserEdificio({userId}) {
+function UserEdificio({userId, data}) {
     const dispatch = useDispatch();
     const [imagem, setImagem] = useState(null);
     const utilizador = useSelector(({Utilizadores})=> Utilizadores.user);
@@ -46,7 +46,7 @@ function UserEdificio({userId}) {
             </span>
             <span className="col-8 p-0 pl-1">
                 <p className="nomeUser">{utilizador.nomeUtilizador}</p>
-                <p className="extraInfoUser">Inserido em: 02/01/2021</p>
+                <p className="extraInfoUser">Inserido em: {data}</p>
                 <p className="extraInfoUser">Niv. 38</p>
             </span>
         </span>        

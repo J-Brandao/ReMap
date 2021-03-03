@@ -122,7 +122,7 @@ function PaginaEdificio(props) {
             <Div>
                 <section className="row col-12 m-0 p-0">
                     <BackArrow isGoingBack={true}/>
-                    <UserEdificio userId={edificio.userId}/>
+                    <UserEdificio userId={edificio.userId} data={edificio.date}/>
                     <span className="col-2 text-right m-0 p-0">
                         <img src={More}/>
                     </span>
