@@ -8,10 +8,13 @@ import Trofeus from '../Components/Perfil/Trofeus';
 import Interacoes from '../Components/Perfil/Interacoes';
 import BackArrow from '../Components/Geral/BackArrow';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUtilizadorForPerfil } from '../Store/Utilizadores/Actions';
+import { getUtilizadorForPerfil, getUtilizadorById } from '../Store/Utilizadores/Actions';
 import { useAuth0 } from '@auth0/auth0-react';
 import Loading from '../Components/Geral/Loading';
 import { storage } from '../Firebase/FbConfig';
+import FriendButton from '../Components/Geral/FriendButton';
+import useAuthentication from '../Firebase/useAuthentication';
+
 
 const Div = styled.div`
     margin: 40px 30px 40px 30px;
@@ -32,13 +35,22 @@ function PerfilOutros(props) {
 
     const { user, isLoading, isAuthenticated } = useAuth0();
     const [imagem, setImagem] = useState(null)
-    const utilizador = useSelector(({Utilizadores})=> Utilizadores.user)
+    const utilizador = useSelector(({ Utilizadores }) => Utilizadores.user)
+    const isLoadingSelf = useSelector(({ Utilizadores }) => Utilizadores.isLoadingSelf)
+    const ownUser = useSelector(({Utilizadores})=> Utilizadores.ownUser)
     const dispatch = useDispatch();
 
     useEffect(() => {
         setImagem(null)
         dispatch(getUtilizadorForPerfil(props.match.params.id))    
-    }, [])
+
+        if (Object.keys(ownUser).length === 0) {
+            if (!isLoading && user) {
+                dispatch(getUtilizadorById(user.email))
+            }
+        } 
+    }, [isLoading])
+    useAuthentication()
     useEffect(() => {
         if (utilizador && !isLoading && isAuthenticated) {
             storage.ref('imagensUtilizadores').child(`${utilizador.imagemUser}`).getDownloadURL().then((url) => {
@@ -48,7 +60,8 @@ function PerfilOutros(props) {
         
     },[utilizador])
     
-    if(isLoading) {
+    if (isLoading || isLoadingSelf) {
+        console.log(isLoadingSelf)
         return (
             <Loading/>
         )
@@ -64,7 +77,7 @@ function PerfilOutros(props) {
                     <p id="DataUser">Membro desde 2021</p>
                 </div>
                 <span className="col-2 text-right m-0 p-0">
-                    <img src={user.email === utilizador.userId ? More : IconeAmigo}/>
+                <FriendButton friendId={utilizador.id} userId={ownUser.id} friendName={utilizador.nomeUtilizador} imageFriend={utilizador.imagemUser} />
                 </span>
            </section>
            <section className="row col-12 m-0 p-0">
