@@ -57,7 +57,7 @@ function PerfilOutros(props) {
     return(
         <Div>
            <section className="row col-12 m-0 p-0">
-                <BackArrow />
+                <BackArrow isGoingBack={true}/>
                 <div className="col-8 text-center m-0 p-0">
                     <ProfilePicture style={{backgroundImage:`url(${imagem !== null ? imagem : Placeholder})`}}/>
                     <h5 id="NomeUser">{utilizador.nomeUtilizador}</h5>  

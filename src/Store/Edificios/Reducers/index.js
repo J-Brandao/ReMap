@@ -11,7 +11,9 @@ import {
   
   const initialState = {
     isLoading: true,
-    data: []
+    isLoadingSingle:true,
+    data: [],
+    dataSingle: {},
   };
   
   export default (state = initialState, { type, payload }) => {
@@ -25,7 +27,7 @@ import {
       case EDIFICIO_GET_START:
         return { ...state, isLoading: true };
       case EDIFICIO_GET_SUCCESS:
-        return { ...state, data: payload, isLoading: false };
+        return { ...state, dataSingle: payload, isLoadingSingle: false };
       case EDIFICIOS_PERFIL_GET_START:
         return { ...state, isLoading: true };
       case EDIFICIOS_PERFIL_GET_SUCCESS:

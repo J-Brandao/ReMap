@@ -18,6 +18,7 @@ import {
 const initialState = {
   isLoading: true,
   isLoadingFriendship: true,
+  isLoadingCreation: false,
   dataArray: [],
   data: false,
 }
@@ -37,13 +38,13 @@ export default (state = initialState, { type, payload }) => {
     case FRIEND_GET_ERROR:
       return {...state, isLoadingFriendship: false, data:payload}
     case FRIEND_CREATE_START:
-      return { ...state, isLoading: true }
+      return { ...state, isLoadingCreation: true }
     case FRIEND_CREATE_SUCCESS:
-      return { ...state, isLoading: false, data: payload }
+      return { ...state, isLoadingCreation: false, data: payload }
     case FRIEND_DELETE_START:
-      return { ...state, isLoading: true }
+      return { ...state, isLoadingCreation: true }
     case FRIEND_DELETE_SUCCESS:
-      return { ...state, isLoading: false, data: payload }
+      return { ...state, isLoadingCreation: false, data: payload }
     default:
       return state;
   }

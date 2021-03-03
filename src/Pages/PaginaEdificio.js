@@ -20,6 +20,7 @@ import Sugestoes from '../Components/PaginaEdificio/Sugestoes';
 import { storage } from '../Firebase/FbConfig';
 import { getComentariosListByBuilding } from '../Store/Comentarios/Actions';
 import { getSugestoesListByBuilding } from '../Store/Sugestoes/Actions';
+import UserEdificio from '../Components/PaginaEdificio/UserEdificio';
 
 
 const Div = styled.div`
@@ -62,8 +63,8 @@ function PaginaEdificio(props) {
     const [seccao, setSeccao] = useState('Sugestões');
     const ownUser = useSelector(({Utilizadores})=> Utilizadores.ownUser);
     const isLoadingUser = useSelector(({Utilizadores}) => Utilizadores.isLoadingSelf);
-    const edificio = useSelector(({ Edificios }) => Edificios.data );
-    const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading);
+    const edificio = useSelector(({ Edificios }) => Edificios.dataSingle );
+    const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoadingSingle);
     const sugestoes = useSelector(({ Sugestoes }) => Sugestoes.data);
     const isLoadingSugestoes = useSelector(({Sugestoes})=> Sugestoes.isLoading)
 
@@ -120,24 +121,15 @@ function PaginaEdificio(props) {
         <div className="m-0 p-0">
             <Div>
                 <section className="row col-12 m-0 p-0">
-                    <BackArrow />
-                    <span className="col-8 inicio row justify-content-center m-0 p-0">
-                        <span className="col-4 p-0">
-                            <ProfilePicture/>
-                        </span>
-                        <span className="col-8 p-0 pl-1">
-                            <p className="nomeUser">Pedro Alves</p>
-                            <p className="extraInfoUser">Inserido em: 02/01/2021</p>
-                            <p className="extraInfoUser">Niv. 38</p>
-                        </span>
-                    </span>
+                    <BackArrow isGoingBack={true}/>
+                    <UserEdificio userId={edificio.userId}/>
                     <span className="col-2 text-right m-0 p-0">
                         <img src={More}/>
                     </span>
                 </section>
                 <h2 className="nomeEdificio p-0 pb-2">{edificio.nomeEdificio}</h2>
                 <section className="col-12 m-0 p-0">
-                        <h5 id="seccaoTitulo">Informações do Edifiício</h5>
+                        <h5 id="seccaoTitulo">Informações do Edifício</h5>
                         <p id="descricaoEdificio">{edificio.descricao}</p>
                 </section>
                 <section className="row col-12 m-0 p-0">
