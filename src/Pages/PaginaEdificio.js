@@ -137,7 +137,7 @@ function PaginaEdificio(props) {
                 </section>
                 <h2 className="nomeEdificio p-0 pb-2">{edificio.nomeEdificio}</h2>
                 <section className="col-12 m-0 p-0">
-                        <h5 id="seccaoTitulo">Informações do Edifiício</h5>
+                        <h5 id="seccaoTitulo">Informações do Edifício</h5>
                         <p id="descricaoEdificio">{edificio.descricao}</p>
                 </section>
                 <section className="row col-12 m-0 p-0">
