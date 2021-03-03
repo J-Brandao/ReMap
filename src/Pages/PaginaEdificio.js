@@ -20,6 +20,7 @@ import Sugestoes from '../Components/PaginaEdificio/Sugestoes';
 import { storage } from '../Firebase/FbConfig';
 import { getComentariosListByBuilding } from '../Store/Comentarios/Actions';
 import { getSugestoesListByBuilding } from '../Store/Sugestoes/Actions';
+import UserEdificio from '../Components/PaginaEdificio/UserEdificio';
 
 
 const Div = styled.div`
@@ -121,16 +122,7 @@ function PaginaEdificio(props) {
             <Div>
                 <section className="row col-12 m-0 p-0">
                     <BackArrow isGoingBack={true}/>
-                    <span className="col-8 inicio row justify-content-center m-0 p-0">
-                        <span className="col-4 p-0">
-                            <ProfilePicture/>
-                        </span>
-                        <span className="col-8 p-0 pl-1">
-                            <p className="nomeUser">Pedro Alves</p>
-                            <p className="extraInfoUser">Inserido em: 02/01/2021</p>
-                            <p className="extraInfoUser">Niv. 38</p>
-                        </span>
-                    </span>
+                    <UserEdificio userId={edificio.userId}/>
                     <span className="col-2 text-right m-0 p-0">
                         <img src={More}/>
                     </span>
