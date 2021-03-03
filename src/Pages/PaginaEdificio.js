@@ -62,8 +62,8 @@ function PaginaEdificio(props) {
     const [seccao, setSeccao] = useState('Sugestões');
     const ownUser = useSelector(({Utilizadores})=> Utilizadores.ownUser);
     const isLoadingUser = useSelector(({Utilizadores}) => Utilizadores.isLoadingSelf);
-    const edificio = useSelector(({ Edificios }) => Edificios.data );
-    const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading);
+    const edificio = useSelector(({ Edificios }) => Edificios.dataSingle );
+    const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoadingSingle);
     const sugestoes = useSelector(({ Sugestoes }) => Sugestoes.data);
     const isLoadingSugestoes = useSelector(({Sugestoes})=> Sugestoes.isLoading)
 
