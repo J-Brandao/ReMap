@@ -71,7 +71,7 @@ margin:0;
 
 `
 
-function Perfil() {
+function Perfil(props) {
 
     const { user, isLoading, isAuthenticated, logout } = useAuth0();
     const [imagem, setImagem] = useState(null)
@@ -138,7 +138,6 @@ function Perfil() {
     return (
         
         <Div>
-            {console.log(showDropdown)}
            <section className="row col-12 m-0 p-0">
                 <BackArrow />
                 <div className="col-8 text-center m-0 p-0">
@@ -163,7 +162,7 @@ function Perfil() {
 
            <Trofeus/>
 
-           <Interacoes userId={utilizador.id}/>
+           <Interacoes userId={utilizador.id} urlId={props.location.state.id}/>
         </Div>
     )
 }

@@ -90,8 +90,13 @@ if(isLoading || isLoadingSelf || isLoadingUtilizadores || isLoadingEdicao) {
             <div className="m-0 p-0">
                 <Pesquisa onChange={onChange} value={value}/>
             </div>
-            
-                    <Link className="m-0 p-0" to={`/perfil`}>
+            {console.log(ownUser.id)}
+                    <Link className="m-0 p-0" to={{
+                        pathname: `/perfil`,
+                        state: {
+                            id: ownUser.id
+                        }
+                        }}>
                         <ListaUtilizadores user={ownUser} tipo={"own"}/>
             </Link>
             

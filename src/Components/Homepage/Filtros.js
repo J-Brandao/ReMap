@@ -24,22 +24,22 @@ function Filtros ({filtro}) {
                 <span>
                     <img className="filtrosImagem" src={FiltrosAtivo} onClick={() => abreFiltros('Fechado')}/>
                     <div className="filtrosAberto">
-                        <p className="mb-0">Menu Filtrar</p>
+                        <p className="mb-0">Filtar por Distância</p>
                         <span className="linhaFiltro">
                             <input type="checkbox" className="inputFiltro"/>
-                            <p className="mb-0">Favoritos</p>
+                            <p className="mb-0">0-5km</p>
                         </span>
                         <span className="linhaFiltro">
                             <input type="checkbox" className="inputFiltro" onClick={() => atualiza('proximidade')}/>
-                            <p className="mb-0">Próximidade</p>
+                            <p className="mb-0">6-15km</p>
                         </span>
                         <span className="linhaFiltro">
-                            <input type="checkbox" className="inputFiltro"/>
-                            <p className="mb-0">Perigoso</p>
+                        <input type="checkbox" className="inputFiltro" onClick={() => atualiza('proximidade')}/>
+                            <p className="mb-0">16-25km</p>
                         </span>
                         <span className="linhaFiltro">
-                            <input type="checkbox" className="inputFiltro"/>
-                            <p className="mb-0">Fotogénico</p>
+                        <input type="checkbox" className="inputFiltro" onClick={() => atualiza('proximidade')}/>
+                            <p className="mb-0">26-50km</p>
                         </span>
                     </div>
                 </span>

@@ -46,16 +46,21 @@ function DetalhesSeccao (props) {
         <div className="row col-12 m-0 p-0">
             {props.tipo === 'Edifícios Adicionados' ?
             <Carousel className="imgCarousel mb-0" activeIndex={index} onSelect={handleSelect}>
-                {imagens.map(item => {
-                    console.log(item)
+                {imagens.map((item, key) => {
                     return(
-                        <Carousel.Item className="divCarousel">
-                            <img
-                                className="d-block imgCarousel"
-                                src={item}
-                                alt="First slide"
-                            />
-                        </Carousel.Item>
+                        <>
+                        {index === key ?
+                            <Carousel.Item className="divCarousel">
+                                <img
+                                    className="d-block imgCarousel"
+                                    src={item}
+                                    alt="First slide"
+                                />
+                            </Carousel.Item>
+                            :
+                            <></>
+                        }
+                        </>
                     )
                 })}
             </Carousel>
@@ -68,24 +73,6 @@ function DetalhesSeccao (props) {
                     })
                     }
             </>
-            :
-            props.tipo === 'Fotografias' ?
-            <Carousel className="imgCarousel mb-0" activeIndex={index} onSelect={handleSelect}>
-                <Carousel.Item>
-                    <img
-                        className="d-block imgCarousel"
-                        src={imgCarousel1}
-                        alt="First slide"
-                    />
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img
-                        className="d-block imgCarousel"
-                        src={imgCarousel2}
-                        alt="Second slide"
-                    />
-                </Carousel.Item>
-            </Carousel>
             :
             <>
                             {props.comentarios && props.comentarios.length>0 &&

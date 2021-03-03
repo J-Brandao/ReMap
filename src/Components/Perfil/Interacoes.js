@@ -16,9 +16,10 @@ import { getEdificioPerfil } from '../../Store/Edificios/Actions';
 
 
 
-function Interacoes ({userId}) {
+function Interacoes ({userId, urlId}) {
 
     const [seccao, setSeccao] = useState('Edifícios Adicionados');
+    const [verifica, setVerifica] = useState(false);
     const dispatch = useDispatch()
     const isLoadingComment = useSelector(({ Comentarios }) => Comentarios.isLoading)
     const commentData = useSelector(({ Comentarios }) => Comentarios.data)
@@ -28,10 +29,15 @@ function Interacoes ({userId}) {
     const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading);
     
     useEffect(() => {
-        dispatch(getComentariosListByUser(userId));
-        dispatch(getSugestoesListByUser(userId));
-        dispatch(getEdificioPerfil(userId));
-    }, [])
+        console.log(userId, urlId)
+        if(userId == urlId){
+            dispatch(getComentariosListByUser(userId));
+            dispatch(getSugestoesListByUser(userId));
+            dispatch(getEdificioPerfil(userId));
+        } else {
+            setVerifica(!verifica);
+        }
+    }, [verifica])
 
     const MudaSeccao = id => {
         setSeccao(id);
@@ -46,28 +52,21 @@ function Interacoes ({userId}) {
         <section className="row col-12 m-0 p-0">
             {console.log(commentData, EdificioList, sugestoes)}
             <h5 className="col-12 p-0 mb-3" id="seccaoTitulo">As minhas interações</h5>
-            <span onClick = {() => MudaSeccao('Edifícios Adicionados')} className="col-3 m-0 p-0 text-center">
+            <span onClick = {() => MudaSeccao('Edifícios Adicionados')} className="col-4 m-0 p-0 text-center">
                 {seccao === 'Edifícios Adicionados' ?
                 <img src={EdificiosSelected} className="m-0"/>
                 :
                 <img src={Edificios} className="m-0"/>
                 }
             </span>
-            <span onClick = {() => MudaSeccao('Sugestões')} className="col-3 m-0 p-0 text-center">
+            <span onClick = {() => MudaSeccao('Sugestões')} className="col-4 m-0 p-0 text-center">
                 {seccao === 'Sugestões' ?
                 <img src={IdeiasSelected} className="m-0"/>
                 :
                 <img src={Ideias} className="m-0"/>
                 }
             </span>
-            <span onClick = {() => MudaSeccao('Fotografias')} className="col-3 m-0 p-0 text-center">
-                {seccao === 'Fotografias' ?
-                <img src={FotografiasSelected} className="m-0"/>
-                :
-                <img src={Fotografias} className="m-0"/>
-                }
-            </span>
-            <span onClick = {() => MudaSeccao('Comentários')} className="col-3 m-0 p-0 text-center">
+            <span onClick = {() => MudaSeccao('Comentários')} className="col-4 m-0 p-0 text-center">
                 {seccao === 'Comentários' ?
                 <img src={ComentariosSelected} className="m-0"/>
                 :

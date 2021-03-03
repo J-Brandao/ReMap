@@ -53,7 +53,7 @@ function PerfilOutros(props) {
             <Loading/>
         )
     }
-
+    
     return(
         <Div>
            <section className="row col-12 m-0 p-0">
@@ -74,7 +74,7 @@ function PerfilOutros(props) {
 
            <Trofeus/>
 
-            <Interacoes userId={utilizador.id}/>
+            <Interacoes userId={utilizador.id} urlId={props.match.params.id}/>
         </Div>
     )
 }

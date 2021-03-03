@@ -8,7 +8,7 @@ export const fetchEdificio = ( id ) =>
     .then(response => response.json())
 
 export const fetchEdificioForPerfil = ( userId ) =>
-  fetch(`http://localhost:3001/edificio/perfil/${userId}`)
+  fetch(`http://localhost:3001/edificio/profile/${userId}`)
     .then(response => response.json())
 
 

@@ -104,7 +104,12 @@ function Homepage () {
                 <Filtros filtro={atualiza}/>
             </div>
             <Menu coordenadas={coordenadas} userId={ownUser.id}/>
-            <Link className="m-0 p-0" to={`/perfil`}>
+            <Link className="m-0 p-0" to={{
+                        pathname: `/perfil`,
+                        state: {
+                            id: ownUser.id
+                        }
+                        }}>
                 <ProfilePicture className="fotografia" style={{backgroundImage: `url(${imagem})`}}/>
             </Link>
             <MapContainer center={[coordenadas.lat, coordenadas.long]} zoom={20}>

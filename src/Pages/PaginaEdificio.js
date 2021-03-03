@@ -92,12 +92,9 @@ function PaginaEdificio(props) {
             edificio.fotos.map((item, index) => {
                 if (imagens.length < edificio.fotos.length) {
                 storage.ref('imagensEdificios').child(item).getDownloadURL().then((url) => {
-                    
-                        const newArray = imagens
-                    newArray.push(item)
+                    const newArray = imagens
+                    newArray.push(url)
                     setImagens(newArray)
-                    
-                    
                 });
             }
                 if (index === edificio.fotos.length - 1)
@@ -189,11 +186,6 @@ function PaginaEdificio(props) {
                 <Sugestoes utilizador={ownUser.id} edificio={edificio.id} isLoading={isLoadingSugestoes} sugestoes={sugestoes}/>
                 :
             <Comentarios utilizador={ownUser.id} edificio={edificio.id} isLoading={isLoadingComment} comments={commentData}/>
-           
-                          
-             
-               
-
             }
         </div>
     )
