@@ -16,9 +16,10 @@ import { getEdificioPerfil } from '../../Store/Edificios/Actions';
 
 
 
-function Interacoes ({userId}) {
+function Interacoes ({userId, urlId}) {
 
     const [seccao, setSeccao] = useState('Edifícios Adicionados');
+    const [verifica, setVerifica] = useState(false);
     const dispatch = useDispatch()
     const isLoadingComment = useSelector(({ Comentarios }) => Comentarios.isLoading)
     const commentData = useSelector(({ Comentarios }) => Comentarios.data)
@@ -28,10 +29,15 @@ function Interacoes ({userId}) {
     const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading);
     
     useEffect(() => {
-        dispatch(getComentariosListByUser(userId));
-        dispatch(getSugestoesListByUser(userId));
-        dispatch(getEdificioPerfil(userId));
-    }, [])
+        console.log(userId, urlId)
+        if(userId == urlId){
+            dispatch(getComentariosListByUser(userId));
+            dispatch(getSugestoesListByUser(userId));
+            dispatch(getEdificioPerfil(userId));
+        } else {
+            setVerifica(!verifica);
+        }
+    }, [verifica])
 
     const MudaSeccao = id => {
         setSeccao(id);

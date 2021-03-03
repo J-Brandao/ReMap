@@ -186,11 +186,6 @@ function PaginaEdificio(props) {
                 <Sugestoes utilizador={ownUser.id} edificio={edificio.id} isLoading={isLoadingSugestoes} sugestoes={sugestoes}/>
                 :
             <Comentarios utilizador={ownUser.id} edificio={edificio.id} isLoading={isLoadingComment} comments={commentData}/>
-           
-                          
-             
-               
-
             }
         </div>
     )
