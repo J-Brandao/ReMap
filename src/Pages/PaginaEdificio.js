@@ -159,7 +159,7 @@ function PaginaEdificio(props) {
     }
     
     const showMenu = () => {
-        setShowDropDown(!showDropdown);
+        setShowDropDown(true);
     }
 
     const handleShow = () => {
@@ -183,23 +183,18 @@ function PaginaEdificio(props) {
     }
 
     const renderOptions = () => {
-        if (showDropdown)
-            if (ownUser.id === edificio.userId) {
+        if (showDropdown) {
                return (
             <DropDown >
                         
-                <ButtonOptions onClick={_editEdificio}>Editar Edifício</ButtonOptions>
-                <Line />
-                <ButtonOptions onClick={handleShow} eliminar> Eliminar edifício </ButtonOptions>
+               {ownUser.id ===edificio.userId && <><ButtonOptions onClick={_editEdificio}>Editar Edifício</ButtonOptions><Line /></>}
+                
+                <ButtonOptions onClick={handleShow} eliminar> Eliminar</ButtonOptions>
                             
         
             </DropDown>
         ) 
-            } else {
-                <DropDown >
-                      <ButtonOptions onClick={handleShow} eliminar> Eliminar edifício </ButtonOptions>
-                </DropDown>
-            }
+            } 
         
     }
 
