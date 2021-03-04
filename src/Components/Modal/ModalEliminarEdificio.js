@@ -34,18 +34,18 @@ justifyContent: 'center',
         <Button style={{
 
 }}
-variant="warning" onClick={props.activateAccount}>Não</Button>
+variant="warning" onClick={props.onHide}>Não</Button>
         </p>
         <p
         style={{
 display: 'flex',
 alignItems: 'center',
 justifyContent: 'center',
-color: '#cc0000',
+color: '#ffa801',
 }} >
         <Button style={{
 
-}}variant="outline-danger" onClick={props.onHide}>Sim</Button></p>
+}}variant="outline-danger" onClick={props.onDelete}>Sim</Button></p>
           </Modal.Body>
       
     </Modal>
