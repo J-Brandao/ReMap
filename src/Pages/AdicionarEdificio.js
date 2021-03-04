@@ -159,14 +159,14 @@ function AdicionarEdificio (props) {
             <section className="row col-12 m-0 p-0">
                 <form className="col-12 w-0 p-0">
                     <span className="col-12 m-0 p-0">
-                        <span className="seccaoTitulo">Identificação do edifício</span>
+                        <span className="seccaoTitulo">Identificação do edifício<span className="obrigatorio">*</span></span>
                         <input 
                             className="form-control forms mb-3" 
                             type="text" aria-label="Search" 
                             onChange={handleChange('nomeEdificio')}/>
                     </span>
                     <span className="col-12 m-0 p-0">
-                        <span className="seccaoTitulo">Descrição do edifício</span>
+                        <span className="seccaoTitulo">Descrição do edifício<span className="obrigatorio">*</span></span>
                         <textarea 
                             className="form-control forms mb-3" 
                             rows="4" 
@@ -176,7 +176,7 @@ function AdicionarEdificio (props) {
                     </span>
                     {valores.fotos !== '' ?
                         <span className="col-12 m-0 p-0">
-                            <span className="seccaoTitulo">Galeria de fotos</span>
+                            <span className="seccaoTitulo">Galeria de fotos<span className="obrigatorio">*</span></span>
                             {imagem.map(item => {
                                 return(
                                     <Imagem className="m-0 mb-3 mt-1 p-0" style={{backgroundImage: `url(${item})`}}/>
@@ -187,7 +187,7 @@ function AdicionarEdificio (props) {
                         </span>
                             :
                         <span className="col-12 m-0 p-0">
-                            <span className="seccaoTitulo">Galeria de fotos</span>                        
+                            <span className="seccaoTitulo">Galeria de fotos<span className="obrigatorio">*</span></span>                        
                             <label for="galeriaImgs" className="seccaoTitulo formsImagem mb-3"><img src={AdicionarImagem} className="mb-0"/></label>
                             <input className="form-control" id="galeriaImgs" type="file" aria-label="Search" onChange={handleChange('fotos')}/>
                         </span>
@@ -202,7 +202,7 @@ function AdicionarEdificio (props) {
                         </MapContainer>
                     </div>
                     <span className="col-12 m-0 p-0">
-                        <span className="seccaoTitulo">Estado do edifício</span>
+                        <span className="seccaoTitulo">Estado do edifício<span className="obrigatorio">*</span></span>
                         <div className="m-0 p-0">
                             <span className="nomeBarra">Degradação</span>
                             <input className="bar mb-2 w-100" type="range" min="0" max="5" step="1" aria-label="Search" onChange={handleChange('degradacao')}/>

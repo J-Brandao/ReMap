@@ -56,10 +56,10 @@ module.exports = {
     
     const edificioRef = await edificioCollectionRef.add(body);
     return {id: edificioRef.id, ...body}
-  }/*,
+  },
   remove: async (id) => {
     const db = getFirestore();
-    const pokeCollectionRef = db.collection("Favoritos");
+    const edificioCollectionRef = db.collection("Edifícios");
     
     if(!id){
         response.status(400);
@@ -67,7 +67,7 @@ module.exports = {
         return;
     }
 
-    const pokeRef = pokeCollectionRef.doc(id);
-    await pokeRef.delete();
-  }*/
+    const edificioRef = edificioCollectionRef.doc(id);
+    await edificioRef.delete();
+  }
 }

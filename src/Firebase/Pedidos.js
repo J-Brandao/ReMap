@@ -22,13 +22,13 @@ export const createEdificio = (token, userId, date, nomeEdificio, descricao, fot
     body: JSON.stringify({ userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo })
   }).then(response => console.log(response.json()));
 
-/*export const deleteFavPokemon = (token, id) =>
-  fetch(`http://localhost:3001/favoritos/${id}`, {
+export const deleteEdificio = (token, id) =>
+  fetch(`http://localhost:3001/edificio/${id}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`
     }
-  });*/
+  });
 
 
 //UTILIZADORES

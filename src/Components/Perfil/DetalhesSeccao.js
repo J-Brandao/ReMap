@@ -39,27 +39,23 @@ function DetalhesSeccao (props) {
                             <>
                             {index === key ?
                                 <Carousel.Item className="divCarousel">
-                                    <img
-                                        className="d-block imgCarousel"
-                                        src={item.url}
-                                        alt="First slide"
-                                    />
-                                    <Carousel.Caption>
-                                    <Link to={`/edificio/${item.id}`}>
-                                    <p
-              style={{
+                                    <Link to={`/edificio/${item.id}`} style={{textDecoration: 'none'}}>
+                                        <img
+                                            className="d-block imgCarousel"
+                                            src={item.url}
+                                            alt="First slide"
+                                        />
+                                        <Carousel.Caption>
+                                                <p style={{
                 position: "absolute",
                 left: "50%",
                 bottom: 3,
                 color: "white",
                 transform: " translateX(-50%)",
         
-              }}
-            >
-              {item.nome}
-            </p></Link>
-                                        
-                                    </Carousel.Caption>
+              }}>{item.nome}</p>
+                                        </Carousel.Caption>
+                                    </Link>
                                 </Carousel.Item>
                                 :
                                 <></>

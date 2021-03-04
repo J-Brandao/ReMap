@@ -19,7 +19,7 @@ import {
     EDIFICIO_DELETE_SUCCESS,
     EDIFICIO_DELETE_ERROR,
   } from './Constants';
-  import { fetchEdificioList, fetchEdificio, createEdificio, fetchEdificioForPerfil } from "../../../Firebase/Pedidos"
+  import { fetchEdificioList, fetchEdificio, createEdificio, fetchEdificioForPerfil, deleteEdificio } from "../../../Firebase/Pedidos"
   
   export const getEdificioList = () => {
     return (dispatch) => {
@@ -67,14 +67,14 @@ import {
     }
   }
 
-  /*export const deleteFav = id => {
+  export const apagaEdificio = id => {
     return (dispatch, getState) => {
-      dispatch({ type: FAVLIST_DELETE_START });
+      dispatch({ type: EDIFICIO_DELETE_START });
   
-      deleteFavPokemon(getState().token, id)
+      deleteEdificio(getState().token, id)
         .then((e) => {
-          dispatch({ type: FAVLIST_DELETE_SUCCESS, payload: e })
+          dispatch({ type: EDIFICIO_DELETE_SUCCESS, payload: e })
         })
-        .catch(() => dispatch({ type: FAVLIST_DELETE_ERROR }))
+        .catch(() => dispatch({ type: EDIFICIO_DELETE_ERROR }))
     }
-  }*/
+  }
