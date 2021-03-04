@@ -57,11 +57,14 @@ function Comentarios (props) {
                         }
                       
                 </span>
+                    {props.comments.length === 0 ?
+                    <div className="w-100 text-center textoNada py-3">Parece que ainda não existem comentários. Sê o primeiro a comentar!</div>
+                    :
+                    props.comments.map((comment, index)=>{
+                        return <SingleComentario comment={comment} tipo={'edificio'} utilizador={props.userCheck} />
+                      })                
+                    }
                     
-                    { props.comments.map((comment, index)=>{
-                           return <SingleComentario comment={comment} tipo={'edificio'} utilizador={props.userCheck} />
-                         })
-                    } 
                     </>)
             }
             
