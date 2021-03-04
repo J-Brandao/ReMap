@@ -9,6 +9,8 @@ import { createNovoUtilizador } from '../Store/Utilizadores/Actions';
 import { storage } from '../Firebase/FbConfig';
 import Loading from '../Components/Geral/Loading';
 import useAuthentication from '../Firebase/useAuthentication';
+import { useHistory } from 'react-router-dom';
+import ModalPerfilCriado from "../Components/Modal/ModalPerfilCriado";
 
 const TiposAceites = 'image/x-png, image/png, image/jpg, image/jpeg';
 const arrayTiposAceites = TiposAceites.split(",").map((item) => {
@@ -43,6 +45,8 @@ color:#34495e;
 
 function FinalizarUtilizador () {
 
+    const [showModal, setShowModal] = useState(false);
+    const history = useHistory();
     const { user, isLoading } = useAuth0();
     const dispatch = useDispatch();
     const [valores, setValores] = useState({
@@ -107,7 +111,17 @@ function FinalizarUtilizador () {
         )
     }
 
-    return(
+    const onConfirm = (valores) => {
+        onCreateNovoUtilizador(user.email, valores.imagemUser, valores.nomeUtilizador, valores.biografia, valores.pais, valores.cidade)
+        setShowModal(true)
+    }
+    const onClose = () => {
+        setShowModal(false);
+        history.push('homepage');
+    }
+
+    return (
+        <>
         <Fundo>
             <Div>
                 <section className="m-0 p-0 w-100">
@@ -441,7 +455,7 @@ function FinalizarUtilizador () {
                             valores.nomeUtilizador !== '' && valores.cidade !== '' && valores.pais !== '' ?
                             <button 
                             className="botaoSubmeter mt-4"
-                            onClick={() => onCreateNovoUtilizador(user.email, valores.imagemUser, valores.nomeUtilizador, valores.biografia, valores.pais, valores.cidade)} 
+                            onClick={() => onConfirm(valores)} 
                             >Confirmar</button>
                             :
                             <button 
@@ -452,7 +466,9 @@ function FinalizarUtilizador () {
                     </span>
                 </section>
             </Div>
-        </Fundo>
+            </Fundo>
+            <ModalPerfilCriado show={showModal} onHide={onClose}/>
+        </>
     )
 }
 

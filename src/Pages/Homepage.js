@@ -6,13 +6,15 @@ import '../Styles/Homepage.css';
 import Filtros from '../Components/Homepage/Filtros';
 import { useSelector, useDispatch } from 'react-redux';
 import { getEdificioList } from '../Store/Edificios/Actions';
-import { getUtilizadorById } from '../Store/Utilizadores/Actions'
+import { getUtilizadorById, atualizaUtilizador } from '../Store/Utilizadores/Actions'
 import { useAuth0 } from '@auth0/auth0-react';
 import Loading from '../Components/Geral/Loading';
 import { storage } from '../Firebase/FbConfig';
 import Menu from '../Components/Homepage/Menu';
 import UserLocation from '../Images/UserLocation.svg';
+import ModalReativarConta from '../Components/Modal/ModalReativarConta';
 import L from 'leaflet';
+import useAuthentication from "../Firebase/useAuthentication"
 
 
 const ProfilePicture = styled.div`
@@ -42,6 +44,7 @@ function Homepage () {
     const history = useHistory()
     const [coordenadas, setCoordenadas] = useState({lat: '0', long: '0'});
     const [imagem, setImagem] = useState(null)
+    const [showModal, setShowModal] = useState(false)
     const [filtros, setFiltros] = useState({
         proximidade: false,
         valor: 0
@@ -68,11 +71,27 @@ function Homepage () {
         if (ownUser && !isLoading && isAuthenticated) {
             storage.ref('imagensUtilizadores').child(`${ownUser.imagemUser}`).getDownloadURL().then((url) => {
                 setImagem(url)
+                checkActive()
             })
-        } 
-    },[ownUser])
+        }
+    }, [ownUser]);
+    useAuthentication()
 
-   
+    const closeModal = () => {
+        setShowModal(false);
+        history.push("/");
+    }
+    const activateAccount = () => {
+        setShowModal(false);
+        dispatch(atualizaUtilizador(ownUser.id, ownUser.userId, ownUser.imagemUser, ownUser.nomeownUser, ownUser.biografia, ownUser.pais, ownUser.cidade, ownUser.role, true))
+
+    }
+
+    const checkActive = () => {
+        if (!ownUser.active) {
+            setShowModal(true)
+        }
+    }
     
     const atualiza = (tipo, value) => {
         if(filtros.valor === 0) {
@@ -85,11 +104,7 @@ function Homepage () {
         setFiltros({...filtros})
     }
 
-    if (isLoading || isLoadingEdificio || isLoadingUser) {
-        return (
-            <Loading />
-        )
-    }
+    
     const hasUser = () => {
         if (!ownUser || ownUser === {})
             return true
@@ -103,10 +118,18 @@ function Homepage () {
         })
     }
 
-    return(
+    if (isLoading || isLoadingEdificio || isLoadingUser) {
+        return (
+            <Loading />
+        )
+    }
+
+    return (
+        <>
         <div className="m-0 p-0">
             {hasUser() &&
-            history.push("/finalizar")}
+                history.push("/finalizar")}
+            
             <div className="m-0 p-0 filtros">
                 <Filtros filtro={atualiza} valorFiltro={filtros.valor}/>
             </div>
@@ -158,7 +181,9 @@ function Homepage () {
                 
             </MapContainer>
 
-        </div>
+            </div>
+            <ModalReativarConta show={showModal} onHide={closeModal} activateAccount={activateAccount}/>
+        </>
     )
 }
 
