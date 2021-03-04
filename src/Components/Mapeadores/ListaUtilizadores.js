@@ -140,7 +140,7 @@ function ListaUtilizadores(props) {
                     <p className="nomeUtilizador mb-0 pb-0">{props.user.nomeUtilizador}</p>
                     </Link>  
                 <span className="col-12 row m-0 p-0 divUtilizador">
-                    <span className="col-5 m-0 pr-1 pl-0">
+                    <span className={props.ownUser.role==="admin"?"col-5 m-0 pr-1 pl-0":"col-7 m-0 pr-1 pl-0"}>
                         <ProgressBar now={60} variant="custom"/>
                     </span>
                         <span className="col-3 m-0 p-0">
@@ -150,15 +150,17 @@ function ListaUtilizadores(props) {
                         
                             <span className="col-2 m-0 p-0 text-center">
                             <FriendButton friendId={props.user.id} userId={props.ownUser.id} friendName={props.user.nomeUtilizador} imageFriend={props.user.imagemUser} /></span>
+                            {props.ownUser.role === "admin" &&
                             <span className="col-2 m-0 p-0">
-                            {props.ownUser.role==="admin" &&
+                            
                                 <><Button onClick={showMenu}>
                                 <img className="m-0 w-100" src={More} alt="Mais opções" />
                                 </Button>
                                 {renderOptions()}</>
-                            } 
+                            
                             
                             </span>
+                            } 
                              
                     
                     

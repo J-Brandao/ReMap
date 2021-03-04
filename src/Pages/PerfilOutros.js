@@ -74,7 +74,7 @@ function PerfilOutros(props) {
                 <div className="col-8 text-center m-0 p-0">
                     <ProfilePicture style={{backgroundImage:`url(${imagem !== null ? imagem : Placeholder})`}}/>
                     <h5 id="NomeUser">{utilizador.nomeUtilizador}</h5>  
-                    <p id="DataUser">Membro desde 2021</p>
+                    <p id="DataUser">{utilizador.active ? "Membro desde 2020" : "Inativo"}</p>
                 </div>
                 <span className="col-2 text-right m-0 p-0">
                 <FriendButton friendId={utilizador.id} userId={ownUser.id} friendName={utilizador.nomeUtilizador} imageFriend={utilizador.imagemUser} />

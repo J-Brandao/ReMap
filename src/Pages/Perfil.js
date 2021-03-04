@@ -132,7 +132,7 @@ function Perfil(props) {
 
     const deleteProfile = () => {
         setShowModal(false);
-        dispatch(atualizaUtilizador(utilizador.id, utilizador.userId, utilizador.imagemUser, utilizador.nomeUtilizador, utilizador.biografia, utilizador.pais, utilizador.cidade, utilizador.role, false))
+        dispatch(atualizaUtilizador(utilizador.id, utilizador.userId, utilizador.imagemUser, utilizador.nomeUtilizador, utilizador.biografia, utilizador.cidade, utilizador.role, false))
         logout();
     }
     
