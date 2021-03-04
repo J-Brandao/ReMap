@@ -68,9 +68,13 @@ function EditarEdificio (props) {
                 vandalismo: edificio.vandalismo
             })
             edificio.fotos.map((item, key) => {
-                storage.ref('imagensEdificios').child(`${item}`).getDownloadURL().then((url) => {
-                    setImagem([...imagem, url])
-                })
+                if (imagem.length < edificio.fotos.length) {
+                    storage.ref('imagensEdificios').child(`${item}`).getDownloadURL().then((url) => {
+                        const newArray = imagem;
+                        newArray.push(url)
+                        setImagem(newArray)
+                    })
+                }
             })
         }
     }, [isLoadingEdificio])
