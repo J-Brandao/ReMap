@@ -28,19 +28,19 @@ function Filtros ({filtro, valorFiltro}) {
                         <p className="mb-0">Filtar por Distância</p>
                         <span className="linhaFiltro">
                             <input type="checkbox" className="inputFiltro" onClick={() => atualiza('proximidade', 0.05)}/>
-                            <p className="mb-0">0-5km</p>
+                            <p className="mb-0"> 0-5km</p>
                         </span>
                         <span className="linhaFiltro">
                             <input type="checkbox" className="inputFiltro" onClick={() => atualiza('proximidade', 0.15)}/>
-                            <p className="mb-0">6-15km</p>
+                            <p className="mb-0">0-15km</p>
                         </span>
                         <span className="linhaFiltro">
                         <input type="checkbox" className="inputFiltro" onClick={() => atualiza('proximidade', 0.25)}/>
-                            <p className="mb-0">16-25km</p>
+                            <p className="mb-0">0-25km</p>
                         </span>
                         <span className="linhaFiltro">
                         <input type="checkbox" className="inputFiltro" onClick={() => atualiza('proximidade', 0.5)}/>
-                            <p className="mb-0">26-50km</p>
+                            <p className="mb-0">0-50km</p>
                         </span>
                     </div>
                     :
