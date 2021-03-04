@@ -60,10 +60,14 @@ function Sugestoes (props) {
                         <button className="btnPublicar mb-3" onClick={() => handleCreateSugestao(sugestao.userId, sugestao.valor, sugestao.edificioId)}>Publicar</button>
                     }
                 </span>
-                    { props.sugestoes.map((sugestao, index) => {
+                    {props.sugestoes.length === 0 ?
+                    <div className="w-100 text-center textoNada py-3">Ainda não existem sugestões. Sê o primeiro a sugerir ideias para a reabilitação do edifício!</div>
+                    :
+                    props.sugestoes.map((sugestao, index) => {
                         return <SingleSugestao sugestao={sugestao} tipo={'edificio'} utilizador={props.userCheck}/>
                     })
-                    } </>)
+                    }
+                     </>)
             
             }
                     
