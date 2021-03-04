@@ -156,7 +156,7 @@ function Perfil(props) {
         <>
         <Div>
            <section className="row col-12 m-0 p-0">
-                <BackArrow isGoingBack={true}/>
+                <BackArrow />
                 <div className="col-8 text-center m-0 p-0">
                     <ProfilePicture style={{backgroundImage:`url(${imagem !== null ? imagem : Placeholder})`}}/>
                     <h5 id="NomeUser">{utilizador.nomeUtilizador}</h5>  
@@ -185,7 +185,7 @@ function Perfil(props) {
             <Trofeus />
             </Link>
 
-           <Interacoes userId={utilizador.id} urlId={props.location.state.id} utilizador={user.email}/>
+           <Interacoes userId={utilizador.id} urlId={props.location.state ? props.location.state.id : utilizador.id} utilizador={user.email}/>
             </Div>
             
             <ModalEdificioCoordenadas show={showModal} onHide={handleClose} onDelete={deleteProfile}/>

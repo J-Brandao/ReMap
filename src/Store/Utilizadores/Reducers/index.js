@@ -8,7 +8,8 @@ import {
     UTILIZADOR_CREATE_SUCCESS,
     UTILIZADOR_DELETE_SUCCESS,
     UTILIZADOR_UPDATE_SUCCESS,
-    UTILIZADOR_UPDATE_START
+    UTILIZADOR_UPDATE_START,
+    UTILIZADOR_CREATE_START
   } from '../Actions/Constants'
   
   const initialState = {
@@ -47,9 +48,11 @@ import {
         return payload;
       });
 
-      return { ...state, isLoadingEdit:false, data };
+        return { ...state, isLoadingEdit: false, data };
+        case UTILIZADOR_CREATE_START:
+          return { ...state, isLoadingSelf:true };
       case UTILIZADOR_CREATE_SUCCESS:
-        return { ...state, data: [payload] };
+        return { ...state, ownUser: payload, isLoadingSelf:false };
       //case FAVLIST_DELETE_SUCCESS:
         //return { ...state, data };
       default:

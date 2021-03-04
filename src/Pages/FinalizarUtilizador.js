@@ -117,7 +117,7 @@ function FinalizarUtilizador () {
     }
     const onClose = () => {
         setShowModal(false);
-        history.push('homepage');
+        history.push('/homepage');
     }
 
     return (
