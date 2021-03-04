@@ -35,7 +35,7 @@ import {
       case EDIFICIO_CREATE_SUCCESS:
         return { ...state, dataSingle: payload };
       case EDIFICIO_DELETE_SUCCESS:
-        return { ...state, data };
+        return { ...state };
       default:
         return state;
     }

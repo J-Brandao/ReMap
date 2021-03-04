@@ -22,6 +22,7 @@ import { getComentariosListByBuilding } from '../Store/Comentarios/Actions';
 import { getSugestoesListByBuilding } from '../Store/Sugestoes/Actions';
 import UserEdificio from '../Components/PaginaEdificio/UserEdificio';
 import ModalEliminarEdificio from '../Components/Modal/ModalEliminarEdificio';
+import {useHistory} from "react-router-dom"
 
 
 const Div = styled.div`
@@ -100,6 +101,7 @@ margin:0;
 `
 
 function PaginaEdificio(props) {
+    const history = useHistory();
     const dispatch = useDispatch();
     const {user, isLoading, isAuthenticated, logout} = useAuth0()
     const [showDropdown, setShowDropDown] = useState(false);
@@ -174,6 +176,7 @@ function PaginaEdificio(props) {
     const deleteEdificio = () => {
         setShowModal(false);
         dispatch(apagaEdificio(edificio.id))
+        history.push("/homepage")
     }
 
     const _editEdificio = () => {
