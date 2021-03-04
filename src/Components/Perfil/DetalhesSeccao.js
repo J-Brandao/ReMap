@@ -17,23 +17,31 @@ function DetalhesSeccao (props) {
       };
     
     useEffect(() => {
-        if (props.edificios.length>0) {
-             props.edificios.map(item => {
-                 if (imagens.length < props.edificios.length) {
-                     storage.ref('imagensEdificios').child(`${item.fotos[0]}`).getDownloadURL().then((url) => {
-                         const newArray = imagens;
-                         newArray.push({url: url, nome: item.nomeEdificio, id: item.id})
-                setImagens(newArray)
-            })
-            }
-            
-        })
+        if (props.edificios.length > 0) {
+            if (imagens.length < props.edificios.length) {
+                
+                props.edificios.map(item => {
+                 
+                    
+                    storage.ref('imagensEdificios').child(`${item.fotos[0]}`).getDownloadURL().then((url) => {
+                        const newArray = imagens;
+                        newArray.push({ url: url, nome: item.nomeEdificio, id: item.id })
+                        setImagens(newArray)
+                    })
+                    
+                })
+                
+                
+            } 
         }
        
     }, [])
 
-    return(
+    
+
+    return (
         <div className="row col-12 m-0 p-0">
+            
             {props.tipo === 'Edifícios Adicionados' ?
             <>
             {imagens.length > 0 ?
@@ -75,7 +83,7 @@ function DetalhesSeccao (props) {
             :
                 props.tipo === 'Sugestões' ?
             <>
-                {props.sugestoes && props.sugestoes.lenght > 0 ?
+                {props.sugestoes && props.sugestoes.length > 0 ?
                     props.sugestoes.map((sugestao, index) => {
                         return <SingleSugestao sugestao={sugestao} tipo={'perfil'} utilizador={props.utilizador}/> })
                     :
