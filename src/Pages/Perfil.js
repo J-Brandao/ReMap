@@ -125,7 +125,6 @@ function Perfil(props) {
     }
 
     const handleClose = () => {
-        console.log("fechar")
         setShowModal(false);
 
     }

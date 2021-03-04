@@ -21,6 +21,7 @@ import { storage } from '../Firebase/FbConfig';
 import { getComentariosListByBuilding } from '../Store/Comentarios/Actions';
 import { getSugestoesListByBuilding } from '../Store/Sugestoes/Actions';
 import UserEdificio from '../Components/PaginaEdificio/UserEdificio';
+import ModalEliminarEdificio from '../Components/Modal/ModalEliminarEdificio';
 
 
 const Div = styled.div`
@@ -55,11 +56,54 @@ const ButtonS = styled.button`
     font-size: 18px;
     color: #34495e;
 `;
+const ButtonOP = styled.button`
+background: none;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    width:100%;
+:focus{
+    outline:0;
+    boder:none
+}
+`
+const ButtonOptions = styled.button`
+background: none;
+	border: none;
+	padding:10px;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    width:130px;
+    text-align:left;
+   :focus{
+        background-color: ${props => props.eliminar ? "rgba(255,0,0, 0.3)" : "none"}
+        outline:0;
+   }
+`
+const DropDown = styled.div`
+border:2px solid #ffa801;
+text-align:left;
+padding:0;
+min-width:120px;
+position:absolute;
+background-color:white;
+right:0;
+z-index:5000;
+`
+const Line = styled.hr`
+color:#ffa801;
+margin:0;
+
+`
 
 function PaginaEdificio(props) {
     const dispatch = useDispatch();
     const {user, isLoading, isAuthenticated, logout} = useAuth0()
-    
+    const [showDropdown, setShowDropDown] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const [seccao, setSeccao] = useState('Sugestões');
     const ownUser = useSelector(({Utilizadores})=> Utilizadores.ownUser);
     const isLoadingUser = useSelector(({Utilizadores}) => Utilizadores.isLoadingSelf);
@@ -114,17 +158,66 @@ function PaginaEdificio(props) {
         )
     }
     
-    
+    const showMenu = () => {
+        setShowDropDown(!showDropdown);
+    }
 
+    const handleShow = () => {
+        setShowModal(true);
+        setShowDropDown(false);
+    }
 
-    return(
+    const handleClose = () => {
+        setShowModal(false);
+    }
+
+    const deleteEdificio = () => {
+        setShowModal(false);
+        console.log("Eliminar")
+    }
+
+    const _editEdificio = () => {
+        setShowDropDown(false);
+        console.log("editEdificio")
+
+    }
+
+    const renderOptions = () => {
+        if (showDropdown)
+            if (ownUser.id === edificio.userId) {
+               return (
+            <DropDown >
+                        
+                <ButtonOptions onClick={_editEdificio}>Editar Edifício</ButtonOptions>
+                <Line />
+                <ButtonOptions onClick={handleShow} eliminar> Eliminar edifício </ButtonOptions>
+                            
+        
+            </DropDown>
+        ) 
+            } else {
+                <DropDown >
+                      <ButtonOptions onClick={handleShow} eliminar> Eliminar edifício </ButtonOptions>
+                </DropDown>
+            }
+        
+    }
+
+    return (
+        <>
         <div className="m-0 p-0">
             <Div>
                 <section className="row col-12 m-0 p-0">
                     <BackArrow isGoingBack={true}/>
                     <UserEdificio userId={edificio.userId} data={edificio.date} userCheck={user.email}/>
                     <span className="col-2 text-right m-0 p-0">
-                        <img src={More}/>
+                        {(ownUser.id === edificio.userId || ownUser.role === "admin") &&
+                        <ButtonOP onClick={showMenu}>
+                        <img className="m-0" src={More} alt="Mais opções" />
+                    </ButtonOP>
+                     }
+                    
+                    {renderOptions()}
                     </span>
                 </section>
                 <h2 className="nomeEdificio p-0 pb-2">{edificio.nomeEdificio}</h2>
@@ -179,7 +272,9 @@ function PaginaEdificio(props) {
                 :
             <Comentarios utilizador={ownUser.id} edificio={edificio.id} isLoading={isLoadingComment} comments={commentData} userCheck={user.email}/>
             }
-        </div>
+            </div>
+            <ModalEliminarEdificio show={showModal} onHide={handleClose} onDelete={deleteEdificio}/>    
+        </>
     )
 }
 
