@@ -103,16 +103,16 @@ function ListaUtilizadores(props) {
         setShowDropDown(!showDropdown);
     }
 
-    const FriendCard=()=> {
+    const FriendCard = () => {
         return (
             <span className="row col-12 m-0 mt-3 p-0 divUtilizador">
             <div className="col-3 p-0">
                 <ProfilePicture style={{backgroundImage: `url(${imagem !== null ? imagem : Placeholder})`}}/>
             </div>
             <div className="col-9 pr-0">
-                <span>
+                    <Link to={`/mapeador/${props.user.friendId}`}>
                         <p className="nomeUtilizador mb-0 pb-0">{props.user.nomeFriend}</p>
-                </span>
+                </Link>
                 <span className="col-12 row m-0 p-0 divUtilizador">
                     <span className="col-9 m-0 pr-1 pl-0">
                         <ProgressBar now={60} variant="custom"/>

@@ -41,8 +41,6 @@ function Mapeadores() {
     const history = useHistory();
     const [value, setValue] = useState("");
     const {isLoading, user} = useAuth0()
-    const UtilizadoresList = useSelector(({Utilizadores}) => Utilizadores.data);
-    const isLoadingUtilizadores = useSelector(({ Utilizadores }) => Utilizadores.isLoading)
     const isLoadingSelf = useSelector(({ Utilizadores }) => Utilizadores.isLoadingSelf)
     const ownUser = useSelector(({Utilizadores})=> Utilizadores.ownUser)
     const FriendsList = useSelector(({ Friends }) => Friends.dataArray)
@@ -116,9 +114,9 @@ function Mapeadores() {
                             if (ownUser.id === userSingle.id) return null
                             if (userSingle.nomeFriend.includes(value))
                                 return (
-                                    <Link className="m-0 p-0" to={`/mapeador/${userSingle.id}`}>
-                                        <ListaUtilizadores tipo={"Amigos"} user={userSingle} />
-                                    </Link>
+                                    
+                                        <ListaUtilizadores ownUser={ownUser} tipo={"Amigos"} user={userSingle} />
+                                    
                                 )
                         })}
             

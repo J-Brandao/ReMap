@@ -49,7 +49,7 @@ const isLoadingEdicao = useSelector(({Utilizadores})=>Utilizadores.isLoadingEdit
 }
 
 const changeSection = () => {
-    history.push("/mapeadores/amigos")
+    history.push("/mapeadores")
 }
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const changeSection = () => {
     } 
         
   }, [isLoading, isLoadingEdicao])
-    //add atualizar dados
+    
 
     
 
