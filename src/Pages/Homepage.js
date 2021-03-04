@@ -83,7 +83,7 @@ function Homepage () {
     }
     const activateAccount = () => {
         setShowModal(false);
-        dispatch(atualizaUtilizador(ownUser.id, ownUser.userId, ownUser.imagemUser, ownUser.nomeownUser, ownUser.biografia, ownUser.pais, ownUser.cidade, ownUser.role, true))
+        dispatch(atualizaUtilizador(ownUser.id, ownUser.userId, ownUser.imagemUser, ownUser.nomeownUser, ownUser.biografia, ownUser.cidade, ownUser.role, true))
 
     }
 

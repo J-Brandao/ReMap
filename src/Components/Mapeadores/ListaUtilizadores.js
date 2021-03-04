@@ -174,7 +174,7 @@ function ListaUtilizadores(props) {
     }
     
     const updateRole = (newRole) => {
-        dispatch(atualizaUtilizador(props.user.id, props.user.userId, props.user.imagemUser, props.user.nomeUtilizador, props.user.biografia, props.user.pais, props.user.cidade, newRole))
+        dispatch(atualizaUtilizador(props.user.id, props.user.userId, props.user.imagemUser, props.user.nomeUtilizador, props.user.biografia, props.user.cidade, newRole))
     }
 
     const renderOptions = () => {
