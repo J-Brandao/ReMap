@@ -188,7 +188,7 @@ function Perfil(props) {
            <Interacoes userId={utilizador.id} urlId={props.location.state.id} utilizador={user.email}/>
             </Div>
             
-            <ModalEliminarPerfil show={showModal} onHide={handleClose} onDelete={deleteProfile}/>
+            <ModalEdificioCoordenadas show={showModal} onHide={handleClose} onDelete={deleteProfile}/>
         </>
     )
 }
