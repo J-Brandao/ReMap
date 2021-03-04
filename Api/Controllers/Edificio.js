@@ -1,6 +1,6 @@
 const express = require("express");
-const { get, getForPerfil } = require("../Models/Edificios");
-//const checkJwt = require("../Utils/checkJwt");
+const { get, getForPerfil, remove } = require("../Models/Edificios");
+const checkJwt = require("../Utils/checkJwt");
 
 const router = express.Router();
 
@@ -33,6 +33,14 @@ router.route("/profile/:userId?")
   
   res.status(200);
   res.json(edificio);
+  res.end();
+})
+
+router.route("/:id?")
+.delete(checkJwt, async (req, res) => {
+  await remove(req.params.id);
+
+  res.status(200);
   res.end();
 })
 

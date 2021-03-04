@@ -34,8 +34,8 @@ import {
         return { ...state, data: payload, isLoading: false };
       case EDIFICIO_CREATE_SUCCESS:
         return { ...state, dataSingle: payload };
-      //case FAVLIST_DELETE_SUCCESS:
-        //return { ...state, data };
+      case EDIFICIO_DELETE_SUCCESS:
+        return { ...state, data };
       default:
         return state;
     }

@@ -11,7 +11,7 @@ import Book from '../Images/Book.svg';
 import Camera from '../Images/Camera.svg';
 import BackArrow from '../Components/Geral/BackArrow';
 import {useAuth0} from "@auth0/auth0-react";
-import { getEdificio } from '../Store/Edificios/Actions';
+import { getEdificio, apagaEdificio } from '../Store/Edificios/Actions';
 import { getUtilizadorById } from '../Store/Utilizadores/Actions'
 import { useSelector, useDispatch } from 'react-redux';
 import Loading from '../Components/Geral/Loading';
@@ -173,7 +173,7 @@ function PaginaEdificio(props) {
 
     const deleteEdificio = () => {
         setShowModal(false);
-        console.log("Eliminar")
+        dispatch(apagaEdificio(edificio.id))
     }
 
     const _editEdificio = () => {
