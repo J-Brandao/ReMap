@@ -19,6 +19,8 @@ const SugestaoPicture = styled.div`
       width: 70px;
     `; 
 
+
+
 function SingleSugestao({ sugestao, tipo, utilizador }) {
   
   const [user, setUser] = useState({})
@@ -48,9 +50,9 @@ function SingleSugestao({ sugestao, tipo, utilizador }) {
     {tipo === 'perfil' ?
       <>
         <span className="col-3 p-0">
-          <SugestaoPicture imagem={imagem}/>
+          <SugestaoPicture className="my-2" imagem={imagem}/>
         </span>
-        <span className="col-9 pr-0">
+        <span className="col-9 pr-0 my-2">
           <p className="NomeComments">{user.nomeUtilizador}</p>
           <p className="textoComments">{sugestao.valor}</p>
         </span>
@@ -58,9 +60,9 @@ function SingleSugestao({ sugestao, tipo, utilizador }) {
     :
       <>
         <span className="col-3 p-0">
-          <SugestaoPicture imagem={imagem}/>
+          <SugestaoPicture className="my-2" imagem={imagem}/>
         </span>
-        <span className="col-9 pr-0">
+        <span className="col-9 pr-0 my-2">
           {utilizador === user.userId ?
             <Link className="m-0 p-0" to={{
                 pathname: `/perfil`,

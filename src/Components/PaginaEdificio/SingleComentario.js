@@ -17,7 +17,8 @@ const CommentPicture = styled.div`
       border: 2px solid #ffa801;
       min-height: 70px;
       width: 70px;
-    `; 
+    `;
+
 
 function SingleComentario({ comment, tipo, utilizador }) {
   
@@ -48,9 +49,9 @@ function SingleComentario({ comment, tipo, utilizador }) {
     {tipo === 'perfil' ?
     <>
       <span className="col-3 p-0">
-        <CommentPicture imagem={imagem}/>
+        <CommentPicture calssName="my-2" imagem={imagem}/>
       </span>
-      <span className="col-9 pr-0">
+      <span className="col-9 pr-0 my-2">
         <p className="NomeComments">{user.nomeUtilizador}</p>
         <p className="textoComments">{comment.valor}</p>
       </span>
@@ -58,9 +59,9 @@ function SingleComentario({ comment, tipo, utilizador }) {
     :
     <>
       <span className="col-3 p-0">
-        <CommentPicture imagem={imagem}/>
+        <CommentPicture className="my-2" imagem={imagem}/>
       </span>
-      <span className="col-9 pr-0">
+      <span className="col-9 pr-0 my-2">
         {utilizador === user.userId ?
           <Link className="m-0 p-0" to={{
               pathname: `/perfil`,
