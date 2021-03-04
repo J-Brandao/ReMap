@@ -11,7 +11,7 @@ import Book from '../Images/Book.svg';
 import Camera from '../Images/Camera.svg';
 import BackArrow from '../Components/Geral/BackArrow';
 import {useAuth0} from "@auth0/auth0-react";
-import { getEdificio } from '../Store/Edificios/Actions';
+import { getEdificio, apagaEdificio } from '../Store/Edificios/Actions';
 import { getUtilizadorById } from '../Store/Utilizadores/Actions'
 import { useSelector, useDispatch } from 'react-redux';
 import Loading from '../Components/Geral/Loading';
@@ -22,6 +22,7 @@ import { getComentariosListByBuilding } from '../Store/Comentarios/Actions';
 import { getSugestoesListByBuilding } from '../Store/Sugestoes/Actions';
 import UserEdificio from '../Components/PaginaEdificio/UserEdificio';
 import ModalEliminarEdificio from '../Components/Modal/ModalEliminarEdificio';
+import {useHistory} from "react-router-dom"
 
 
 const Div = styled.div`
@@ -100,6 +101,7 @@ margin:0;
 `
 
 function PaginaEdificio(props) {
+    const history = useHistory();
     const dispatch = useDispatch();
     const {user, isLoading, isAuthenticated, logout} = useAuth0()
     const [showDropdown, setShowDropDown] = useState(false);
@@ -173,7 +175,8 @@ function PaginaEdificio(props) {
 
     const deleteEdificio = () => {
         setShowModal(false);
-        console.log("Eliminar")
+        dispatch(apagaEdificio(edificio.id))
+        history.push("/homepage")
     }
 
     const _editEdificio = () => {
