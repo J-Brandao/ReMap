@@ -118,8 +118,10 @@ function PaginaEdificio(props) {
     const [isLoadingImages, setIsLoadingImages] = useState(true);
 
     const isLoadingComment = useSelector(({ Comentarios }) => Comentarios.isLoading)
-    const commentData = useSelector(({Comentarios}) => Comentarios.data)
-    
+    const commentData = useSelector(({ Comentarios }) => Comentarios.data)
+
+    const isLoadingCreationComment = useSelector(({Comentarios})=>Comentarios.isLoadingCreation)
+    const isLoadingCreationSugestion = useSelector(({Sugestoes})=>Sugestoes.isLoadingCreation)
 
     useEffect(() => {
         dispatch(getEdificio(props.match.params.id));
@@ -131,6 +133,13 @@ function PaginaEdificio(props) {
             dispatch(getUtilizadorById(user.email))
         }
     }, [user])
+    useEffect(() => {
+        dispatch(getComentariosListByBuilding(props.match.params.id));
+    }, [isLoadingCreationComment])
+    useEffect(() => {
+        dispatch(getSugestoesListByBuilding(props.match.params.id));
+    }, [isLoadingCreationSugestion])
+
 
     useEffect(() => {
         if (edificio && !isLoadingEdificio && edificio.fotos) {
@@ -228,9 +237,7 @@ function PaginaEdificio(props) {
                     
                         <Galeria fotos={imagens} />
                     
-                        <span className="col-12 mx-0 px-0 text-right mt-2">
-                            <button onClick={()=>logout()} className="botaoFotografia">Nova Fotografia</button>
-                        </span>
+                        
                 </section>
 
                 <Classificacao vandalismo={edificio.vandalismo} degradacao={edificio.degradacao} seguranca={edificio.seguranca} acesso={edificio.acesso}/>
@@ -268,7 +275,7 @@ function PaginaEdificio(props) {
             {seccao === 'Sugestões' ?
                 <Sugestoes utilizador={ownUser.id} edificio={edificio.id} isLoading={isLoadingSugestoes} sugestoes={sugestoes} userCheck={user.email}/>
                 :
-            <Comentarios utilizador={ownUser.id} edificio={edificio.id} isLoading={isLoadingComment} comments={commentData} userCheck={user.email}/>
+                    <Comentarios utilizador={ownUser.id} edificio={edificio.id} isLoading={isLoadingComment} comments={commentData} userCheck={user.email}/>
             }
             </div>
             <ModalEliminarEdificio show={showModal} onHide={handleClose} onDelete={deleteEdificio}/>    

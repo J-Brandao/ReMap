@@ -43,7 +43,9 @@ function Comentarios (props) {
             {props.isLoading ?
                 <CommentLoading />
                 :
+                
                 (<>
+                  {  console.log(props.comments)}
                     <span className="col-12 p-0">
                 <input className="form-control forms mb-2" 
                        type="text" aria-label="name"
