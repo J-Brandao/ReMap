@@ -45,9 +45,20 @@ function DetalhesSeccao (props) {
                                         alt="First slide"
                                     />
                                     <Carousel.Caption>
-                                        <Link to={`/edificio/${item.id}`} style={{textDecoration: 'none', color: 'white'}}>
-                                            <h3>{item.nome}</h3>
-                                        </Link>
+                                    <Link to={`/edificio/${item.id}`}>
+                                    <p
+              style={{
+                position: "absolute",
+                left: "50%",
+                bottom: 3,
+                color: "white",
+                transform: " translateX(-50%)",
+        
+              }}
+            >
+              {item.nome}
+            </p></Link>
+                                        
                                     </Carousel.Caption>
                                 </Carousel.Item>
                                 :

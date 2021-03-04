@@ -11,38 +11,45 @@ import {Modal,Button} from "react-bootstrap"
 function ModalEliminarEdificio (props) {
 
 
-    return (
-        <Modal
-          {...props}
-          size="lg"
-          aria-labelledby="contained-modal-title"
-          centered
-        >
-          <Modal.Header>
-            <Modal.Title id="contained-modal">
-            Deseja eliminar este edifício?
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <h4></h4>
-            <p
-            style={{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title"
+      centered
+    >
+      <Modal.Header>
+        <Modal.Title id="contained-modal">
+        Tem a certeza que pretende eliminar este edifíco?
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <h4></h4>
+        <p
+        style={{
+display: 'flex',
+alignItems: 'center',
+justifyContent: 'center',
 }} >
-            <Button variant="secondary" onClick={props.onHide}>Não</Button>
-            </p>
-            <p
-            style={{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+        <Button style={{
+
+}}
+variant="warning" onClick={props.activateAccount}>Não</Button>
+        </p>
+        <p
+        style={{
+display: 'flex',
+alignItems: 'center',
+justifyContent: 'center',
+color: '#cc0000',
 }} >
-            <Button variant="danger" onClick={props.onDelete}>Sim</Button></p>
-              </Modal.Body>
-          
-        </Modal>
+        <Button style={{
+
+}}variant="outline-danger" onClick={props.onHide}>Sim</Button></p>
+          </Modal.Body>
+      
+    </Modal>
+  
       );  
     
 };

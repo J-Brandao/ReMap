@@ -11,38 +11,30 @@ import {Modal,Button} from "react-bootstrap"
 function ModalEliminarPerfil (props) {
 
 
-    return (
-        <Modal
-          {...props}
-          size="lg"
-          aria-labelledby="contained-modal-title"
-          centered
-        >
-          <Modal.Header>
-            <Modal.Title id="contained-modal">
-            Deseja eliminar a sua conta?
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <h4></h4>
-            <p
-            style={{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}} >
-            <Button variant="secondary" onClick={props.onHide}>Não</Button>
-            </p>
-            <p
-            style={{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}} >
-            <Button variant="danger" onClick={props.onDelete}>Sim</Button></p>
-              </Modal.Body>
-          
-        </Modal>
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title"
+      centered
+    >
+      <Modal.Header>
+        <Modal.Title id="contained-modal">
+        Localização do edifício
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <h4></h4>
+        <p>
+          Já existe um edifício na localização selecionada, por favor tente novamente num novo local.
+        </p>
+      </Modal.Body>
+      <Modal.Footer>
+      <span className="w-100">
+          <button style={{float: 'right'}} class="botaoFotografia" onClick={props.onHide}>Confirmar</button>
+        </span>
+      </Modal.Footer>
+    </Modal>
       );  
     
 };
