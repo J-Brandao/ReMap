@@ -72,7 +72,7 @@ export const atualizaUtilizador = (docID = '', userId = '', imagemUser = '', nom
     }
   }
   
-  export const createNovoUtilizador = (userId = '', imagemUser = '', nomeUtilizador = '', biografia = '', pais = '', cidade = '', role='normal', active=true) => {
+  export const createNovoUtilizador = (userId = '', imagemUser = 'Placeholder.png', nomeUtilizador = '', biografia = '', pais = '', cidade = '', role='normal', active=true) => {
     return (dispatch, getState) => {
       dispatch({ type: UTILIZADOR_CREATE_START });
 
