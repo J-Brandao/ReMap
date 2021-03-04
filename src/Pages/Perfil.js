@@ -12,7 +12,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Loading from '../Components/Geral/Loading';
 import { storage } from '../Firebase/FbConfig';
 import { useHistory } from "react-router-dom"
-import ModalEdificioCoordenadas from "../Components/Modal/ModalEdificioCoordenadas"
+import ModalEliminarUtilizador from "../Components/Modal/ModalEliminarUtilizador"
 import useAuthentication from "../Firebase/useAuthentication"
 import {Link} from "react-router-dom"
 
@@ -145,7 +145,7 @@ function Perfil(props) {
                 <Line/>
                 <ButtonOptions onClick={_logout}>Logout</ButtonOptions>
                 <Line />
-                <ButtonOptions onClick={handleShow} eliminar> Eliminar conta </ButtonOptions>
+                <ButtonOptions onClick={handleShow} eliminar> Desativar conta </ButtonOptions>
                             
         
             </DropDown>
@@ -188,7 +188,7 @@ function Perfil(props) {
            <Interacoes userId={utilizador.id} urlId={props.location.state ? props.location.state.id : utilizador.id} utilizador={user.email}/>
             </Div>
             
-            <ModalEdificioCoordenadas show={showModal} onHide={handleClose} onDelete={deleteProfile}/>
+            <ModalEliminarUtilizador show={showModal} onHide={handleClose} onDelete={deleteProfile}/>
         </>
     )
 }
