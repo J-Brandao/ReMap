@@ -1,13 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import styled from 'styled-components';
 import '../../Styles/Perfil.css';
 import {Carousel} from 'react-bootstrap';
-import imgCarousel1 from '../../Images/ImgCarousel1.jpg';
-import imgCarousel2 from '../../Images/ImgCarousel2.jpg';
-import Perfil from '../../Images/Perfil.jpg';
 import SingleSugestao from '../PaginaEdificio/SingleSugestao'
 import SingleComentario from '../PaginaEdificio/SingleComentario'
 import { storage } from '../../Firebase/FbConfig';
+import { Link } from 'react-router-dom';
+
 
 function DetalhesSeccao (props) {
 
@@ -23,24 +21,12 @@ function DetalhesSeccao (props) {
              props.edificios.map(item => {
             
             storage.ref('imagensEdificios').child(`${item.fotos[0]}`).getDownloadURL().then((url) => {
-                console.log(url)
-                setImagens([...imagens, url])
+                setImagens([...imagens, {url: url, nome: item.nomeEdificio, id: item.id}])
             })
         })
         }
        
     }, [])
-
-    const CommentPicture = styled.div`
-      margin: 0 auto;
-      background-image: url(${Perfil});
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-      border-radius: 50%;
-      min-height: 70px;
-      width: 70px;
-    `;  
 
     return(
         <div className="row col-12 m-0 p-0">
@@ -55,9 +41,14 @@ function DetalhesSeccao (props) {
                                 <Carousel.Item className="divCarousel">
                                     <img
                                         className="d-block imgCarousel"
-                                        src={item}
+                                        src={item.url}
                                         alt="First slide"
                                     />
+                                    <Carousel.Caption>
+                                        <Link to={`/edificio/${item.id}`} style={{textDecoration: 'none', color: 'white'}}>
+                                            <h3>{item.nome}</h3>
+                                        </Link>
+                                    </Carousel.Caption>
                                 </Carousel.Item>
                                 :
                                 <></>

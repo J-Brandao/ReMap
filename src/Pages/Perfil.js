@@ -174,7 +174,11 @@ function Perfil(props) {
            </section>
            <section className="row col-12 m-0 p-0">
                 <h5 id="seccaoTitulo" className="col-12 px-0">Biografia</h5>
-                <p id="biografiaTexto" className="col-12 px-0">{utilizador.biografia}</p>
+                {!utilizador.biografia ? 
+                    <p id="biografiaTexto" className="col-12 px-0">Este utilizador ainda não acrescentou uma biografia.</p>
+                    :
+                    <p id="biografiaTexto" className="col-12 px-0">{utilizador.biografia}</p>  
+                }
            </section>
 
            <Trofeus/>
