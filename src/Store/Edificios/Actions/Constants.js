@@ -14,6 +14,10 @@ export const EDIFICIO_CREATE_START = 'edificio/create:start';
 export const EDIFICIO_CREATE_SUCCESS = 'edificio/create:success';
 export const EDIFICIO_CREATE_ERROR = 'edificio/create:error';
 
+export const EDIFICIO_UPDATE_START = 'edificio/update:start';
+export const EDIFICIO_UPDATE_SUCCESS = 'edificio/update:success';
+export const EDIFICIO_UPDATE_ERROR = 'edificio/update:error';
+
 export const EDIFICIO_DELETE_START = 'edificio/delete:start';
 export const EDIFICIO_DELETE_SUCCESS = 'edificio/delete:success';
 export const EDIFICIO_DELETE_ERROR = 'edificio/delete:error';

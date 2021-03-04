@@ -14,12 +14,16 @@ import {
     EDIFICIO_CREATE_START,
     EDIFICIO_CREATE_SUCCESS,
     EDIFICIO_CREATE_ERROR,
+
+    EDIFICIO_UPDATE_START,
+    EDIFICIO_UPDATE_SUCCESS,
+    EDIFICIO_UPDATE_ERROR,
   
     EDIFICIO_DELETE_START,
     EDIFICIO_DELETE_SUCCESS,
     EDIFICIO_DELETE_ERROR,
   } from './Constants';
-  import { fetchEdificioList, fetchEdificio, createEdificio, fetchEdificioForPerfil, deleteEdificio } from "../../../Firebase/Pedidos"
+  import { fetchEdificioList, fetchEdificio, createEdificio, fetchEdificioForPerfil, deleteEdificio, updateEdificio } from "../../../Firebase/Pedidos"
   
   export const getEdificioList = () => {
     return (dispatch) => {
@@ -64,6 +68,17 @@ import {
           dispatch({ type: EDIFICIO_CREATE_SUCCESS, payload: Edificio })
         })
         .catch(() => dispatch({ type: EDIFICIO_CREATE_ERROR }))
+    }
+  }
+
+  export const atualizaEdificio = (docID = '', userId = '', date='', nomeEdificio = '', descricao = '', fotos = '', localizacao = '', degradacao = '', acesso = '', seguranca = '', vandalismo = '') => {
+    return (dispatch, getState) => {
+      dispatch({ type: EDIFICIO_UPDATE_START });
+      updateEdificio(getState().token, docID, userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo)
+        .then(Info => {
+          dispatch({ type: EDIFICIO_UPDATE_SUCCESS, payload: Info })
+        })
+        .catch(() => dispatch({ type: EDIFICIO_UPDATE_ERROR }))
     }
   }
 

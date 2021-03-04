@@ -1,4 +1,6 @@
 const getFirestore = require("../Utils/getFirestore");
+const getCollection = require("../utils/getCollection")
+const getDocumentFromCollection = require("../utils/getDocFromCol")
 
 module.exports = {
   get: async (id) =>  {
@@ -69,5 +71,22 @@ module.exports = {
 
     const edificioRef = edificioCollectionRef.doc(id);
     await edificioRef.delete();
-  }
+  },
+  update: async (id, body) => {
+    if (!id) {
+      throw new Error("An ID must be provided");
+    }
+
+    if (!body) {
+      throw new Error("A body must be provided");
+    }
+
+    console.log(body)
+
+    const coll = getCollection("Edifícios");
+    const doc = getDocumentFromCollection(coll, id);
+
+    await doc.update(body);
+    return true;
+  },
 }

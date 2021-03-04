@@ -22,6 +22,16 @@ export const createEdificio = (token, userId, date, nomeEdificio, descricao, fot
     body: JSON.stringify({ userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo })
   }).then(response => console.log(response.json()));
 
+  export const updateEdificio = (token, docID, userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo) =>
+  fetch(`http://localhost:3001/edificio/${docID}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo })
+  }).then(response => response.json());
+
 export const deleteEdificio = (token, id) =>
   fetch(`http://localhost:3001/edificio/${id}`, {
     method: 'DELETE',

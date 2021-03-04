@@ -12,6 +12,7 @@ import EditarUtilizador from './Pages/EditarUtilizador';
 import FinalizarUtilizador from './Pages/FinalizarUtilizador';
 import PerfilOutros from './Pages/PerfilOutros';
 import GamehubOutros from './Pages/GamehubOutros';
+import EditarEdificio from './Pages/EditarEdificio';
 import './Styles/Geral.css';
 import { Auth0Provider } from "@auth0/auth0-react";
 import Error404 from './Components/Geral/404';
@@ -40,6 +41,7 @@ function App() {
         <Route exact path="/finalizar" component={FinalizarUtilizador} />
           <Route exact path="/mapeador/:id" component={PerfilOutros} />
           <Route exact path="/gamehub/:id" component={GamehubOutros} />
+          <Route exact path="/editarEdificio/:id" component={EditarEdificio} />
         <Route component={Error404}/>
         
       </Switch>

@@ -6,6 +6,7 @@ import {
     EDIFICIOS_PERFIL_GET_START,
     EDIFICIOS_PERFIL_GET_SUCCESS,
     EDIFICIO_CREATE_SUCCESS,
+    EDIFICIO_UPDATE_SUCCESS,
     EDIFICIO_DELETE_SUCCESS
   } from '../Actions/Constants'
   
@@ -34,6 +35,14 @@ import {
         return { ...state, data: payload, isLoading: false };
       case EDIFICIO_CREATE_SUCCESS:
         return { ...state, dataSingle: payload };
+      case EDIFICIO_UPDATE_SUCCESS:
+        data = state.data.map((edificio) => {
+          if (edificio.id !== payload.id) {
+            return edificio;
+          }
+  
+          return payload;
+        });
       case EDIFICIO_DELETE_SUCCESS:
         return { ...state };
       default:
