@@ -13,7 +13,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Loading from '../Components/Geral/Loading';
 import { storage } from '../Firebase/FbConfig';
 import FriendButton from '../Components/Geral/FriendButton';
-import useAuthentication from '../Firebase/useAuthentication';
+import useAuthentication from '../Firebase/useAuthentication'; 
+import {Link} from "react-router-dom"
 
 
 const Div = styled.div`
@@ -61,7 +62,6 @@ function PerfilOutros(props) {
     },[utilizador])
     
     if (isLoading || isLoadingSelf) {
-        console.log(isLoadingSelf)
         return (
             <Loading/>
         )
@@ -89,7 +89,9 @@ function PerfilOutros(props) {
                 }
            </section>
 
-           <Trofeus/>
+            <Link style={{textDecoration: 'none', color:'#34495e'}} to={`/gamehub/${utilizador.id}`}>
+            <Trofeus />
+            </Link>
 
             <Interacoes userId={utilizador.id} urlId={props.match.params.id}/>
         </Div>

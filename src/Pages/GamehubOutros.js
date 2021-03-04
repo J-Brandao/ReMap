@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
+import Back from '../Images/BackArrow.svg';
 import Perfil from '../Images/Perfil.jpg';
 import '../Styles/Gamehub.css';
 import {ProgressBar} from 'react-bootstrap';
 import Trofeus from '../Components/Perfil/Trofeus';
+import Placeholder from '../Images/Placeholder.jpg';
 import Ideia from '../Images/Ideia.svg';
 import BrokenHouseGH from '../Images/BrokenHouse.svg';
 import CameraGH from '../Images/CameraStats.svg';
@@ -17,13 +19,11 @@ import Book from '../Images/Book.svg';
 import CheckMark from '../Images/CheckMark.svg';
 import Spray from '../Images/Spray.svg';
 import BackArrow from '../Components/Geral/BackArrow'
-import '../Styles/Perfil.css'
-import Placeholder from '../Images/Placeholder.jpg';
-import { useSelector, useDispatch } from 'react-redux';
-import { getUtilizadorById} from '../Store/Utilizadores/Actions';
+import { getUtilizadorForPerfil, getUtilizadorById } from '../Store/Utilizadores/Actions';
 import { useAuth0 } from '@auth0/auth0-react';
-import Loading from '../Components/Geral/Loading';
+import { useSelector, useDispatch } from 'react-redux';
 import { storage } from '../Firebase/FbConfig';
+import Loading from '../Components/Geral/Loading';
 
 
 const Div = styled.div`
@@ -42,36 +42,42 @@ const ProfilePicture = styled.div`
     width: 70px;
 `;  
 
-function Gamehub() {
+function Gamehub (props) {
 
-    const utilizador = useSelector(({Utilizadores})=> Utilizadores.ownUser)
-    const isLoadingUtilizador = useSelector(({Utilizadores})=> Utilizadores.isLoadingSelf)
-    const dispatch = useDispatch();
-    const { user, isLoading, isAuthenticated} = useAuth0();
+  const { user, isLoading, isAuthenticated } = useAuth0();
     const [imagem, setImagem] = useState(null)
+    const utilizador = useSelector(({ Utilizadores }) => Utilizadores.user)
+    const isLoadingSelf = useSelector(({ Utilizadores }) => Utilizadores.isLoadingSelf)
+    const ownUser = useSelector(({Utilizadores})=> Utilizadores.ownUser)
+    const dispatch = useDispatch();
 
-
-    
     useEffect(() => {
-        if (user && !isLoading && isAuthenticated) {
-            dispatch(getUtilizadorById(user.email))
+        setImagem(null)
+        dispatch(getUtilizadorForPerfil(props.match.params.id))    
+
+        if (Object.keys(ownUser).length === 0) {
+            if (!isLoading && user) {
+                dispatch(getUtilizadorById(user.email))
+            }
         } 
-    },[user])
-    useEffect(() => {
+    }, [isLoading])
+
+  useEffect(() => {
         if (utilizador && !isLoading && isAuthenticated) {
             storage.ref('imagensUtilizadores').child(`${utilizador.imagemUser}`).getDownloadURL().then((url) => {
                 setImagem(url)
             })
-        }  
-    }, [utilizador])
+        }
+        
+    },[utilizador])
     
-
-    if(isLoading || isLoadingUtilizador) {
+    if (isLoading || isLoadingSelf) {
+  
         return (
             <Loading/>
         )
-    }
-
+  }
+  
     return(
         <div className="m-0 p-0">
             <Div>
@@ -85,7 +91,7 @@ function Gamehub() {
             </section>
             <section className="row col-12 m-0 mb-4 p-0">
                     <div className="col-3 p-0">
-                        <ProfilePicture  style={{backgroundImage:`url(${imagem !== null ? imagem : Placeholder})`}}/>
+                        <ProfilePicture style={{backgroundImage:`url(${imagem !== null ? imagem : Placeholder})`}}/>
                     </div>
                     <div className="col-9 pr-0">
                         <span className="row col-12 m-0 p-0">
