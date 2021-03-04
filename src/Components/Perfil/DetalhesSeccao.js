@@ -19,10 +19,14 @@ function DetalhesSeccao (props) {
     useEffect(() => {
         if (props.edificios.length>0) {
              props.edificios.map(item => {
-            
-            storage.ref('imagensEdificios').child(`${item.fotos[0]}`).getDownloadURL().then((url) => {
-                setImagens([...imagens, {url: url, nome: item.nomeEdificio, id: item.id}])
+                 if (imagens.length < props.edificios.length) {
+                     storage.ref('imagensEdificios').child(`${item.fotos[0]}`).getDownloadURL().then((url) => {
+                         const newArray = imagens;
+                         newArray.push({url: url, nome: item.nomeEdificio, id: item.id})
+                setImagens(newArray)
             })
+            }
+            
         })
         }
        
