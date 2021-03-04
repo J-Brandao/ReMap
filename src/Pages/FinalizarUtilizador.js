@@ -86,20 +86,24 @@ function FinalizarUtilizador () {
 
     const onCreateNovoUtilizador = (userId, imagemUser, nomeUtilizador, biografia,  cidade) => {
 
-        let date = new Date();
-        let timestamp = date.getTime();
-        let newName = imagemUser.name + "_imagem_" + timestamp;
+        if(imagemUser !== 'Placeholder.jpg') {
+            let date = new Date();
+            let timestamp = date.getTime();
+            let newName = imagemUser.name + "_imagem_" + timestamp;
 
         dispatch(createNovoUtilizador(userId, newName, nomeUtilizador, biografia,  cidade));
 
-        const uploadTask = storage.ref(`imagensUtilizadores/${newName}`).put(imagemUser);
-        uploadTask.on(
-        "state_changed",
-        snapshot => {
-        },
-        error => {
-            console.log(error);
-        });
+            const uploadTask = storage.ref(`imagensUtilizadores/${newName}`).put(imagemUser);
+            uploadTask.on(
+            "state_changed",
+            snapshot => {
+            },
+            error => {
+                console.log(error);
+            });
+        } else {
+            dispatch(createNovoUtilizador(userId, imagemUser, nomeUtilizador, biografia, cidade));
+        }
     }
 
     useAuthentication();

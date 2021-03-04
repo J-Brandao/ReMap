@@ -190,7 +190,7 @@ function PaginaEdificio(props) {
 
     const _editEdificio = () => {
         setShowDropDown(false);
-        console.log("editEdificio")
+        history.push(`/editarEdificio/${edificio.id}`)
 
     }
 
