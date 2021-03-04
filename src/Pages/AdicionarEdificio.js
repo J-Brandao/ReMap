@@ -11,6 +11,7 @@ import Loading from '../Components/Geral/Loading';
 import { useAuth0 } from '@auth0/auth0-react';
 import useAuthentication from '../Firebase/useAuthentication';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import ModalEdificioNovo from "../Components/Modal/ModalEdificioNovo"
 
 const TiposAceites = 'image/x-png, image/png, image/jpg, image/jpeg';
 const arrayTiposAceites = TiposAceites.split(",").map((item) => {
@@ -38,6 +39,7 @@ function AdicionarEdificio (props) {
     const EdificioList = useSelector(({ Edificios }) => Edificios.data);
     const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading);
     const [imagem, setImagem] = useState([]);
+    const [showModal, setShowModal] = useState(false)
     const [valores, setValores] = useState({
         nomeEdificio: '',
         descricao: '',
@@ -128,7 +130,14 @@ function AdicionarEdificio (props) {
 
         //Envia Informação para a firebase
         dispatch(createNovoEdificio(userId, dataFinal, nomeEdificio, descricao, arrayNomes, localizacao, degradacao, acesso, seguranca, vandalismo));
+        setShowModal(true);
     }
+
+    const closeModal = () => {
+        setShowModal(false)
+        history.push("/homepage")
+    }
+
 
     useAuthentication();
 
@@ -138,7 +147,8 @@ function AdicionarEdificio (props) {
         )
     }
 
-    return(
+    return (
+        <>
         <Div>
             <section className="row col-12 m-0 p-0">
                 <BackArrow isGoingBack={true}/>
@@ -234,7 +244,9 @@ function AdicionarEdificio (props) {
                   }
                 `}
             </style>
-        </Div>
+            </Div>
+            <ModalEdificioNovo show={showModal} onHide={closeModal} />
+        </>
     )
 }
 

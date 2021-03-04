@@ -2,7 +2,6 @@ import React from "react"
 import styled from 'styled-components'
 import Broken from '../../Images/BrokenHouse.svg';
 import Background from '../../Images/Background2.svg';
-import Logo from '../../Images/check.png';
 import {Modal,Button} from "react-bootstrap"
 
 

@@ -182,7 +182,7 @@ function EditarUtilizador () {
                         <select 
                             className="form-control forms mb-3" 
                             type="text" aria-label="pais"
-                            defaultValue={valores.pais}
+                            value={valores.pais}
                             onChange={handleChange('pais')}
                             placeholder="Selecione um país">
                                 <option value="" disabled>Selecione um país</option>
@@ -443,7 +443,7 @@ function EditarUtilizador () {
                         <select 
                             className="form-control forms mb-3" 
                             type="text" aria-label="cidade"
-                            defaultValue={valores.cidade}
+                            value={valores.cidade}
                             onChange={handleChange('cidade')}
                             placeholder="Selecione um distrito">
                                     <option value="" disabled>Selecione um Distrito</option>

@@ -25,7 +25,7 @@ import {
       case EDIFICIOS_GET_SUCCESS:
         return { ...state, data: payload, isLoading: false };
       case EDIFICIO_GET_START:
-        return { ...state, isLoading: true };
+        return { ...state, isLoadingSelf: true };
       case EDIFICIO_GET_SUCCESS:
         return { ...state, dataSingle: payload, isLoadingSingle: false };
       case EDIFICIOS_PERFIL_GET_START:
@@ -33,7 +33,7 @@ import {
       case EDIFICIOS_PERFIL_GET_SUCCESS:
         return { ...state, data: payload, isLoading: false };
       case EDIFICIO_CREATE_SUCCESS:
-        return { ...state, data: payload };
+        return { ...state, dataSingle: payload };
       //case FAVLIST_DELETE_SUCCESS:
         //return { ...state, data };
       default:
