@@ -12,7 +12,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Loading from '../Components/Geral/Loading';
 import { storage } from '../Firebase/FbConfig';
 import { useHistory } from "react-router-dom"
-import ModalEliminarPerfil from "../Components/Modal/ModalEliminarPerfil"
+import ModalEdificioCoordenadas from "../Components/Modal/ModalEdificioCoordenadas"
 import useAuthentication from "../Firebase/useAuthentication"
 import {Link} from "react-router-dom"
 

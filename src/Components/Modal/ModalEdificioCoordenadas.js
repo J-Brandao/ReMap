@@ -8,7 +8,7 @@ import {Modal,Button} from "react-bootstrap"
 
 
 
-function ModalEliminarPerfil (props) {
+function ModalEdificioCoordenadas (props) {
 
 
   return (
@@ -39,5 +39,5 @@ function ModalEliminarPerfil (props) {
     
 };
 
-export default ModalEliminarPerfil
+export default ModalEdificioCoordenadas
 

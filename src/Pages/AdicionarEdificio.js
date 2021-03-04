@@ -11,7 +11,8 @@ import Loading from '../Components/Geral/Loading';
 import { useAuth0 } from '@auth0/auth0-react';
 import useAuthentication from '../Firebase/useAuthentication';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
-import ModalEdificioNovo from "../Components/Modal/ModalEdificioNovo"
+import ModalEdificioNovo from "../Components/Modal/ModalEdificioNovo";
+import ModalEdificioCoordenadas from '../Components/Modal/ModalEdificioCoordenadas'
 
 const TiposAceites = 'image/x-png, image/png, image/jpg, image/jpeg';
 const arrayTiposAceites = TiposAceites.split(",").map((item) => {
@@ -39,7 +40,8 @@ function AdicionarEdificio (props) {
     const EdificioList = useSelector(({ Edificios }) => Edificios.data);
     const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading);
     const [imagem, setImagem] = useState([]);
-    const [showModal, setShowModal] = useState(false)
+    const [showModal, setShowModal] = useState(false);
+    const [showModalVer, setShowModalVer] = useState(false);
     const [valores, setValores] = useState({
         nomeEdificio: '',
         descricao: '',
@@ -53,7 +55,7 @@ function AdicionarEdificio (props) {
 
     useEffect(() => {
         if(!props.location.state){
-            history.push('/homepage');
+            setShowModalVer(true)
         } else {
             dispatch(getEdificioList())
             valores.localizacao = props.location.state.localizacao;
@@ -64,7 +66,7 @@ function AdicionarEdificio (props) {
         if(EdificioList) {
             EdificioList.map(edificio => {
                 if(edificio.localizacao[0] === valores.localizacao[0] && edificio.localizacao[1] === valores.localizacao[1]){
-                    history.push('/homepage');
+                    setShowModalVer(true)
                 }
             })
         }
@@ -135,6 +137,10 @@ function AdicionarEdificio (props) {
 
     const closeModal = () => {
         setShowModal(false)
+        history.push("/homepage")
+    }
+    const closeModalVer = () => {
+        setShowModalVer(false)
         history.push("/homepage")
     }
 
@@ -246,6 +252,7 @@ function AdicionarEdificio (props) {
             </style>
             </Div>
             <ModalEdificioNovo show={showModal} onHide={closeModal} />
+            <ModalEdificioCoordenadas show={showModalVer} onHide={closeModalVer} />
         </>
     )
 }
