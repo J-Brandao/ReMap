@@ -81,7 +81,7 @@ module.exports = {
       throw new Error("A body must be provided");
     }
 
-    console.log(body)
+  
 
     const coll = getCollection("Edifícios");
     const doc = getDocumentFromCollection(coll, id);

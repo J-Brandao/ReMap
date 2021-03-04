@@ -131,7 +131,7 @@ function ListaUtilizadores(props) {
         return (
          
             <span className="row col-12 m-0 mt-3 p-0 divUtilizador">
-                {console.log(props.user.role)}
+                
             <div className="col-3 p-0">
                 <ProfilePicture style={{backgroundImage: `url(${imagem !== null ? imagem : Placeholder})`}}/>
             </div>

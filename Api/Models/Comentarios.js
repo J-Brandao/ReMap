@@ -5,7 +5,6 @@ module.exports = {
     const db = getFirestore();
     const comentarioCollectionRef = db.collection("Comentarios");
     const result = await comentarioCollectionRef.where("edificioId", "==", buildingId).get();
-    console.log(result)
     const comentarios = result.docs.map(doc => ({
         ...doc.data(),
         id: doc.id

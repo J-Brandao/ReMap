@@ -20,7 +20,7 @@ export const createEdificio = (token, userId, date, nomeEdificio, descricao, fot
       Authorization: `Bearer ${token}`
     },
     body: JSON.stringify({ userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo })
-  }).then(response => console.log(response.json()));
+  }).then(response => response.json());
 
   export const updateEdificio = (token, docID, userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo) =>
   fetch(`http://localhost:3001/edificio/${docID}`, {
@@ -125,7 +125,7 @@ fetch(`http://localhost:3001/comentarios`, {
     Authorization: `Bearer ${token}`
   },
   body: JSON.stringify({ userId, valor, edificioId })
-}).then(response => console.log(response.json()));
+}).then(response => response.json());
 
 //SUGESTÕES
 
@@ -145,4 +145,4 @@ fetch(`http://localhost:3001/sugestoes`, {
     Authorization: `Bearer ${token}`
   },
   body: JSON.stringify({ userId, valor, edificioId })
-}).then(response => console.log(response.json()));
+}).then(response => response.json());

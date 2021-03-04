@@ -90,7 +90,7 @@ if(isLoading || isLoadingSelf || isLoadingUtilizadores || isLoadingEdicao) {
             <div className="m-0 p-0">
                 <Pesquisa onChange={onChange} value={value}/>
             </div>
-            {console.log(ownUser.id)}
+          
                     <Link className="m-0 p-0" to={{
                         pathname: `/perfil`,
                         state: {

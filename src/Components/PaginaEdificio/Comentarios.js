@@ -45,7 +45,7 @@ function Comentarios (props) {
                 :
                 
                 (<>
-                  {  console.log(props.comments)}
+                  
                     <span className="col-12 p-0">
                 <input className="form-control forms mb-2" 
                        type="text" aria-label="name"

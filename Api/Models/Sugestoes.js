@@ -5,7 +5,7 @@ module.exports = {
     const db = getFirestore();
     const sugestaoCollectionRef = db.collection("Sugestao");
     const result = await sugestaoCollectionRef.where("edificioId", "==", buildingId).get();
-    console.log(result)
+   
     const sugestoes = result.docs.map(doc => ({
         ...doc.data(),
         id: doc.id

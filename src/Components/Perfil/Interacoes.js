@@ -29,7 +29,7 @@ function Interacoes ({userId, urlId}) {
     const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading);
     
     useEffect(() => {
-        console.log(userId, urlId)
+        
         if(userId == urlId){
             dispatch(getComentariosListByUser(userId));
             dispatch(getSugestoesListByUser(userId));
@@ -50,7 +50,7 @@ function Interacoes ({userId, urlId}) {
     return(
         <>
         <section className="row col-12 m-0 p-0">
-            {console.log(commentData, EdificioList, sugestoes)}
+         
             <h5 className="col-12 p-0 mb-3" id="seccaoTitulo">As minhas interações</h5>
             <span onClick = {() => MudaSeccao('Edifícios Adicionados')} className="col-4 m-0 p-0 text-center">
                 {seccao === 'Edifícios Adicionados' ?

@@ -60,7 +60,7 @@ import {
   }
 
 export const atualizaUtilizador = (docID = '', userId = '', imagemUser = '', nomeUtilizador = '', biografia = '', cidade = '', role = 'normal', active) => {
-    console.log(active)
+   
     return (dispatch, getState) => {
       dispatch({ type: UTILIZADOR_UPDATE_START });
 

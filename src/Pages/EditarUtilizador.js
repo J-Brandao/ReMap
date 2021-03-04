@@ -109,7 +109,7 @@ function EditarUtilizador () {
             let date = new Date();
             let timestamp = date.getTime();
             let newName = imagemUser.name + "_imagem_" + timestamp;
-            console.log(imagemUser, newName)
+            
 
             dispatch(atualizaUtilizador(docId, userId, newName, nomeUtilizador, biografia,  cidade));
 
@@ -128,7 +128,7 @@ function EditarUtilizador () {
 
     useAuthentication()
 
-    console.log(isLoading, isLoadingUser)
+   
     if(isLoading || isLoadingUser) {
         return (
             <Loading />
