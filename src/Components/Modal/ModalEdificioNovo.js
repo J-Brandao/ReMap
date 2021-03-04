@@ -27,11 +27,9 @@ function ModalEliminarPerfil (props) {
         <p>
           Obrigado por ter adicionado mais um edifício ao ReMap!
         </p>
-<button style={{
-position: 'absolute',
-bottom:10,
-left:284,
-}}class="botaoFotografia" onClick={props.onHide}>Confirmar</button>
+        <span className="w-100">
+          <button style={{float: 'right'}} class="botaoFotografia" onClick={props.onHide}>Confirmar</button>
+        </span>
       </Modal.Body>
       
       
