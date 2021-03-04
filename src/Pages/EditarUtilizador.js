@@ -1,5 +1,6 @@
 import React, {useState, useEffect}  from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {useHistory} from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react';
 import styled from 'styled-components';
 import Background from '../Images/Background2.svg';
@@ -10,6 +11,7 @@ import { storage } from '../Firebase/FbConfig';
 import Loading from '../Components/Geral/Loading';
 import useAuthentication from '../Firebase/useAuthentication';
 import BackArrow from '../Components/Geral/BackArrow'
+import ModalEditarUtilizador from '../Components/Modal/ModalEditarUtilizador';
 
 const TiposAceites = 'image/x-png, image/png, image/jpg, image/jpeg';
 const arrayTiposAceites = TiposAceites.split(",").map((item) => {
@@ -41,6 +43,7 @@ const ProfilePicture = styled.div`
 
 function EditarUtilizador () {
 
+    const history = useHistory();
     const { user, isLoading, isAuthenticated } = useAuth0();
     const dispatch = useDispatch();
     const [valores, setValores] = useState({
@@ -51,6 +54,7 @@ function EditarUtilizador () {
         cidade: '',
     });
     const [imagem, setImagem] = useState(null);
+    const [showModal, setShowModal] = useState(false);
     const ownUser = useSelector(({Utilizadores})=> Utilizadores.ownUser)
     const isLoadingUser = useSelector(({Utilizadores}) => Utilizadores.isLoadingSelf)
 
@@ -132,8 +136,23 @@ function EditarUtilizador () {
             <Loading />
         )
     }
+    
+    const onConfirm = (valores) => {
+        onAtualizaUtilizador(ownUser.id, user.email, valores.imagemUser, valores.nomeUtilizador, valores.biografia, valores.pais, valores.cidade)
+        setShowModal(true)
+    }
+    const onClose = () => {
+        setShowModal(false);
+        history.push({
+            pathname: `/perfil`,
+            state: {
+                id: ownUser.id
+            }
+            });
+    }
 
-    return(
+    return (
+        <>
         <Fundo>
             <Div>
                 <section className="m-0 p-0 w-100">
@@ -469,7 +488,7 @@ function EditarUtilizador () {
                             valores.nomeUtilizador !== '' && valores.cidade !== '' && valores.pais !== '' ?
                             <button 
                             className="botaoSubmeter mt-4"
-                            onClick={() => onAtualizaUtilizador(ownUser.id, user.email, valores.imagemUser, valores.nomeUtilizador, valores.biografia, valores.pais, valores.cidade)} 
+                            onClick={()=>onConfirm(valores)} 
                             >Confirmar</button>
                             :
                             <button 
@@ -481,6 +500,8 @@ function EditarUtilizador () {
                 </section>
             </Div>
         </Fundo>
+            <ModalEditarUtilizador show={showModal} onHide={onClose}/>
+        </>
     )
 }
 
