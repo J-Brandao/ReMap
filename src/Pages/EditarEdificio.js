@@ -11,6 +11,7 @@ import Loading from '../Components/Geral/Loading';
 import { useAuth0 } from '@auth0/auth0-react';
 import useAuthentication from '../Firebase/useAuthentication';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import ModalEditarEdificio from '../Components/Modal/ModalEditarEdificio';
 
 const TiposAceites = 'image/x-png, image/png, image/jpg, image/jpeg';
 const arrayTiposAceites = TiposAceites.split(",").map((item) => {
@@ -126,7 +127,14 @@ function EditarEdificio (props) {
 
         //Envia Informação para a firebase
         dispatch(atualizaEdificio(edificioId, userId, data, nomeEdificio, descricao, arrayNomes, localizacao, degradacao, acesso, seguranca, vandalismo));
-        //setShowModal(true);
+        setShowModal(true);
+    }
+
+    const onClose = () => {
+        setShowModal(false);
+        history.push({
+            pathname: `/homepage`,
+            });
     }
 
 
@@ -187,12 +195,16 @@ function EditarEdificio (props) {
                     }
                     <div className="col-12 m-0 mb-5 p-0" style={{width: '100%', height: '175px'}}>
                         <span className="seccaoTitulo">Localização do edifício</span>
-                        <MapContainer center={valores.localizacao !=='' ? [valores.localizacao[0], valores.localizacao[1]] : [0, 0]} zoom={15}>
-                            <TileLayer
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                            />
-                            <Marker position={[valores.localizacao[0], valores.localizacao[1]]}></Marker>
-                        </MapContainer>
+                        {valores.localizacao !=='' ?
+                            <MapContainer center={valores.localizacao !=='' ? [valores.localizacao[0], valores.localizacao[1]] : [0, 0]} zoom={15}>
+                                <TileLayer
+                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                />
+                                <Marker position={[valores.localizacao[0], valores.localizacao[1]]}></Marker>
+                            </MapContainer>
+                        :
+                        <></>
+                        }
                     </div>
                     <span className="col-12 m-0 p-0">
                         <span className="seccaoTitulo">Estado do edifício<span className="obrigatorio">*</span></span>
@@ -238,6 +250,7 @@ function EditarEdificio (props) {
                 `}
             </style>
             </Div>
+            <ModalEditarEdificio show={showModal} onHide={onClose}/>
         </>
     )
 }

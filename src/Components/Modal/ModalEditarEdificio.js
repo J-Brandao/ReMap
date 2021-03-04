@@ -25,7 +25,7 @@ function ModalEditarEdificio (props) {
           <Modal.Body>
             <h4></h4>
             <p>
-              A sua edição do edifício foi sumbetida e está agora visível!
+              A sua edição do edifício foi submetida e está agora visível!
             </p>
           </Modal.Body>
           <Modal.Footer>
