@@ -57,3 +57,15 @@
   height: 50px;
   width: auto;
 }
+
+.btnTeam {
+  background-color: #cce6c1;
+  border: solid 1px #62b240;
+  height: 81px;
+}
+
+.nomeEquipa {
+  font-size: 24px;
+  color: #34495e;
+  vertical-align: middle;
+}

@@ -16,7 +16,9 @@ import ArrowMap from '../Images/ArrowMap.svg';
 import Book from '../Images/Book.svg';
 import CheckMark from '../Images/CheckMark.svg';
 import Spray from '../Images/Spray.svg';
-import BackArrow from '../Components/Geral/BackArrow'
+import BackArrow from '../Components/Geral/BackArrow';
+import Architect from '../Images/architect.svg';
+import ArrowTeam from '../Images/Arrow2.svg';
 import '../Styles/Perfil.css'
 import Placeholder from '../Images/Placeholder.jpg';
 import { useSelector, useDispatch } from 'react-redux';
@@ -40,7 +42,7 @@ const ProfilePicture = styled.div`
     border: solid 3px #ffa801;
     min-height: 70px;
     width: 70px;
-`;  
+`;
 
 function Gamehub() {
 
@@ -106,7 +108,17 @@ function Gamehub() {
             <Trofeus/>
            </Div>
 
-           <section className="row col-12 m-0 p-0">
+           <section className="row col-12 m-0 p-0 btnTeam">
+               <span className="col-3 text-right m-auto p-0">
+                    <img className="m-0" src={Architect}/>
+               </span>
+                <span className="nomeEquipa col-6 text-center m-auto p-0">Arquitetos</span>
+                <span className="col-3 m-auto">
+                    <img className="m-0" src={ArrowTeam}/>
+               </span>
+           </section>
+
+           <section className="row col-12 m-0 mt-3 p-0">
                 <h5 id="seccaoTitulo" className="subtituloGH">Estatísticas Principais</h5>
                 <div className="bgSeccao">
                     <span className="row col-12 m-0 px-0 py-2 justify-content-center">
