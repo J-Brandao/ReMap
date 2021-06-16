@@ -16,6 +16,8 @@ import EditarEdificio from './Pages/EditarEdificio';
 import './Styles/Geral.css';
 import { Auth0Provider } from "@auth0/auth0-react";
 import Error404 from './Components/Geral/404';
+import Equipas from './Pages/Equipas';
+import EquipasTut from './Pages/EquipasTut';
 
 
 function App() {
@@ -37,6 +39,8 @@ function App() {
         <Route exact path="/novo" component={AdicionarEdificio}/>
         <Route exact path="/homepage" component={Homepage}/>
         <Route exact path="/editar" component={EditarUtilizador} />
+        <Route exact path="/equipas" component={Equipas} />
+        <Route exact path="/equipas/equipastut" component={EquipasTut} />
         <Route exact path="/finalizar" component={FinalizarUtilizador} />
           <Route exact path="/mapeador/:id" component={PerfilOutros} />
           <Route exact path="/gamehub/:id" component={GamehubOutros} />

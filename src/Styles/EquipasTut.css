@@ -1,0 +1,34 @@
+.Arquitetos {
+  background-color: #cce6c1;
+  height: 68px;
+}
+
+.Historiadores {
+  background-color: #f8a46f;
+  height: 68px;
+}
+
+.Fotografos {
+  background-color: rgba(34, 112, 147, 0.5);
+  height: 68px;
+}
+
+.scoreEquipa {
+  font-size: 24px;
+  color: #34495e;
+}
+
+.percent1 {
+  color: #83afc3;
+  font-size: 22px;
+}
+
+.percent2 {
+  color: #69ba6d;
+  font-size: 18px;
+}
+
+.percent3 {
+  color: #f8a46f;
+  font-size: 18px;
+}
