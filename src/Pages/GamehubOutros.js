@@ -24,6 +24,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { storage } from '../Firebase/FbConfig';
 import Loading from '../Components/Geral/Loading';
+import Architect from '../Images/architect.svg';
+import ArrowTeam from '../Images/Arrow2.svg';
 
 
 const Div = styled.div`
@@ -112,7 +114,17 @@ function Gamehub (props) {
             <Trofeus/>
            </Div>
 
-           <section className="row col-12 m-0 p-0">
+           <section className="row col-12 m-0 p-0 btnTeam">
+               <span className="col-3 text-right m-auto p-0">
+                    <img className="m-0" src={Architect}/>
+               </span>
+                <span className="nomeEquipa col-6 text-center m-auto p-0">Arquitetos</span>
+                <span className="col-3 m-auto">
+                    <img className="m-0" src={ArrowTeam}/>
+               </span>
+           </section>
+
+           <section className="row col-12 m-0 mt-3 p-0">
                 <h5 id="seccaoTitulo" className="subtituloGH">Estatísticas Principais</h5>
                 <div className="bgSeccao">
                     <span className="row col-12 m-0 px-0 py-2 justify-content-center">

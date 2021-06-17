@@ -14,7 +14,8 @@ import Loading from '../Components/Geral/Loading';
 import { storage } from '../Firebase/FbConfig';
 import FriendButton from '../Components/Geral/FriendButton';
 import useAuthentication from '../Firebase/useAuthentication'; 
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
+import Architect from '../Images/architect.svg';
 
 
 const Div = styled.div`
@@ -30,6 +31,18 @@ const ProfilePicture = styled.div`
     width: 125px;
     border-radius: 50%;
     border: solid 3px #ffa801;
+`;
+
+const BackgroundDiv2 = styled.div`
+    margin: auto 0 auto auto;
+    bottom: 35%;
+    right: 15%;
+    background-color: #CCE6C1;
+    border-radius: 50%;
+    min-height: 55px;
+    width: 55px;
+    line-height: 55px;
+    position: absolute;
 `;
 
 function PerfilOutros(props) {
@@ -72,7 +85,12 @@ function PerfilOutros(props) {
            <section className="row col-12 m-0 p-0">
                 <BackArrow isGoingBack={true}/>
                 <div className="col-8 text-center m-0 p-0">
-                    <ProfilePicture style={{backgroundImage:`url(${imagem !== null ? imagem : Placeholder})`}}/>
+                    <span className="m-0 p-0">
+                        <ProfilePicture style={{backgroundImage:`url(${imagem !== null ? imagem : Placeholder})`}}/>
+                        <BackgroundDiv2>
+                            <img className="m-auto" style={{height:`35px`}} src={Architect}/>
+                        </BackgroundDiv2>
+                    </span>
                     <h5 id="NomeUser">{utilizador.nomeUtilizador}</h5>  
                     <p id="DataUser">{utilizador.active ? "Membro desde 2020" : "Inativo"}</p>
                 </div>
