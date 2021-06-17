@@ -6,9 +6,6 @@ import Perfil from '../Images/Perfil.jpg';
 import '../Styles/PaginaEdificio.css';
 import Galeria from '../Components/PaginaEdificio/Galeria';
 import Classificacao from '../Components/PaginaEdificio/Classificacao';
-import ArrowMap from '../Images/ArrowMap.svg';
-import Book from '../Images/Book.svg';
-import Camera from '../Images/Camera.svg';
 import BackArrow from '../Components/Geral/BackArrow';
 import {useAuth0} from "@auth0/auth0-react";
 import { getEdificio, apagaEdificio } from '../Store/Edificios/Actions';
@@ -22,7 +19,10 @@ import { getComentariosListByBuilding } from '../Store/Comentarios/Actions';
 import { getSugestoesListByBuilding } from '../Store/Sugestoes/Actions';
 import UserEdificio from '../Components/PaginaEdificio/UserEdificio';
 import ModalEliminarEdificio from '../Components/Modal/ModalEliminarEdificio';
-import {useHistory} from "react-router-dom"
+import {useHistory} from "react-router-dom";
+import Architect from '../Images/architect.svg';
+import Photographer from '../Images/photographer.svg';
+import Scroll from '../Images/scroll.svg';
 
 
 const Div = styled.div`
@@ -99,6 +99,31 @@ color:#ffa801;
 margin:0;
 
 `
+
+const BackgroundDiv1 = styled.div`
+    margin: 0 auto;
+    background-color: rgba(34, 112, 147, 0.5);
+    border-radius: 50%;
+    min-height: 65px;
+    width: 65px;
+    line-height: 65px;
+`;
+const BackgroundDiv2 = styled.div`
+    margin: auto 0 auto auto;
+    background-color: #CCE6C1;
+    border-radius: 50%;
+    min-height: 55px;
+    width: 55px;
+    line-height: 55px;
+`;
+const BackgroundDiv3 = styled.div`
+    margin: auto 0 auto auto;
+    background-color: #F8A46F;
+    border-radius: 50%;
+    min-height: 55px;
+    width: 55px;
+    line-height: 55px;
+`;
 
 function PaginaEdificio(props) {
     const history = useHistory();
@@ -242,24 +267,30 @@ function PaginaEdificio(props) {
 
                 <Classificacao vandalismo={edificio.vandalismo} degradacao={edificio.degradacao} seguranca={edificio.seguranca} acesso={edificio.acesso}/>
 
-                <section className="row col-12 m-0 p-0 mt-3">
-                        <h5 id="seccaoTitulo">Crachás</h5>
-                        <span className="row col-12 m-0 px-0 py-2 justify-content-center">
-                            <span className="col-4 m-0 p-0 text-center">
-                                <img className="m-0 imgCracha" src={ArrowMap}/>
-                                <p className="m-0 p-0 nomeCracha">Marco Importante</p>
-                            </span>
-                            <span className="col-4 m-0 p-0 text-center">
-                                <img className="m-0 imgCracha" src={Camera}/>
-                                <p className="m-0 p-0 nomeCracha">Fotografo Nato</p>
-                            </span>
-                            <span className="col-4 m-0 p-0 text-center">
-                                <img className="m-0 imgCracha" src={Book}/>
-                                <p className="m-0 p-0 nomeCracha">Historiador</p>
-                            </span>
-                        </span>
-                </section>
             </Div>
+
+            <section className="row col-12 m-0 p-0 px-3 mt-3">
+                        <h5 id="seccaoTitulo" className="col-12">Domínio</h5>
+                        <span className="col-4 text-center m-0 p-0 m-auto d-flex">
+                            <BackgroundDiv1>
+                                <img className="m-auto" style={{height:`45px`}} src={Photographer}/>
+                            </BackgroundDiv1>
+                            <span className="m-auto pl-1 percent1">53%</span>
+                        </span>
+                        <span className="col-4 text-center m-0 p-0 m-auto d-flex">
+                            <BackgroundDiv2>
+                                <img className="m-auto" style={{height:`35px`}} src={Architect}/>
+                            </BackgroundDiv2>
+                            <span className="m-auto percent2">27%</span>
+                        </span>
+                        <span className="col-4 text-center m-0 p-0 m-auto d-flex">
+                            <BackgroundDiv3>
+                                <img className="m-auto" style={{height:`35px`}} src={Scroll}/>
+                            </BackgroundDiv3>
+                            <span className="m-auto percent3">20%</span>
+                        </span>
+            </section>
+
             {seccao === 'Sugestões' ?
             <div className="row col-12 m-0 mt-3 p-0">
                 <ButtonS className="btn col-6 m-0 p-0">Sugestões</ButtonS>

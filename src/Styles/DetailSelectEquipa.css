@@ -1,0 +1,13 @@
+.tituloEquipa {
+  color: #34495e;
+  font-size: 48px;
+  font-weight: 500;
+}
+
+.setinha {
+  transform: rotate(180deg);
+}
+
+.mainImage {
+  height: 170px;
+}
