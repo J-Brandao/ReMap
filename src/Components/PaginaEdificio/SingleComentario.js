@@ -19,6 +19,12 @@ const CommentPicture = styled.div`
       width: 70px;
     `;
 
+const TextArea = styled.span`
+    border-radius: 10px;
+    background-color: #F2F2F2;
+    padding-right: 10px;
+`;
+
 
 function SingleComentario({ comment, tipo, utilizador }) {
   
@@ -61,7 +67,7 @@ function SingleComentario({ comment, tipo, utilizador }) {
       <span className="col-3 p-0">
         <CommentPicture className="my-2" imagem={imagem}/>
       </span>
-      <span className="col-9 pr-0 my-2">
+      <TextArea className="col-9 pr-3 pt-2 my-2">
         {utilizador === user.userId ?
           <Link className="m-0 p-0" to={{
               pathname: `/perfil`,
@@ -76,7 +82,7 @@ function SingleComentario({ comment, tipo, utilizador }) {
           </Link>
         }
         <p className="textoComments">{comment.valor}</p>
-      </span>
+      </TextArea>
     </>
     }
     </>
