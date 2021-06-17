@@ -18,6 +18,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import Error404 from './Components/Geral/404';
 import Equipas from './Pages/Equipas';
 import EquipasTut from './Pages/EquipasTut';
+import DetailSelectEquipa from './Pages/DetailSelectEquipa';
 
 
 function App() {
@@ -34,17 +35,18 @@ function App() {
         <Route exact path="/perfil" component={Perfil}/>
         <Route exact path="/gamehub" component={Gamehub}/>
         <Route exact path="/edificio/:id" component={PaginaEdificio}/>
-          <Route exact path="/mapeadores" component={MapeadoresFriends} />
-          <Route exact path="/mapeadores/comunidade" component={MapeadoresCom} />
+        <Route exact path="/mapeadores" component={MapeadoresFriends} />
+        <Route exact path="/mapeadores/comunidade" component={MapeadoresCom} />
         <Route exact path="/novo" component={AdicionarEdificio}/>
         <Route exact path="/homepage" component={Homepage}/>
         <Route exact path="/editar" component={EditarUtilizador} />
         <Route exact path="/equipas" component={Equipas} />
         <Route exact path="/equipas/equipastut" component={EquipasTut} />
+        <Route exact path="/selectequipa" component={DetailSelectEquipa} />
         <Route exact path="/finalizar" component={FinalizarUtilizador} />
-          <Route exact path="/mapeador/:id" component={PerfilOutros} />
-          <Route exact path="/gamehub/:id" component={GamehubOutros} />
-          <Route exact path="/editarEdificio/:id" component={EditarEdificio} />
+        <Route exact path="/mapeador/:id" component={PerfilOutros} />
+        <Route exact path="/gamehub/:id" component={GamehubOutros} />
+        <Route exact path="/editarEdificio/:id" component={EditarEdificio} />
         <Route component={Error404}/>
         
       </Switch>
