@@ -11,3 +11,16 @@
 .mainImage {
   height: 170px;
 }
+
+.butEscolhe {
+  background-color: #ffc65a;
+  border: 2px #ffa801 solid;
+  color: #34495e;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.textoEquipa {
+  width: 80%;
+}

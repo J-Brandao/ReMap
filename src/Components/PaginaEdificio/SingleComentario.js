@@ -61,7 +61,6 @@ function SingleComentario({ comment, tipo, utilizador }) {
   const [like, setLike] = useState('false')
 
   const daLike = (() => {
-    console.log("ola")
     setLike('true');
   })
 
