@@ -24,3 +24,33 @@
 .textoEquipa {
   width: 80%;
 }
+
+.tituloSelectEquipa {
+  color: #34495e;
+  font-size: 36px;
+  font-weight: 500;
+}
+
+.SelectArquitetos {
+  background-color: #cce6c1;
+  height: 100px;
+  border: solid 2px #4eae53;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.SelectHistoriadores {
+  background-color: #f8a46f;
+  height: 100px;
+  border: solid 2px #d58244;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.SelectFotografos {
+  background-color: #92d1df;
+  height: 100px;
+  border: solid 2px #006ec5;
+  font-size: 30px;
+  font-weight: 500;
+}

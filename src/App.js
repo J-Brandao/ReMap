@@ -19,6 +19,7 @@ import Error404 from './Components/Geral/404';
 import Equipas from './Pages/Equipas';
 import EquipasTut from './Pages/EquipasTut';
 import DetailSelectEquipa from './Pages/DetailSelectEquipa';
+import SelectEquipa from './Pages/SelectEquipa';
 
 
 function App() {
@@ -42,7 +43,8 @@ function App() {
         <Route exact path="/editar" component={EditarUtilizador} />
         <Route exact path="/equipas" component={Equipas} />
         <Route exact path="/equipas/equipastut" component={EquipasTut} />
-        <Route exact path="/selectequipa" component={DetailSelectEquipa} />
+        <Route exact path="/detailselectequipa" component={DetailSelectEquipa} />
+        <Route exact path="/selectequipa" component={SelectEquipa} />
         <Route exact path="/finalizar" component={FinalizarUtilizador} />
         <Route exact path="/mapeador/:id" component={PerfilOutros} />
         <Route exact path="/gamehub/:id" component={GamehubOutros} />
