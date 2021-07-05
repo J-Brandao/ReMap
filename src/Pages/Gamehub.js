@@ -96,12 +96,12 @@ function Gamehub() {
                                 <p className="mb-0 nomeNivel">Principiante</p>
                             </span>
                             <span className="col-4 p-0 text-right">
-                                <p className="nivel mb-0">03</p>
+                                <p className="nivel mb-0">{utilizador.progresso.nivel}</p>
                             </span>
                         </span>
-                        <ProgressBar now={60} variant="custom"/>
+                        <ProgressBar now={utilizador.progresso.exp/10} variant="custom"/>
                         <span>
-                            <p className="mb-0 experienciaNivel">600/1000 XP</p>
+                            <p className="mb-0 experienciaNivel">{utilizador.progresso.exp}/1000 XP</p>
                         </span>
                     </div>
             </section>

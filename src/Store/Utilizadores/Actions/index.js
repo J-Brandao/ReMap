@@ -75,8 +75,27 @@ export const atualizaUtilizador = (docID = '', userId = '', imagemUser = '', nom
   export const createNovoUtilizador = (userId = '', imagemUser = 'Placeholder.png', nomeUtilizador = '', biografia = '', cidade = '', role='normal', active=true) => {
     return (dispatch, getState) => {
       dispatch({ type: UTILIZADOR_CREATE_START });
-
-      createUtilizador(getState().token, userId, imagemUser, nomeUtilizador, biografia, cidade, role, active)
+      const progresso = {
+        exp: 0,
+        nivel:1,
+        amigos: {
+          badge: "badgeAmigo_0.svg",
+          nrAmigos:0,
+        },
+        comentarios: {
+          badge: "badgeComentario_0.svg",
+          nrComentarios:0,
+        },
+        edificios: {
+          badge: "badgeEdificio_0.svg",
+          nrEdificios:0,
+        },
+        sugestao: {
+          badge: "badgeSugestao_0.svg",
+          nrSugestoes:0,
+        }
+      }
+      createUtilizador(getState().token, userId, imagemUser, nomeUtilizador, biografia, cidade, role, active, progresso)
         .then(Info => {
           dispatch({ type: UTILIZADOR_CREATE_SUCCESS, payload: Info })
         })

@@ -65,14 +65,14 @@ export const updateUtilizador = (token, docID, userId, imagemUser, nomeUtilizado
     body: JSON.stringify({ userId, imagemUser, nomeUtilizador, biografia, cidade, role, active })
   }).then(response => response.json());
   
-export const createUtilizador = (token, userId, imagemUser, nomeUtilizador, biografia, cidade, role, active) =>
+export const createUtilizador = (token, userId, imagemUser, nomeUtilizador, biografia, cidade, role, active, progresso) =>
 fetch(`http://localhost:3001/utilizadores`, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${token}`
   },
-  body: JSON.stringify({ userId, imagemUser, nomeUtilizador, biografia, cidade, role, active })
+  body: JSON.stringify({ userId, imagemUser, nomeUtilizador, biografia, cidade, role, active, progresso })
 }).then(response => response.json());
 
 //AMIGOS
