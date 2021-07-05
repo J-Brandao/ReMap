@@ -133,7 +133,7 @@ function Gamehub() {
                             <img className="m-0 imgStats" src={BrokenHouseGH}/>
                         </span>
                         <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Edifícios Adicionados</p>
-                        <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">2</p>
+                        <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">{utilizador.progresso.edificios.nrEdificios}</p>
                     </span>
                     <span className="row col-12 m-0 px-0 py-2 justify-content-center">
                         <span className="col-2 m-0 p-0 my-auto">
