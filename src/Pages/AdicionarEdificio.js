@@ -39,6 +39,7 @@ function AdicionarEdificio (props) {
     const history = useHistory();   
     const EdificioList = useSelector(({ Edificios }) => Edificios.data);
     const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading);
+    const utilizador = useSelector(({Utilizadores})=> Utilizadores.ownUser)
     const [imagem, setImagem] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showModalVer, setShowModalVer] = useState(false);
@@ -99,7 +100,7 @@ function AdicionarEdificio (props) {
         }
     };
 
-    const onCreateFavEdificio = (userId, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo) => {
+    const onCreateFavEdificio = (userId, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo, utilizador) => {
 
         let arrayNomes = [];
 
@@ -133,7 +134,7 @@ function AdicionarEdificio (props) {
         }) 
 
         //Envia Informação para a firebase
-        dispatch(createNovoEdificio(userId, dataFinal, nomeEdificio, descricao, arrayNomes, localizacao, degradacao, acesso, seguranca, vandalismo));
+        dispatch(createNovoEdificio(userId, dataFinal, nomeEdificio, descricao, arrayNomes, localizacao, degradacao, acesso, seguranca, vandalismo, utilizador));
         setShowModal(true);
     }
 
@@ -233,7 +234,7 @@ function AdicionarEdificio (props) {
                     {valores.nomeEdificio !== '' && valores.descricao !== '' && valores.localizacao !== '' && valores.fotos.length > 0 ?
                         <button 
                             className="botaoSubmeter mt-4" 
-                            onClick={() => onCreateFavEdificio(props.location.state.id, valores.nomeEdificio, valores.descricao, valores.fotos, valores.localizacao, valores.degradacao, valores.acesso, valores.seguranca, valores.vandalismo)}
+                            onClick={() => onCreateFavEdificio(props.location.state.id, valores.nomeEdificio, valores.descricao, valores.fotos, valores.localizacao, valores.degradacao, valores.acesso, valores.seguranca, valores.vandalismo, utilizador)}
                             >Submeter</button>
                         :
                         <button 

@@ -59,11 +59,11 @@ import {
     }
   }
   
-  export const createNovoEdificio = (userId = '', date='', nomeEdificio = '', descricao = '', fotos = '', localizacao = '', degradacao = '', acesso = '', seguranca = '', vandalismo = '') => {
+  export const createNovoEdificio = (userId = '', date='', nomeEdificio = '', descricao = '', fotos = '', localizacao = '', degradacao = '', acesso = '', seguranca = '', vandalismo = '', user) => {
     return (dispatch, getState) => {
       dispatch({ type: EDIFICIO_CREATE_START });
 
-      createEdificio(getState().token, userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo)
+      createEdificio(getState().token, userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo, user)
         .then(Edificio => {
           dispatch({ type: EDIFICIO_CREATE_SUCCESS, payload: Edificio })
         })
