@@ -116,7 +116,9 @@ function AdicionarEdificio (props) {
         //Cria nome único para a imagem
         fotos.map(imagem => {
             let timestamp = date.getTime();
-            let newName = imagem.name + "_imagem_" + timestamp;
+            let replacedName = imagem.name.replace(/ /g, "_");
+            //let newName = imagem.name + "_imagem_" + timestamp;
+            let newName = replacedName + "_imagem_" + timestamp;
             arrayNomes.push(newName);
             
             //Guarda a imagem na storage

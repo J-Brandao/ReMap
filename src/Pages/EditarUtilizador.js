@@ -108,7 +108,9 @@ function EditarUtilizador () {
         if(imagemUser.name) {
             let date = new Date();
             let timestamp = date.getTime();
-            let newName = imagemUser.name + "_imagem_" + timestamp;
+            let replacedName = imagemUser.name.replace(/ /g, "_");
+            //let newName = imagemUser.name + "_imagem_" + timestamp;
+            let newName = replacedName + "_imagem_" + timestamp;
             
 
             dispatch(atualizaUtilizador(docId, userId, newName, nomeUtilizador, biografia,  cidade));

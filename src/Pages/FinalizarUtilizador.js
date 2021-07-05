@@ -89,7 +89,9 @@ function FinalizarUtilizador () {
         if(imagemUser !== 'Placeholder.jpg') {
             let date = new Date();
             let timestamp = date.getTime();
-            let newName = imagemUser.name + "_imagem_" + timestamp;
+            let replacedName = imagemUser.name.replace(/ /g, "_");
+            //let newName = imagemUser.name + "_imagem_" + timestamp;
+            let newName = replacedName + "_imagem_" + timestamp;
 
         dispatch(createNovoUtilizador(userId, newName, nomeUtilizador, biografia,  cidade));
 
