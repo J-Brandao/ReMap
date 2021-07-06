@@ -87,8 +87,8 @@ function EquipasTut() {
                 <section className="col-12 m-0 p-0">
                         <h5 id="seccaoTitulo" className="mb-2">Pontuações</h5>
                         
-                        {equipas.map((equipa) => {
-                        <span className="row col-12 m-0 p-0 Arquitetos">
+                        {equipas.map((equipa) => (
+                        <span className={equipa.teamName === "Fotógrafos" ? "row col-12 m-0 mb-2 p-0 Fotografos" : equipa.teamName === "Arquitetos" ? "row col-12 m-0 mb-2 p-0 Arquitetos" : "row col-12 m-0 mb-2 p-0 Historiadores"}>
                             <span className="col-3 text-center m-auto p-0">
                                 {equipa.teamName === "Fotógrafos" ?
                                     <img className="m-0" src={Photographer}/>
@@ -101,31 +101,10 @@ function EquipasTut() {
                             </span>
                             <span className="nomeEquipa col-6 m-auto p-0">{equipa.teamName}</span>
                             <span className="col-3 m-auto scoreEquipa">
-                                <b>{equipa.points}k</b>
+                                <b>{equipa.points}</b>
                             </span>
                         </span>
-                        })}
-
-
-                        <span className="row col-12 m-0 mt-2 p-0 Fotografos">
-                            <span className="col-3 text-center m-auto p-0">
-                                <img className="m-0" src={Photographer}/>
-                            </span>
-                            <span className="nomeEquipa col-6 m-auto p-0">Fotógrafos</span>
-                            <span className="col-3 m-auto scoreEquipa">
-                                <b>20k</b>
-                            </span>
-                        </span>
-
-                        <span className="row col-12 m-0 mt-2 p-0 Historiadores">
-                            <span className="col-3 text-center m-auto p-0">
-                                <img className="m-0" src={Scroll}/>
-                            </span>
-                            <span className="nomeEquipa col-6 m-auto p-0">Historiadores</span>
-                            <span className="col-3 m-auto scoreEquipa">
-                                <b>17k</b>
-                            </span>
-                        </span>
+                        ))}
                 </section>
 
                 <section className="col-12 m-0 mt-3 p-0">
