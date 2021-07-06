@@ -9,11 +9,7 @@ import BrokenHouseGH from '../Images/BrokenHouse.svg';
 import CameraGH from '../Images/CameraStats.svg';
 import FootstepsGH from '../Images/FootstepsGH.svg';
 import CommentsGH from '../Images/Comments.svg';
-import Camera from '../Images/Camera.svg';
-import Bandeira from '../Images/Bandeira.svg';
 import Alert from '../Images/Alert.svg';
-import ArrowMap from '../Images/ArrowMap.svg';
-import Book from '../Images/Book.svg';
 import CheckMark from '../Images/CheckMark.svg';
 import Spray from '../Images/Spray.svg';
 import BackArrow from '../Components/Geral/BackArrow';
@@ -26,6 +22,11 @@ import { getUtilizadorById} from '../Store/Utilizadores/Actions';
 import { useAuth0 } from '@auth0/auth0-react';
 import Loading from '../Components/Geral/Loading';
 import { storage } from '../Firebase/FbConfig';
+import { Link } from 'react-router-dom';
+import badgeEdificio_0 from '../Images/badges/badgeEdificio_0.svg';
+import badgeComentario_0 from '../Images/badges/badgeComentario_0.svg';
+import badgeAmigo_0 from '../Images/badges/badgeAmigo_0.svg';
+import badgeSugestao_0 from '../Images/badges/badgeSugestao_0.svg';
 
 
 const Div = styled.div`
@@ -76,6 +77,7 @@ function Gamehub() {
 
     return(
         <div className="m-0 p-0">
+            {console.log(utilizador.progresso.comentarios.badge)}
             <Div>
                 <section className="row col-12 m-0 p-0">
                     <span className="col-2 m-0 p-0">
@@ -108,6 +110,7 @@ function Gamehub() {
             <Trofeus/>
            </Div>
 
+           <Link to="/equipas">
            <section className="row col-12 m-0 p-0 btnTeam">
                <span className="col-3 text-right m-auto p-0">
                     <img className="m-0" src={Architect}/>
@@ -117,6 +120,7 @@ function Gamehub() {
                     <img className="m-0" src={ArrowTeam}/>
                </span>
            </section>
+           </Link>
 
            <section className="row col-12 m-0 mt-3 p-0">
                 <h5 id="seccaoTitulo" className="subtituloGH">Estatísticas Principais</h5>
@@ -164,26 +168,26 @@ function Gamehub() {
                 <div className="bgSeccao">
                     <span className="row col-12 m-0 px-0 py-2 justify-content-center">
                         <span className="col-4 m-0 text-center">
-                            <img className="m-0 imgCracha" src={ArrowMap}/>
-                            <ProgressBar now={60} className="my-2" variant="custom"/>
-                            <p className="m-0 p-0 nomeCracha">Marco Importante</p>
+                            <img className="m-0 imgCracha" src={badgeEdificio_0}/>
+                            <ProgressBar now={utilizador.progresso.edificios.nrEdificios} className="my-2" variant="custom"/>
+                            <p className="m-0 p-0 nomeCracha">Edifícios Adicionados</p>
                         </span>
                         <span className="col-4 m-0 text-center">
-                            <img className="m-0 imgCracha" src={Camera}/>
-                            <ProgressBar now={60} className="my-2" variant="custom"/>
-                            <p className="m-0 p-0 nomeCracha">Fotografo Nato</p>
+                            <img className="m-0 imgCracha" src={badgeComentario_0}/>
+                            <ProgressBar now={utilizador.progresso.comentarios.nrComentarios} className="my-2" variant="custom"/>
+                            <p className="m-0 p-0 nomeCracha">Comentários</p>
                         </span>
                         <span className="col-4 m-0 text-center">
-                            <img className="m-0 imgCracha" src={Book}/>
-                            <ProgressBar now={60} className="my-2" variant="custom"/>
-                            <p className="m-0 p-0 nomeCracha">Historiador</p>
+                            <img className="m-0 imgCracha" src={badgeAmigo_0}/>
+                            <ProgressBar now={utilizador.progresso.amigos.nrAmigos} className="my-2" variant="custom"/>
+                            <p className="m-0 p-0 nomeCracha">Amigos Adicionados</p>
                         </span>
                     </span>
                     <span className="row col-12 m-0 px-0 py-2 justify-content-center">
                         <span className="col-4 m-0 text-center">
-                            <img className="m-0 imgCracha" src={Bandeira}/>
-                            <ProgressBar now={60} className="my-2" variant="custom"/>
-                            <p className="m-0 p-0 nomeCracha">Edifícios Raros</p>
+                            <img className="m-0 imgCracha" src={badgeSugestao_0}/>
+                            <ProgressBar now={utilizador.progresso.sugestao.nrSugestoes} className="my-2" variant="custom"/>
+                            <p className="m-0 p-0 nomeCracha">Sugestões Dadas</p>
                         </span>
                         <span className="col-4 m-0 text-center">
                             <img className="m-0 imgCracha" src={Ideia}/>

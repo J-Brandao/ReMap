@@ -8,7 +8,7 @@ import Photographer from '../Images/photographer.svg';
 import Scroll from '../Images/scroll.svg';
 import '../Styles/Perfil.css'
 import { useSelector, useDispatch } from 'react-redux';
-import { getUtilizadorById} from '../Store/Utilizadores/Actions';
+import { getEquipasList } from '../Store/Equipas/Actions';
 import { useAuth0 } from '@auth0/auth0-react';
 import Loading from '../Components/Geral/Loading';
 import { storage } from '../Firebase/FbConfig';
@@ -45,29 +45,21 @@ const BackgroundDiv3 = styled.div`
 
 function EquipasTut() {
 
-    const utilizador = useSelector(({Utilizadores})=> Utilizadores.ownUser)
-    const isLoadingUtilizador = useSelector(({Utilizadores})=> Utilizadores.isLoadingSelf)
+    const equipas = useSelector(({Equipas})=> Equipas.data)
+    const isLoadingEquipas = useSelector(({Equipas})=> Equipas.isLoading)
     const dispatch = useDispatch();
     const { user, isLoading, isAuthenticated} = useAuth0();
-    const [imagem, setImagem] = useState(null)
 
 
     
     useEffect(() => {
         if (user && !isLoading && isAuthenticated) {
-            dispatch(getUtilizadorById(user.email))
+            dispatch(getEquipasList())
         } 
     },[user])
-    /*useEffect(() => {
-        if (utilizador && !isLoading && isAuthenticated) {
-            storage.ref('imagensUtilizadores').child(`${utilizador.imagemUser}`).getDownloadURL().then((url) => {
-                setImagem(url)
-            })
-        }  
-    }, [utilizador])*/
     
 
-    if(isLoading || isLoadingUtilizador) {
+    if(isLoading || isLoadingEquipas) {
         return (
             <Loading/>
         )
@@ -75,6 +67,7 @@ function EquipasTut() {
 
     return(
         <div className="m-0 p-0">
+            {console.log(equipas)}
             <Div>
                 <section className="row col-12 m-0 p-0">
                         <span className="col-2 m-0 p-0">
@@ -93,36 +86,25 @@ function EquipasTut() {
 
                 <section className="col-12 m-0 p-0">
                         <h5 id="seccaoTitulo" className="mb-2">Pontuações</h5>
-
-                        <span className="row col-12 m-0 p-0 Arquitetos">
+                        
+                        {equipas.map((equipa) => (
+                        <span className={equipa.teamName === "Fotógrafos" ? "row col-12 m-0 mb-2 p-0 Fotografos" : equipa.teamName === "Arquitetos" ? "row col-12 m-0 mb-2 p-0 Arquitetos" : "row col-12 m-0 mb-2 p-0 Historiadores"}>
                             <span className="col-3 text-center m-auto p-0">
-                                <img className="m-0" src={Architect}/>
+                                {equipa.teamName === "Fotógrafos" ?
+                                    <img className="m-0" src={Photographer}/>
+                                    :
+                                    equipa.teamName === "Arquitetos" ?
+                                    <img className="m-0" src={Architect}/>
+                                    :
+                                    <img className="m-0" src={Scroll}/>
+                                }
                             </span>
-                            <span className="nomeEquipa col-6 m-auto p-0">Arquitetos</span>
+                            <span className="nomeEquipa col-6 m-auto p-0">{equipa.teamName}</span>
                             <span className="col-3 m-auto scoreEquipa">
-                                <b>23k</b>
+                                <b>{equipa.points}</b>
                             </span>
                         </span>
-
-                        <span className="row col-12 m-0 mt-2 p-0 Fotografos">
-                            <span className="col-3 text-center m-auto p-0">
-                                <img className="m-0" src={Photographer}/>
-                            </span>
-                            <span className="nomeEquipa col-6 m-auto p-0">Fotógrafos</span>
-                            <span className="col-3 m-auto scoreEquipa">
-                                <b>20k</b>
-                            </span>
-                        </span>
-
-                        <span className="row col-12 m-0 mt-2 p-0 Historiadores">
-                            <span className="col-3 text-center m-auto p-0">
-                                <img className="m-0" src={Scroll}/>
-                            </span>
-                            <span className="nomeEquipa col-6 m-auto p-0">Historiadores</span>
-                            <span className="col-3 m-auto scoreEquipa">
-                                <b>17k</b>
-                            </span>
-                        </span>
+                        ))}
                 </section>
 
                 <section className="col-12 m-0 mt-3 p-0">

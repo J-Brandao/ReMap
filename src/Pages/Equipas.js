@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import Perfil from '../Images/Perfil.jpg';
 import '../Styles/Gamehub.css';
 import Ideia from '../Images/Ideia.svg';
 import BrokenHouseGH from '../Images/BrokenHouse.svg';
@@ -9,7 +8,6 @@ import FootstepsGH from '../Images/FootstepsGH.svg';
 import CommentsGH from '../Images/Comments.svg';
 import BackArrow from '../Components/Geral/BackArrow';
 import Architect from '../Images/architect.svg';
-import ArrowTeam from '../Images/Arrow2.svg';
 import QuestionMark from '../Images/QuestionMark.svg';
 import Photographer from '../Images/photographer.svg';
 import Scroll from '../Images/scroll.svg';
@@ -19,6 +17,7 @@ import { getUtilizadorById} from '../Store/Utilizadores/Actions';
 import { useAuth0 } from '@auth0/auth0-react';
 import Loading from '../Components/Geral/Loading';
 import { storage } from '../Firebase/FbConfig';
+import { Link } from 'react-router-dom';
 
 
 const Div = styled.div`
@@ -90,9 +89,11 @@ function Equipas() {
                     <span className="col-8 tituloPagina offset-2 text-center m-0 p-0">
                         Equipas
                     </span>
-                    <span className="col-2 m-0 text-right">
-                        <img className="m-auto" src={QuestionMark}/>
-                    </span>
+                    <Link to="/equipas/equipastut">
+                        <span className="col-2 m-0 text-right">
+                            <img className="m-auto" src={QuestionMark}/>
+                        </span>
+                    </Link>
             </section>
 
             <section className="row col-12 m-0 p-0">

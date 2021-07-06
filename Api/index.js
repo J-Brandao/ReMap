@@ -31,5 +31,8 @@ app.use("/comentarios",
 app.use("/sugestoes",
   require("./Controllers/Sugestoes")
 );
+app.use("/equipas",
+  require("./Controllers/Equipas")
+);
 
 app.listen(3001, () => console.log("Servidor a funcionar!"));
