@@ -9,7 +9,6 @@ import BrokenHouseGH from '../Images/BrokenHouse.svg';
 import CameraGH from '../Images/CameraStats.svg';
 import FootstepsGH from '../Images/FootstepsGH.svg';
 import CommentsGH from '../Images/Comments.svg';
-import Bandeira from '../Images/Bandeira.svg';
 import Alert from '../Images/Alert.svg';
 import CheckMark from '../Images/CheckMark.svg';
 import Spray from '../Images/Spray.svg';
