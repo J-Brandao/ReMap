@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import '../../Styles/PaginaEdificio.css';
 import { createNovoComentario } from '../../Store/Comentarios/Actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useAuthentication from '../../Firebase/useAuthentication';
 import CommentLoading from '../Geral/CommentLoading';
 import SingleComentario from "./SingleComentario"
@@ -14,6 +14,8 @@ const Div = styled.div`
 
 function Comentarios (props) { 
     
+
+    const utilizador = useSelector(({Utilizadores})=> Utilizadores.ownUser)
     const dispatch = useDispatch();
 
     
@@ -32,7 +34,7 @@ function Comentarios (props) {
     })
 
     const handleCreateComentario = (userId, valor, edificioId) => {
-        dispatch(createNovoComentario(userId, valor, edificioId))
+        dispatch(createNovoComentario(userId, valor, edificioId, utilizador))
     }
 
     useAuthentication();

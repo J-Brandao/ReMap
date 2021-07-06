@@ -34,11 +34,11 @@ export const getComentariosListByUser = (userId) => {
       .catch(() => dispatch({ type: COMENTARIOS_GET_ERROR }))
   }
 }
-  export const createNovoComentario = (userId = '', valor = '', edificioId = '') => {
+  export const createNovoComentario = (userId = '', valor = '', edificioId = '', user) => {
     return (dispatch, getState) => {
       dispatch({ type: COMENTARIO_CREATE_START });
 
-      createComentario(getState().token, userId, valor, edificioId)
+      createComentario(getState().token, userId, valor, edificioId, user)
         .then(Comentario => {
           dispatch({ type: COMENTARIO_CREATE_SUCCESS, payload: Comentario })
         })
