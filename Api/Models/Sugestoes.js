@@ -1,4 +1,6 @@
 const getFirestore = require("../Utils/getFirestore");
+const getDocumentFromCollection = require("../utils/getDocFromCol")
+
 
 module.exports = {
   getAllByBuilding: async (buildingId) => {
@@ -32,6 +34,30 @@ module.exports = {
         response.end();
         return;
     }
+
+    const user = body.user;
+    delete body.user;
+
+    const userCollectionRef = db.collection("Utilizadores");
+    const userDoc = getDocumentFromCollection(userCollectionRef, user.id);
+
+    if (user.progresso.exp + 250 === 1000) {
+      user.progresso.exp = 0
+      user.progresso.nivel+=1
+    } else if(user.progresso.exp+250 >1000){
+      user.progresso.exp = 250 - (1000 - user.progresso.exp);
+      user.progresso.nivel += 1;
+    } else {
+      user.progresso.exp += 250;
+    }
+    
+    if (user.progresso.sugestao.nrSugestoes + 1 === 15) {
+      user.progresso.sugestao.badge = "badgeEdificio_1.svg";
+      user.progresso.sugestao.nrSugestoes += 1;
+    } else {
+      user.progresso.sugestao.nrSugestoes += 1;
+    }
+    const userRef = await userDoc.update(user);
     
     const sugestaoRef = await sugestaoCollectionRef.add(body);
     return {id: sugestaoRef.id, ...body}

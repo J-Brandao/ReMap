@@ -137,12 +137,12 @@ export const fetchSugestoesListByBuilding = (buildingId) =>
   fetch(`http://localhost:3001/sugestoes/user/${userId}`)
     .then(response => response.json())
 
-export const createSugestao = (token, userId, valor, edificioId) =>
+export const createSugestao = (token, userId, valor, edificioId, user) =>
 fetch(`http://localhost:3001/sugestoes`, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${token}`
   },
-  body: JSON.stringify({ userId, valor, edificioId })
+  body: JSON.stringify({ userId, valor, edificioId, user })
 }).then(response => response.json());

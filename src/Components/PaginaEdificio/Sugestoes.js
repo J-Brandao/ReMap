@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import '../../Styles/PaginaEdificio.css';
 import Perfil from '../../Images/Perfil.jpg';
 import { createNovaSugestao } from '../../Store/Sugestoes/Actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useAuthentication from '../../Firebase/useAuthentication';
 import SingleSugestao from './SingleSugestao'
 import CommentLoading from '../Geral/CommentLoading'
@@ -25,6 +25,7 @@ const CommentPicture = styled.div`
 
 function Sugestoes (props) { 
 
+    const utilizador = useSelector(({Utilizadores})=> Utilizadores.ownUser)
     const dispatch = useDispatch();
     const [sugestao, setSugestao] = useState({
         valor: '',
@@ -38,7 +39,7 @@ function Sugestoes (props) {
     })
 
     const handleCreateSugestao = (userId, valor, edificioId) => {
-        dispatch(createNovaSugestao(userId, valor, edificioId))
+        dispatch(createNovaSugestao(userId, valor, edificioId, utilizador))
     }
 
     useAuthentication();
