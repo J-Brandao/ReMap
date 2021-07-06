@@ -77,6 +77,7 @@ function Gamehub() {
 
     return(
         <div className="m-0 p-0">
+            {console.log(utilizador.progresso.comentarios.badge)}
             <Div>
                 <section className="row col-12 m-0 p-0">
                     <span className="col-2 m-0 p-0">
@@ -168,24 +169,24 @@ function Gamehub() {
                     <span className="row col-12 m-0 px-0 py-2 justify-content-center">
                         <span className="col-4 m-0 text-center">
                             <img className="m-0 imgCracha" src={badgeEdificio_0}/>
-                            <ProgressBar now={60} className="my-2" variant="custom"/>
+                            <ProgressBar now={utilizador.progresso.edificios.nrEdificios} className="my-2" variant="custom"/>
                             <p className="m-0 p-0 nomeCracha">Edifícios Adicionados</p>
                         </span>
                         <span className="col-4 m-0 text-center">
                             <img className="m-0 imgCracha" src={badgeComentario_0}/>
-                            <ProgressBar now={60} className="my-2" variant="custom"/>
+                            <ProgressBar now={utilizador.progresso.comentarios.nrComentarios} className="my-2" variant="custom"/>
                             <p className="m-0 p-0 nomeCracha">Comentários</p>
                         </span>
                         <span className="col-4 m-0 text-center">
                             <img className="m-0 imgCracha" src={badgeAmigo_0}/>
-                            <ProgressBar now={60} className="my-2" variant="custom"/>
+                            <ProgressBar now={utilizador.progresso.amigos.nrAmigos} className="my-2" variant="custom"/>
                             <p className="m-0 p-0 nomeCracha">Amigos Adicionados</p>
                         </span>
                     </span>
                     <span className="row col-12 m-0 px-0 py-2 justify-content-center">
                         <span className="col-4 m-0 text-center">
                             <img className="m-0 imgCracha" src={badgeSugestao_0}/>
-                            <ProgressBar now={60} className="my-2" variant="custom"/>
+                            <ProgressBar now={utilizador.progresso.sugestao.nrSugestoes} className="my-2" variant="custom"/>
                             <p className="m-0 p-0 nomeCracha">Sugestões Dadas</p>
                         </span>
                         <span className="col-4 m-0 text-center">

@@ -146,3 +146,9 @@ fetch(`http://localhost:3001/sugestoes`, {
   },
   body: JSON.stringify({ userId, valor, edificioId })
 }).then(response => response.json());
+
+//EQUIPAS
+
+export const fetchEquipasList = () =>
+  fetch(`http://localhost:3001/equipas`)
+    .then(response => response.json())

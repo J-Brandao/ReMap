@@ -5,6 +5,7 @@ import FriendsReducer from './Friends/Reducers';
 import ComentariosReducer from './Comentarios/Reducers'
 import tokenReducer from './Token/Reducers';
 import SugestoesReducer from './Sugestoes/Reducers';
+import EquipasReducer from './Equipas/Reducers';
 import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
     Friends: FriendsReducer,
     Comentarios: ComentariosReducer,
     Sugestoes: SugestoesReducer,
+    Equipas: EquipasReducer,
     token: tokenReducer
 });
 
