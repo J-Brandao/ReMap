@@ -26,6 +26,7 @@ import { getUtilizadorById} from '../Store/Utilizadores/Actions';
 import { useAuth0 } from '@auth0/auth0-react';
 import Loading from '../Components/Geral/Loading';
 import { storage } from '../Firebase/FbConfig';
+import { Link } from 'react-router-dom';
 
 
 const Div = styled.div`
@@ -108,6 +109,7 @@ function Gamehub() {
             <Trofeus/>
            </Div>
 
+           <Link to="/equipas">
            <section className="row col-12 m-0 p-0 btnTeam">
                <span className="col-3 text-right m-auto p-0">
                     <img className="m-0" src={Architect}/>
@@ -117,6 +119,7 @@ function Gamehub() {
                     <img className="m-0" src={ArrowTeam}/>
                </span>
            </section>
+           </Link>
 
            <section className="row col-12 m-0 mt-3 p-0">
                 <h5 id="seccaoTitulo" className="subtituloGH">Estatísticas Principais</h5>
