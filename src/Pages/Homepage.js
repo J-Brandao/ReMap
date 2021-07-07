@@ -15,6 +15,10 @@ import UserLocation from '../Images/UserLocation.svg';
 import ModalReativarConta from '../Components/Modal/ModalReativarConta';
 import L from 'leaflet';
 import useAuthentication from "../Firebase/useAuthentication"
+import ArquitetosMarker from '../Images/ArquitetosMarker.png';
+import HistoriadoresMarker from '../Images/HistoriadoresMarker.png';
+import FotografosMarker from '../Images/FotografosMarker.png';
+import ShadowMarker from '../Images/ShadowMarker.png';
 
 
 const ProfilePicture = styled.div`
@@ -118,6 +122,34 @@ function Homepage () {
         })
     }
 
+    const getMarker = (equipa) => {
+        if(equipa === "Historiadores"){
+            return L.icon({
+                iconUrl: HistoriadoresMarker,
+                shadowUrl: ShadowMarker,
+                iconSize: [26, 40.5],
+                shadowSize: [30, 22],
+                shadowAnchor: [0, 0]
+            })
+        } else if (equipa === "Fotógrafos"){
+            return L.icon({
+                iconUrl: FotografosMarker,
+                shadowUrl: ShadowMarker,
+                iconSize: [26, 40.5],
+                shadowSize: [30, 22],
+                shadowAnchor: [0, 0]
+            })
+        } else {
+            return L.icon({
+                iconUrl: ArquitetosMarker,
+                shadowUrl: ShadowMarker,
+                iconSize: [26, 40.5],
+                shadowSize: [30, 22],
+                shadowAnchor: [0, 0]
+            })
+        }
+    }
+
     if (isLoading || isLoadingEdificio || isLoadingUser) {
         return (
             <Loading />
@@ -169,7 +201,7 @@ function Homepage () {
                     :
                     <>
                     {EdificioList.map((edificio, key) => (
-                        <Marker key={key} position={[edificio.localizacao[0], edificio.localizacao[1]]}>
+                        <Marker key={key} position={[edificio.localizacao[0], edificio.localizacao[1]]} icon={getMarker("Arquitetos")}>
                             <Popup position={[edificio.localizacao[0], edificio.localizacao[1]]}>
                                 <Link to={`/edificio/${edificio.id}`}><h3>{edificio.nomeEdificio}</h3></Link>
                             </Popup>
