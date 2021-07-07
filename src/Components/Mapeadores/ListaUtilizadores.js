@@ -149,7 +149,7 @@ function ListaUtilizadores(props) {
                         </span>
                         
                             <span className="col-2 m-0 p-0 text-center">
-                            <FriendButton friendId={props.user.id} userId={props.ownUser.id} friendName={props.user.nomeUtilizador} imageFriend={props.user.imagemUser} /></span>
+                            <FriendButton friendId={props.user.id} userId={props.ownUser.id} friendName={props.user.nomeUtilizador} imageFriend={props.user.imagemUser} ownUser={props.ownUser}/></span>
                             {props.ownUser.role === "admin" &&
                             <span className="col-2 m-0 p-0">
                             

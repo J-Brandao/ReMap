@@ -24,7 +24,8 @@ router.route("/:userId?/:friendId?")
       res.end();
       return
     }
-    await remove(req.params.userId);
+    
+    await remove(req.params.userId, req.body);
 
     res.status(200);
     res.end()

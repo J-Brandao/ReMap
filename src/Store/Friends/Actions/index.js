@@ -43,11 +43,11 @@ export const getFriends = (userId, friendId) => {
   }
 }
 
-export const createFriend = (friendName = '', userId = '', friendId = '', imageFriend = 'Placeholder.jpg') => {
+export const createFriend = (friendName = '', userId = '', friendId = '', imageFriend = 'Placeholder.jpg', ownUser) => {
   return (dispatch, getState) => {
     dispatch({ type: FRIEND_CREATE_START })
     
-    createFriends(getState().token, friendName, userId, friendId, imageFriend)
+    createFriends(getState().token, friendName, userId, friendId, imageFriend, ownUser)
       .then(friend => {
       dispatch({ type: FRIEND_CREATE_SUCCESS, payload:friend})
     })
@@ -55,11 +55,11 @@ export const createFriend = (friendName = '', userId = '', friendId = '', imageF
   }
 }
 
-export const deleteFriend = id => {
+export const deleteFriend = (id, ownUser) => {
   return (dispatch, getState) => {
     dispatch({ type: FRIEND_DELETE_START });
 
-    deleteFriends(getState().token, id)
+    deleteFriends(getState().token, id, ownUser)
       .then(() => {
       dispatch({type: FRIEND_DELETE_SUCCESS, payload: false})
       })

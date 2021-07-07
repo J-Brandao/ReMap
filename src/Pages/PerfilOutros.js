@@ -95,7 +95,7 @@ function PerfilOutros(props) {
                     <p id="DataUser">{utilizador.active ? "Membro desde 2020" : "Inativo"}</p>
                 </div>
                 <span className="col-2 text-right m-0 p-0">
-                <FriendButton friendId={utilizador.id} userId={ownUser.id} friendName={utilizador.nomeUtilizador} imageFriend={utilizador.imagemUser} />
+                    <FriendButton friendId={utilizador.id} userId={ownUser.id} friendName={utilizador.nomeUtilizador} imageFriend={utilizador.imagemUser} ownUser={ownUser}/>
                 </span>
            </section>
            <section className="row col-12 m-0 p-0">

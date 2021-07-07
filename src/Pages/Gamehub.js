@@ -127,13 +127,6 @@ function Gamehub() {
                 <div className="bgSeccao">
                     <span className="row col-12 m-0 px-0 py-2 justify-content-center">
                         <span className="col-2 m-0 p-0 my-auto">
-                            <img className="m-0 imgStats" src={FootstepsGH}/>
-                        </span>
-                        <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Área de Influência</p>
-                        <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">2</p>
-                    </span>
-                    <span className="row col-12 m-0 px-0 py-2 justify-content-center">
-                        <span className="col-2 m-0 p-0 my-auto">
                             <img className="m-0 imgStats" src={BrokenHouseGH}/>
                         </span>
                         <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Edifícios Adicionados</p>
@@ -144,21 +137,21 @@ function Gamehub() {
                             <img className="m-0 imgStats" src={Ideia}/>
                         </span>
                         <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Sugestões dadas</p>
-                        <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">2</p>
-                    </span>
-                    <span className="row col-12 m-0 px-0 py-2 justify-content-center">
-                        <span className="col-2 m-0 p-0 my-auto">
-                            <img className="m-0 imgStats" src={CameraGH}/>
-                        </span>
-                        <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Fotografias Publicadas</p>
-                        <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">2</p>
+                        <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">{utilizador.progresso.sugestao.nrSugestoes}</p>
                     </span>
                     <span className="row col-12 m-0 px-0 py-2 justify-content-center">
                         <span className="col-2 m-0 p-0 my-auto">
                             <img className="m-0 imgStats" src={CommentsGH}/>
                         </span>
                         <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Comentários Publicados</p>
-                        <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">2</p>
+                        <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">{utilizador.progresso.comentarios.nrComentarios}</p>
+                    </span>
+                    <span className="row col-12 m-0 px-0 py-2 justify-content-center">
+                        <span className="col-2 m-0 p-0 my-auto">
+                            <img className="m-0 imgStats" src={FootstepsGH}/>
+                        </span>
+                        <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Amigos Adicionados</p>
+                        <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">{utilizador.progresso.amigos.nrAmigos}</p>
                     </span>
                 </div>
            </section>

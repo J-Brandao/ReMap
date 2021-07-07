@@ -6,7 +6,7 @@ import { ReactComponent as CheckMark } from "../../Images/CheckMark.svg"
 import { ReactComponent as AddFriend } from "../../Images/AdicionarAmigo.svg"
 import {fetchFriends} from "../../Firebase/Pedidos"
 
-function FriendButton({ friendId, userId, friendName, imageFriend }) {
+function FriendButton({ friendId, userId, friendName, imageFriend, ownUser }) {
 
   const dispatch = useDispatch()
   const [isFriend, setIsFriend] = useState(false); 
@@ -28,14 +28,14 @@ function FriendButton({ friendId, userId, friendName, imageFriend }) {
 
 
   const onCreateFriend = (friendName, userId, friendId, imageFriend) => {
-    dispatch(createFriend(friendName, userId, friendId, imageFriend))
+    dispatch(createFriend(friendName, userId, friendId, imageFriend, ownUser))
    
     
   }
 
   const onDeleteFriend = (id) => {
     
-    dispatch(deleteFriend(id))
+    dispatch(deleteFriend(id, ownUser))
    
     
   }

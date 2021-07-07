@@ -87,23 +87,25 @@ export const fetchFriends = (userId, friendId) => {
     .then(response => response.json())
 }
 
-export const createFriends = (token, nomeFriend, userId, friendId, imagemUser) => {
+export const createFriends = (token, nomeFriend, userId, friendId, imagemUser, ownUser) => {
   return fetch(`http://localhost:3001/friends`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     },
-    body: JSON.stringify({ nomeFriend, userId, friendId, imagemUser })
+    body: JSON.stringify({ nomeFriend, userId, friendId, imagemUser, ownUser })
   }).then(response => response.json());
 }
 
-export const deleteFriends = (token, id) => {
+export const deleteFriends = (token, id, ownUser) => {
   return fetch(`http://localhost:3001/friend/${id}`, {
     method: 'DELETE',
     headers: {
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
-    }
+    },
+    body: JSON.stringify({ownUser})
   })
 }
 
