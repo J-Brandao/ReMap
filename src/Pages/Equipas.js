@@ -14,10 +14,12 @@ import Scroll from '../Images/scroll.svg';
 import '../Styles/Perfil.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { getUtilizadorById} from '../Store/Utilizadores/Actions';
+import { getEquipasList } from '../Store/Equipas/Actions';
 import { useAuth0 } from '@auth0/auth0-react';
 import Loading from '../Components/Geral/Loading';
 import { storage } from '../Firebase/FbConfig';
 import { Link } from 'react-router-dom';
+import CarouselEquipas from '../Components/Equipas/CarouselEquipas.js';
 
 
 const Div = styled.div`
@@ -51,29 +53,32 @@ const BackgroundDiv3 = styled.div`
 
 function Equipas() {
 
+    const [team, setTeam] = useState("Arquitetos");
+
     const utilizador = useSelector(({Utilizadores})=> Utilizadores.ownUser)
     const isLoadingUtilizador = useSelector(({Utilizadores})=> Utilizadores.isLoadingSelf)
+    const equipas = useSelector(({Equipas})=> Equipas.data)
+    const isLoadingEquipas = useSelector(({Equipas})=> Equipas.isLoading)
     const dispatch = useDispatch();
     const { user, isLoading, isAuthenticated} = useAuth0();
-    const [imagem, setImagem] = useState(null)
 
-
+    const onChange = (e) => {
+        setTeam(e);
+    }
     
     useEffect(() => {
         if (user && !isLoading && isAuthenticated) {
-            dispatch(getUtilizadorById(user.email))
+            dispatch(getUtilizadorById(user.email));
         } 
     },[user])
-    /*useEffect(() => {
+    useEffect(() => {
         if (utilizador && !isLoading && isAuthenticated) {
-            storage.ref('imagensUtilizadores').child(`${utilizador.imagemUser}`).getDownloadURL().then((url) => {
-                setImagem(url)
-            })
+            dispatch(getEquipasList());
         }  
-    }, [utilizador])*/
+    }, [utilizador])
     
 
-    if(isLoading || isLoadingUtilizador) {
+    if(isLoading || isLoadingUtilizador || isLoadingEquipas) {
         return (
             <Loading/>
         )
@@ -96,27 +101,19 @@ function Equipas() {
                     </Link>
             </section>
 
-            <section className="row col-12 m-0 p-0">
-                <span className="col-3 text-center m-0 p-0 m-auto">
-                    <BackgroundDiv1>
-                        <img className="m-auto" src={Photographer}/>
-                    </BackgroundDiv1>
-                </span>
-                <span className="col-6 text-center m-0 p-0 m-auto">
-                    <BackgroundDiv2>
-                        <img className="m-auto" style={{height:`75px`}} src={Architect}/>
-                    </BackgroundDiv2>
-                </span>
-                <span className="col-3 text-center m-0 p-0 m-auto">
-                    <BackgroundDiv3>
-                        <img className="m-auto" src={Scroll}/>
-                    </BackgroundDiv3>
-                </span>
-            </section>
+            <CarouselEquipas onChange={onChange}/>
 
             <section className="row col-12 m-0 mt-2 p-0">
-                <p className="nomeEquipa mb-2 col-12 text-center" style={{fontSize: "18px", color: "#34495e"}}>Arquitetos</p>
-                <p className="nomeEquipa mb-0 col-12 text-center" style={{fontSize: "18px", color: "#34495e"}}><b>Pontuação: 20k</b></p>
+                {equipas.map((equipa) => {
+                    if(equipa.teamName === team) {
+                        return(
+                            <>
+                                <p className="nomeEquipa mb-2 col-12 text-center" style={{fontSize: "18px", color: "#34495e"}}>{equipa.teamName}</p>
+                                <p className="nomeEquipa mb-0 col-12 text-center" style={{fontSize: "18px", color: "#34495e"}}><b>Pontuação: {equipa.points}</b></p>
+                            </>
+                        )
+                    }
+                })}
             </section>
            </Div>
 
