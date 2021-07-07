@@ -75,13 +75,13 @@ module.exports = {
     }
     
     if (user.progresso.edificios.nrEdificios + 1 === 15) {
-      user.progresso.edificios.badge = "badgeEdificio_1.svg";
+      user.progresso.edificios.badge = "badgeEdificio_1.png";
       user.progresso.edificios.nrEdificios += 1;
     }else if (user.progresso.comentarios.nrComentarios + 1 === 50) {
-      user.progresso.comentarios.badge = "badgeEdificio_2.svg";
+      user.progresso.comentarios.badge = "badgeEdificio_2.png";
       user.progresso.comentarios.nrComentarios += 1;
     }else if (user.progresso.comentarios.nrComentarios + 1 === 100) {
-      user.progresso.comentarios.badge = "badgeEdificio_3.svg";
+      user.progresso.comentarios.badge = "badgeEdificio_3.png";
       user.progresso.comentarios.nrComentarios += 1;
     } else {
       user.progresso.edificios.nrEdificios += 1;

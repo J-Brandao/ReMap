@@ -52,13 +52,13 @@ module.exports = {
     }
     
     if (user.progresso.comentarios.nrComentarios + 1 === 15) {
-      user.progresso.comentarios.badge = "badgeComentario_1.svg";
+      user.progresso.comentarios.badge = "badgeComentario_1.png";
       user.progresso.comentarios.nrComentarios += 1;
     } else if (user.progresso.comentarios.nrComentarios + 1 === 50) {
-      user.progresso.comentarios.badge = "badgeComentario_2.svg";
+      user.progresso.comentarios.badge = "badgeComentario_2.png";
       user.progresso.comentarios.nrComentarios += 1;
     }else if (user.progresso.comentarios.nrComentarios + 1 === 100) {
-      user.progresso.comentarios.badge = "badgeComentario_3.svg";
+      user.progresso.comentarios.badge = "badgeComentario_3.png";
       user.progresso.comentarios.nrComentarios += 1;
     }else {
       user.progresso.comentarios.nrComentarios += 1;

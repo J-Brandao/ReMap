@@ -79,19 +79,19 @@ export const atualizaUtilizador = (docID = '', userId = '', imagemUser = '', nom
         exp: 0,
         nivel:1,
         amigos: {
-          badge: "badgeAmigo_0.svg",
+          badge: "badgeAmigo_0.png",
           nrAmigos:0,
         },
         comentarios: {
-          badge: "badgeComentario_0.svg",
+          badge: "badgeComentario_0.png",
           nrComentarios:0,
         },
         edificios: {
-          badge: "badgeEdificio_0.svg",
+          badge: "badgeEdificio_0.png",
           nrEdificios:0,
         },
         sugestao: {
-          badge: "badgeSugestao_0.svg",
+          badge: "badgeSugestao_0.png",
           nrSugestoes:0,
         }
       }
