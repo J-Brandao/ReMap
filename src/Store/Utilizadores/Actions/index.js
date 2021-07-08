@@ -63,7 +63,7 @@ export const atualizaUtilizador = (docID = '', userId = '', imagemUser = '', nom
    
     return (dispatch, getState) => {
       dispatch({ type: UTILIZADOR_UPDATE_START });
-      
+
       updateUtilizador(getState().token, docID, userId, imagemUser, nomeUtilizador, biografia, cidade, progresso, equipa, role, active)
         .then(Info => {
           dispatch({ type: UTILIZADOR_UPDATE_SUCCESS, payload: Info })

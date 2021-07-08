@@ -13,7 +13,7 @@ import Loading from '../Components/Geral/Loading';
 import { atualizaUtilizador, getUtilizadorById } from '../Store/Utilizadores/Actions';
 import { useAuth0 } from '@auth0/auth0-react';
 import useAuthentication from '../Firebase/useAuthentication';
-import ModalEditarUtilizador from '../Components/Modal/ModalEditarUtilizador';
+import ModalPerfilCriado from "../Components/Modal/ModalPerfilCriado";
 
 const Home = styled.div`
     flex-grow: 1;
@@ -171,7 +171,7 @@ function DetailSelectEquipa(props) {
                 }
             </section>
         </Home>
-        <ModalEditarUtilizador show={showModal} onHide={onClose}/>
+        <ModalPerfilCriado show={showModal} onHide={onClose}/>
         </>
     )
 }

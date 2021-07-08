@@ -10,7 +10,6 @@ import { storage } from '../Firebase/FbConfig';
 import Loading from '../Components/Geral/Loading';
 import useAuthentication from '../Firebase/useAuthentication';
 import { useHistory } from 'react-router-dom';
-import ModalPerfilCriado from "../Components/Modal/ModalPerfilCriado";
 
 const TiposAceites = 'image/x-png, image/png, image/jpg, image/jpeg';
 const arrayTiposAceites = TiposAceites.split(",").map((item) => {
@@ -118,12 +117,13 @@ function FinalizarUtilizador () {
 
     const onConfirm = (valores) => {
         onCreateNovoUtilizador(user.email, valores.imagemUser, valores.nomeUtilizador, valores.biografia, valores.cidade)
-        setShowModal(true)
+        history.push('/selectequipa');
+        //setShowModal(true)
     }
-    const onClose = () => {
+    /*const onClose = () => {
         setShowModal(false);
-        history.push('/homepage');
-    }
+        history.push('/selectequipa');
+    }*/
 
     return (
         <>
@@ -212,7 +212,6 @@ function FinalizarUtilizador () {
                 </section>
             </Div>
             </Fundo>
-            <ModalPerfilCriado show={showModal} onHide={onClose}/>
         </>
     )
 }
