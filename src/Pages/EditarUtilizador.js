@@ -103,7 +103,7 @@ function EditarUtilizador () {
         }
     };
 
-    const onAtualizaUtilizador = (docId, userId, imagemUser, nomeUtilizador, biografia,  cidade) => {
+    const onAtualizaUtilizador = (docId, userId, imagemUser, nomeUtilizador, biografia,  cidade, progresso, equipa) => {
 
         if(imagemUser.name) {
             let date = new Date();
@@ -113,7 +113,7 @@ function EditarUtilizador () {
             let newName = replacedName + "_imagem_" + timestamp;
             
 
-            dispatch(atualizaUtilizador(docId, userId, newName, nomeUtilizador, biografia,  cidade));
+            dispatch(atualizaUtilizador(docId, userId, newName, nomeUtilizador, biografia,  cidade, progresso, equipa));
 
             const uploadTask = storage.ref(`imagensUtilizadores/${newName}`).put(imagemUser);
             uploadTask.on(
@@ -124,7 +124,7 @@ function EditarUtilizador () {
                 console.log(error);
             });
         } else {
-            dispatch(atualizaUtilizador(docId, userId, imagemUser, nomeUtilizador, biografia,  cidade));
+            dispatch(atualizaUtilizador(docId, userId, imagemUser, nomeUtilizador, biografia,  cidade, progresso, equipa));
         }
     }
 
@@ -138,7 +138,7 @@ function EditarUtilizador () {
     }
     
     const onConfirm = (valores) => {
-        onAtualizaUtilizador(ownUser.id, user.email, valores.imagemUser, valores.nomeUtilizador, valores.biografia, valores.cidade)
+        onAtualizaUtilizador(ownUser.id, user.email, valores.imagemUser, valores.nomeUtilizador, valores.biografia, valores.cidade, ownUser.progresso, ownUser.equipa)
         setShowModal(true)
     }
     const onClose = () => {

@@ -43,7 +43,7 @@ function App() {
         <Route exact path="/editar" component={EditarUtilizador} />
         <Route exact path="/equipas" component={Equipas} />
         <Route exact path="/equipas/equipastut" component={EquipasTut} />
-        <Route exact path="/detailselectequipa" component={DetailSelectEquipa} />
+        <Route exact path="/selectequipa/detailselectequipa" component={DetailSelectEquipa} />
         <Route exact path="/selectequipa" component={SelectEquipa} />
         <Route exact path="/finalizar" component={FinalizarUtilizador} />
         <Route exact path="/mapeador/:id" component={PerfilOutros} />

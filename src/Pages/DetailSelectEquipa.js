@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {useHistory} from 'react-router-dom'
 import '../Styles/LandingPage.css';
 import '../Styles/DetailSelectEquipa.css'
 import styled from 'styled-components';
@@ -7,6 +9,11 @@ import Scroll from '../Images/scroll.svg';
 import SetaSelectEquipa from '../Images/SetaSelectEquipa.svg';
 import Architect from '../Images/architect.svg';
 import Photographer from '../Images/photographer.svg';
+import Loading from '../Components/Geral/Loading';
+import { atualizaUtilizador, getUtilizadorById } from '../Store/Utilizadores/Actions';
+import { useAuth0 } from '@auth0/auth0-react';
+import useAuthentication from '../Firebase/useAuthentication';
+import ModalEditarUtilizador from '../Components/Modal/ModalEditarUtilizador';
 
 const Home = styled.div`
     flex-grow: 1;
@@ -47,9 +54,44 @@ const BackgroundDiv3 = styled.div`
     line-height: 246px;
 `;
 
-function DetailSelectEquipa() {
+function DetailSelectEquipa(props) {
 
-    const [equipa, setEquipa] = useState(1);
+    const [equipa, setEquipa] = useState(props.location.state.numero);
+    const history = useHistory();
+    const [showModal, setShowModal] = useState(false);
+    const ownUser = useSelector(({Utilizadores})=> Utilizadores.ownUser)
+    const isLoadingUser = useSelector(({Utilizadores}) => Utilizadores.isLoadingSelf)
+    const { user, isLoading, isAuthenticated } = useAuth0();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (user && !isLoading && isAuthenticated) {
+            dispatch(getUtilizadorById(user.email))
+        }
+    },[user])
+
+    const onConfirm = (docId, userId, imagemUser, nomeUtilizador, biografia, cidade, progresso, equipa) => {
+        onAtualizaUtilizador(docId, userId, imagemUser, nomeUtilizador, biografia, cidade, progresso, equipa)
+        setShowModal(true)
+    }
+    const onClose = () => {
+        setShowModal(false);
+        history.push(`/homepage`);
+    }
+
+    const onAtualizaUtilizador = (docId, userId, imagemUser, nomeUtilizador, biografia, cidade, progresso, equipa) => {
+        console.log(docId, userId, imagemUser, nomeUtilizador, biografia, cidade, progresso, equipa)
+        dispatch(atualizaUtilizador(docId, userId, imagemUser, nomeUtilizador, biografia, cidade, progresso, equipa));
+    }
+
+    useAuthentication()
+
+   
+    if(isLoading || isLoadingUser) {
+        return (
+            <Loading />
+        )
+    }
 
     const mudaEquipa = ((valor) => {
         let equipaNovo;
@@ -74,6 +116,7 @@ function DetailSelectEquipa() {
       })
 
     return(
+        <>
         <Home>
             {equipa === 1 ?
                 <h1 className="tituloEquipa">Historiadores</h1>
@@ -108,7 +151,14 @@ function DetailSelectEquipa() {
                 </span>
             </section>
             <section className="w-100 m-0 p-0 text-center">
-                <button className="btn butEscolhe">Escolher</button>
+                {equipa === 1 ?
+                    <button onClick={()=>onConfirm(ownUser.id, user.email, ownUser.imagemUser, ownUser.nomeUtilizador, ownUser.biografia, ownUser.cidade, ownUser.progresso, "Historiadores")} className="btn butEscolhe">Escolher</button>
+                    :
+                    equipa === 2 ?
+                    <button onClick={()=>onConfirm(ownUser.id, user.email, ownUser.imagemUser, ownUser.nomeUtilizador, ownUser.biografia, ownUser.cidade, ownUser.progresso, "Fotógrafos")} className="btn butEscolhe">Escolher</button>
+                    :
+                    <button onClick={()=>onConfirm(ownUser.id, user.email, ownUser.imagemUser, ownUser.nomeUtilizador, ownUser.biografia, ownUser.cidade, ownUser.progresso, "Arquitetos")} className="btn butEscolhe">Escolher</button>
+                }
             </section>
             <section className="w-100 m-0 p-0 text-center">
                 {equipa === 1 ?
@@ -121,6 +171,8 @@ function DetailSelectEquipa() {
                 }
             </section>
         </Home>
+        <ModalEditarUtilizador show={showModal} onHide={onClose}/>
+        </>
     )
 }
 

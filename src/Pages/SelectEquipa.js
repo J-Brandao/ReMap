@@ -4,9 +4,9 @@ import '../Styles/DetailSelectEquipa.css'
 import styled from 'styled-components';
 import Background from '../Images/Background.png';
 import Scroll from '../Images/scroll.svg';
-import SetaSelectEquipa from '../Images/SetaSelectEquipa.svg';
 import Architect from '../Images/architect.svg';
 import Photographer from '../Images/photographer.svg';
+import { Link } from 'react-router-dom';
 
 const Home = styled.div`
     flex-grow: 1;
@@ -27,26 +27,47 @@ function SelectEquipa() {
         <Home>
             <h1 className="tituloSelectEquipa text-center mb-3">Escolhe a tua equipa</h1>
             <section className="row w-100 m-0 p-0 justify-content-center">
-                <span className="row col-10 m-0 mb-4 p-0 SelectArquitetos">
-                    <span className="col-5 text-center m-auto p-0">
-                        <img className="m-0" src={Architect}/>
+                <Link className="col-10 p-0 w-100" to={{
+                    pathname: "/selectequipa/detailselectequipa",
+                    state: {
+                        numero: 3
+                    }
+                }}>
+                    <span className="row m-0 mb-4 p-0 SelectArquitetos">
+                        <span className="col-5 text-center m-auto p-0">
+                            <img className="m-0" src={Architect}/>
+                        </span>
+                        <span className="nomeEquipa col-7 m-auto p-0">Arquitetos</span>
                     </span>
-                    <span className="nomeEquipa col-7 m-auto p-0">Arquitetos</span>
-                </span>
+                </Link>
 
-                <span className="row col-10 m-0 mb-4 p-0 SelectHistoriadores">
-                    <span className="col-5 text-center m-auto p-0">
-                        <img className="m-0" src={Scroll}/>
+                <Link className="col-10 p-0 w-100" to={{
+                    pathname: "/selectequipa/detailselectequipa",
+                    state: {
+                        numero: 1
+                    }
+                }}>
+                    <span className="row m-0 mb-4 p-0 SelectHistoriadores">
+                        <span className="col-5 text-center m-auto p-0">
+                            <img className="m-0" src={Scroll}/>
+                        </span>
+                        <span className="nomeEquipa col-7 m-auto p-0">Historiadores</span>
                     </span>
-                    <span className="nomeEquipa col-7 m-auto p-0">Historiadores</span>
-                </span>
+                </Link>
 
-                <span className="row col-10 m-0 p-0 SelectFotografos">
-                    <span className="col-5 text-center m-auto p-0">
-                        <img className="m-0" src={Photographer}/>
+                <Link className="col-10 p-0 w-100" to={{
+                    pathname: "/selectequipa/detailselectequipa",
+                    state: {
+                        numero: 2
+                    }
+                }}>
+                    <span className="row m-0 p-0 SelectFotografos">
+                        <span className="col-5 text-center m-auto p-0">
+                            <img className="m-0" src={Photographer}/>
+                        </span>
+                        <span className="nomeEquipa col-7 m-auto p-0">Fotografos</span>
                     </span>
-                    <span className="nomeEquipa col-7 m-auto p-0">Fotografos</span>
-                </span>
+                </Link>
             </section>
         </Home>
     )

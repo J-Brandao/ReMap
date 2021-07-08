@@ -55,14 +55,14 @@ export const fetchUtilizadorForPerfil = (userId) =>
   fetch(`http://localhost:3001/utilizador/perfil/${userId}`)
     .then(response => response.json())
     
-export const updateUtilizador = (token, docID, userId, imagemUser, nomeUtilizador, biografia, cidade, role, active) =>
+export const updateUtilizador = (token, docID, userId, imagemUser, nomeUtilizador, biografia, cidade, progresso, equipa, role, active) =>
   fetch(`http://localhost:3001/utilizador/perfil/${docID}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     },
-    body: JSON.stringify({ userId, imagemUser, nomeUtilizador, biografia, cidade, role, active })
+    body: JSON.stringify({ userId, imagemUser, nomeUtilizador, biografia, cidade, progresso, equipa, role, active })
   }).then(response => response.json());
   
 export const createUtilizador = (token, userId, imagemUser, nomeUtilizador, biografia, cidade, role, active, progresso) =>
