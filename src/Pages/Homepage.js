@@ -19,6 +19,9 @@ import ArquitetosMarker from '../Images/ArquitetosMarker.png';
 import HistoriadoresMarker from '../Images/HistoriadoresMarker.png';
 import FotografosMarker from '../Images/FotografosMarker.png';
 import ShadowMarker from '../Images/ShadowMarker.png';
+import Architect from '../Images/architect.svg';
+import Scroll from '../Images/scroll.svg';
+import Photographer from '../Images/photographer.svg';
 
 
 const ProfilePicture = styled.div`
@@ -31,6 +34,15 @@ const ProfilePicture = styled.div`
     min-height: 80px;
     width: 80px;
 `;  
+
+const BackgroundDiv = styled.div`
+    margin: 0 0 15px 15px;
+    border-radius: 50%;
+    min-height: 35px;
+    width: 35px;
+    line-height: 35px;
+    position: absolute;
+`;
 
 function GetLocation ({latitude, longitude}) {
     const map = useMap();
@@ -172,7 +184,12 @@ function Homepage () {
                             id: ownUser.id
                         }
                         }}>
-                <ProfilePicture className="fotografia" style={{backgroundImage: `url(${imagem})`}}/>
+                <span className="m-0 p-0">
+                    <ProfilePicture className="fotografia" style={{backgroundImage: `url(${imagem})`}}/>
+                    <BackgroundDiv className="fotografia2 text-center" style={ownUser.equipa === "Arquitetos" ? {backgroundColor: "#CCE6C1"} : ownUser.equipa === "Historiadores" ? {backgroundColor: "#F8A46F"} : {backgroundColor: "#92d1df"}}>
+                        <img className="m-auto" style={{height:`20px`}} src={ownUser.equipa === "Arquitetos" ? Architect : ownUser.equipa === "Historiadores" ? Scroll : Photographer}/>
+                    </BackgroundDiv>
+                </span>
             </Link>
             <MapContainer center={[coordenadas.lat, coordenadas.long]} zoom={20}>
                 <GetLocation latitude={coordenadas.lat} longitude={coordenadas.long}/>

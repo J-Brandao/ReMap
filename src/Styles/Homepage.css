@@ -52,6 +52,13 @@
   z-index: 500;
 }
 
+.fotografia2 {
+  position: fixed;
+  bottom: -5px;
+  left: 45px;
+  z-index: 500;
+}
+
 .filtros {
   position: fixed;
   top: 0;
