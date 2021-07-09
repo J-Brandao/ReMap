@@ -114,16 +114,6 @@ function Gamehub (props) {
             <Trofeus/>
            </Div>
 
-           <section className="row col-12 m-0 p-0 btnTeam">
-               <span className="col-3 text-right m-auto p-0">
-                    <img className="m-0" src={Architect}/>
-               </span>
-                <span className="nomeEquipa col-6 text-center m-auto p-0">Arquitetos</span>
-                <span className="col-3 m-auto">
-                    <img className="m-0" src={ArrowTeam}/>
-               </span>
-           </section>
-
            <section className="row col-12 m-0 mt-3 p-0">
                 <h5 id="seccaoTitulo" className="subtituloGH">Estatísticas Principais</h5>
                 <div className="bgSeccao">

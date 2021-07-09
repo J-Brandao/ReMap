@@ -16,6 +16,8 @@ import FriendButton from '../Components/Geral/FriendButton';
 import useAuthentication from '../Firebase/useAuthentication'; 
 import {Link} from "react-router-dom";
 import Architect from '../Images/architect.svg';
+import Scroll from '../Images/scroll.svg';
+import Photographer from '../Images/photographer.svg';
 
 
 const Div = styled.div`
@@ -37,7 +39,6 @@ const BackgroundDiv2 = styled.div`
     margin: auto 0 auto auto;
     bottom: 35%;
     right: 15%;
-    background-color: #CCE6C1;
     border-radius: 50%;
     min-height: 55px;
     width: 55px;
@@ -87,8 +88,8 @@ function PerfilOutros(props) {
                 <div className="col-8 text-center m-0 p-0">
                     <span className="m-0 p-0">
                         <ProfilePicture style={{backgroundImage:`url(${imagem !== null ? imagem : Placeholder})`}}/>
-                        <BackgroundDiv2>
-                            <img className="m-auto" style={{height:`35px`}} src={Architect}/>
+                        <BackgroundDiv2 style={utilizador.equipa === "Arquitetos" ? {backgroundColor: "#CCE6C1"} : utilizador.equipa === "Historiadores" ? {backgroundColor: "#F8A46F"} : {backgroundColor: "#92d1df"}}>
+                            <img className="m-auto" style={{height:`35px`}} src={utilizador.equipa === "Arquitetos" ? Architect : utilizador.equipa === "Historiadores" ? Scroll : Photographer}/>
                         </BackgroundDiv2>
                     </span>
                     <h5 id="NomeUser">{utilizador.nomeUtilizador}</h5>  
