@@ -51,9 +51,9 @@ const BackgroundDiv3 = styled.div`
     line-height: 65px;
 `;
 
-function Equipas() {
+function Equipas(props) {
 
-    const [team, setTeam] = useState("Arquitetos");
+    const [team, setTeam] = useState(props.location.state.id);
 
     const utilizador = useSelector(({Utilizadores})=> Utilizadores.ownUser)
     const isLoadingUtilizador = useSelector(({Utilizadores})=> Utilizadores.isLoadingSelf)
@@ -101,7 +101,14 @@ function Equipas() {
                     </Link>
             </section>
 
-            <CarouselEquipas onChange={onChange}/>
+            {props.location.state.id === "Arquitetos" ?
+                <CarouselEquipas onChange={onChange} value={1}/>
+                :
+                props.location.state.id === "Historiadores" ?
+                <CarouselEquipas onChange={onChange} value={2}/>
+                :
+                <CarouselEquipas onChange={onChange} value={3}/>
+            }
 
             <section className="row col-12 m-0 mt-2 p-0">
                 {equipas.map((equipa) => {

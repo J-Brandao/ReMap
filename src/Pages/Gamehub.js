@@ -27,6 +27,7 @@ import badgeEdificio_0 from '../Images/badges/badgeEdificio_0.svg';
 import badgeComentario_0 from '../Images/badges/badgeComentario_0.svg';
 import badgeAmigo_0 from '../Images/badges/badgeAmigo_0.svg';
 import badgeSugestao_0 from '../Images/badges/badgeSugestao_0.svg';
+import BtnGamehub from '../Components/Equipas/BtnGamehub';
 
 
 const Div = styled.div`
@@ -77,7 +78,6 @@ function Gamehub() {
 
     return(
         <div className="m-0 p-0">
-            {console.log(utilizador.progresso.comentarios.badge)}
             <Div>
                 <section className="row col-12 m-0 p-0">
                     <span className="col-2 m-0 p-0">
@@ -110,16 +110,13 @@ function Gamehub() {
             <Trofeus/>
            </Div>
 
-           <Link to="/equipas">
-           <section className="row col-12 m-0 p-0 btnTeam">
-               <span className="col-3 text-right m-auto p-0">
-                    <img className="m-0" src={Architect}/>
-               </span>
-                <span className="nomeEquipa col-6 text-center m-auto p-0">Arquitetos</span>
-                <span className="col-3 m-auto">
-                    <img className="m-0" src={ArrowTeam}/>
-               </span>
-           </section>
+           <Link to={{
+               pathname: "/equipas",
+               state: {
+                   id: utilizador.equipa
+               }
+            }}>
+                <BtnGamehub team={utilizador.equipa}/>
            </Link>
 
            <section className="row col-12 m-0 mt-3 p-0">

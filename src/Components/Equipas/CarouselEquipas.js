@@ -27,9 +27,9 @@ const BackgroundDiv3 = styled.div`
     border-radius: 50%;
 `;
 
-function CarouselEquipas({onChange}) {
+function CarouselEquipas({onChange, value}) {
 
-    const [equipa, setEquipa] = useState(1);
+    const [equipa, setEquipa] = useState(value);
 
     const mudaEquipa = ((valor) => {
         let equipaNovo;
