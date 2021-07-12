@@ -24,6 +24,7 @@ import {
     EDIFICIO_DELETE_ERROR,
   } from './Constants';
   import { fetchEdificioList, fetchEdificio, createEdificio, fetchEdificioForPerfil, deleteEdificio, updateEdificio } from "../../../Firebase/Pedidos"
+import { UTILIZADOR_CREATE_ERROR } from '../../Utilizadores/Actions/Constants';
   
   export const getEdificioList = () => {
     return (dispatch) => {
@@ -63,7 +64,17 @@ import {
     return (dispatch, getState) => {
       dispatch({ type: EDIFICIO_CREATE_START });
 
-      createEdificio(getState().token, userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo, user)
+      const domain = {
+        Arquitetos: 0,
+        Fotógrafos: 0,
+        Historiadores: 0,
+        total: 0
+      }
+
+      domain[user.equipa] = domain[user.equipa] + 250;
+      domain.total = domain.total + 250;
+
+      createEdificio(getState().token, userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo, domain, user)
         .then(Edificio => {
           dispatch({ type: EDIFICIO_CREATE_SUCCESS, payload: Edificio })
         })

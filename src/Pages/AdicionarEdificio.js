@@ -159,6 +159,7 @@ function AdicionarEdificio (props) {
     return (
         <>
         <Div>
+            {console.log(utilizador)}
             <section className="row col-12 m-0 p-0">
                 <BackArrow isGoingBack={true}/>
                 <span className="col-10 tituloPagina offset-2 text-center m-0 p-0">

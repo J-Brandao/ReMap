@@ -12,14 +12,14 @@ export const fetchEdificioForPerfil = ( userId ) =>
     .then(response => response.json())
 
 
-export const createEdificio = (token, userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo, user) =>
+export const createEdificio = (token, userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo, domain, user) =>
   fetch(`http://localhost:3001/edificios`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     },
-    body: JSON.stringify({ userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo, user })
+    body: JSON.stringify({ userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo, domain, user })
   }).then(response => response.json());
 
   export const updateEdificio = (token, docID, userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo) =>
