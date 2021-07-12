@@ -38,8 +38,18 @@ module.exports = {
     const user = body.user;
     delete body.user;
 
+    const edificio = body.edificio;
+    delete body.edificio;
+
     const userCollectionRef = db.collection("Utilizadores");
     const userDoc = getDocumentFromCollection(userCollectionRef, user.id);
+
+    const edificioCollectionRef = db.collection("Edifícios");
+    const edificioDoc = getDocumentFromCollection(edificioCollectionRef, edificio.id);
+
+    
+    edificio.domain[user.equipa] += 100;
+    edificio.domain.total += 100;
 
     if (user.progresso.exp + 150 === 1000) {
       user.progresso.exp = 0
@@ -64,7 +74,7 @@ module.exports = {
       user.progresso.comentarios.nrComentarios += 1;
     }
     const userRef = await userDoc.update(user);
-    
+    const edificioRef = await edificioDoc.update(edificio);
     
     const comentarioRef = await comentarioCollectionRef.add(body);
     return {id: comentarioRef.id, ...body}

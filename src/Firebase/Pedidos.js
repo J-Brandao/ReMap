@@ -119,14 +119,14 @@ export const fetchComentariosListByBuilding = (buildingId) =>
   fetch(`http://localhost:3001/comentarios/user/${userId}`)
     .then(response => response.json())
     
-export const createComentario = (token, userId, valor, edificioId, user) =>
+export const createComentario = (token, userId, valor, edificioId, user, edificio) =>
 fetch(`http://localhost:3001/comentarios`, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${token}`
   },
-  body: JSON.stringify({ userId, valor, edificioId, user })
+  body: JSON.stringify({ userId, valor, edificioId, user, edificio })
 }).then(response => response.json());
 
 //SUGESTÕES

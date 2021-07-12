@@ -304,9 +304,9 @@ function PaginaEdificio(props) {
             }
            
             {seccao === 'Sugestões' ?
-                <Sugestoes utilizador={ownUser.id} edificio={edificio.id} isLoading={isLoadingSugestoes} sugestoes={sugestoes} userCheck={user.email}/>
+                <Sugestoes utilizador={ownUser.id} edificio={edificio} isLoading={isLoadingSugestoes} sugestoes={sugestoes} userCheck={user.email}/>
                 :
-                    <Comentarios utilizador={ownUser.id} edificio={edificio.id} isLoading={isLoadingComment} comments={commentData} userCheck={user.email}/>
+                    <Comentarios utilizador={ownUser.id} edificio={edificio} isLoading={isLoadingComment} comments={commentData} userCheck={user.email}/>
             }
             </div>
             <ModalEliminarEdificio show={showModal} onHide={handleClose} onDelete={deleteEdificio}/>    

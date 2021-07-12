@@ -23,7 +23,7 @@ function Comentarios (props) {
     const [comentario, setComentario] = useState({
         valor: '',
         userId: props.utilizador,
-        edificioId: props.edificio
+        edificioId: props.edificio.id
     });
 
    
@@ -34,7 +34,7 @@ function Comentarios (props) {
     })
 
     const handleCreateComentario = (userId, valor, edificioId) => {
-        dispatch(createNovoComentario(userId, valor, edificioId, utilizador))
+        dispatch(createNovoComentario(userId, valor, edificioId, utilizador, props.edificio))
     }
 
     useAuthentication();
