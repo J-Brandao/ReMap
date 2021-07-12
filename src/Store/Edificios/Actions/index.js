@@ -68,11 +68,11 @@ import { UTILIZADOR_CREATE_ERROR } from '../../Utilizadores/Actions/Constants';
         Arquitetos: 0,
         Fotógrafos: 0,
         Historiadores: 0,
-        total: 0
+        total: 250
       }
 
       domain[user.equipa] = domain[user.equipa] + 250;
-      domain.total = domain.total + 250;
+      //domain.total = domain.total + 250;
 
       createEdificio(getState().token, userId, date, nomeEdificio, descricao, fotos, localizacao, degradacao, acesso, seguranca, vandalismo, domain, user)
         .then(Edificio => {

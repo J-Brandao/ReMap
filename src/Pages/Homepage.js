@@ -170,6 +170,7 @@ function Homepage () {
 
     return (
         <>
+        {console.log(EdificioList)}
         <div className="m-0 p-0">
             {hasUser() &&
                 history.push("/finalizar")}
@@ -218,7 +219,7 @@ function Homepage () {
                     :
                     <>
                     {EdificioList.map((edificio, key) => (
-                        <Marker key={key} position={[edificio.localizacao[0], edificio.localizacao[1]]} icon={getMarker("Arquitetos")}>
+                        <Marker key={key} position={[edificio.localizacao[0], edificio.localizacao[1]]} icon={getMarker(edificio.maior)}>
                             <Popup position={[edificio.localizacao[0], edificio.localizacao[1]]}>
                                 <Link to={`/edificio/${edificio.id}`}><h3>{edificio.nomeEdificio}</h3></Link>
                             </Popup>

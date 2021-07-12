@@ -40,10 +40,25 @@ module.exports = {
     const db = getFirestore();
     const pokeCollectionRef = db.collection("Edifícios");
     const result = await pokeCollectionRef.get();
-    const edificios = result.docs.map(doc => ({
+    const edificios = result.docs.map(doc => {
+      
+      let max = 0;
+      var keys = Object.keys(doc.data().domain);
+      var sorted = keys.sort();
+      for(i = 0; i < sorted.length - 1; i++){
+        console.log(sorted)
+        console.log(sorted[i])
+        var value = doc.data().domain[sorted[i]];
+        if (value > max) max = sorted[i];
+        //console.log(max)
+      }
+      
+      return {
         ...doc.data(),
-        id: doc.id
-    }));
+        id: doc.id,
+        maior: max
+      }
+    });
     return edificios;
   },
   create: async (body) => {
