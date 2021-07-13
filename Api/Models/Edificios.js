@@ -45,8 +45,9 @@ module.exports = {
       let max = 0;
       var keys = Object.keys(doc.data().domain);
       var sorted = keys.sort();
+      var i;
       for(i = 0; i < sorted.length - 1; i++){
-        console.log(sorted)
+        //console.log(sorted)
         console.log(sorted[i])
         var value = doc.data().domain[sorted[i]];
         if (value > max) max = sorted[i];

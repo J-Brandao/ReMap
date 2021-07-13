@@ -27,6 +27,18 @@ import badgeEdificio_0 from '../Images/badges/badgeEdificio_0.svg';
 import badgeComentario_0 from '../Images/badges/badgeComentario_0.svg';
 import badgeAmigo_0 from '../Images/badges/badgeAmigo_0.svg';
 import badgeSugestao_0 from '../Images/badges/badgeSugestao_0.svg';
+import badgeEdificio_1 from '../Images/badges/badgeEdificio_1.svg';
+import badgeComentario_1 from '../Images/badges/badgeComentario_1.svg';
+import badgeAmigo_1 from '../Images/badges/badgeAmigo_1.svg';
+import badgeSugestao_1 from '../Images/badges/badgeSugestao_1.svg';
+import badgeEdificio_2 from '../Images/badges/badgeEdificio_2.svg';
+import badgeComentario_2 from '../Images/badges/badgeComentario_2.svg';
+import badgeAmigo_2 from '../Images/badges/badgeAmigo_2.svg';
+import badgeSugestao_2 from '../Images/badges/badgeSugestao_2.svg';
+import badgeEdificio_3 from '../Images/badges/badgeEdificio_3.svg';
+import badgeComentario_3 from '../Images/badges/badgeComentario_3.svg';
+import badgeAmigo_3 from '../Images/badges/badgeAmigo_3.svg';
+import badgeSugestao_3 from '../Images/badges/badgeSugestao_3.svg';
 import BtnGamehub from '../Components/Equipas/BtnGamehub';
 
 
@@ -158,24 +170,68 @@ function Gamehub() {
                 <div className="bgSeccao">
                     <span className="row col-12 m-0 px-0 py-2 justify-content-center">
                         <span className="col-4 m-0 text-center">
-                            <img className="m-0 imgCracha" src={badgeEdificio_0}/>
+                            <img className="m-0 imgCracha" src={
+                                utilizador.progresso.edificios.badge === "badgeEdificio_0.svg" ?
+                                badgeEdificio_0
+                                :
+                                utilizador.progresso.edificios.badge === "badgeEdificio_1.svg" ?
+                                badgeEdificio_1
+                                :
+                                utilizador.progresso.edificios.badge === "badgeEdificio_2.svg" ?
+                                badgeEdificio_2
+                                :
+                                badgeEdificio_3
+                            }/>
                             <ProgressBar now={utilizador.progresso.edificios.nrEdificios} className="my-2" variant="custom"/>
                             <p className="m-0 p-0 nomeCracha">Edifícios Adicionados</p>
                         </span>
                         <span className="col-4 m-0 text-center">
-                            <img className="m-0 imgCracha" src={badgeComentario_0}/>
+                            <img className="m-0 imgCracha" src={
+                                utilizador.progresso.comentarios.badge === "badgeComentario_0.svg" ?
+                                badgeComentario_0
+                                :
+                                utilizador.progresso.comentarios.badge === "badgeComentario_1.svg" ?
+                                badgeComentario_1
+                                :
+                                utilizador.progresso.comentarios.badge === "badgeComentario_2.svg" ?
+                                badgeComentario_2
+                                :
+                                badgeComentario_3
+                            }/>
                             <ProgressBar now={utilizador.progresso.comentarios.nrComentarios} className="my-2" variant="custom"/>
                             <p className="m-0 p-0 nomeCracha">Comentários</p>
                         </span>
                         <span className="col-4 m-0 text-center">
-                            <img className="m-0 imgCracha" src={badgeAmigo_0}/>
+                            <img className="m-0 imgCracha" src={
+                                utilizador.progresso.amigos.badge === "badgeAmigo_0.svg" ?
+                                badgeAmigo_0
+                                :
+                                utilizador.progresso.amigos.badge === "badgeAmigo_1.svg" ?
+                                badgeAmigo_1
+                                :
+                                utilizador.progresso.amigos.badge === "badgeAmigo_2.svg" ?
+                                badgeAmigo_2
+                                :
+                                badgeAmigo_3
+                            }/>
                             <ProgressBar now={utilizador.progresso.amigos.nrAmigos} className="my-2" variant="custom"/>
                             <p className="m-0 p-0 nomeCracha">Amigos Adicionados</p>
                         </span>
                     </span>
                     <span className="row col-12 m-0 px-0 py-2 justify-content-center">
                         <span className="col-4 m-0 text-center">
-                            <img className="m-0 imgCracha" src={badgeSugestao_0}/>
+                            <img className="m-0 imgCracha" src={
+                                utilizador.progresso.sugestao.badge === "badgeSugestao_0.svg" ?
+                                badgeSugestao_0
+                                :
+                                utilizador.progresso.sugestao.badge === "badgeSugestao_1.svg" ?
+                                badgeSugestao_1
+                                :
+                                utilizador.progresso.sugestao.badge === "badgeSugestao_2.svg" ?
+                                badgeSugestao_2
+                                :
+                                badgeSugestao_3
+                            }/>
                             <ProgressBar now={utilizador.progresso.sugestao.nrSugestoes} className="my-2" variant="custom"/>
                             <p className="m-0 p-0 nomeCracha">Sugestões Dadas</p>
                         </span>
