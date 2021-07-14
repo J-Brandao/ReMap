@@ -10,7 +10,6 @@ import Trofeu4 from '../../Images/Trofeu4.svg';
 function trofeus ({nivel}) {
     return(
         <section className="row col-12 text-center m-0 p-0">
-            {console.log(nivel)}
             <span className="col-4 m-0 p-0">
                 <img src={Bandeira} className="m-0"/>
                 <p className="nomeTrofeu">Explorador</p>

@@ -119,7 +119,7 @@ function Gamehub() {
                         </span>
                     </div>
             </section>
-            <Trofeus/>
+            <Trofeus nivel={utilizador.progresso.nivel} />
            </Div>
 
            <Link to={{
