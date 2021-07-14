@@ -111,7 +111,7 @@ function Gamehub (props) {
                         </span>
                     </div>
             </section>
-            <Trofeus/>
+                <Trofeus utilizador={utilizador}/>
            </Div>
 
            <section className="row col-12 m-0 mt-3 p-0">

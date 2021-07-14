@@ -109,7 +109,7 @@ function PerfilOutros(props) {
            </section>
 
             <Link style={{textDecoration: 'none', color:'#34495e'}} to={`/gamehub/${utilizador.id}`}>
-            <Trofeus />
+                <Trofeus utilizador={utilizador}/>
             </Link>
 
             <Interacoes userId={utilizador.id} urlId={props.match.params.id}/>
