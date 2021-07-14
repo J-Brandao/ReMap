@@ -2,7 +2,10 @@ import React from 'react';
 import '../../Styles/Perfil.css';
 import Camera from '../../Images/Camera.svg';
 import Bandeira from '../../Images/Bandeira.svg';
-import Trofeu from '../../Images/Trofeu.svg';
+import Trofeu1 from '../../Images/Trofeu1.svg';
+import Trofeu2 from '../../Images/Trofeu2.svg';
+import Trofeu3 from '../../Images/Trofeu3.svg';
+import Trofeu4 from '../../Images/Trofeu4.svg';
 
 import badgeSugestao_0 from '../../Images/badges/badgeSugestao_0.svg';
 import badgeSugestao_1 from '../../Images/badges/badgeSugestao_1.svg';
@@ -14,7 +17,8 @@ import badgeEdificio_1 from '../../Images/badges/badgeEdificio_1.svg';
 import badgeEdificio_2 from '../../Images/badges/badgeEdificio_2.svg';
 import badgeEdificio_3 from '../../Images/badges/badgeEdificio_3.svg';
 
-function trofeus ({utilizador}) {
+function trofeus({ utilizador }) {
+    const nivel = utilizador.progresso.nivel;
     return(
         <section className="row col-12 text-center m-0 p-0">
             <span className="col-4 m-0 p-0">
@@ -33,7 +37,7 @@ function trofeus ({utilizador}) {
                 <p className="nomeTrofeu">Mapeador</p>
             </span>
             <span className="col-4 m-0 p-0">
-                <img src={Trofeu} className="m-0"/>
+            <img src={nivel < 10 ? Trofeu1 : nivel >= 10 && nivel < 24 ? Trofeu2 : nivel >= 25 && nivel < 50 ? Trofeu3 : Trofeu4} className="m-0" style={{height: "70px", width: "auto"}}/>
                 <p className="nomeTrofeu">Principiante</p>
             </span>
             <span className="col-4 m-0 p-0">

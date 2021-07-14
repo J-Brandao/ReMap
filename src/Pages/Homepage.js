@@ -22,6 +22,7 @@ import ShadowMarker from '../Images/ShadowMarker.png';
 import Architect from '../Images/architect.svg';
 import Scroll from '../Images/scroll.svg';
 import Photographer from '../Images/photographer.svg';
+import { popupContent, popupText } from "../Components/Homepage/PopupStyles";
 
 
 const ProfilePicture = styled.div`
@@ -170,7 +171,6 @@ function Homepage () {
 
     return (
         <>
-        {console.log(EdificioList)}
         <div className="m-0 p-0">
             {hasUser() &&
                 history.push("/finalizar")}
@@ -187,7 +187,7 @@ function Homepage () {
                         }}>
                 <span className="m-0 p-0">
                     <ProfilePicture className="fotografia" style={{backgroundImage: `url(${imagem})`}}/>
-                    <BackgroundDiv className="fotografia2 text-center" style={ownUser.equipa === "Arquitetos" ? {backgroundColor: "#CCE6C1"} : ownUser.equipa === "Historiadores" ? {backgroundColor: "#F8A46F"} : {backgroundColor: "#92d1df"}}>
+                    <BackgroundDiv className="fotografia2 text-center" style={ownUser.equipa === "Arquitetos" ? {backgroundColor: "#CCE6C1", border: "solid 2px #4eae53"} : ownUser.equipa === "Historiadores" ? {backgroundColor: "#F8A46F", border: "solid 2px #d58244"} : {backgroundColor: "#92d1df", border: "solid 2px #006ec5"}}>
                         <img className="m-auto" style={{height:`20px`}} src={ownUser.equipa === "Arquitetos" ? Architect : ownUser.equipa === "Historiadores" ? Scroll : Photographer}/>
                     </BackgroundDiv>
                 </span>
@@ -204,9 +204,13 @@ function Homepage () {
                         {EdificioList.map((edificio, key) => (
                             <>
                             {edificio.localizacao[0] <= coordenadas.lat + filtros.valor && edificio.localizacao[0] >= coordenadas.lat - filtros.valor && edificio.localizacao[1] <= coordenadas.long + filtros.valor && edificio.localizacao[1] >= coordenadas.long - filtros.valor ?
-                                <Marker key={key} position={[edificio.localizacao[0], edificio.localizacao[1]]} icon={getMarker("Arquitetos")}>
+                                <Marker key={key} position={[edificio.localizacao[0], edificio.localizacao[1]]} icon={getMarker(edificio.maior)}>
                                     <Popup position={[edificio.localizacao[0], edificio.localizacao[1]]}>
-                                        <Link to={`/edificio/${edificio.id}`}><h3>{edificio.nomeEdificio}</h3></Link>
+                                        <div style={popupContent}>
+                                            <h4>{edificio.nomeEdificio}</h4>
+                                            <p className="textoPopup">{edificio.descricao}</p>
+                                            <Link style={{textDecoration: "none"}} to={`/edificio/${edificio.id}`}><button className="btnSubmeter">Saber mais</button></Link>
+                                        </div>
                                     </Popup>
                                 </Marker>
                                 :
@@ -221,7 +225,11 @@ function Homepage () {
                     {EdificioList.map((edificio, key) => (
                         <Marker key={key} position={[edificio.localizacao[0], edificio.localizacao[1]]} icon={getMarker(edificio.maior)}>
                             <Popup position={[edificio.localizacao[0], edificio.localizacao[1]]}>
-                                <Link to={`/edificio/${edificio.id}`}><h3>{edificio.nomeEdificio}</h3></Link>
+                                <div style={popupContent}>
+                                    <h4>{edificio.nomeEdificio}</h4>
+                                    <p className="textoPopup">{edificio.descricao}</p>
+                                    <Link style={{textDecoration: "none"}} to={`/edificio/${edificio.id}`}><button className="btnSubmeter">Saber mais</button></Link>
+                                </div>
                             </Popup>
                         </Marker>
                     ))}
