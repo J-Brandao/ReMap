@@ -53,13 +53,13 @@ module.exports = {
     }
     
     if (user.progresso.amigos.nrAmigos + 1 === 25) {
-      user.progresso.amigos.badge = "badgeAmigo_1.png";
+      user.progresso.amigos.badge = "badgeAmigo_1.svg";
       user.progresso.amigos.nrAmigos += 1;
     }else if (user.progresso.comentarios.nrAmigos + 1 === 75) {
-      user.progresso.comentarios.badge = "badgeAmigo_2.png";
+      user.progresso.comentarios.badge = "badgeAmigo_2.svg";
       user.progresso.comentarios.nrAmigos += 1;
     }else if (user.progresso.comentarios.nrAmigos + 1 === 150) {
-      user.progresso.comentarios.badge = "badgeAmigo_3.png";
+      user.progresso.comentarios.badge = "badgeAmigo_3.svg";
       user.progresso.comentarios.nrAmigos += 1;
     } else {
       user.progresso.amigos.nrAmigos += 1;

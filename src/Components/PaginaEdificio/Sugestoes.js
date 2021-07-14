@@ -30,7 +30,7 @@ function Sugestoes (props) {
     const [sugestao, setSugestao] = useState({
         valor: '',
         userId: props.utilizador,
-        edificioId: props.edificio
+        edificioId: props.edificio.id
     });
     
     const handleChange = (escrito  => {
@@ -39,7 +39,7 @@ function Sugestoes (props) {
     })
 
     const handleCreateSugestao = (userId, valor, edificioId) => {
-        dispatch(createNovaSugestao(userId, valor, edificioId, utilizador))
+        dispatch(createNovaSugestao(userId, valor, edificioId, utilizador, props.edificio))
     }
 
     useAuthentication();

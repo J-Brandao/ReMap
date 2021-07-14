@@ -235,33 +235,6 @@ function Gamehub() {
                             <ProgressBar now={utilizador.progresso.sugestao.nrSugestoes} className="my-2" variant="custom"/>
                             <p className="m-0 p-0 nomeCracha">Sugestões Dadas</p>
                         </span>
-                        <span className="col-4 m-0 text-center">
-                            <img className="m-0 imgCracha" src={Ideia}/>
-                            <ProgressBar now={60} className="my-2" variant="custom"/>
-                            <p className="m-0 p-0 nomeCracha">Sugestões</p>
-                        </span>
-                        <span className="col-4 m-0 text-center">
-                            <img className="m-0 imgCracha" src={CheckMark}/>
-                            <ProgressBar now={60} className="my-2" variant="custom"/>
-                            <p className="m-0 p-0 nomeCracha">Verificado</p>
-                        </span>
-                    </span>
-                    <span className="row col-12 m-0 px-0 py-2 justify-content-center">
-                        <span className="col-4 m-0 text-center">
-                            <img className="m-0 imgCracha" src={Alert}/>
-                            <ProgressBar now={60} className="my-2" variant="custom"/>
-                            <p className="m-0 p-0 nomeCracha">Fora da Lei</p>
-                        </span>
-                        <span className="col-4 m-0 text-center">
-                            <img className="m-0 imgCracha" src={Spray}/>
-                            <ProgressBar now={60} className="my-2" variant="custom"/>
-                            <p className="m-0 p-0 nomeCracha">Vandalizado</p>
-                        </span>
-                        <span className="col-4 m-0 text-center">
-                            <img className="m-0 imgCracha" src={BrokenHouseGH}/>
-                            <ProgressBar now={60} className="my-2" variant="custom"/>
-                            <p className="m-0 p-0 nomeCracha">Mapeador</p>
-                        </span>
                     </span>
                 </div>
            </section>
