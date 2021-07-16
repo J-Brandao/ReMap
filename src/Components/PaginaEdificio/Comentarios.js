@@ -57,7 +57,10 @@ function Comentarios (props) {
                 {comentario.valor === '' ?
                 <button className="btnPublicarDisabled mb-3" disabled>Publicar</button>
                 :
-                <button className="btnPublicar mb-3" onClick={() => handleCreateComentario(comentario.userId, comentario.valor, comentario.edificioId)}>Publicar</button>
+                <div className="m-0 p-0 w-100 text-right">
+                    <span className="XPdada">+200 XP</span>
+                    <button className="btnPublicar mb-3" onClick={() => handleCreateComentario(comentario.userId, comentario.valor, comentario.edificioId)}>Publicar</button>
+                </div>
                         }
                       
                 </span>
