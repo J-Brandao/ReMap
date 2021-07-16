@@ -58,7 +58,10 @@ function Sugestoes (props) {
                     {sugestao.valor === '' ?
                         <button className="btnPublicarDisabled mb-3" disabled>Publicar</button>
                         :
-                        <button className="btnPublicar mb-3" onClick={() => handleCreateSugestao(sugestao.userId, sugestao.valor, sugestao.edificioId)}>Publicar</button>
+                        <div className="m-0 p-0 w-100 text-right">
+                            <span className="XPdada">+200 XP</span>
+                            <button className="btnPublicar mb-3" onClick={() => handleCreateSugestao(sugestao.userId, sugestao.valor, sugestao.edificioId)}>Publicar</button>
+                        </div>
                     }
                 </span>
                     {props.sugestoes.length === 0 ?

@@ -41,6 +41,7 @@ function AdicionarEdificio (props) {
     const isLoadingEdificio = useSelector(({ Edificios }) => Edificios.isLoading);
     const utilizador = useSelector(({Utilizadores})=> Utilizadores.ownUser)
     const [imagem, setImagem] = useState([]);
+    const [imgUser, setImgUser] = useState(null)
     const [showModal, setShowModal] = useState(false);
     const [showModalVer, setShowModalVer] = useState(false);
     const [valores, setValores] = useState({
@@ -72,6 +73,13 @@ function AdicionarEdificio (props) {
             })
         }
     }, [EdificioList])
+    useEffect(() => {
+        if (utilizador && !isLoading) {
+            storage.ref('imagensUtilizadores').child(`${utilizador.imagemUser}`).getDownloadURL().then((url) => {
+                setImgUser(url)
+            })
+        }  
+    }, [utilizador])
 
     const verificarFicheiro = (file) => {
         if (file.type && !arrayTiposAceites.includes(file.type)) {
@@ -134,7 +142,7 @@ function AdicionarEdificio (props) {
         }) 
 
         //Envia Informação para a firebase
-        dispatch(createNovoEdificio(userId, dataFinal, nomeEdificio, descricao, arrayNomes, localizacao, degradacao, acesso, seguranca, vandalismo, utilizador));
+        //dispatch(createNovoEdificio(userId, dataFinal, nomeEdificio, descricao, arrayNomes, localizacao, degradacao, acesso, seguranca, vandalismo, utilizador));
         setShowModal(true);
     }
 
@@ -254,7 +262,7 @@ function AdicionarEdificio (props) {
                 `}
             </style>
             </Div>
-            <ModalEdificioNovo show={showModal} onHide={closeModal} />
+            <ModalEdificioNovo show={showModal} onHide={closeModal} utilizador={utilizador} imagem={imgUser} />
             <ModalEdificioCoordenadas show={showModalVer} onHide={closeModalVer} />
         </>
     )
