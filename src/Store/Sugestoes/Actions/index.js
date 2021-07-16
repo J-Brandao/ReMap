@@ -33,11 +33,11 @@ export const getSugestoesListByUser = (userId) => {
   }
 }
   
-  export const createNovaSugestao = (userId = '', valor = '', edificioId = '', user) => {
+  export const createNovaSugestao = (userId = '', valor = '', edificioId = '', user, edificio) => {
     return (dispatch, getState) => {
       dispatch({ type: SUGESTAO_CREATE_START });
 
-      createSugestao(getState().token, userId, valor, edificioId, user)
+      createSugestao(getState().token, userId, valor, edificioId, user, edificio)
         .then(Sugestao => {
           dispatch({ type: SUGESTAO_CREATE_SUCCESS, payload: Sugestao })
         })

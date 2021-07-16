@@ -38,8 +38,17 @@ module.exports = {
     const user = body.user;
     delete body.user;
 
+    const edificio = body.edificio;
+    delete body.edificio;
+
     const userCollectionRef = db.collection("Utilizadores");
     const userDoc = getDocumentFromCollection(userCollectionRef, user.id);
+
+    const edificioCollectionRef = db.collection("Edifícios");
+    const edificioDoc = getDocumentFromCollection(edificioCollectionRef, edificio.id);
+
+    edificio.domain[user.equipa] += 150;
+    edificio.domain.total += 150;
 
     if (user.progresso.exp + 250 === 1000) {
       user.progresso.exp = 0
@@ -52,18 +61,19 @@ module.exports = {
     }
     
     if (user.progresso.sugestao.nrSugestoes + 1 === 15) {
-      user.progresso.sugestao.badge = "badgeSugestao_1.png";
+      user.progresso.sugestao.badge = "badgeSugestao_1.svg";
       user.progresso.sugestao.nrSugestoes += 1;
     }else if (user.progresso.comentarios.nrComentarios + 1 === 50) {
-      user.progresso.comentarios.badge = "badgeSugestao_2.png";
+      user.progresso.comentarios.badge = "badgeSugestao_2.svg";
       user.progresso.comentarios.nrComentarios += 1;
     }else if (user.progresso.comentarios.nrComentarios + 1 === 100) {
-      user.progresso.comentarios.badge = "badgeSugestao_3.png";
+      user.progresso.comentarios.badge = "badgeSugestao_3.svg";
       user.progresso.comentarios.nrComentarios += 1;
     } else {
       user.progresso.sugestao.nrSugestoes += 1;
     }
     const userRef = await userDoc.update(user);
+    const edificioRef = await edificioDoc.update(edificio);
     
     const sugestaoRef = await sugestaoCollectionRef.add(body);
     return {id: sugestaoRef.id, ...body}

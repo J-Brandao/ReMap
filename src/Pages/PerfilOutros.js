@@ -108,7 +108,9 @@ function PerfilOutros(props) {
                 }
            </section>
 
-            <Trofeus nivel={utilizador.progresso.nivel} />
+            <Link style={{textDecoration: 'none', color:'#34495e'}} to={`/gamehub/${utilizador.id}`}>
+                <Trofeus utilizador={utilizador}/>
+            </Link>
 
             <Interacoes userId={utilizador.id} urlId={props.match.params.id}/>
         </Div>

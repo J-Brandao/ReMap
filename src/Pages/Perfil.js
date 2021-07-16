@@ -201,7 +201,7 @@ function Perfil(props) {
            </section>
 
            <Link style={{textDecoration: 'none', color:'#34495e'}} to={`/gamehub`}>
-            <Trofeus nivel={utilizador.progresso.nivel} />
+                    <Trofeus utilizador={utilizador}/>
             </Link>
 
            <Interacoes userId={utilizador.id} urlId={props.location.state ? props.location.state.id : utilizador.id} utilizador={user.email}/>
