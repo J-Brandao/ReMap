@@ -5,7 +5,9 @@ import { createNovoComentario } from '../../Store/Comentarios/Actions';
 import { useDispatch, useSelector } from 'react-redux';
 import useAuthentication from '../../Firebase/useAuthentication';
 import CommentLoading from '../Geral/CommentLoading';
-import SingleComentario from "./SingleComentario"
+import SingleComentario from "./SingleComentario";
+import ModalComment from '../Modal/ModalComment';
+import { useHistory } from 'react-router-dom';
 
 const Div = styled.div`
     padding: 20px 30px 10px 30px;
@@ -17,6 +19,8 @@ function Comentarios (props) {
 
     const utilizador = useSelector(({Utilizadores})=> Utilizadores.ownUser)
     const dispatch = useDispatch();
+    const [showModal, setShowModal] = useState(false);
+    const history = useHistory(); 
 
     
 
@@ -35,6 +39,13 @@ function Comentarios (props) {
 
     const handleCreateComentario = (userId, valor, edificioId) => {
         dispatch(createNovoComentario(userId, valor, edificioId, utilizador, props.edificio))
+        if(props.nrComentarios + 1 == 15 || props.nrComentarios + 1 == 50 || props.nrComentarios + 1 == 100) {
+            setShowModal(true)
+        }
+    }
+
+    const closeModal = () => {
+        setShowModal(false)
     }
 
     useAuthentication();
@@ -75,7 +86,7 @@ function Comentarios (props) {
                     </>)
             }
             
-                       
+        <ModalComment show={showModal} onHide={closeModal} numero={props.nrComentarios + 1}/>       
         </Div> 
     )
 }

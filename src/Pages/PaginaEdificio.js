@@ -416,7 +416,7 @@ function PaginaEdificio(props) {
     const MudaSeccao = id => {
         setSeccao(id);
     }
-    console.log(domainTeam1, domainTeam2, domainTeam3)
+
     if (isLoading || isLoadingEdificio || isLoadingUser || isLoadingImages) {
         return (
             <Loading />
@@ -497,7 +497,7 @@ function PaginaEdificio(props) {
                     <Classificacao vandalismo={edificio.vandalismo} degradacao={edificio.degradacao} seguranca={edificio.seguranca} acesso={edificio.acesso} />
 
                 </Div>
-                {console.log(domainTeam3.points)}
+
                 <section className="row col-12 m-0 p-0 px-3 mt-3">
                     <h5 id="seccaoTitulo" className="col-12">Domínio</h5>
                     <span className="col-4 text-center m-0 p-0 m-auto d-flex">
@@ -533,9 +533,9 @@ function PaginaEdificio(props) {
                 }
 
                 {seccao === 'Sugestões' ?
-                    <Sugestoes utilizador={ownUser.id} edificio={edificio} isLoading={isLoadingSugestoes} sugestoes={sugestoes} userCheck={user.email} />
+                    <Sugestoes utilizador={ownUser.id} edificio={edificio} isLoading={isLoadingSugestoes} sugestoes={sugestoes} userCheck={user.email} nrSugestoes={ownUser.progresso.sugestao.nrSugestoes}/>
                     :
-                    <Comentarios utilizador={ownUser.id} edificio={edificio} isLoading={isLoadingComment} comments={commentData} userCheck={user.email} />
+                    <Comentarios utilizador={ownUser.id} edificio={edificio} isLoading={isLoadingComment} comments={commentData} userCheck={user.email} nrComentarios={ownUser.progresso.comentarios.nrComentarios} />
                 }
             </div>
             <ModalEliminarEdificio show={showModal} onHide={handleClose} onDelete={deleteEdificio} />

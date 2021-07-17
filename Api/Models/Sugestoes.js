@@ -37,9 +37,10 @@ module.exports = {
 
     const user = body.user;
     delete body.user;
-
+console.warn(body)
     const edificio = body.edificio;
     delete body.edificio;
+    console.warn(edificio)
 
     const userCollectionRef = db.collection("Utilizadores");
     const userDoc = getDocumentFromCollection(userCollectionRef, user.id);

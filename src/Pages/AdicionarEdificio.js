@@ -142,7 +142,7 @@ function AdicionarEdificio (props) {
         }) 
 
         //Envia Informação para a firebase
-        //dispatch(createNovoEdificio(userId, dataFinal, nomeEdificio, descricao, arrayNomes, localizacao, degradacao, acesso, seguranca, vandalismo, utilizador));
+        dispatch(createNovoEdificio(userId, dataFinal, nomeEdificio, descricao, arrayNomes, localizacao, degradacao, acesso, seguranca, vandalismo, utilizador));
         setShowModal(true);
     }
 

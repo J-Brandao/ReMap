@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import useAuthentication from '../../Firebase/useAuthentication';
 import SingleSugestao from './SingleSugestao'
 import CommentLoading from '../Geral/CommentLoading'
+import ModalSugestao from '../Modal/ModalSugestao';
 
 const Div = styled.div`
     padding: 20px 30px 10px 30px;
@@ -27,10 +28,11 @@ function Sugestoes (props) {
 
     const utilizador = useSelector(({Utilizadores})=> Utilizadores.ownUser)
     const dispatch = useDispatch();
+    const [showModal, setShowModal] = useState(false);
     const [sugestao, setSugestao] = useState({
         valor: '',
         userId: props.utilizador,
-        edificioId: props.edificio
+        edificioId: props.edificio.id
     });
     
     const handleChange = (escrito  => {
@@ -39,7 +41,14 @@ function Sugestoes (props) {
     })
 
     const handleCreateSugestao = (userId, valor, edificioId) => {
-        dispatch(createNovaSugestao(userId, valor, edificioId, utilizador))
+        dispatch(createNovaSugestao(userId, valor, edificioId, utilizador, props.edificio))
+        if(props.nrSugestoes + 1 == 15 || props.nrSugestoes + 1 == 50 || props.nrSugestoes + 1 == 100) {
+            setShowModal(true)
+        }
+    }
+
+    const closeModal = () => {
+        setShowModal(false)
     }
 
     useAuthentication();
@@ -75,7 +84,7 @@ function Sugestoes (props) {
             
             }
                     
-
+            <ModalSugestao show={showModal} onHide={closeModal} numero={props.nrSugestoes + 1}/>    
         </Div> 
     )
 }
