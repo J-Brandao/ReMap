@@ -132,6 +132,7 @@ function PaginaEdificio(props) {
     const [domainTeam3, setDomainTeam3] = useState({});
 
     const [imagens, setImagens] = useState([]);
+    const [imagemUser, setImagemUser] = useState([]);
     const [isLoadingImages, setIsLoadingImages] = useState(true);
 
     const isLoadingComment = useSelector(({ Comentarios }) => Comentarios.isLoading)
@@ -155,7 +156,14 @@ function PaginaEdificio(props) {
     }, [isLoadingCreationComment])
     useEffect(() => {
         dispatch(getSugestoesListByBuilding(props.match.params.id));
-    }, [isLoadingCreationSugestion])
+    }, [isLoadingCreationSugestion]) 
+    useEffect(() => {
+        if (ownUser && !isLoading) {
+            storage.ref('imagensUtilizadores').child(`${ownUser.imagemUser}`).getDownloadURL().then((url) => {
+                setImagemUser(url)
+            })
+        }  
+    }, [ownUser])
 
 
     useEffect(() => {
@@ -533,7 +541,7 @@ function PaginaEdificio(props) {
                 }
 
                 {seccao === 'Sugestões' ?
-                    <Sugestoes utilizador={ownUser.id} edificio={edificio} isLoading={isLoadingSugestoes} sugestoes={sugestoes} userCheck={user.email} nrSugestoes={ownUser.progresso.sugestao.nrSugestoes}/>
+                    <Sugestoes utilizador={ownUser.id} edificio={edificio} isLoading={isLoadingSugestoes} sugestoes={sugestoes} userCheck={user.email} nrSugestoes={ownUser.progresso.sugestao.nrSugestoes} imagem={imagemUser}/>
                     :
                     <Comentarios utilizador={ownUser.id} edificio={edificio} isLoading={isLoadingComment} comments={commentData} userCheck={user.email} nrComentarios={ownUser.progresso.comentarios.nrComentarios} />
                 }

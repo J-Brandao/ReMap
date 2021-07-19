@@ -12,7 +12,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 import useAuthentication from '../Firebase/useAuthentication';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import ModalEdificioNovo from "../Components/Modal/ModalEdificioNovo";
-import ModalEdificioCoordenadas from '../Components/Modal/ModalEdificioCoordenadas'
+import ModalEdificioCoordenadas from '../Components/Modal/ModalEdificioCoordenadas';
+import ModalCrachaEdificio from '../Components/Modal/ModalCrachaEdificio';
 
 const TiposAceites = 'image/x-png, image/png, image/jpg, image/jpeg';
 const arrayTiposAceites = TiposAceites.split(",").map((item) => {
@@ -43,6 +44,7 @@ function AdicionarEdificio (props) {
     const [imagem, setImagem] = useState([]);
     const [imgUser, setImgUser] = useState(null)
     const [showModal, setShowModal] = useState(false);
+    const [showModalCracha, setShowModalCracha] = useState(false);
     const [showModalVer, setShowModalVer] = useState(false);
     const [valores, setValores] = useState({
         nomeEdificio: '',
@@ -143,7 +145,11 @@ function AdicionarEdificio (props) {
 
         //Envia Informação para a firebase
         dispatch(createNovoEdificio(userId, dataFinal, nomeEdificio, descricao, arrayNomes, localizacao, degradacao, acesso, seguranca, vandalismo, utilizador));
-        setShowModal(true);
+        if(utilizador.progresso.edificios.nrEdificios + 1 === 15 || utilizador.progresso.edificios.nrEdificios + 1 === 50 || utilizador.progresso.edificios.nrEdificios + 1 === 100) {
+            setShowModalCracha(true);
+        } else {
+            setShowModal(true);
+        }
     }
 
     const closeModal = () => {
@@ -152,6 +158,10 @@ function AdicionarEdificio (props) {
     }
     const closeModalVer = () => {
         setShowModalVer(false)
+        history.push("/homepage")
+    }
+    const closeModalCracha = () => {
+        setShowModalCracha(false)
         history.push("/homepage")
     }
 
@@ -264,6 +274,7 @@ function AdicionarEdificio (props) {
             </Div>
             <ModalEdificioNovo show={showModal} onHide={closeModal} utilizador={utilizador} imagem={imgUser} />
             <ModalEdificioCoordenadas show={showModalVer} onHide={closeModalVer} />
+            <ModalCrachaEdificio show={showModalCracha} onHide={closeModalCracha} numero={utilizador.progresso.edificios.nrEdificios + 1}/>
         </>
     )
 }

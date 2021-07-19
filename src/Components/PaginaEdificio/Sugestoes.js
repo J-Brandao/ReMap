@@ -8,6 +8,7 @@ import useAuthentication from '../../Firebase/useAuthentication';
 import SingleSugestao from './SingleSugestao'
 import CommentLoading from '../Geral/CommentLoading'
 import ModalSugestao from '../Modal/ModalSugestao';
+import ModalSugestaoNivel from '../Modal/ModalSugestaoNivel';
 
 const Div = styled.div`
     padding: 20px 30px 10px 30px;
@@ -29,6 +30,7 @@ function Sugestoes (props) {
     const utilizador = useSelector(({Utilizadores})=> Utilizadores.ownUser)
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
+    const [showModalNivel, setShowModalNivel] = useState(false);
     const [sugestao, setSugestao] = useState({
         valor: '',
         userId: props.utilizador,
@@ -44,11 +46,17 @@ function Sugestoes (props) {
         dispatch(createNovaSugestao(userId, valor, edificioId, utilizador, props.edificio))
         if(props.nrSugestoes + 1 == 15 || props.nrSugestoes + 1 == 50 || props.nrSugestoes + 1 == 100) {
             setShowModal(true)
+        } else {
+            setShowModalNivel(true)
         }
     }
 
     const closeModal = () => {
         setShowModal(false)
+    }
+
+    const closeModalNivel = () => {
+        setShowModalNivel(false)
     }
 
     useAuthentication();
@@ -83,7 +91,7 @@ function Sugestoes (props) {
                      </>)
             
             }
-                    
+            <ModalSugestaoNivel show={showModalNivel} onHide={closeModalNivel} utilizador={utilizador} imagem={props.imagem} />
             <ModalSugestao show={showModal} onHide={closeModal} numero={props.nrSugestoes + 1}/>    
         </Div> 
     )
