@@ -47,6 +47,16 @@ module.exports = {
     const edificioCollectionRef = db.collection("Edifícios");
     const edificioDoc = getDocumentFromCollection(edificioCollectionRef, edificio.id);
 
+    const teamCollectionRef = db.collection("Equipas");
+    const teamId = await teamCollectionRef.where("teamName", "==", user.equipa).get();
+
+    const teamObj = teamId.docs[0].data()
+    const userTeam = teamId.docs[0].id
+
+      teamObj.points += 100;
+      teamObj.estatisticas.nrComentarios += 1;
+
+    const teamDoc = getDocumentFromCollection(teamCollectionRef, userTeam)
     
     edificio.domain[user.equipa] += 100;
     edificio.domain.total += 100;
@@ -73,6 +83,8 @@ module.exports = {
     }else {
       user.progresso.comentarios.nrComentarios += 1;
     }
+
+    const teamRef = await teamDoc.update(teamObj);
     const userRef = await userDoc.update(user);
     const edificioRef = await edificioDoc.update(edificio);
     

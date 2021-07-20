@@ -83,6 +83,17 @@ module.exports = {
     const userCollectionRef = db.collection("Utilizadores");
     const userDoc = getDocumentFromCollection(userCollectionRef, user.id);
 
+    const teamCollectionRef = db.collection("Equipas");
+    const teamId = await teamCollectionRef.where("teamName", "==", user.equipa).get();
+
+    const teamObj = teamId.docs[0].data()
+    const userTeam = teamId.docs[0].id
+
+      teamObj.points += 250;
+      teamObj.estatisticas.nrEdificios += 1;
+
+    const teamDoc = getDocumentFromCollection(teamCollectionRef, userTeam)
+
     if (user.progresso.exp + 500 === 1000) {
       user.progresso.exp = 0
       user.progresso.nivel+=1
@@ -105,6 +116,8 @@ module.exports = {
     } else {
       user.progresso.edificios.nrEdificios += 1;
     }
+
+    const teamRef = await teamDoc.update(teamObj);
     const userRef = await userDoc.update(user);
     const edificioRef = await edificioCollectionRef.add(body);
     return {id: edificioRef.id, ...body}

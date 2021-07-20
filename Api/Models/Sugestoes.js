@@ -37,16 +37,26 @@ module.exports = {
 
     const user = body.user;
     delete body.user;
-console.warn(body)
     const edificio = body.edificio;
     delete body.edificio;
-    console.warn(edificio)
 
     const userCollectionRef = db.collection("Utilizadores");
     const userDoc = getDocumentFromCollection(userCollectionRef, user.id);
 
     const edificioCollectionRef = db.collection("Edifícios");
     const edificioDoc = getDocumentFromCollection(edificioCollectionRef, edificio.id);
+
+    
+    const teamCollectionRef = db.collection("Equipas");
+    const teamId = await teamCollectionRef.where("teamName", "==", user.equipa).get();
+
+    const teamObj = teamId.docs[0].data()
+    const userTeam = teamId.docs[0].id
+
+      teamObj.points += 200;
+      teamObj.estatisticas.nrSugestoes += 1;
+
+    const teamDoc = getDocumentFromCollection(teamCollectionRef, userTeam)
 
     edificio.domain[user.equipa] += 150;
     edificio.domain.total += 150;
@@ -73,6 +83,8 @@ console.warn(body)
     } else {
       user.progresso.sugestao.nrSugestoes += 1;
     }
+
+    const teamRef = await teamDoc.update(teamObj);
     const userRef = await userDoc.update(user);
     const edificioRef = await edificioDoc.update(edificio);
     
