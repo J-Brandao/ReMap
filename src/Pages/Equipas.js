@@ -126,43 +126,44 @@ function Equipas(props) {
 
            <section className="row col-12 m-0 mt-3 p-0">
                 <h5 id="seccaoTitulo" className="subtituloGH">Estatísticas Principais</h5>
-                <div className="bgSeccao">
-                    <span className="row col-12 m-0 px-0 py-2 justify-content-center">
-                        <span className="col-2 m-0 p-0 my-auto">
-                            <img className="m-0 imgStats" src={FootstepsGH}/>
-                        </span>
-                        <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Área de Influência</p>
-                        <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">2</p>
-                    </span>
-                    <span className="row col-12 m-0 px-0 py-2 justify-content-center">
-                        <span className="col-2 m-0 p-0 my-auto">
-                            <img className="m-0 imgStats" src={BrokenHouseGH}/>
-                        </span>
-                        <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Edifícios Adicionados</p>
-                        <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">2</p>
-                    </span>
-                    <span className="row col-12 m-0 px-0 py-2 justify-content-center">
-                        <span className="col-2 m-0 p-0 my-auto">
-                            <img className="m-0 imgStats" src={Ideia}/>
-                        </span>
-                        <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Sugestões dadas</p>
-                        <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">2</p>
-                    </span>
-                    <span className="row col-12 m-0 px-0 py-2 justify-content-center">
-                        <span className="col-2 m-0 p-0 my-auto">
-                            <img className="m-0 imgStats" src={CameraGH}/>
-                        </span>
-                        <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Fotografias Publicadas</p>
-                        <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">2</p>
-                    </span>
-                    <span className="row col-12 m-0 px-0 py-2 justify-content-center">
-                        <span className="col-2 m-0 p-0 my-auto">
-                            <img className="m-0 imgStats" src={CommentsGH}/>
-                        </span>
-                        <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Comentários Publicados</p>
-                        <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">2</p>
-                    </span>
-                </div>
+                {equipas.map((equipa) => {
+                    if(equipa.teamName === team) {
+                        return(
+                            <>
+                            <div className="bgSeccao">
+                                <span className="row col-12 m-0 px-0 py-2 justify-content-center">
+                                    <span className="col-2 m-0 p-0 my-auto">
+                                        <img className="m-0 imgStats" src={BrokenHouseGH}/>
+                                    </span>
+                                    <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Edifícios Adicionados</p>
+                                    <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">{equipa.estatisticas.nrEdificios}</p>
+                                </span>
+                                <span className="row col-12 m-0 px-0 py-2 justify-content-center">
+                                    <span className="col-2 m-0 p-0 my-auto">
+                                        <img className="m-0 imgStats" src={Ideia}/>
+                                    </span>
+                                    <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Sugestões dadas</p>
+                                    <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">{equipa.estatisticas.nrSugestoes}</p>
+                                </span>
+                                <span className="row col-12 m-0 px-0 py-2 justify-content-center">
+                                    <span className="col-2 m-0 p-0 my-auto">
+                                        <img className="m-0 imgStats" src={CameraGH}/>
+                                    </span>
+                                    <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Fotografias Publicadas</p>
+                                    <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">{equipa.estatisticas.nrFotografias}</p>
+                                </span>
+                                <span className="row col-12 m-0 px-0 py-2 justify-content-center">
+                                    <span className="col-2 m-0 p-0 my-auto">
+                                        <img className="m-0 imgStats" src={CommentsGH}/>
+                                    </span>
+                                    <p className="col-6 m-0 px-0 my-auto textoEstatisticas">Comentários Publicados</p>
+                                    <p className="col-2 m-0 p-0 my-auto textoEstatisticas text-center">{equipa.estatisticas.nrComentarios}</p>
+                                </span>
+                            </div>
+                            </>
+                        )
+                    }
+                })}
            </section>
         </div>
     )
