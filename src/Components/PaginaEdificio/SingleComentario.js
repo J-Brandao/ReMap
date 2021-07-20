@@ -3,8 +3,6 @@ import styled from "styled-components"
 import { fetchUtilizadorForPerfil } from '../../Firebase/Pedidos'
 import { storage } from '../../Firebase/FbConfig';
 import { Link } from 'react-router-dom';
-import ThumbsUp from '../../Images/ThumbsUp.svg';
-import ThumbsDown from '../../Images/ThumbsDown.svg';
 
 
 
@@ -25,32 +23,6 @@ const TextArea = styled.span`
     border-radius: 10px;
     background-color: #F2F2F2;
     padding-right: 10px;
-`;
-
-const ThumbsBg = styled.div`
-    border-radius: 50%;
-    background-color: #C0C0C0;
-    border: solid 2px #34495E;
-    height: 30px;
-    width: 30px;
-    margin: auto 5px;
-`;
-
-const ThumbsBg2 = styled.div`
-    border-radius: 50%;
-    background-color: #4DE926;
-    border: solid 2px #34495E;
-    height: 30px;
-    width: 30px;
-    margin: auto 5px;
-`;
-
-const LikeDiv = styled.div`
-    width: 100%;
-    height: 40px;
-    display: flex;
-    text-align: center;
-    justify-content: flex-end;
 `;
 
 
@@ -115,21 +87,6 @@ function SingleComentario({ comment, tipo, utilizador }) {
           </Link>
         }
         <p className="textoComments mb-1">{comment.valor}</p>
-
-        <LikeDiv className="m-0 p-0 mb-1">
-          {like === 'false' ?
-            <ThumbsBg onClick={() => daLike()}>
-              <img className="m-0" style={{height:`18px`}} src={ThumbsUp}/>
-            </ThumbsBg>
-            :
-            <ThumbsBg2>
-              <img className="m-0" style={{height:`18px`}} src={ThumbsUp}/>
-            </ThumbsBg2>
-          }
-          <ThumbsBg>
-            <img className="m-0" style={{height:`18px`}} src={ThumbsDown}/>
-          </ThumbsBg>
-        </LikeDiv>
         
       </TextArea>
     </>
